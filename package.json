@@ -1,0 +1,41 @@
+{
+    "name": "bootwhatsapp",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./src/server.js",
+    "scripts": {
+        "server": "node",
+        "start": "nodemon",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/IsaacDSC/BootWhatsApp.git"
+    },
+    "author": "IsaacDSC",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "express-flash": "0.0.2",
+        "express-handlebars": "^5.1.0",
+        "module-alias": "^2.2.2",
+        "mysql2": "^2.1.0",
+        "passport": "^0.4.1",
+        "passport-local": "^1.0.0",
+        "sequelize": "^6.3.4",
+        "venom-bot": "^1.1.4"
+    },
+    "_moduleAliases": {
+        "@": "src",
+        "@data": "data",
+        "@message": "data/message",
+        "@User:": "data/User",
+        "@config": "config",
+        "@routes": "src/routes",
+        "@Crypto": "config/crytpto/Crypto",
+        "@Config_Json": "config/JSON/Json",
+        "@helper": "src/helpers",
+        "@models": "src/models"
+    }
+}
