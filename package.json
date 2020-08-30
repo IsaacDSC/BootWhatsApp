@@ -31,11 +31,14 @@
         "@data": "data",
         "@message": "data/message",
         "@User:": "data/User",
-        "@config": "config",
+        "@config": "src/config",
         "@routes": "src/routes",
         "@Crypto": "config/crytpto/Crypto",
         "@Config_Json": "config/JSON/Json",
         "@helper": "src/helpers",
         "@models": "src/models"
+    },
+    "devDependencies": {
+        "sequelize-cli": "^6.2.0"
     }
 }
