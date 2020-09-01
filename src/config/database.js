@@ -1,9 +1,7 @@
 module.exports = {
-    database: 'bootwhatsapp',
+    dialect: 'mysql',
+    host: 'localhost',
     username: 'dev',
     password: 'secret',
-    dialect: 'mysql',
-    host: 'localhost'
+    database: 'bootwhatsapp'
 }
-
-//para criar database => npx db:create

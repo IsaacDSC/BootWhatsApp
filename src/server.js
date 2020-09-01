@@ -4,20 +4,48 @@ const app = express()
 const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const path = require('path')
-
 const venom = require('venom-bot');
+const session = require('express-session')
+const routes = require('@routes/routes')
+const passport = require('passport')
+const flash = require('express-flash')
+require('./config/Auhenticated')(passport)
+
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const stages = require('@data/stages') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 const cardapio = require('@data/cardapio/cardapio')
 
-const routes = require('@routes/routes')
 
+
+//Config handlebars
 app.engine('hbs', hbs({ defaultLayout: 'main.hbs', extname: 'hbs' }));
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "/views/")) //resolvendo problema, direcionando views para dentro de src
-
+    //consfig BodyParser
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+    //config pasta Public
+app.use(express.static(path.join(__dirname, 'public')))
+    //config session
+app.use(session({
+        secret: 'secret',
+        resave: true,
+        saveUninitialized: true
+    }))
+    //config passport
+app.use(passport.initialize())
+app.use(passport.session())
+    //config Flahs
+app.use(flash())
+    //config midleware flash
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.error_msg = req.flash('error_msg')
+    res.locals.message = req.flash('message')
+    res.locals.error = req.flash('error')
+    next()
+})
+
 
 
 /* venom.create().then((client) => start(client));

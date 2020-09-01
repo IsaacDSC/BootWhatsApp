@@ -8,7 +8,7 @@
         "@data/*": ["data/*"],
         "@message/*":["data/message/*"],
         "@User/*":["data/user/*"],
-        "@config/*": ["config/*"],
+        "@config/*": ["src/config/*"],
         "@routes/*": ["src/routes/*"],
         "@Crypto/*": ["config/crytpto/Crypto/*"],
         "@Config_Json/*": ["config/JSON/Json/*"],        
