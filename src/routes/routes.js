@@ -3,13 +3,14 @@ const router = express.Router()
 const Users = require('@models/Users')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+const { auth } = require('@helper/auth')
 
-router.get('/', (req, res) => {
+router.get('/', auth, (req, res) => {
     res.render('index/index')
 })
 
 router.get('/login', (req, res) => {
-    res.render('login/login')
+    res.render('login/login', { layout: 'login.hbs' })
 })
 
 router.post('/login', (req, res, next) => {

@@ -14,16 +14,16 @@ module.exports = function(passport) {
         Users.findOne({ where: { email: email } }).then((user) => {
             //console.log(user)
             if (!user) {
-                console.log('não achou usuario!')
-                return done(null, false, { messages: 'Esta conta não Existe' })
+                //console.log('não achou usuario!')
+                return done(null, false, { message: 'Esta conta não Existe' })
             }
             bcrypt.compare(password, user.password, (err, batem) => {
                 if (batem) {
-                    console.log('senhas batem')
+                    //console.log('senhas batem')
                     return done(null, user)
                 } else {
-                    console.log('senhas não batem')
-                    return done(null, false, { messages: "Senha Incorreta" })
+                    //console.log('senhas não batem')
+                    return done(null, false, { message: "Senha Incorreta" })
                 }
             })
         })
