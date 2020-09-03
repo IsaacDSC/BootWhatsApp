@@ -9,12 +9,11 @@ const User = db.define('user', {
     },
     name: {
         type: db.Sequelize.STRING,
-        unique: true,
         allowNull: false,
         require: true
     },
     photograph: {
-        type: db.Sequelize.STRING
+        type: db.Sequelize.TEXT
     }
 })
 

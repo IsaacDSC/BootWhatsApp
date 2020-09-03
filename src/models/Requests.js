@@ -1,6 +1,6 @@
 const db = require('../database/index')
 
-const Pedidos = db.Sequelize.define('pedido', {
+const Requests = db.define('menu_request', {
     client: {
         type: db.Sequelize.STRING,
         require: true,
@@ -25,6 +25,6 @@ const Pedidos = db.Sequelize.define('pedido', {
 
 })
 
-//Pedidos.sync({ force: true })
+//Requests.sync({ force: true })
 
-module.exports = Pedidos
+module.exports = Requests

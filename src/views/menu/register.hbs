@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5>Cadastre seu Cardápio</h5>
+            <hr>
+            <form action="/menu/register" method="post">
+                <div class="row col-12">
+                    <div class="form-group col-12">
+                        <label for="">Nome</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-12">
+                        <label for="">Descrição</label>
+                        <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-6">
+                        <label for="">Gasto Material</label>
+                        <input type="text" name="costProduce" id="costProduce" class="form-control">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="">Valor Venda</label>
+                        <input type="text" name="value" id="value" class="form-control">
+                    </div>
+                </div>
+                <div class="row col-12 mt-2">
+                    <div class="form-group col-12">
+                        <button class="btn btn-outline-success col-12">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 const db = require('../database/index')
 
-const Admin = db.Sequelize.define('admin', {
+const Admin = db.define('admin', {
     name: {
         type: db.Sequelize.STRING,
         require: true,
