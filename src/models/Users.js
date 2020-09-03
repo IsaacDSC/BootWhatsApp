@@ -1,20 +1,20 @@
 const db = require('../database/index')
 
 const User = db.define('user', {
+    telephone: {
+        type: db.Sequelize.STRING,
+        unique: true,
+        allowNull: false,
+        require: true
+    },
     name: {
         type: db.Sequelize.STRING,
-        require: true,
+        unique: true,
         allowNull: false,
+        require: true
     },
-    email: {
-        type: db.Sequelize.STRING,
-        require: true,
-        allowNull: false
-    },
-    password: {
-        type: db.Sequelize.STRING,
-        require: true,
-        allowNull: false
+    photograph: {
+        type: db.Sequelize.STRING
     }
 })
 

@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const { auth } = require('@helper/auth')
 
-router.get('/', auth, (req, res) => {
+router.get('/', (req, res) => {
     res.render('index/index')
 })
 
@@ -41,5 +41,7 @@ router.get('/reset', (req, res) => {
     })
 
 })
+
+
 
 module.exports = router
