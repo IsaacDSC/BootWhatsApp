@@ -51,23 +51,23 @@ app.use((req, res, next) => {
 
 
 
-/* venom.create().then((client) => start(client));
+venom.create().then((client) => start(client));
 
 function start(client) {
     client.onMessage((message) => {
-        console.log(message)
-            //Verificar se existe
-            //cadastrar usuario ao Bando Users
+        //console.log(message)
+        //Verificar se existe
+        //cadastrar usuario ao Bando Users
         Users.findOne({ where: { telephone: message.sender.id } }).then((user) => {
             if (user) {
+                console.log('\n\n\ncliente encontrado\n\n\n')
                 let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
-                    console.log('cliente encontrado')
                 }
             } else {
-                console.log('cliente não encontrado')
+                console.log('\n\n\ncliente não encontrado\n\n\n')
                 Users.create({
                     telephone: message.sender.id,
                     name: message.sender.pushname,
@@ -80,20 +80,18 @@ function start(client) {
                         client.sendText(message.from, element)
                     }
                 }).catch((err) => {
-                    console.log(err)
+                    console.log('Erro ao adicionar ao banco de dados ' + err)
                 })
             }
         })
-
-
     });
 }
- */
 
 
-function getStage(user) {
+
+/* function getStage(user) {
     return banco.db[user].stage
-}
+} */
 
 /* console.log(stages.step[getStage('user1')].obj.execute())
 console.log(stages.step[getStage('user2')].obj.execute()) */

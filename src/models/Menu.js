@@ -2,7 +2,6 @@ const db = require('../database/index')
 const Menu = db.define('menu', {
     name: {
         type: db.Sequelize.STRING,
-        unique: true,
         require: true,
         allowNull: false
     },
