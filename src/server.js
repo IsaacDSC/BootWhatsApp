@@ -79,6 +79,7 @@ function start(client) {
              client.sendText(message.from, element)
          } */
         Users.findAll().then((user) => {
+           
             if (user.telephone == message.sender.id) {
                 let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
                 for (let i = 0; i < resposta.length; i++) {
@@ -98,10 +99,10 @@ function start(client) {
                         const element = resposta[i]
                         client.sendText(message.from, element)
                     }
-                })
-            }
-        }).catch((err) => {
+                }).catch((err) => {
             console.log(err)
+        })
+            }
         })
     });
 }
