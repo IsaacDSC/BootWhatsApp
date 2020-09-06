@@ -11,7 +11,7 @@ const Banco = {
         stage: 0,
         itens: []
     },
-    '5535988798846@c.us': {
+    '553588798846@c.us': {
         stage: 0,
         itens: []
 

@@ -1,7 +1,6 @@
 //File System para salvar o Qr Code
-const fs = require('fs');
-
 require('module-alias/register')
+const fs = require('fs');
 const express = require('express')
 const app = express()
 const hbs = require('express-handlebars')
@@ -9,19 +8,23 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const venom = require('venom-bot');
 const session = require('express-session')
-const routes = require('@routes/routes')
-const menu = require("@routes/menu")
 const passport = require('passport')
 const flash = require('express-flash')
 require('./config/Auhenticated')(passport)
+
+const VerifyUsers = require('./helpers/VerifyUsers')
 
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const stages = require('@data/stages') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 const cardapio = require('@data/cardapio/cardapio')
 
+const routes = require('@routes/routes')
+const menu = require("@routes/menu")
 const Users = require('@models/Users')
-const clients = require('@routes/clients')
-
+const clients = require('@routes/clients');
+const { sync } = require('./database/index');
+const User = require('@models/Users');
+const USER = []
 
 
 
@@ -55,11 +58,10 @@ app.use((req, res, next) => {
 })
 
 
-
 venom.create('Delivery', (base64Qr, asciiQR) => {
     // Mostra o Qr Code no Terminal
     console.log(asciiQR);
-  
+
     // Cria o arquivo png
     exportQR(base64Qr, 'imagemWhatsapp.png');
 }).then((client) => start(client));
@@ -68,42 +70,45 @@ function exportQR(qrCode, path) {
     qrCode = qrCode.replace('data:image/png;base64,', '');
     const imageBuffer = Buffer.from(qrCode, 'base64');
     fs.writeFileSync(path, imageBuffer);
-  }
+}
 
 
- function start(client) {
+function start(client) {
     client.onMessage(async(message) => {
-        /*  let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
-         for (let i = 0; i < resposta.length; i++) {
-             const element = resposta[i]
-             client.sendText(message.from, element)
-         } */
-      await  Users.findAll().then((user) => {
-           
-            if (user) {
+        /* let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
+        for (let i = 0; i < resposta.length; i++) {
+            const element = resposta[i]
+            client.sendText(message.from, element)
+        } */
+        const user = await User.findAll({ where: { telephone: message.sender.id } })
+        console.log(user.length)
+        if (user.length === 0) {
+            try {
                 let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
                 }
-            }
-           else {
-                Users.create({
+                User.create({
                     telephone: message.sender.id,
                     name: message.sender.pushname,
                     photograph: message.sender.profilePicThumbObj.img,
                     stage: 0
-                }).then(() => {
-                    let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
-                    for (let i = 0; i < resposta.length; i++) {
-                        const element = resposta[i]
-                        client.sendText(message.from, element)
-                    }
-                }).catch((err) => {
-            console.log(err)
-        })
+                })
+            } catch (error) {
+                console.log(error)
             }
-        })
+
+        } else {
+            let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
+            for (let i = 0; i < resposta.length; i++) {
+                const element = resposta[i]
+                client.sendText(message.from, element)
+            }
+            console.log('cadastrado')
+
+        }
+
     });
 }
 
@@ -112,6 +117,7 @@ function exportQR(qrCode, path) {
 function getStage(user) {
     return banco.db[user].stage
 }
+
 
 /* console.log(stages.step[getStage('user1')].obj.execute())
 console.log(stages.step[getStage('user2')].obj.execute()) */
