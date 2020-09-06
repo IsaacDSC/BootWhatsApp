@@ -1,3 +1,6 @@
+//File System para salvar o Qr Code
+const fs = require('fs');
+
 require('module-alias/register')
 const express = require('express')
 const app = express()
@@ -53,7 +56,20 @@ app.use((req, res, next) => {
 
 
 
-venom.create().then((client) => start(client));
+venom.create('Delivery', (base64Qr, asciiQR) => {
+    // Mostra o Qr Code no Terminal
+    console.log(asciiQR);
+  
+    // Cria o arquivo png
+    exportQR(base64Qr, 'imagemWhatsapp.png');
+}).then((client) => start(client));
+
+function exportQR(qrCode, path) {
+    qrCode = qrCode.replace('data:image/png;base64,', '');
+    const imageBuffer = Buffer.from(qrCode, 'base64');
+    fs.writeFileSync(path, imageBuffer);
+  }
+
 
 function start(client) {
     client.onMessage((message) => {
