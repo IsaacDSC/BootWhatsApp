@@ -20,12 +20,10 @@ const cardapio = require('@data/cardapio/cardapio')
 
 const routes = require('@routes/routes')
 const menu = require("@routes/menu")
-const Users = require('@models/Users')
 const clients = require('@routes/clients');
+const msg = require('@routes/msg')
 const { sync } = require('./database/index');
 const User = require('@models/Users');
-const USER = []
-
 
 
 //Config handlebars
@@ -57,60 +55,56 @@ app.use((req, res, next) => {
     next()
 })
 
+function main() {
+    venom.create('Delivery', (base64Qr, asciiQR) => {
+        // Mostra o Qr Code no Terminal
+        console.log(asciiQR);
 
-venom.create('Delivery', (base64Qr, asciiQR) => {
-    // Mostra o Qr Code no Terminal
-    console.log(asciiQR);
+        // Cria o arquivo png
+        exportQR(base64Qr, 'imagemWhatsapp.png');
+    }).then((client) => start(client));
 
-    // Cria o arquivo png
-    exportQR(base64Qr, 'imagemWhatsapp.png');
-}).then((client) => start(client));
+    function exportQR(qrCode, path) {
+        qrCode = qrCode.replace('data:image/png;base64,', '');
+        const imageBuffer = Buffer.from(qrCode, 'base64');
+        fs.writeFileSync(path, imageBuffer);
+    }
 
-function exportQR(qrCode, path) {
-    qrCode = qrCode.replace('data:image/png;base64,', '');
-    const imageBuffer = Buffer.from(qrCode, 'base64');
-    fs.writeFileSync(path, imageBuffer);
-}
+    function start(client) {
+        client.onMessage(async(message) => {
+            const user = await User.findAll({ where: { telephone: message.sender.id } })
+            console.log(user.length)
+            if (user.length === 0) {
+                try {
+                    let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
+                    for (let i = 0; i < resposta.length; i++) {
+                        const element = resposta[i]
+                        client.sendText(message.from, element)
+                    }
+                    User.create({
+                        telephone: message.sender.id,
+                        name: message.sender.pushname,
+                        photograph: message.sender.profilePicThumbObj.img,
+                        stage: 0
+                    })
+                } catch (error) {
+                    console.log(error)
+                }
 
-
-function start(client) {
-    client.onMessage(async(message) => {
-        /* let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
-        for (let i = 0; i < resposta.length; i++) {
-            const element = resposta[i]
-            client.sendText(message.from, element)
-        } */
-        const user = await User.findAll({ where: { telephone: message.sender.id } })
-        console.log(user.length)
-        if (user.length === 0) {
-            try {
+            } else {
                 let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
                 }
-                User.create({
-                    telephone: message.sender.id,
-                    name: message.sender.pushname,
-                    photograph: message.sender.profilePicThumbObj.img,
-                    stage: 0
-                })
-            } catch (error) {
-                console.log(error)
+                console.log('cadastrado')
+
             }
 
-        } else {
-            let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
-            for (let i = 0; i < resposta.length; i++) {
-                const element = resposta[i]
-                client.sendText(message.from, element)
-            }
-            console.log('cadastrado')
-
-        }
-
-    });
+        });
+    }
 }
+
 
 
 
@@ -125,6 +119,8 @@ console.log(stages.step[getStage('user2')].obj.execute()) */
 app.use(routes)
 app.use(menu)
 app.use(clients)
+app.use('/msg', msg)
+
 
 const Port = 3000
 app.listen(Port, () => {

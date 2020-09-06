@@ -1,13 +1,19 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/registermsg', (req, res) => {
+router.get('/register', (req, res) => {
     res.render('formMSG/register')
 })
-router.get('/viewmsg', (req, res) => {
+
+router.post('/register', (req, res) => {
+
+})
+
+router.get('/view', (req, res) => {
     res.render('formMSG/view')
 })
-router.get('/editmsg', (req, res) => {
+
+router.get('/edit', (req, res) => {
     res.render('formMSG/edit')
 })
 
