@@ -14,6 +14,11 @@ const User = db.define('user', {
     },
     photograph: {
         type: db.Sequelize.TEXT
+    },
+    stage: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        require: true
     }
 })
 

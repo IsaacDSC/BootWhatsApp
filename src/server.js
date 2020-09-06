@@ -17,6 +17,8 @@ const stages = require('@data/stages') //arquivo com a desc e o apontamento para
 const cardapio = require('@data/cardapio/cardapio')
 
 const Users = require('@models/Users')
+const clients = require('@routes/clients')
+
 
 
 
@@ -55,49 +57,51 @@ venom.create().then((client) => start(client));
 
 function start(client) {
     client.onMessage((message) => {
-        //console.log(message)
-        //Verificar se existe
-        //cadastrar usuario ao Bando Users
-        Users.findOne({ where: { telephone: message.sender.id } }).then((user) => {
-            if (user) {
-                console.log('\n\n\ncliente encontrado\n\n\n')
+        /*  let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
+         for (let i = 0; i < resposta.length; i++) {
+             const element = resposta[i]
+             client.sendText(message.from, element)
+         } */
+        Users.findAll().then((user) => {
+            if (user.telephone == message.sender.id) {
                 let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
                 }
-            } else {
-                console.log('\n\n\ncliente não encontrado\n\n\n')
+            }
+            if (user.telephone != message.sender.id) {
                 Users.create({
                     telephone: message.sender.id,
                     name: message.sender.pushname,
-                    photograph: message.sender.profilePicThumbObj.img
+                    photograph: message.sender.profilePicThumbObj.img,
+                    stage: 0
                 }).then(() => {
-                    console.log('cliente salvo no banco de dados')
                     let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
                     for (let i = 0; i < resposta.length; i++) {
                         const element = resposta[i]
                         client.sendText(message.from, element)
                     }
-                }).catch((err) => {
-                    console.log('Erro ao adicionar ao banco de dados ' + err)
                 })
             }
+        }).catch((err) => {
+            console.log(err)
         })
     });
 }
 
 
 
-/* function getStage(user) {
+function getStage(user) {
     return banco.db[user].stage
-} */
+}
 
 /* console.log(stages.step[getStage('user1')].obj.execute())
 console.log(stages.step[getStage('user2')].obj.execute()) */
 
 app.use(routes)
 app.use(menu)
+app.use(clients)
 
 const Port = 3000
 app.listen(Port, () => {

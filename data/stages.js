@@ -1,4 +1,5 @@
 require('module-alias/register')
+const Menu = require('@models/Menu')
 
 const stages = {
     0: {

@@ -1,4 +1,8 @@
+const Menu = require('../../src/models/Menu')
+const cardapios = []
+
 const cardapio = {
+
     1: {
         nome: 'X-Tudo',
         valor: 15.00
