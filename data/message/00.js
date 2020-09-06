@@ -1,6 +1,7 @@
 require('module-alias/register')
 const cardapio = require('@data/cardapio/cardapio')
 const banco = require('@data/user/user')
+
 const Menu = require('@models/Menu')
 
 function execute(user, msg) {

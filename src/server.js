@@ -71,23 +71,23 @@ function exportQR(qrCode, path) {
   }
 
 
-function start(client) {
-    client.onMessage((message) => {
+ function start(client) {
+    client.onMessage(async(message) => {
         /*  let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
          for (let i = 0; i < resposta.length; i++) {
              const element = resposta[i]
              client.sendText(message.from, element)
          } */
-        Users.findAll().then((user) => {
+      await  Users.findAll().then((user) => {
            
-            if (user.telephone == message.sender.id) {
+            if (user) {
                 let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
                 }
             }
-            if (user.telephone != message.sender.id) {
+           else {
                 Users.create({
                     telephone: message.sender.id,
                     name: message.sender.pushname,
@@ -122,6 +122,6 @@ app.use(clients)
 
 const Port = 3000
 app.listen(Port, () => {
-    console.log(`http://10.0.0.122`)
+    console.log(`http://127.0.0.1:${Port}`)
     console.log('Break Server CTRL + C')
 })
