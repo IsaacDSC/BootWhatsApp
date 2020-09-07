@@ -4,7 +4,7 @@
     "description": "",
     "main": "./src/server.js",
     "scripts": {
-        "start": "sudo apt-get update"
+        "start": "nodemon"
     },
     "repository": {
         "type": "git",
