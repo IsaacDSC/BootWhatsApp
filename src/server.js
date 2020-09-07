@@ -119,7 +119,7 @@ function getStage(user) {
     return banco.db[user].stage
 }
 
-main()
+//main()
 
 /* console.log(stages.step[getStage('user1')].obj.execute())
 console.log(stages.step[getStage('user2')].obj.execute()) */
