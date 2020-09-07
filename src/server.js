@@ -96,7 +96,7 @@ function main() {
                 }
 
             } else {
-                let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body,message.sender.name)
+                let resposta = await stages.step[getStage(message.from)].obj.execute(message.from, message.body,message.sender.name)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)

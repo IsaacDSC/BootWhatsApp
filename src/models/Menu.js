@@ -1,4 +1,18 @@
 const db = require('../database/index')
+
+/*Itens do Cardapio Ex
+      * Lanches *
+    1- X-Tudo R$19,00
+    (Pão,Maionese,...)
+    2- X-bacon R$18,88
+    (Pão,Hamburger,...)
+
+
+       * Promoçao *
+    1- X-Tudo R$7,00
+    2- X-bacon R$8,88
+*/
+
 const Menu = db.define('menu', {
     name: {
         type: db.Sequelize.STRING,
