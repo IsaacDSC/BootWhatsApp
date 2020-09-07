@@ -52,6 +52,12 @@ app.use((req, res, next) => {
 boot.main()
 
 
+<<<<<<< HEAD
+=======
+/* console.log(stages.step[getStage('user1')].obj.execute())
+console.log(stages.step[getStage('user2')].obj.execute()) */
+
+>>>>>>> 35558d4e9d5d2bda9feb18f8b0a6aeca8b4f95a4
 app.use(routes)
 app.use(menu)
 app.use(clients)
