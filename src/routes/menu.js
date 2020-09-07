@@ -11,7 +11,8 @@ router.post('/menu/register', (req, res) => {
         name: req.body.name,
         desc: req.body.desc,
         value: req.body.value,
-        costProduce: req.body.costProduce
+        costProduce: req.body.costProduce,
+        class: req.body.class
     }).then(() => {
         res.send('cardápio cadastrado com sucesso!')
     }).catch((err) => {

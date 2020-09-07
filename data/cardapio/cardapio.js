@@ -1,5 +1,4 @@
 const Menu = require('../../src/models/Menu')
-const cardapios = []
 
 const cardapio = {
 

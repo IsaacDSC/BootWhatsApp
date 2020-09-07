@@ -31,6 +31,11 @@ const Menu = db.define('menu', {
     },
     costProduce: {
         type: db.Sequelize.FLOAT,
+    },
+    class: {
+        type: db.Sequelize.STRING,
+            allowNull: false,
+            require: true
     }
 
 })
