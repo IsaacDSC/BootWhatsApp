@@ -3,25 +3,30 @@ require('module-alias/register')
 const banco = require('@data/user/user')
 
 function execute(user, msg) {
-    if (msg === '*') {
-        banco.db[user].stage = 0
-        return ["Pedido Cancelado com Sucesso!"]
+    if (msg === "*") {
+      banco.db[user].stage = 0;
+      banco.db[user]=""
+      return ["Pedido cancelado com sucesso"];
     }
+  
     if (msg === "#") {
-        banco.db[user].stage = 3
-        return ["Digite seu Endenreço para entrega por favor"]
+      banco.db[user].stage = 3;
+      return ["Digite o endereço completo por favor :"];
     }
-
-    let resumo = "*Resumo*\n"
-    let total = 0
+  
+    let resumo = "  RESUMO DO PEDIDO \n";
+    let total = 0;
     banco.db[user].itens.forEach((value) => {
-        total += value.valor
-        resumo += `${value.nome} ...............${value.valor}\n`
-        resumo += `Total R$ ${total}`
-
-    })
-    return [resumo, "Para confirmar digite # ou para cancelar digite *"]
-}
-
-
-exports.execute = execute
+      console.log(value);
+      resumo += `${value.descricao} --- ${value.preco} \n`;
+  
+      total += value.preco;
+    });
+  
+    resumo += "-------------------------\n";
+    resumo += ` Total R$ ${total}`;
+  
+    return [resumo, "Para confirmar digite # ou para cancelar digite * "];
+  }
+  
+  exports.execute = execute;

@@ -1,30 +1,92 @@
 require('module-alias/register')
-const cardapio = require('@data/cardapio/cardapio')
+const cardapio = require('@data/cardapio/promocoes')
+const lanches = require('@data/cardapio/lanches')
 const banco = require('@data/user/user')
+let key = 0;
 
 function execute(user, msg) {
-    let menu = "*Cardapio*\n\n"
-    Object.keys(cardapio.menu).forEach((value) => {
-        let element = cardapio.menu[value]
-        menu += `${value} - ${element.nome} Valor: R$ ${element.valor} \n`
-    })
-    if (msg === '*') {
-        banco.db[user].stage = 0
-        return ["Pedido Cancelado com Sucesso!"]
+  
+    const frase ="```Digite # para finalizar * para cancelar & para voltar ao cardápio```"
+  
+    if (msg === "*") {
+      key = 0
+      banco.db[user].stage = 0;
+      banco.db[user]=""
+      console.log(banco.db[user])
+      return ["Pedido cancelado com sucesso"];
+    } 
+     if (msg === "#") {
+      key = 0
+      banco.db[user].stage = 2;
+      return ["Estamos fechando seu pedido, ok?"];
     }
-    if (msg === "#") {
-        banco.db[user].stage = 2
-        return ["Estamos Finalizando seu pedido, ok?"]
+  
+    if (key === 1) {
+      banco.db[user].itens.push(cardapio.menu[msg]);
+      
+      return [`Item(${cardapio.menu[msg].descricao}) adiconado com sucesso `,
+      frase,]
     }
+    if (key === 2) {
+      banco.db[user].itens.push(lanches.menu[msg]);
+      
+      return [`Lanche(${lanches.menu[msg].descricao}) adiconado com sucesso `,
+     frase,]
+    }
+    if (key === 3) {
+      banco.db[user].itens.push(lanches.menu[msg]);
+      
+      return [`Item(${lanches.menu[msg].descricao}) adiconado com sucesso `,
+     frase,]
+    }
+  
+    if (msg === "1") {
+      key = 1
+      let menu = " Promoções \n\n";
+      Object.keys(cardapio.menu).forEach((value) => {
+        let element = cardapio.menu[value];
+        menu += `${value} - ${element.descricao}        R$ ${element.preco} \n`;
+      });
+      return [menu, frase];
+    }
+  
+  
+  
+  
+    if (msg === "2") {
+      key = 2
+      let menu = " Lanches \n\n";
+  
+      Object.keys(lanches.menu).forEach((value) => {
+        let element = lanches.menu[value];
+        menu += `${value} - ${element.descricao}        R$ ${element.preco} \n`;
+      });
+      return [menu];
+  
+  
+    }
+    if (msg === "3") {
+      key=3
+      let menu = " Bebidas \n\n";
+  
+      Object.keys(cardapio.menu).forEach((value) => {
+        let element = cardapio.menu[value];
+        menu += `${value} - ${element.descricao}        R$ ${element.preco} \n`;
+      });
+      return [menu];
+  
+  
+    }
+  
+  
     if (!cardapio.menu[msg]) {
-        return ["Codigo invalido.\nDigite um código valido por favor!", "```Digite # para Finalizar ou * para Cancelar```"]
+      return [
+        "Código inválido, digite corretamente",
+        "```Digite # para finalizar ou * para cancelar```",
+      ];
     }
-
-
-    banco.db[user].itens.push(cardapio.menu[msg])
-    return [menu, `Item: (${cardapio.menu[msg].nome}) adionando com sucesso!`, "```Digite # para Finalizar ou * para Cancelar```"]
-
-}
-
-
-exports.execute = execute
+  
+  }
+  
+  exports.execute = execute;
+  

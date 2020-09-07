@@ -1,5 +1,9 @@
 const Banco = {
-    '5524988094891@c.us': {
+    '5524988180688@c.us': {
+        stage: 0,
+        itens: []
+    },
+    '553591165385@c.us': {
         stage: 0,
         itens: []
     },
@@ -11,15 +15,11 @@ const Banco = {
         stage: 0,
         itens: []
     },
-    '553588798846@c.us': {
-        stage: 0,
-        itens: []
-
-    },
-    '5524988180688@c.us': {
+    '5535988798846@c.us': {
         stage: 0,
         itens: []
     }
+    
 }
 
 exports.db = Banco

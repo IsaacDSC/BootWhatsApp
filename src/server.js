@@ -71,12 +71,16 @@ function main() {
     }
 
     function start(client) {
-        client.onMessage(async(message) => {
+        client.onMessage(async(message) => {            
             const user = await User.findAll({ where: { telephone: message.sender.id } })
             console.log(user.length)
             if (user.length === 0) {
                 try {
-                    let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
+                    let resposta = stages.step[getStage(message.from)].obj.execute(
+                        message.from, 
+                        message.body,
+                        message.sender.name
+                        )
                     for (let i = 0; i < resposta.length; i++) {
                         const element = resposta[i]
                         client.sendText(message.from, element)
@@ -92,7 +96,7 @@ function main() {
                 }
 
             } else {
-                let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body)
+                let resposta = stages.step[getStage(message.from)].obj.execute(message.from, message.body,message.sender.name)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
@@ -112,6 +116,7 @@ function getStage(user) {
     return banco.db[user].stage
 }
 
+main()
 
 /* console.log(stages.step[getStage('user1')].obj.execute())
 console.log(stages.step[getStage('user2')].obj.execute()) */
