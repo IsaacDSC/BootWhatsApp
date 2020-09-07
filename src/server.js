@@ -57,10 +57,6 @@ app.use((req, res, next) => {
 boot.main()
 
 
-
-
-
-
 /* console.log(stages.step[getStage('user1')].obj.execute())
 console.log(stages.step[getStage('user2')].obj.execute()) */
 
