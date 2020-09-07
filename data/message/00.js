@@ -27,18 +27,21 @@ async function execute(user, msg, contato) {
 
         contato = msg
         banco.db[user].stage = 1;
+        //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
-        const USER = await User.findOne({ where: { telephone: msg.sender.id } })
-        try {
-            USER((stage) => {
-                stage.stage = 1,
-                    stage.save()
-            }).then(() => {
-                console.log('usuario para o proximo estagio salvo')
+        async function temp() {
+            await User.findOne({ where: { telephone: user } }).then((usuario) => {
+                console.log(usuario)
+                usuario.stage = 1,
+                    usuario.save().then(() => {
+                        console.log('ok')
+                    }).catch((err) => {
+                        console.log(err)
+                    })
             })
-        } catch (error) {
-            console.log('erro ao enviar usuario para o proximo estagio: ' + error)
         }
+        //setTimeout(temp(), 1000)
+        temp()
 
         return [
             `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
@@ -49,21 +52,22 @@ async function execute(user, msg, contato) {
 
     if (contato) {
         //Nome da pessoa já Cadastrada na sua lista de contatos
-
         banco.db[user].stage = 1;
+        //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
-        const USER = await User.findOne({ where: { telephone: msg.sender.id } })
-        try {
-            console.log(USER)
-            USER((stage) => {
-                stage.stage = 1,
-                    stage.save()
-            }).then(() => {
-                console.log('usuario para o proximo estagio salvo')
+        async function temp() {
+            await User.findOne({ where: { telephone: user } }).then((usuario) => {
+                console.log(usuario)
+                usuario.stage = 1,
+                    usuario.save().then(() => {
+                        console.log('ok')
+                    }).catch((err) => {
+                        console.log(err)
+                    })
             })
-        } catch (error) {
-            console.log('erro ao enviar usuario para o proximo estagio: ' + error)
         }
+        //setTimeout(temp(), 1000)
+        temp()
         return [
             `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
             menu,
