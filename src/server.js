@@ -70,8 +70,8 @@ app.use(clients)
 app.use('/msg', msg)
 
 
-const Port = 3000
-app.listen(Port, () => {
-    console.log(`http://127.0.0.1:${Port}`)
+const port = 3000
+app.listen(process.env.PORT || port, () => {
+    console.log(`http://127.0.0.1:${port}`)
     console.log('Break Server CTRL + C')
 })
