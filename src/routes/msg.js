@@ -14,14 +14,18 @@ router.post('/register', (req, res) => {
         stage: req.body.stage,
         message: req.body.message
     }).then(() => {
-        res.send('Mensagem cadastrada com sucesso')
+        req.flash('success_msg', 'Mensagem cadastrada com Sucesso!')
+        res.redirect('/msg/register')
     }).catch((err) => {
-        res.send(err)
+        req.flash('error_msg', 'Error ao cadastrar menssagem: ' + err)
+        res.redirect('/msg/register')
     })
 })
 
-router.get('/view', auth, (req, res) => {
-    res.render('formMSG/view')
+router.get('/views', auth, (req, res) => {
+    Messages.findAll().then((msg) => {
+        res.render('formMSG/view', { msg: msg })
+    })
 })
 
 router.get('/edit', (req, res) => {

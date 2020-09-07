@@ -4,7 +4,6 @@ const banco = require('@data/user/user')
 
 const Cardapio = require('@models/Menu')
 
-const Menu = require('@models/Menu')
 
 let key = 0
 
