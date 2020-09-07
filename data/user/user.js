@@ -19,8 +19,9 @@ const Banco = {
         stage: 0,
         itens: []
     },
-
-
+    '5524988094891@c.us': {
+        stage: 0,
+        itens: []
+    },
 }
-
 exports.db = Banco

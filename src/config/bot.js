@@ -40,7 +40,7 @@ function main() {
                         const element = resposta[i]
                         client.sendText(message.from, element)
                     }
-                    console.log('usuario nao cadastrado')
+                    console.log('usuario cadastrado')
                     User.create({
                         telephone: message.sender.id,
                         name: message.sender.pushname,

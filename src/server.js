@@ -5,22 +5,18 @@ const app = express()
 const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const path = require('path')
-const boot = require('@config/bot')
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('express-flash')
 require('./config/Auhenticated')(passport)
 
 
+const boot = require('@config/bot') //para chamar configuração do bot
 
 const routes = require('@routes/routes')
 const menu = require("@routes/menu")
 const clients = require('@routes/clients');
 const msg = require('@routes/msg')
-
-const { sync } = require('./database/index');
-
-
 
 
 //Config handlebars
@@ -52,17 +48,9 @@ app.use((req, res, next) => {
     next()
 })
 
-
 ///local para chamar a configuração do bot
 boot.main()
 
-
-
-
-
-
-/* console.log(stages.step[getStage('user1')].obj.execute())
-console.log(stages.step[getStage('user2')].obj.execute()) */
 
 app.use(routes)
 app.use(menu)
@@ -70,8 +58,8 @@ app.use(clients)
 app.use('/msg', msg)
 
 
-const port = 3000
-app.listen(process.env.PORT || port, () => {
+const port = process.env.PORT || 3000
+app.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
     console.log('Break Server CTRL + C')
 })
