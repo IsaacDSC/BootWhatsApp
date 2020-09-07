@@ -2,8 +2,9 @@ require('module-alias/register')
 const express = require('express')
 const router = express.Router()
 const Messages = require('@models/Messages')
+const { auth } = require('@helper/auth')
 
-router.get('/register', (req, res) => {
+router.get('/register', auth, (req, res) => {
     res.render('formMSG/register')
 })
 
@@ -19,7 +20,7 @@ router.post('/register', (req, res) => {
     })
 })
 
-router.get('/view', (req, res) => {
+router.get('/view', auth, (req, res) => {
     res.render('formMSG/view')
 })
 

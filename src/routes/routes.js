@@ -1,14 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const Users = require('@models/Users')
+const Admin = require('@models/Admin')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const { auth } = require('@helper/auth')
 
-router.get('/', (req, res) => {
+router.get('/', auth, (req, res) => {
     res.render('index/index')
 })
-
 
 router.get('/login', (req, res) => {
     res.render('login/login', { layout: 'login.hbs' })
@@ -30,7 +29,7 @@ router.get('/reset', (req, res) => {
                 res.send('Erro ao criptogradar esta senha: ' + err)
             } else {
                 const pass = hash
-                Users.create({
+                Admin.create({
                     name: 'Administrador',
                     email: 'admin@gmail.com',
                     password: pass
@@ -41,6 +40,7 @@ router.get('/reset', (req, res) => {
         })
     })
 })
+
 
 
 
