@@ -1,5 +1,6 @@
 const db = require('../database/index')
 
+
 const Messages = db.define('message', {
     stage: {
         type: db.Sequelize.STRING(3),
@@ -16,9 +17,10 @@ const Messages = db.define('message', {
 
 function createTable() {
     Messages.sync({ force: true }).then(() => {
-        return console.log('Resetado com successo')
+        console.log('Resetado com successo')
     })
 }
 
+//createTable()
 
-module.exports = { Messages: Messages, createTable: createTable }
+module.exports = Messages

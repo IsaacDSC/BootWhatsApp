@@ -11,7 +11,6 @@ const session = require('express-session')
 const passport = require('passport')
 const flash = require('express-flash')
 require('./config/Auhenticated')(passport)
-
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const stages = require('@data/stages') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 const cardapio = require('@data/cardapio/cardapio')
@@ -22,6 +21,7 @@ const clients = require('@routes/clients');
 const msg = require('@routes/msg')
 const { sync } = require('./database/index');
 const User = require('@models/Users');
+
 
 
 //Config handlebars
@@ -119,7 +119,7 @@ function getStage(user) {
     return banco.db[user].stage
 }
 
-//main()
+main()
 
 /* console.log(stages.step[getStage('user1')].obj.execute())
 console.log(stages.step[getStage('user2')].obj.execute()) */
