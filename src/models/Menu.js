@@ -1,4 +1,5 @@
 const db = require('../database/index')
+const { createTable } = require('./Messages')
 
 /*Itens do Cardapio Ex
       * Lanches *
@@ -33,13 +34,14 @@ const Menu = db.define('menu', {
         type: db.Sequelize.FLOAT,
     },
     class: {
-        type: db.Sequelize.STRING,
-            allowNull: false,
-            require: true
+        type: db.Sequelize.STRING
     }
 
 })
 
-//Menu.sync({ force: true })
+function create() {
+    Menu.sync({ force: true })
+}
+
 
 module.exports = Menu

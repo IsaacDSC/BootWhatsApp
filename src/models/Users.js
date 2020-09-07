@@ -22,6 +22,8 @@ const User = db.define('user', {
     }
 })
 
-//User.sync({ force: true })
+function create() {
+    User.sync({ force: true })
+}
 
 module.exports = User

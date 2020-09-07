@@ -2,7 +2,7 @@ require('module-alias/register')
     //const cardapio = require('@data/cardapio/inicio')
 const banco = require('@data/user/user')
 
-const Cardapio = require('@models/Cardapio')
+const Cardapio = require('@models/Menu')
 
 const Menu = require('@models/Menu')
 
@@ -13,8 +13,9 @@ async function execute(user, msg, contato) {
     let menu = " CARDAPIO \n\n";
 
     //Cardapio Obtido Do Banco de Dados
-    const Menu = await Cardapio.findAll()
-    Menu.forEach(e => menu += `${e.dataValues.id} - ${e.dataValues.name} \n`)
+    const cardapio = await Cardapio.findAll()
+        //console.log(cardapio)
+    cardapio.forEach(e => menu += `${e.dataValues.id} - ${e.dataValues.name} \n`)
 
 
     /*Object.keys(cardapio.menu).forEach((value) => {

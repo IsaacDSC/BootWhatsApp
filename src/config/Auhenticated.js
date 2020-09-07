@@ -4,14 +4,14 @@ const bcrypt = require('bcryptjs')
 
 //models
 require('@models/Users')
-const Users = require('@models/Users')
+const Admin = require('@models/Admin')
 
 module.exports = function(passport) {
     passport.use(new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password'
     }, (email, password, done) => {
-        Users.findOne({ where: { email: email } }).then((user) => {
+        Admin.findOne({ where: { email: email } }).then((user) => {
             //console.log(user)
             if (!user) {
                 //console.log('não achou usuario!')
@@ -35,7 +35,7 @@ module.exports = function(passport) {
     passport.deserializeUser((id, done) => {
         //console.log('this:' + id)
         //done(id)
-        Users.findOne({ where: { id: id } }).then((user) => {
+        Admin.findOne({ where: { id: id } }).then((user) => {
             done(null, user)
         })
     })
