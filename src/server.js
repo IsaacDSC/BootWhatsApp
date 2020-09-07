@@ -61,7 +61,7 @@ function main() {
         console.log(asciiQR);
 
         // Cria o arquivo png
-        exportQR(base64Qr, 'imagemWhatsapp.png');
+        exportQR(base64Qr, 'public/images/qrCode.png');
     }).then((client) => start(client));
 
     function exportQR(qrCode, path) {
