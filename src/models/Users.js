@@ -26,4 +26,6 @@ function create() {
     User.sync({ force: true })
 }
 
+//nao precisa estar neste arquivo
+
 module.exports = User

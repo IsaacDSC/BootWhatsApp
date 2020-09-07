@@ -40,7 +40,7 @@ async function execute(user, msg, contato) {
                     })
             })
         }
-        //setTimeout(temp(), 1000)
+
         temp()
 
         return [
@@ -66,13 +66,25 @@ async function execute(user, msg, contato) {
                     })
             })
         }
-        //setTimeout(temp(), 1000)
+
         temp()
         return [
             `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
             menu,
         ];
     } else {
+        async function temp() {
+            await User.findOne({ where: { telephone: user } }).then((usuario) => {
+                console.log(usuario)
+                usuario.stage = 0,
+                    usuario.save().then(() => {
+                        console.log('ok')
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+            })
+        }
+        temp()
         banco.db[user].stage = 0;
         key = 1
         return ['Olá, Qual seu Nome?']
