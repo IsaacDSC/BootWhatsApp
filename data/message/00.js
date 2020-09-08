@@ -13,8 +13,8 @@ async function execute(user, msg, contato) {
 
     //Cardapio Obtido Do Banco de Dados
     const cardapio = await Cardapio.findAll()
-    console.log(cardapio)
-    cardapio.forEach(e => menu += `${e.dataValues.id} - ${e.dataValues.name} \n`)
+    //passa cada primeira letra para maiuscula
+    cardapio.forEach(e => menu += `${e.dataValues.id} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); })} \n`)
 
 
     /*Object.keys(cardapio.menu).forEach((value) => {

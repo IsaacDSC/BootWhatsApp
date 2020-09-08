@@ -1,5 +1,7 @@
 const db = require('../database/index')
 
+//Falta colocar data de criação do Pedido
+
 const Requests = db.define('menu_request', {
     client: {
         type: db.Sequelize.STRING,
