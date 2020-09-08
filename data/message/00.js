@@ -3,7 +3,7 @@ require('module-alias/register')
 const banco = require('@data/user/user')
 const Cardapio = require('@models/Menu')
 const User = require('@models/Users')
-
+const escolha = require("../escolha");
 
 let key = 0
 
@@ -17,10 +17,13 @@ async function execute(user, msg, contato) {
         group: ['class']
     })
 
+
     //passa cada primeira letra para maiuscula
-    cardapio.forEach((e,index) => menu += `${index+1} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); })} \n`)
-
-
+    cardapio.forEach((e,index) => { escolha.db.push({'id':index+1,'class':e.dataValues.class})
+         return menu += `${index+1} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); })} \n`
+        })
+    console.log(escolha)
+   
     /*Object.keys(cardapio.menu).forEach((value) => {
       let element = cardapio.menu[value];
       menu += `${value} - ${element.descricao}\n`;

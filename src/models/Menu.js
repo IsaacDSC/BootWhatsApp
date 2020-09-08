@@ -18,6 +18,7 @@ const Menu = db.define('menu', {
     name: {
         type: db.Sequelize.STRING,
         require: true,
+        unique:true,
         allowNull: false
     },
     desc: {
