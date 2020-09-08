@@ -1,5 +1,5 @@
 require('module-alias/register')
-    //const cardapio = require('@data/cardapio/inicio')
+//const cardapio = require('@data/cardapio/inicio')
 const banco = require('@data/user/user')
 const Cardapio = require('@models/Menu')
 const User = require('@models/Users')
@@ -11,10 +11,14 @@ let key = 0
 async function execute(user, msg, contato) {
     let menu = " CARDAPIO \n\n";
 
-    //Cardapio Obtido Do Banco de Dados
-    const cardapio = await Cardapio.findAll()
+    //Cardapio Obtido Do Banco de Dados só Obtem as classes
+    const cardapio = await Cardapio.findAll({
+        attributes: ['class'],
+        group: ['class']
+    })
+
     //passa cada primeira letra para maiuscula
-    cardapio.forEach(e => menu += `${e.dataValues.id} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); })} \n`)
+    cardapio.forEach((e,index) => menu += `${index+1} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); })} \n`)
 
 
     /*Object.keys(cardapio.menu).forEach((value) => {

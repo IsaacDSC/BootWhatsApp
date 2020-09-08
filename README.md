@@ -22,4 +22,7 @@ Instalar Chromium no servidor:
     3-npm install sharp
 
 
+Build Pack Heroku:
 
+https://buildpack-registry.s3.amazonaws.com/buildpacks/jontewks/puppeteer.tgz
+heroku/nodejs
