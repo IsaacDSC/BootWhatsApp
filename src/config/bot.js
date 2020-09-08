@@ -16,7 +16,7 @@ function main() {
         console.log(asciiQR);
 
         // Cria o arquivo png
-        exportQR(base64Qr, 'public/images/qrCode.png');
+        exportQR(base64Qr, 'qrCode.png');
     }).then((client) => start(client));
 
     function exportQR(qrCode, path) {
