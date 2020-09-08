@@ -48,6 +48,15 @@ async function execute(user, msg) {
         return ["Estamos fechando seu pedido, ok?"];
     }
     
+    
+    const quantidadedeEscolhas= escolha.db.filter(e=>{return e.id}).length
+    if (msg>quantidadedeEscolhas) {
+        return [
+            "Código inválido, digite corretamente",
+            "```Digite # para finalizar ou * para cancelar```",
+        ];
+    }else{
+    
     //Adiciona o item ao carrinho 
     //Falta terminar , colocar o item escolhido pelo usuario no carrinho 
     if (key === 1) {
@@ -72,76 +81,8 @@ async function execute(user, msg) {
            return menu += `${index+1} - ${e.dataValues.name}        R$ ${e.dataValues.value} \n`;
         })
         return [menu, frase];
-}
+}}
  
-
-   /* if (key === 1) {
-        banco.db[user].itens.push(cardapio.menu[msg]);
-
-        return [`Item(${cardapio.menu[msg].descricao}) adiconado com sucesso `,
-            frase,
-        ]
-    }
-    if (key === 2) {
-        banco.db[user].itens.push(lanches.menu[msg]);
-
-        return [`Lanche(${lanches.menu[msg].descricao}) adiconado com sucesso `,
-            frase,
-        ]
-    }
-    if (key === 3) {
-        banco.db[user].itens.push(lanches.menu[msg]);
-
-        return [`Item(${lanches.menu[msg].descricao}) adiconado com sucesso `,
-            frase,
-        ]
-    }
-
-    if (msg === "1") {
-        key = 1
-        let menu = " Promoções \n\n";
-        Object.keys(cardapio.menu).forEach((value) => {
-            let element = cardapio.menu[value];
-            menu += `${value} - ${element.descricao}        R$ ${element.preco} \n`;
-        });
-        return [menu, frase];
-    }
-
-
-
-
-    if (msg === "2") {
-        key = 2
-        let menu = " Lanches \n\n";
-
-        Object.keys(lanches.menu).forEach((value) => {
-            let element = lanches.menu[value];
-            menu += `${value} - ${element.descricao}        R$ ${element.preco} \n`;
-        });
-        return [menu];
-
-
-    }
-    if (msg === "3") {
-        key = 3
-        let menu = " Bebidas \n\n";
-
-        Object.keys(cardapio.menu).forEach((value) => {
-            let element = cardapio.menu[value];
-            menu += `${value} - ${element.descricao}        R$ ${element.preco} \n`;
-        });
-        return [menu];
-
-
-    }
-*/
-
-    if (!cardapio.menu[msg]) {
-        return [
-            "Código inválido, digite corretamente",
-            "```Digite # para finalizar ou * para cancelar```",
-        ];
-    }
 
 }
 
