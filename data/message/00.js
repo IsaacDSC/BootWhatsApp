@@ -22,7 +22,6 @@ async function execute(user, msg, contato) {
     cardapio.forEach((e,index) => { escolha.db.push({'id':index+1,'class':e.dataValues.class})
          return menu += `${index+1} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); })} \n`
         })
-    console.log(escolha)
    
     /*Object.keys(cardapio.menu).forEach((value) => {
       let element = cardapio.menu[value];

@@ -43,6 +43,7 @@ function execute(user, msg) {
 
     let resumo = "  RESUMO DO PEDIDO \n";
     let total = 0;
+    //Pegar esses itens do Banco de Dados
     banco.db[user].itens.forEach((value) => {
         console.log(value);
         resumo += `${value.descricao} --- ${value.preco} \n`;

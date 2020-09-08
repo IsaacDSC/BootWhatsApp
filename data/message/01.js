@@ -2,6 +2,7 @@ require('module-alias/register')
 const cardapio = require('@data/cardapio/promocoes')
 const escolha = require("../escolha");
 const Menu = require('@models/Menu')
+const Requests = require('@models/Requests')
 const banco = require('@data/user/user')
 const User = require('@models/Users')
 
@@ -51,6 +52,12 @@ async function execute(user, msg) {
     
     const quantidadedeEscolhas= escolha.db.filter(e=>{return e.id}).length
     if (msg>quantidadedeEscolhas) {
+      /*  Requests.create({
+            client,
+            package,
+            profit,
+            spent,
+        })*/
         return [
             "Código inválido, digite corretamente",
             "```Digite # para finalizar ou * para cancelar```",
