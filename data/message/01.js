@@ -56,6 +56,7 @@ async function execute(user, msg) {
         return [`Item(${cardapio.menu[msg].descricao}) adiconado com sucesso `,
             frase,
         ]
+        
     }else{
          // Numero Digitado pega a class 
         const cardapio = await Menu.findAll({ where: { id: Number(msg) } })
