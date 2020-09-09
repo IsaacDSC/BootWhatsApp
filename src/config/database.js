@@ -1,7 +1,7 @@
 module.exports = {
     dialect: 'mysql',
-    host: 'localhost',
-    username: 'dev',
-    password: 'secret',
+    host: 'db4free.net',
+    username: 'matheusmlol',
+    password: '12052000a',
     database: 'bootwhatsapp'
 }
