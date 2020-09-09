@@ -49,15 +49,8 @@ async function execute(user, msg) {
         return ["Estamos fechando seu pedido, ok?"];
     }
     
-    
     const quantidadedeEscolhas= escolha.db.filter(e=>{return e.id}).length
     if (msg>quantidadedeEscolhas) {
-      /*  Requests.create({
-            client,
-            package,
-            profit,
-            spent,
-        })*/
         return [
             "Código inválido, digite corretamente",
             "```Digite # para finalizar ou * para cancelar```",
@@ -65,11 +58,23 @@ async function execute(user, msg) {
     }else{
     
     //Adiciona o item ao carrinho 
-    //Falta terminar , colocar o item escolhido pelo usuario no carrinho 
+    
     if (key === 1) {
         banco.db[user].itens.push(cardapio.menu[msg]);
         const itemEscolhido= escolha.db.filter(e=>{return e.index ==msg}) 
 
+    //Coloca o Item escolhido do usuario ao banco de dados 
+    //Só esta cadastrado um produto esta dando duplicidade de client 
+       Requests.create({
+            client: user,
+            package: itemEscolhido[0].name ,
+            profit: 1,
+            spent: 1,
+            status: 0,
+        })
+        .then(console.log('Pedido Cadastrado Com Sucesso'))
+        .catch(err=>console.log(err))
+        
         return [`Item(${itemEscolhido[0].name}) adiconado com sucesso `,
             frase,
         ]

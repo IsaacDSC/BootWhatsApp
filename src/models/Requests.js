@@ -25,7 +25,7 @@ const Requests = db.define('menu_request', {
         allowNull: false,
     },
     status:{
-        type: db.Sequelize.STRING,
+        type: db.Sequelize.INTEGER,
         require:true,
         allowNull: false,
     }
