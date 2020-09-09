@@ -23,6 +23,11 @@ const Requests = db.define('menu_request', {
         type: db.Sequelize.FLOAT,
         require: true,
         allowNull: false,
+    },
+    status:{
+        type: db.Sequelize.STRING,
+        require:true,
+        allowNull: false,
     }
 
 })
