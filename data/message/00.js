@@ -4,6 +4,7 @@ const banco = require('@data/user/user')
 const Cardapio = require('@models/Menu')
 const User = require('@models/Users')
 const escolha = require("../escolha");
+const setStage = require('../teste')
 
 let key = 0
 
@@ -36,15 +37,8 @@ async function execute(user, msg, contato) {
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
         async function temp() {
-            await User.findOne({ where: { telephone: user } }).then((usuario) => {
-                console.log(usuario)
-                usuario.stage = 1,
-                    usuario.save().then(() => {
-                        console.log('ok')
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-            })
+            await setStage(user,1)
+            
         }
 
         temp()
