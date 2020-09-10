@@ -1,7 +1,6 @@
 const db = require('../database/index')
 
 
-
 const Menu = db.define('menu', {
     id:{
         type: db.Sequelize.INTEGER,
@@ -33,24 +32,5 @@ const Menu = db.define('menu', {
     },
 
 })
-
-
-//const User = require('@models/Users')
-
-Menu.associate = (models) => {
-    Menu.belongsToMany(models.Users, {
-        through: 'menu_request',
-        as: 'menus',
-        foreignKey: 'MenuNameId'
-    })
-}
-
-
-
-
-//Menu.sync({ force: true })
-
-
-
 
 module.exports = Menu

@@ -1,7 +1,12 @@
 const db = require('../database/index')
 
 const Requests = db.define('menu_request', {
-
+    id:{
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     MenuNameId: {
         type: db.Sequelize.INTEGER,
         references: {
@@ -61,9 +66,5 @@ const Requests = db.define('menu_request', {
     }
 
 })
-
-
-
-//Requests.sync({ force: true })
 
 module.exports = Requests
