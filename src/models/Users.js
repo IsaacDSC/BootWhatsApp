@@ -32,20 +32,12 @@ const User = db.define('user', {
 User.associate = (models) => {
     User.belongsToMany(models.Menu, {
         through: 'menu_request',
-<<<<<<< HEAD
         as: 'users',
         foreignKey: 'MenuNameId'
-=======
-        as: 'user',
-        foreignKey: 'id_user'
->>>>>>> 4bdea69e46a983a27029167141a60057a09ec91e
+
     })
 }
 
-function create() {
-    User.sync({ force: true })
-}
 
-//nao precisa estar neste arquivo
 
 module.exports = User
