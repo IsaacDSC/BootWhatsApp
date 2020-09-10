@@ -1,6 +1,7 @@
 const db = require('../database/index')
 const { createTable } = require('./Messages')
 
+
 /*Itens do Cardapio Ex
       * Lanches *
     1- X-Tudo R$19,00
@@ -15,6 +16,12 @@ const { createTable } = require('./Messages')
 */
 
 const Menu = db.define('menu', {
+    id:{
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     name: {
         type: db.Sequelize.STRING,
         require: true,
@@ -40,9 +47,16 @@ const Menu = db.define('menu', {
 
 })
 
-function create() {
-    Menu.sync({ force: true })
-}
+    Menu.associate=(models)=>{
+        Menu.belongsToMany(models.Users,{ 
+            through:'menu_request', 
+            as: 'menus',
+            foreignKey:'id_menu'})
+    }
+
+
+ //Menu.sync({ force: true })
+
 
 
 
