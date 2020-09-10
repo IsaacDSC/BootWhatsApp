@@ -1,13 +1,16 @@
 require('module-alias/register')
+const db = require('../database/index')
 
 const Resquests = require('@models/Requests')
 const Menu = require('@models/Menu')
 const User = require('@models/Users')
 
-function createTable() {
-    Menu.sync({ force: true })
-    User.sync({ force: true })
-    Resquests.sync({ force: true })
+
+
+async function createTable() {
+  Menu.belongsToMany(User,{through:'menu_request',foreignKey: 'MenuNameId', as: 'menus'})
+  User.belongsToMany(Menu,{through:'menu_request',foreignKey: 'UserId',as:'user'})
+  await db.sync({ force: true })
 }
 
 createTable()

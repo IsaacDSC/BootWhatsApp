@@ -1,7 +1,7 @@
 const db = require('../database/index')
 
 const User = db.define('user', {
-    id: {
+    id:{
         type: db.Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -9,7 +9,6 @@ const User = db.define('user', {
     },
     telephone: {
         type: db.Sequelize.STRING,
-        primaryKey: true,
         unique: true,
         allowNull: false,
         require: true
@@ -32,12 +31,12 @@ const User = db.define('user', {
 User.associate = (models) => {
     User.belongsToMany(models.Menu, {
         through: 'menu_request',
-        as: 'users',
-        foreignKey: 'MenuNameId'
+        as: 'user',
+        foreignKey: 'UserId'
 
     })
 }
 
-
+//User.sync({ force: true })
 
 module.exports = User

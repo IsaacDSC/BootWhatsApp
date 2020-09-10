@@ -3,15 +3,20 @@ const db = require('../database/index')
 
 
 const Menu = db.define('menu', {
-    class: {
-        type: db.Sequelize.STRING
+    id:{
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        unique:true,
     },
     name: {
         type: db.Sequelize.STRING,
-        primaryKey: true,
         require: true,
         unique: true,
         allowNull: false
+    }, class: {
+        type: db.Sequelize.STRING
     },
     desc: {
         type: db.Sequelize.TEXT,
@@ -33,7 +38,7 @@ const Menu = db.define('menu', {
 //const User = require('@models/Users')
 
 Menu.associate = (models) => {
-    Menu.belongsToMany(models.User, {
+    Menu.belongsToMany(models.Users, {
         through: 'menu_request',
         as: 'menus',
         foreignKey: 'MenuNameId'
@@ -41,13 +46,6 @@ Menu.associate = (models) => {
 }
 
 
-Menu.associate = (models) => {
-    Menu.belongsToMany(models.Users, {
-        through: 'menu_request',
-        as: 'menus',
-        foreignKey: 'id_menu'
-    })
-}
 
 
 //Menu.sync({ force: true })

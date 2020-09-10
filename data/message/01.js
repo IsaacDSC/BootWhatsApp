@@ -64,16 +64,8 @@ async function execute(user, msg) {
         const itemEscolhido= escolha.db.filter(e=>{return e.index ==msg}) 
 
     //Coloca o Item escolhido do usuario ao banco de dados 
-    //Só esta cadastrado um produto esta dando duplicidade de client 
-       Requests.create({
-            client: user,
-            package: itemEscolhido[0].name ,
-            profit: 1,
-            spent: 1,
-            status: 0,
-        })
-        .then(console.log('Pedido Cadastrado Com Sucesso'))
-        .catch(err=>console.log(err))
+
+
         
         return [`Item(${itemEscolhido[0].name}) adiconado com sucesso `,
             frase,

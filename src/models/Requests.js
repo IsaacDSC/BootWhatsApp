@@ -1,29 +1,28 @@
 const db = require('../database/index')
 
 const Requests = db.define('menu_request', {
-    UserId: {
-        type: db.Sequelize.STRING,
+
+    MenuNameId: {
+        type: db.Sequelize.INTEGER,
         references: {
-            model: 'users',
-            key: 'telephone'
+            model: 'menus',
+            key: 'id'
         },
         onDelete: 'CASCADE',
         allowNull: false
-    },
-    MenuNameId: {
-        type: db.Sequelize.STRING,
+
+    }, UserId: {
+        type: db.Sequelize.INTEGER,
         references: {
-            model: 'menus',
-            key: 'name'
+            model: 'users',
+            key: 'id'
         },
         onDelete: 'CASCADE',
         allowNull: false
     },
     note: {
         type: db.Sequelize.STRING,
-        require: true,
-        allowNull: false,
-        unique: true
+        require: false,
     },
     neighborhood: {
         type: db.Sequelize.STRING,
@@ -40,13 +39,6 @@ const Requests = db.define('menu_request', {
         require: true,
         allowNull: false,
     },
-
-    package: {
-        type: db.Sequelize.TEXT,
-        require: true,
-        allowNull: false,
-    },
-
     shippingAmount: {
         type: db.Sequelize.FLOAT,
         require: true,

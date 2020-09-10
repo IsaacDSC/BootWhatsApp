@@ -15,6 +15,7 @@ router.get('/login', (req, res) => {
     res.render('login/login', { layout: 'login.hbs' })
 })
 
+
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',
