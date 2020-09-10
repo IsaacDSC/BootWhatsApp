@@ -3,6 +3,7 @@ const db = require('../database/index')
 const User = db.define('user', {
     telephone: {
         type: db.Sequelize.STRING,
+        primaryKey: true,
         unique: true,
         allowNull: false,
         require: true
@@ -21,6 +22,14 @@ const User = db.define('user', {
         require: true
     }
 })
+
+User.associate = (models) => {
+    User.belongsToMany(models.Menu, {
+        through: 'menu_request',
+        as: 'users',
+        foreignKey: 'MenuNameId'
+    })
+}
 
 function create() {
     User.sync({ force: true })

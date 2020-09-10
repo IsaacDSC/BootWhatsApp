@@ -1,24 +1,14 @@
 const db = require('../database/index')
-const { createTable } = require('./Messages')
-
-/*Itens do Cardapio Ex
-      * Lanches *
-    1- X-Tudo R$19,00
-    (Pão,Maionese,...)
-    2- X-bacon R$18,88
-    (Pão,Hamburger,...)
-
-
-       * Promoçao *
-    1- X-Tudo R$7,00
-    2- X-bacon R$8,88
-*/
 
 const Menu = db.define('menu', {
+    class: {
+        type: db.Sequelize.STRING
+    },
     name: {
         type: db.Sequelize.STRING,
+        primaryKey: true,
         require: true,
-        unique:true,
+        unique: true,
         allowNull: false
     },
     desc: {
@@ -34,11 +24,18 @@ const Menu = db.define('menu', {
     costProduce: {
         type: db.Sequelize.FLOAT,
     },
-    class: {
-        type: db.Sequelize.STRING
-    }
 
 })
+
+//const User = require('@models/Users')
+
+Menu.associate = (models) => {
+    Menu.belongsToMany(models.User, {
+        through: 'menu_request',
+        as: 'menus',
+        foreignKey: 'MenuNameId'
+    })
+}
 
 function create() {
     Menu.sync({ force: true })
