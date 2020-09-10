@@ -1,10 +1,10 @@
 require('module-alias/register')
-//const cardapio = require('@data/cardapio/inicio')
+    //const cardapio = require('@data/cardapio/inicio')
 const banco = require('@data/user/user')
 const Cardapio = require('@models/Menu')
 const User = require('@models/Users')
 const escolha = require("../escolha");
-const setStage = require('../teste')
+const setStage = require('../../src/helpers/setStage')
 
 let key = 0
 
@@ -20,10 +20,11 @@ async function execute(user, msg, contato) {
 
 
     //passa cada primeira letra para maiuscula
-    cardapio.forEach((e,index) => { escolha.db.push({'id':index+1,'class':e.dataValues.class})
-         return menu += `${index+1} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); })} \n`
-        })
-   
+    cardapio.forEach((e, index) => {
+        escolha.db.push({ 'id': index + 1, 'class': e.dataValues.class })
+        return menu += `${index+1} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); })} \n`
+    })
+
     /*Object.keys(cardapio.menu).forEach((value) => {
       let element = cardapio.menu[value];
       menu += `${value} - ${element.descricao}\n`;
@@ -36,7 +37,10 @@ async function execute(user, msg, contato) {
         banco.db[user].stage = 1;
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
-        await setStage(user,1)
+        async function temp() {
+            await setStage(user, 0)
+        }
+        temp()
 
         return [
             `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
@@ -51,15 +55,7 @@ async function execute(user, msg, contato) {
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
         async function temp() {
-            await User.findOne({ where: { telephone: user } }).then((usuario) => {
-                console.log(usuario)
-                usuario.stage = 1,
-                    usuario.save().then(() => {
-                        console.log('ok')
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-            })
+            await setStage(user, 1)
         }
 
         temp()
@@ -69,15 +65,7 @@ async function execute(user, msg, contato) {
         ];
     } else {
         async function temp() {
-            await User.findOne({ where: { telephone: user } }).then((usuario) => {
-                console.log(usuario)
-                usuario.stage = 0,
-                    usuario.save().then(() => {
-                        console.log('ok')
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-            })
+            await setStage(user, 0)
         }
         temp()
         banco.db[user].stage = 0;
