@@ -104,3 +104,9 @@ dist
 
 # TernJS port file
 .tern-port
+qrCode.png
+tokens/Delivery.data.json
+tokens/Delivery.data.json
+src/tokens/session.data.json
+src/tokens/Delivery.data.json
+src/public/images/qrCode.png

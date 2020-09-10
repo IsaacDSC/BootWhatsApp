@@ -1,6 +1,12 @@
 const db = require('../database/index')
 
 const User = db.define('user', {
+    id: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     telephone: {
         type: db.Sequelize.STRING,
         primaryKey: true,
@@ -26,8 +32,13 @@ const User = db.define('user', {
 User.associate = (models) => {
     User.belongsToMany(models.Menu, {
         through: 'menu_request',
+<<<<<<< HEAD
         as: 'users',
         foreignKey: 'MenuNameId'
+=======
+        as: 'user',
+        foreignKey: 'id_user'
+>>>>>>> 4bdea69e46a983a27029167141a60057a09ec91e
     })
 }
 
