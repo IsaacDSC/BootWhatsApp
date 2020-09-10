@@ -36,12 +36,7 @@ async function execute(user, msg, contato) {
         banco.db[user].stage = 1;
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
-        async function temp() {
-            await setStage(user,1)
-            
-        }
-
-        temp()
+        await setStage(user,1)
 
         return [
             `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
