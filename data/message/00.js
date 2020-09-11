@@ -8,7 +8,6 @@ const setStage = require('../../src/helpers/setStage')
 
 let key = 0
 
-
 async function execute(user, msg, contato) {
     let menu = " CARDAPIO \n\n";
 
@@ -37,10 +36,8 @@ async function execute(user, msg, contato) {
         banco.db[user].stage = 1;
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
-        async function temp() {
-            await setStage(user, 0)
-        }
-        temp()
+        setStage.envStageDb(user, 0)
+        
 
         return [
             `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
@@ -54,20 +51,15 @@ async function execute(user, msg, contato) {
         banco.db[user].stage = 1;
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
-        async function temp() {
-            await setStage(user, 1)
-        }
-
-        temp()
+        setStage.envStageDb(user, 1)
+       
         return [
             `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
             menu,
         ];
     } else {
-        async function temp() {
-            await setStage(user, 0)
-        }
-        temp()
+         setStage.envStageDb(user, 0)
+
         banco.db[user].stage = 0;
         key = 1
         return ['Olá, Qual seu Nome?']
