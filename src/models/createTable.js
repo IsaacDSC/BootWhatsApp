@@ -5,7 +5,7 @@ const Resquests = require('@models/Requests')
 const Menu = require('@models/Menu')
 const User = require('@models/Users')
 
-
+createTable()
 
 async function createTable() {
   Menu.belongsToMany(User,{through:'menu_request',foreignKey: 'MenuNameId', as: 'menus'})
@@ -13,4 +13,3 @@ async function createTable() {
   await db.sync({ force: true })
 }
 
-createTable()

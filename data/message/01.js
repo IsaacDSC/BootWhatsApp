@@ -30,11 +30,10 @@ async function execute(user, msg) {
     }
     
     const quantidadedeEscolhas= escolha.db.filter(e=>{return e.id}).length
-    if (msg>quantidadedeEscolhas) {
+    console.log(Number(msg))
+    if (msg>quantidadedeEscolhas || !Number(msg)) {
         return [
-            "Código inválido, digite corretamente",
-            "```Digite # para finalizar ou * para cancelar```",
-        ];
+            "Você *precisa* escolher um número da categoria."];
     }else{
     
     //Adiciona o item ao carrinho 
@@ -54,9 +53,10 @@ async function execute(user, msg) {
         const classe= escolha.db.filter(e=>{return e.id ==msg}) 
         clas= classe[0].class
         const itensMenu = await Menu.findAll({where:{class:clas}})
-
-        let menu = ` ${clas.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); })} \n\n`;
+        let menu = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
+        menu += ` ${clas.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); })} \n\n`;
         key = 1
+
         itensMenu.forEach((e,index)=>{
             escolha.db.push({'index':index+1,'name':e.dataValues.name, 'price':e.dataValues.value})
 

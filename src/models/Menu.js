@@ -1,3 +1,4 @@
+const { menu } = require('@data/cardapio/promocoes')
 const db = require('../database/index')
 
 

@@ -9,25 +9,22 @@ const setStage = require('../../src/helpers/setStage')
 let key = 0
 
 async function execute(user, msg, contato) {
-    let menu = " CARDAPIO \n\n";
+    let menu ='🔢 Digite o *número* da categoria:\n\n ```Digite apenas 1 número.```\n\n';
 
     //Cardapio Obtido Do Banco de Dados só Obtem as classes
     const cardapio = await Cardapio.findAll({
         attributes: ['class'],
         group: ['class']
     })
-
+    
 
     //passa cada primeira letra para maiuscula
     cardapio.forEach((e, index) => {
         escolha.db.push({ 'id': index + 1, 'class': e.dataValues.class })
-        return menu += `${index+1} - ${e.dataValues.class.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); })} \n`
+        return menu += `*[ ${index+1} ]* ${e.dataValues.class.toUpperCase()} \n`
     })
-
-    /*Object.keys(cardapio.menu).forEach((value) => {
-      let element = cardapio.menu[value];
-      menu += `${value} - ${element.descricao}\n`;
-    });*/
+    
+    menu+='\nDica:\nse quer *'+escolha.db[0].class.toUpperCase()+'* envie o número *1*.\n\n───────────────'
 
     if (key === 1) {
         //Nome da pessoa Digitado = contato
@@ -40,7 +37,7 @@ async function execute(user, msg, contato) {
         
 
         return [
-            `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
+            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
             menu,
         ]
     }
@@ -54,7 +51,7 @@ async function execute(user, msg, contato) {
         setStage.envStageDb(user, 1)
        
         return [
-            `Olá, ${contato} sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
+            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
             menu,
         ];
     } else {
