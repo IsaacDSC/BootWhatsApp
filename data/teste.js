@@ -1,17 +1,8 @@
-require('module-alias/register')
-const User = require('@models/Users')
-
- function envStageDb(user, estagio) {
-     User.findOne({ where: { telephone: user } }).then((usuario) => {
-        usuario.stage = estagio,
-            usuario.save().then(() => {
-                console.log('cadastrado estágio')
-            }).catch((err) => {
-                console.log('erro ao cadastrar estagio ' + err)
-            })
-    })
-}
+const Requests = require('../src/models/Requests')
 
 
-
-exports.envStageDb = envStageDb
+Requests.create({
+    MenuNameId: 1,
+    UserId: 1,
+    quantity: 1,
+}).then(() => console.log('Produto Cadastrado Para O Usuario'))

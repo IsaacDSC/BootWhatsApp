@@ -27,42 +27,43 @@ const Requests = db.define('menu_request', {
     },
     note: {
         type: db.Sequelize.STRING,
-        require: false,
     },
     neighborhood: {
         type: db.Sequelize.STRING,
-        require: true,
-        allowNull: false,
+        allowNull: true,
     },
     street: {
         type: db.Sequelize.STRING,
-        require: true,
-        allowNull: false,
+
+        allowNull: true,
     },
     numberHouse: {
         type: db.Sequelize.STRING,
-        require: true,
-        allowNull: false,
+  
+        allowNull: true,
     },
     shippingAmount: {
         type: db.Sequelize.FLOAT,
-        require: true,
-        allowNull: false,
+    
+        allowNull: true,
     },
     profit: {
         type: db.Sequelize.FLOAT,
-        require: true,
-        allowNull: false,
+
+        allowNull: true,
     },
     spent: {
         type: db.Sequelize.FLOAT,
-        require: true,
-        allowNull: false,
+       
+        allowNull: true,
     },
     status: {
         type: db.Sequelize.STRING,
-        require: true,
         allowNull: false,
+    },quantity:{
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        require: true,
     }
 
 })

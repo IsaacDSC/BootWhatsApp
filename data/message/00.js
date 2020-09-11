@@ -9,15 +9,12 @@ let key = 0
 
 async function execute(user, msg, contato) {
     let menu = '🔢 Digite o *número* da categoria:\n\n ```Digite apenas 1 número.```\n\n';
-
     //Cardapio Obtido Do Banco de Dados só Obtem as classes
     const cardapio = await Cardapio.findAll({
         attributes: ['class'],
         group: ['class']
     })
 
-
-    //passa cada primeira letra para maiuscula
     cardapio.forEach((e, index) => {
         escolha.db.push({ 'id': index + 1, 'class': e.dataValues.class })
         return menu += `*[ ${index+1} ]* ${e.dataValues.class.toUpperCase()} \n`
