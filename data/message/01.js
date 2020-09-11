@@ -13,6 +13,11 @@ async function execute(user, msg) {
 
     const frase = "```Digite # para finalizar * para cancelar & para voltar ao cardápio```"
 
+    if (msg.toUpperCase() === "V") {
+       
+        return ["v"];
+    }
+
     if (msg === "*") {
         setStage.envStageDb(user, 0)
 
@@ -79,7 +84,7 @@ async function execute(user, msg) {
         //parte final da String
         menu += "\n───────────────\n*[ V ]* MENU ANTERIOR"
 
-        return [menu, frase];
+        return [menu];
     }
 }
 

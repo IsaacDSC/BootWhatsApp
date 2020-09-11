@@ -7,6 +7,7 @@ const setStage = require('../../src/helpers/setStage')
 
 let key = 0
 
+
 async function execute(user, msg, contato) {
     let menu = '🔢 Digite o *número* da categoria:\n\n ```Digite apenas 1 número.```\n\n';
     //Cardapio Obtido Do Banco de Dados só Obtem as classes
