@@ -5,6 +5,7 @@ const Menu = require('@models/Menu')
 const Requests = require('@models/Requests')
 const banco = require('@data/user/user')
 const User = require('@models/Users')
+const setStage = require('../../src/helpers/setStage')
 
 let key = 0;
 
@@ -13,18 +14,8 @@ async function execute(user, msg) {
     const frase = "```Digite # para finalizar * para cancelar & para voltar ao cardápio```"
 
     if (msg === "*") {
-        async function temp() {
-            await User.findOne({ where: { telephone: user } }).then((usuario) => {
-                console.log(usuario)
-                usuario.stage = 0,
-                    usuario.save().then(() => {
-                        console.log('ok')
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-            })
-        }
-        temp()
+        setStage.envStageDb(user, 0)
+
         key = 0
         banco.db[user].stage = 0;
         banco.db[user] = ""
@@ -32,18 +23,7 @@ async function execute(user, msg) {
         return ["Pedido cancelado com sucesso"];
     }
     if (msg === "#") {
-        async function temp() {
-            await User.findOne({ where: { telephone: user } }).then((usuario) => {
-                console.log(usuario)
-                usuario.stage = 2,
-                    usuario.save().then(() => {
-                        console.log('ok')
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-            })
-        }
-        temp()
+        setStage.envStageDb(user, 2)
         key = 0
         banco.db[user].stage = 2;
         return ["Estamos fechando seu pedido, ok?"];
@@ -64,8 +44,6 @@ async function execute(user, msg) {
         const itemEscolhido= escolha.db.filter(e=>{return e.index ==msg}) 
 
     //Coloca o Item escolhido do usuario ao banco de dados 
-
-
         
         return [`Item(${itemEscolhido[0].name}) adiconado com sucesso `,
             frase,

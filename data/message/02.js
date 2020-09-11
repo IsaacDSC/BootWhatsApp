@@ -2,41 +2,20 @@ require('module-alias/register')
     //const cardapio = require('@data/cardapio/cardapio')
 const banco = require('@data/user/user')
 const User = require('@models/Users')
+const setStage = require('../../src/helpers/setStage')
 
 function execute(user, msg) {
     if (msg === "*") {
-        async function temp() {
-            await User.findOne({ where: { telephone: user } }).then((usuario) => {
-                console.log(usuario)
-                usuario.stage = 0,
-                    usuario.save().then(() => {
-                        console.log('ok')
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-            })
-        }
-
-        temp()
+        setStage.envStageDb(user, 0)
+        
         banco.db[user].stage = 0;
         banco.db[user] = ""
         return ["Pedido cancelado com sucesso"];
     }
 
     if (msg === "#") {
-        async function temp() {
-            await User.findOne({ where: { telephone: user } }).then((usuario) => {
-                console.log(usuario)
-                usuario.stage = 3,
-                    usuario.save().then(() => {
-                        console.log('ok')
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-            })
-        }
-
-        temp()
+        setStage.envStageDb(user, 3)
+        
         banco.db[user].stage = 3;
         return ["Digite o endereço completo por favor :"];
     }
