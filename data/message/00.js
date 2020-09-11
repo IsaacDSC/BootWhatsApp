@@ -1,6 +1,6 @@
 require('module-alias/register')
 const banco = require('@data/user/user')
-const Menu = require('../teste')
+const Menu = require('../../src/helpers/getMenu')
 
 const setStage = require('../../src/helpers/setStage')
 
@@ -18,7 +18,6 @@ async function execute(user, msg, contato) {
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
         setStage.envStageDb(user, 0)
-
 
         return [
             `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,

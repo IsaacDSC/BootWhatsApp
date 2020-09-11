@@ -1,5 +1,5 @@
-const Cardapio = require('../src/models/Menu')
-const escolha = require("../data/escolha");
+const Cardapio = require('../models/Menu')
+const escolha = require("../../data/escolha");
 
 async function getMenu(){
    let menu = '🔢 Digite o *número* da categoria:\n\n ```Digite apenas 1 número.```\n\n';
