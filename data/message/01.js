@@ -83,9 +83,8 @@ async function execute(user, msg) {
             }).then(() => console.log('Produto Cadastrado Para O Usuario'))
             .catch((err) => console.log(err))
 
-
-  
         console.log(`Quantidade(${msg}) adiconado com sucesso `)
+        
         banco.db[user].itens.push(cardapio.menu[msg]);
 
         //Coloca o Item escolhido do usuario ao banco de dados 
