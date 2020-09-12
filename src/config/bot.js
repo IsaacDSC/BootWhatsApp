@@ -25,8 +25,13 @@ function main() {
         const imageBuffer = Buffer.from(qrCode, 'base64');
         fs.writeFileSync(path, imageBuffer);
     }
+    function close(client) {
+        client.close().then(() => console.log('boot Desativado')).catch(() => console.log('erro'))
+    }
 
     function start(client) {
+      //  setTimeout(() => close(client), 10000)
+
         client.onMessage(async(message) => {
             const user = await User.findAll({ where: { telephone: message.sender.id } })
             console.log(user.length)
