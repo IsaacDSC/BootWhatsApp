@@ -17,6 +17,7 @@ const routes = require('@routes/routes')
 const menu = require("@routes/menu")
 const clients = require('@routes/clients');
 const msg = require('@routes/msg')
+const config = require('@routes/config')
 
 
 //Config handlebars
@@ -49,13 +50,14 @@ app.use((req, res, next) => {
 })
 
 ///local para chamar a configuração do bot
-boot.main()
+//boot.main()
 
 
 app.use(routes)
 app.use(menu)
 app.use(clients)
 app.use('/msg', msg)
+app.use('/config', config)
 
 
 const port = process.env.PORT || 3000
