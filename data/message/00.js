@@ -9,15 +9,15 @@ let key = 0
 
 async function execute(user, msg, contato) {
     let menu
-    await Menu.getMenu().then((res)=>menu=res.toString())
-   
+    await Menu.getMenu().then((res) => menu = res.toString())
+
     if (key === 1) {
         //Nome da pessoa Digitado = contato
         contato = msg
         banco.db[user].stage = 1;
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
-        setStage.envStageDb(user, 0)
+        setStage.envStageDb(user, 1)
 
         return [
             `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,

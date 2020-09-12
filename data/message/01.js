@@ -15,11 +15,16 @@ async function execute(user, msg) {
     let menu
     await a.getMenu().then((res) => menu = res.toString())
 
-    if (msg.toUpperCase() === "V" || msg.toUpperCase() === "E" && key==3) {
+    if (msg.toUpperCase() === "V" || msg.toUpperCase() === "E" && key == 3) {
         key = 0
         return [menu];
     }
-
+    if (msg.toUpperCase() == 'F') {
+        setStage.envStageDb(user, 2)
+        key = 0
+        banco.db[user].stage = 2;
+        return ["Estamos fechando seu pedido, ok?"];
+    }
     if (msg === "*") {
         setStage.envStageDb(user, 0)
         key = 0
@@ -41,46 +46,46 @@ async function execute(user, msg) {
     })
 
     //quantidade de classes 
-    if (msg > quantidadedeEscolhas.length && key == 0 || !Number(msg)&& key==0) {
+    if (msg > quantidadedeEscolhas.length && key == 0 || !Number(msg) && key == 0) {
         return [
             "Você *precisa* escolher um número da categoria."
         ];
-    } 
-     //Adiciona o item ao carrinho
+    }
+    //Adiciona o item ao carrinho
     //Cadastra o Pedido No banco de Dados
     //msg = ao item escolhido
-    if(key===2){
-        const itemEscolhido =await escolha.db.filter(e => { return e.index == msg })
+    if (key === 2) {
+        const itemEscolhido = await escolha.db.filter(e => { return e.index == msg })
         const UserId = await User.findAll({ where: { telephone: user }, attributes: ['id'] })
         const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id'] })
         Requests.create({
-            MenuNameId: MenuNameId[0].dataValues.id,
-            UserId: UserId[0].dataValues.id,
-            quantity: msg,
-            status: 0
-        }).then(() => console.log('Produto Cadastrado Para O Usuario'))
+                MenuNameId: MenuNameId[0].dataValues.id,
+                UserId: UserId[0].dataValues.id,
+                quantity: msg,
+                status: 0
+            }).then(() => console.log('Produto Cadastrado Para O Usuario'))
             .catch((err) => console.log(err))
 
-        key=1
-        return['🔢  Quantos produtos *'+itemEscolhido[0].name+'* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
-    }
-    
-    if(key===1 && !Number(msg) || msg>=100){
-    
-        return['🔢  Quantidade muito alta.\nLimite máximo por pedido 100 unidades.']
+        key = 1
+        return ['🔢  Quantos produtos *' + itemEscolhido[0].name + '* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
     }
 
-   
+    if (key === 1 && !Number(msg) || msg >= 100) {
+
+        return ['🔢  Quantidade muito alta.\nLimite máximo por pedido 100 unidades.']
+    }
+
+
     //msg = quantidade de itens
     if (key === 1) {
-        key=3
-        
+        key = 3
+
         console.log(`Quantidade(${msg}) adiconado com sucesso `)
         banco.db[user].itens.push(cardapio.menu[msg]);
 
         //Coloca o Item escolhido do usuario ao banco de dados 
 
-        return [`👏  Produto *gravado* no carrinho.` ,'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *AÇAÍ*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
+        return [`👏  Produto *gravado* no carrinho.`, 'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *AÇAÍ*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
 
     } else {
         // Numero Digitado pega a class
@@ -91,11 +96,11 @@ async function execute(user, msg) {
         key = 2
 
         itensMenu.forEach((e, index) => {
-            escolha.db.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
+                escolha.db.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
 
-            return menu += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${e.dataValues.value}_ \n`;
-        })
-        //parte final da String
+                return menu += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${e.dataValues.value}_ \n`;
+            })
+            //parte final da String
         menu += "\n───────────────\n*[ V ]* MENU ANTERIOR"
 
         return [menu];
