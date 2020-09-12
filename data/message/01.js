@@ -9,16 +9,37 @@ const setStage = require('../../src/helpers/setStage')
 const a = require('../../src/helpers/getMenu')
 let key = 0;
 let msgItem
+let msgItemMais
 async function execute(user, msg) {
     let menu
     await a.getMenu().then((res) => menu = res.toString())
+
+    const quantidadedeEscolhas = await Menu.findAll({
+        attributes: ['class'],
+        group: ['class']
+    })
+
 
     if (msg.toUpperCase() === "V" || msg.toUpperCase() === "E" && key == 3) {
         key = 0
         return [menu];
     }
     if(msg.toUpperCase() === "M" ){
-       return['M']
+        const classe = quantidadedeEscolhas[msgItemMais - 1].dataValues.class
+
+        const itensMenu = await Menu.findAll({ where: { class: classe } })
+        let menu = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
+        key = 2
+
+        itensMenu.forEach((e, index) => {
+                escolha.db.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
+
+                return menu += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${e.dataValues.value}_ \n`;
+            })
+            //parte final da String
+        menu += "\n───────────────\n*[ V ]* MENU ANTERIOR"
+
+        return [menu];
     }
     if (msg.toUpperCase() == 'F') {
         setStage.envStageDb(user, 2)
@@ -40,11 +61,6 @@ async function execute(user, msg) {
     //     banco.db[user].stage = 2;
     //     return ["Estamos fechando seu pedido, ok?"];
     // }
-
-    const quantidadedeEscolhas = await Menu.findAll({
-        attributes: ['class'],
-        group: ['class']
-    })
 
     //quantidade de classes 
     if (msg > quantidadedeEscolhas.length && key == 0 || !Number(msg) && key == 0) {
@@ -92,6 +108,7 @@ async function execute(user, msg) {
         return [`👏  Produto *gravado* no carrinho.`, 'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *'+MenuNameId[0].dataValues.class.toUpperCase()+'*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
 
     } else {
+        msgItemMais=msg
         // Numero Digitado pega a class
         const classe = quantidadedeEscolhas[msg - 1].dataValues.class
 
