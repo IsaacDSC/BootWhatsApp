@@ -24,9 +24,9 @@ async function execute(user, msg) {
         key = 0
         return [menu];
     }
+    
     if(msg.toUpperCase() === "M" ){
         const classe = quantidadedeEscolhas[msgItemMais - 1].dataValues.class
-
         const itensMenu = await Menu.findAll({ where: { class: classe } })
         let menu = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
         key = 2
@@ -41,26 +41,14 @@ async function execute(user, msg) {
 
         return [menu];
     }
+    //Carrega as opçoes de envio do pedido
     if (msg.toUpperCase() == 'F') {
         setStage.envStageDb(user, 2)
         key = 0
         banco.db[user].stage = 2;
-        return ["Estamos fechando seu pedido, ok?"];
+        return ["👏  *Está quase no final.*\nVamos definir os dados de entrega e o pagamento.",' 🔢  Como deseja receber o pedido:\n\n*[ 1 ]* ENTREGAR NO ENDEREÇO\n*[ 2 ]* RETIRAR NO BALCAO\n*[ 3 ]* COMER AQUI NO LOCAL\n*[ 4 ]* AGENDAR A RETIRADA\n\n───────────────\n*[ V ]* MENU ANTERIOR'];
+
     }
-    // if (msg === "*") {
-    //     setStage.envStageDb(user, 0)
-    //     key = 0
-    //     banco.db[user].stage = 0;
-    //     banco.db[user] = ""
-    //     console.log(banco.db[user])
-    //     return ["Pedido cancelado com sucesso"];
-    // }
-    // if (msg === "#") {
-    //     setStage.envStageDb(user, 2)
-    //     key = 0
-    //     banco.db[user].stage = 2;
-    //     return ["Estamos fechando seu pedido, ok?"];
-    // }
 
     //quantidade de classes 
     if (msg > quantidadedeEscolhas.length && key == 0 || !Number(msg) && key == 0) {

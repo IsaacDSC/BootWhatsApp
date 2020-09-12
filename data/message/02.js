@@ -3,8 +3,17 @@ require('module-alias/register')
 const banco = require('@data/user/user')
 const User = require('@models/Users')
 const setStage = require('../../src/helpers/setStage')
+const a = require('../../src/helpers/getMenu')
 
-function execute(user, msg) {
+async function execute(user, msg) {
+    let menu
+    await a.getMenu().then((res) => menu = res.toString())
+
+    if(msg.toUpperCase() === "V"){
+        setStage.envStageDb(user, 1)
+        banco.db[user].stage = 1;
+        return [menu];
+    }
     if (msg === "*") {
         setStage.envStageDb(user, 0)
         
