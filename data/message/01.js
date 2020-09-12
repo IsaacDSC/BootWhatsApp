@@ -20,6 +20,9 @@ async function execute(user, msg) {
         key = 0
         return [menu];
     }
+    if(msg.toUpperCase() === "M" ){
+       return['M']
+    }
     if (msg.toUpperCase() == 'F') {
         setStage.envStageDb(user, 2)
         key = 0
@@ -63,7 +66,6 @@ async function execute(user, msg) {
     }
 
     if (key === 1 && !Number(msg) || msg >= 100) {
-        console.log(msgItem)
         return ['🔢  Quantidade muito alta.\nLimite máximo por pedido 100 unidades.']
     }
 
@@ -74,7 +76,7 @@ async function execute(user, msg) {
 
         const itemEscolhido = await escolha.db.filter(e => { return e.index == msgItem })
         const UserId = await User.findAll({ where: { telephone: user }, attributes: ['id'] })
-        const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id'] })
+        const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id','class'] })
 
         Requests.create({
                 MenuNameId: MenuNameId[0].dataValues.id,
@@ -90,7 +92,7 @@ async function execute(user, msg) {
 
         //Coloca o Item escolhido do usuario ao banco de dados 
 
-        return [`👏  Produto *gravado* no carrinho.`, 'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *AÇAÍ*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
+        return [`👏  Produto *gravado* no carrinho.`, 'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *'+MenuNameId[0].dataValues.class.toUpperCase()+'*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
 
     } else {
         // Numero Digitado pega a class
