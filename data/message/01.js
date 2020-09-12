@@ -10,9 +10,6 @@ const a = require('../../src/helpers/getMenu')
 let key = 0;
 let msgItem
 async function execute(user, msg) {
-
-   
-
     let menu
     await a.getMenu().then((res) => menu = res.toString())
 
