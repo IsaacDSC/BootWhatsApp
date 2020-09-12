@@ -53,7 +53,6 @@ async function execute(user, msg) {
         const itemEscolhido =await escolha.db.filter(e => { return e.index == msg })
         const UserId = await User.findAll({ where: { telephone: user }, attributes: ['id'] })
         const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id'] })
-        
         Requests.create({
             MenuNameId: MenuNameId[0].dataValues.id,
             UserId: UserId[0].dataValues.id,
