@@ -10,7 +10,7 @@ const cardapio = require('@data/cardapio/cardapio')
 const User = require('@models/Users');
 
 function main() {
-    
+
     //Adicionar browserArgs: ['--no-sandbox']
     venom.create('Delivery', (base64Qr, asciiQR) => {
         // Mostra o Qr Code no Terminal
@@ -19,7 +19,7 @@ function main() {
         // Cria o arquivo png
         exportQR(base64Qr, 'qrCode.png');
     }).then((client) => start(client));
-    
+
     function exportQR(qrCode, path) {
         qrCode = qrCode.replace('data:image/png;base64,', '');
         const imageBuffer = Buffer.from(qrCode, 'base64');
