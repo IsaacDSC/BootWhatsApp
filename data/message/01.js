@@ -25,20 +25,20 @@ async function execute(user, msg) {
         banco.db[user].stage = 2;
         return ["Estamos fechando seu pedido, ok?"];
     }
-    if (msg === "*") {
-        setStage.envStageDb(user, 0)
-        key = 0
-        banco.db[user].stage = 0;
-        banco.db[user] = ""
-        console.log(banco.db[user])
-        return ["Pedido cancelado com sucesso"];
-    }
-    if (msg === "#") {
-        setStage.envStageDb(user, 2)
-        key = 0
-        banco.db[user].stage = 2;
-        return ["Estamos fechando seu pedido, ok?"];
-    }
+    // if (msg === "*") {
+    //     setStage.envStageDb(user, 0)
+    //     key = 0
+    //     banco.db[user].stage = 0;
+    //     banco.db[user] = ""
+    //     console.log(banco.db[user])
+    //     return ["Pedido cancelado com sucesso"];
+    // }
+    // if (msg === "#") {
+    //     setStage.envStageDb(user, 2)
+    //     key = 0
+    //     banco.db[user].stage = 2;
+    //     return ["Estamos fechando seu pedido, ok?"];
+    // }
 
     const quantidadedeEscolhas = await Menu.findAll({
         attributes: ['class'],
