@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 
 ///local para chamar a configuração do bot
 
-setTimeout( ()=>boot.main(),10000)
+//setTimeout( ()=>boot.main(),10000)
 
 
 app.use(routes)
