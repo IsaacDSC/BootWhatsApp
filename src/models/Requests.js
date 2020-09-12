@@ -1,7 +1,7 @@
 const db = require('../database/index')
 
 const Requests = db.define('menu_request', {
-    id:{
+    id: {
         type: db.Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -16,7 +16,8 @@ const Requests = db.define('menu_request', {
         onDelete: 'CASCADE',
         allowNull: false
 
-    }, UserId: {
+    },
+    UserId: {
         type: db.Sequelize.INTEGER,
         references: {
             model: 'users',
@@ -39,12 +40,12 @@ const Requests = db.define('menu_request', {
     },
     numberHouse: {
         type: db.Sequelize.STRING,
-  
+
         allowNull: true,
     },
     shippingAmount: {
         type: db.Sequelize.FLOAT,
-    
+
         allowNull: true,
     },
     profit: {
@@ -54,13 +55,14 @@ const Requests = db.define('menu_request', {
     },
     spent: {
         type: db.Sequelize.FLOAT,
-       
+
         allowNull: true,
     },
     status: {
         type: db.Sequelize.STRING,
         allowNull: false,
-    },quantity:{
+    },
+    quantity: {
         type: db.Sequelize.INTEGER,
         allowNull: false,
         require: true,
