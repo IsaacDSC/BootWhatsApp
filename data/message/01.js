@@ -8,10 +8,11 @@ const banco = require('@data/user/user')
 const setStage = require('../../src/helpers/setStage')
 const a = require('../../src/helpers/getMenu')
 let key = 0;
-
+let msgItem
 async function execute(user, msg) {
 
-    const frase = "```Digite # para finalizar * para cancelar & para voltar ao cardápio```"
+   
+
     let menu
     await a.getMenu().then((res) => menu = res.toString())
 
@@ -55,23 +56,13 @@ async function execute(user, msg) {
     //Cadastra o Pedido No banco de Dados
     //msg = ao item escolhido
     if (key === 2) {
-        const itemEscolhido = await escolha.db.filter(e => { return e.index == msg })
-        const UserId = await User.findAll({ where: { telephone: user }, attributes: ['id'] })
-        const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id'] })
-        Requests.create({
-                MenuNameId: MenuNameId[0].dataValues.id,
-                UserId: UserId[0].dataValues.id,
-                quantity: msg,
-                status: 0
-            }).then(() => console.log('Produto Cadastrado Para O Usuario'))
-            .catch((err) => console.log(err))
-
+        msgItem = msg
         key = 1
         return ['🔢  Quantos produtos *' + itemEscolhido[0].name + '* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
     }
 
     if (key === 1 && !Number(msg) || msg >= 100) {
-
+        console.log(msgItem)
         return ['🔢  Quantidade muito alta.\nLimite máximo por pedido 100 unidades.']
     }
 
@@ -80,6 +71,20 @@ async function execute(user, msg) {
     if (key === 1) {
         key = 3
 
+        const itemEscolhido = await escolha.db.filter(e => { return e.index == msgItem })
+        const UserId = await User.findAll({ where: { telephone: user }, attributes: ['id'] })
+        const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id'] })
+
+        Requests.create({
+                MenuNameId: MenuNameId[0].dataValues.id,
+                UserId: UserId[0].dataValues.id,
+                quantity: msg,
+                status: 0
+            }).then(() => console.log('Produto Cadastrado Para O Usuario'))
+            .catch((err) => console.log(err))
+
+
+  
         console.log(`Quantidade(${msg}) adiconado com sucesso `)
         banco.db[user].itens.push(cardapio.menu[msg]);
 
