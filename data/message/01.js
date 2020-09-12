@@ -57,6 +57,7 @@ async function execute(user, msg) {
     //msg = ao item escolhido
     if (key === 2) {
         msgItem = msg
+        const itemEscolhido = await escolha.db.filter(e => { return e.index == msgItem })
         key = 1
         return ['🔢  Quantos produtos *' + itemEscolhido[0].name + '* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
     }
@@ -84,7 +85,7 @@ async function execute(user, msg) {
             .catch((err) => console.log(err))
 
         console.log(`Quantidade(${msg}) adiconado com sucesso `)
-        
+
         banco.db[user].itens.push(cardapio.menu[msg]);
 
         //Coloca o Item escolhido do usuario ao banco de dados 
