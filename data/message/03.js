@@ -5,6 +5,19 @@ const User = require('@models/Users')
 const setStage = require('../../src/helpers/setStage')
 
 function execute(user, msg) {
+
+
+
+
+
+
+
+
+
+
+
+
+    
     if (msg === "*") {
         setStage.envStageDb(user, 3)
         banco.db[user].stage = 3;

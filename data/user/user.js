@@ -3,10 +3,7 @@ const Banco = {
         stage: 0,
         itens: []
     },
-    '553587219816@c.us': {
-        stage: 0,
-        itens: []
-    },
+    
     '5524988180688@c.us': {
         stage: 0,
         itens: []
@@ -24,6 +21,13 @@ const Banco = {
         itens: []
     },
     '5524988094891@c.us': {
+        stage: 0,
+        itens: []
+    },'553597194314@c.us': {
+        stage: 0,
+        itens: []
+    },
+    '553598929781@c.us': {
         stage: 0,
         itens: []
     },

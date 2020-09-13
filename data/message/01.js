@@ -6,13 +6,13 @@ const User = require('@models/Users')
 const Requests = require('@models/Requests')
 const banco = require('@data/user/user')
 const setStage = require('../../src/helpers/setStage')
-const a = require('../../src/helpers/getMenu')
+const getMenu = require('../../src/helpers/getMenu')
 let key = 0;
 let msgItem
 let msgItemMais
 async function execute(user, msg) {
     let menu
-    await a.getMenu().then((res) => menu = res.toString())
+    await getMenu.getMenu().then((res) => menu = res.toString())
 
     const quantidadedeEscolhas = await Menu.findAll({
         attributes: ['class'],
@@ -20,7 +20,8 @@ async function execute(user, msg) {
     })
 
 
-    if (msg.toUpperCase() === "V" || msg.toUpperCase() === "E" && key == 3) {
+    if (msg.toUpperCase() === "V" && key==2 || msg.toUpperCase() === "E" && key == 3) {
+        escolha.db=[]
         key = 0
         return [menu];
     }
@@ -30,7 +31,6 @@ async function execute(user, msg) {
         const itensMenu = await Menu.findAll({ where: { class: classe } })
         let menu = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
         key = 2
-
         itensMenu.forEach((e, index) => {
                 escolha.db.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
 
@@ -38,11 +38,12 @@ async function execute(user, msg) {
             })
             //parte final da String
         menu += "\n───────────────\n*[ V ]* MENU ANTERIOR"
-
+        menu += "\n*[ F ]* PARA FECHAR O PEDIDO"
         return [menu];
     }
+
     //Carrega as opçoes de envio do pedido
-    if (msg.toUpperCase() == 'F') {
+    if (msg.toUpperCase() == 'F' && key==3|| key==2 && msg.toUpperCase() === "F") {
         setStage.envStageDb(user, 2)
         key = 0
         banco.db[user].stage = 2;
@@ -99,11 +100,9 @@ async function execute(user, msg) {
         msgItemMais=msg
         // Numero Digitado pega a class
         const classe = quantidadedeEscolhas[msg - 1].dataValues.class
-
         const itensMenu = await Menu.findAll({ where: { class: classe } })
         let menu = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
         key = 2
-
         itensMenu.forEach((e, index) => {
                 escolha.db.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
 
