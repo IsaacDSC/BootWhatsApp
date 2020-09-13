@@ -113,7 +113,7 @@ async function execute(user, msg) {
         return [frase]
     }
     //também tratar se o troco é menor que o valor do pedido
-    if (key == 4 && msg.split("").filter(n => (Number(n) || n == 0)).join("") > 50 || key == 4 && !Number(msg.split("").filter(n => (Number(n) || n == 0)).join(""))) {
+    if (key == 4 && msg.split("").filter(n => (Number(n) || n == 0)).join("") < 50 || key == 4 && !Number(msg.split("").filter(n => (Number(n) || n == 0)).join(""))) {
 
         return ["Por favor Informe Um troco Valido"]
     }
