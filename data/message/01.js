@@ -107,17 +107,17 @@ async function execute(user, msg) {
             // Numero Digitado pega a class
         const classe = quantidadedeEscolhas[msg - 1].dataValues.class
         const itensMenu = await Menu.findAll({ where: { class: classe } })
-        let menu = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
+        let message = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
         key = 2
         itensMenu.forEach((e, index) => {
                 escolha.db.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
 
-                return menu += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${e.dataValues.value}_ \n`;
+                return message += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${e.dataValues.value}_ \n`;
             })
             //parte final da String
-        menu += "\n───────────────\n*[ V ]* MENU ANTERIOR"
+        message += "\n───────────────\n*[ V ]* MENU ANTERIOR"
 
-        return [menu];
+        return [message];
     }
 }
 
