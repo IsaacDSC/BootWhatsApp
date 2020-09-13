@@ -1,7 +1,7 @@
 require('module-alias/register')
 const banco = require('@data/user/user')
-const Menu = require('../../src/helpers/getMenu')
-const setStage = require('../../src/helpers/setStage')
+const Menu = require('../../helpers/getMenu')
+const setStage = require('../../helpers/setStage')
 
 let key = 0
 

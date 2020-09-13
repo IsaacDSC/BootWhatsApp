@@ -4,7 +4,7 @@ require('module-alias/register')
 const stages = {
     0: {
         desc: "boas vindas",
-        obj: require('@controller/flow/00')
+        obj: require('@/controller/flow/00')
     },
     01: {
         desc: "Vendas",

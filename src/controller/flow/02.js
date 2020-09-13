@@ -1,10 +1,10 @@
 require('module-alias/register')
 const banco = require('@data/user/user')
 const User = require('@models/Users')
-const escolha = require("../escolha");
-const setStage = require('../../src/helpers/setStage')
-const getMenu = require('../../src/helpers/getMenu');
-const cadastardb = require('../../src/helpers/02.cadastrarDB')
+const escolha = require("@data/escolha");
+const setStage = require('@helpers/setStage')
+const getMenu = require('@helpers/getMenu');
+const cadastardb = require('../../helpers/02.cadastrarDB')
 
 key = 0
 

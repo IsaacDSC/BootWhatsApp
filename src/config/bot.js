@@ -3,7 +3,7 @@ const venom = require('venom-bot');
 
 //dependencies files.js 
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
-const stages = require('@data/stages') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
+const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 const cardapio = require('@data/cardapio/cardapio')
 
 //Models

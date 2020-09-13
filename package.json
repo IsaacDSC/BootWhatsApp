@@ -39,8 +39,9 @@
         "@routes": "src/routes",
         "@Crypto": "config/crytpto/Crypto",
         "@Config_Json": "config/JSON/Json",
-        "@helper": "src/helpers",
-        "@models": "src/models"
+        "@helpers": "src/helpers",
+        "@models": "src/models",
+        "@controller": "src/controller"
     },
     "devDependencies": {
         "nodemon": "^2.0.4",

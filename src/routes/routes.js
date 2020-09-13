@@ -3,7 +3,7 @@ const router = express.Router()
 const Admin = require('@models/Admin')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
-const { auth } = require('@helper/auth')
+const { auth } = require('@helpers/auth')
 const Requests = require('@models/Requests')
 const Menu = require('@models/Menu')
 

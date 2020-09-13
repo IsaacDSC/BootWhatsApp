@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Menu = require('@models/Menu')
-const { auth } = require('@helper/auth')
+const { auth } = require('@helpers/auth')
 
 router.get('/menu/register', auth, (req, res) => {
     res.render('menu/register')
