@@ -9,10 +9,8 @@ const Config_Entrega = require('@models/Config_Entrega')
 createTable()
 
 async function createTable() {
-    // Menu.belongsToMany(User, { through: 'menu_request', foreignKey: 'MenuNameId', as: 'menus' })
-    // User.belongsToMany(Menu, { through: 'menu_request', foreignKey: 'UserId', as: 'user' })
-    // await db.sync({ force: true })
-    Config_Entrega.sync({ force: true })
+    Menu.belongsToMany(User, { through: 'menu_request', foreignKey: 'MenuNameId', as: 'menus' })
+    User.belongsToMany(Menu, { through: 'menu_request', foreignKey: 'UserId', as: 'user' })
+    await db.sync({ force: true })
     Resquests.sync({ force: true })
-
 }

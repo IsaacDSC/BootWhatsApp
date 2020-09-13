@@ -3,7 +3,9 @@ const banco = require('@data/user/user')
 const User = require('@models/Users')
 const escolha = require("../escolha");
 const setStage = require('../../src/helpers/setStage')
-const getMenu = require('../../src/helpers/getMenu')
+const getMenu = require('../../src/helpers/getMenu');
+const cadastardb = require('../../src/helpers/02.cadastrarDB')
+
 key = 0
 
 //Guarda o endereço
@@ -18,6 +20,8 @@ let dadosEntrega;
 let observacao;
 
 async function execute(user, msg) {
+
+
     let menu
     await getMenu.getMenu().then((res) => menu = res.toString())
 
@@ -35,34 +39,34 @@ async function execute(user, msg) {
         return ["👏  *Está quase no final.*\nVamos definir os dados de entrega e o pagamento.", ' 🔢  Como deseja receber o pedido:\n\n*[ 1 ]* ENTREGAR NO ENDEREÇO\n*[ 2 ]* RETIRAR NO BALCAO\n*[ 3 ]* COMER AQUI NO LOCAL\n*[ 4 ]* AGENDAR A RETIRADA\n\n───────────────\n*[ V ]* MENU ANTERIOR'];
     }
     //se a msg digitada é diferente da quantidade de opçoes
-    if(msg>4){
-        return['Opção Invalida escolha dentre esses numeros']
+    if (msg > 4) {
+        return ['Opção Invalida escolha dentre esses numeros']
     }
 
 
     //If 2 RETIRAR NO BALCAO
-    if(msg==2 && key==0){
-        key=5
-        dadosEntrega="RETIRAR NO BALCAO"
-        return[frase1]
+    if (msg == 2 && key == 0) {
+        key = 5
+        dadosEntrega = "RETIRAR NO BALCAO"
+        return [frase1]
     }
     //If 2 COMER AQUI NO LOCAL
-    if(msg==3 && key==0){
-        dadosEntrega="COMER AQUI NO LOCAL"
-        key=5
-        return[frase1]
+    if (msg == 3 && key == 0) {
+        dadosEntrega = "COMER AQUI NO LOCAL"
+        key = 5
+        return [frase1]
     }
     //If 2 AGENDAR A RETIRADA
-    if(msg==4 && key==0){
-        dadosEntrega="AGENDAR A RETIRADA"
-        key=5
-        return[frase1]
+    if (msg == 4 && key == 0) {
+        dadosEntrega = "AGENDAR A RETIRADA"
+        key = 5
+        return [frase1]
     }
 
     //If 1 ENtregar no endereço
     //Cadastra o endereço
     if (msg == 1 && key == 0 || key == 2 && msg == 2) {
-        dadosEntrega='ENTREGAR NO ENDEREÇO'
+        dadosEntrega = 'ENTREGAR NO ENDEREÇO'
         key = 1
         return ['🏠  Digite seu endereço (nome da rua, número, complemento e ponto de referência) para entregar.\n\n───────────────\n*[ V ]* MENU ANTERIOR']
     }
@@ -75,6 +79,7 @@ async function execute(user, msg) {
     if (key == 1) {
         key = 2
         endereco = msg
+        cadastardb.EnvAddressDb(user, endereco)
         return ['🏠  É para entregar no endereço abaixo?\n\n' + msg.toUpperCase() + '\n\n───────────────\n*[ 1 ]* CONFIRMAR ENDEREÇO 👈\n*[ 2 ]* ALTERAR O ENDEREÇO']
     }
 
@@ -92,23 +97,26 @@ async function execute(user, msg) {
     if (key == 3 && msg > 3) {
         return ['Opção De Pagamento Invalida']
     }
-    if (key == 3 && msg == 2 ) {
+    if (key == 3 && msg == 2) {
+        cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
         key = 5
-        formaPagamento= 'CARTAO DE CREDITO'
+        formaPagamento = 'CARTAO DE CREDITO'
         return [frase]
     }
-    if( key == 3 && msg == 3){
-        formaPagamento= 'CARTAO DE DEBITO'
+    if (key == 3 && msg == 3) {
+        cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
+        formaPagamento = 'CARTAO DE DEBITO'
         key = 5
         return [frase]
     }
     if (key == 3 && msg == 1) {
+        cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
         key = 4
-        formaPagamento= 'Dinheiro'
+        formaPagamento = 'Dinheiro'
         return ['💰  11,00  = valor total com a taxa de entrega.\n\nPrecisa de troco para quanto?\nPor exemplo: troco para 50\n\n*[ N ]* NÃO PRECISA DE TROCO']
     }
     if (key == 4 && msg.toUpperCase() == "N") {
-        trocoPara="Não Precisa De Troco"
+        trocoPara = "Não Precisa De Troco"
         key = 5
         return [frase]
     }
@@ -119,7 +127,7 @@ async function execute(user, msg) {
     }
     //Pega o valor do troco 
     if (key == 4) {
-        trocoPara=msg.split("").filter(n => (Number(n) || n == 0)).join("")
+        trocoPara = msg.split("").filter(n => (Number(n) || n == 0)).join("")
         key = 5
         return [frase]
     }
@@ -129,7 +137,7 @@ async function execute(user, msg) {
     //Mostra o pedido
     //Passar a key 5 e 6 para o estagio 3
     if (key == 5) {
-        observacao=msg
+        observacao = msg
 
         key = 6
         return ['Mostra o pedido']
@@ -144,14 +152,6 @@ async function execute(user, msg) {
     if (key == 6) {
         return ['Comando Invalido Digite Ok ou C']
     }
-
-
-
-
-
-
-
-
 
     if (msg === "*") {
         setStage.envStageDb(user, 0)

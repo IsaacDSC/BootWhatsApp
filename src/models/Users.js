@@ -1,7 +1,7 @@
 const db = require('../database/index')
 
 const User = db.define('user', {
-    id:{
+    id: {
         type: db.Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -25,6 +25,12 @@ const User = db.define('user', {
         type: db.Sequelize.INTEGER,
         allowNull: false,
         require: true
+    },
+    neighborhood: {
+        type: db.Sequelize.STRING,
+    },
+    address: {
+        type: db.Sequelize.TEXT,
     }
 })
 

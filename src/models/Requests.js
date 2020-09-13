@@ -26,27 +26,21 @@ const Requests = db.define('menu_request', {
         onDelete: 'CASCADE',
         allowNull: false
     },
+    quantity: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        require: true,
+    },
     note: {
         type: db.Sequelize.STRING,
     },
-    neighborhood: {
-        type: db.Sequelize.STRING,
-        allowNull: true,
-    },
-    street: {
-        type: db.Sequelize.STRING,
-
-        allowNull: true,
-    },
-    numberHouse: {
-        type: db.Sequelize.STRING,
-
-        allowNull: true,
-    },
-    shippingAmount: {
+    delivery: {
         type: db.Sequelize.FLOAT,
 
         allowNull: true,
+    },
+    formPayment: {
+        type: db.Sequelize.STRING
     },
     profit: {
         type: db.Sequelize.FLOAT,
@@ -62,11 +56,7 @@ const Requests = db.define('menu_request', {
         type: db.Sequelize.STRING,
         allowNull: false,
     },
-    quantity: {
-        type: db.Sequelize.INTEGER,
-        allowNull: false,
-        require: true,
-    }
+
 
 })
 
