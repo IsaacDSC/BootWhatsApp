@@ -8,9 +8,9 @@ const path = require('path')
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('express-flash')
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
-
-
 const boot = require('@config/bot') //para chamar configuração do bot
 
 const routes = require('@routes/routes')
@@ -19,6 +19,13 @@ const clients = require('@routes/clients');
 const msg = require('@routes/msg')
 const config = require('@routes/config')
 
+
+//socketio
+app.use( (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); //The ionic server
+    next();
+ });
+io.on('connection',socket=>console.log('Usuario Conectado '+socket.id))
 
 //Config handlebars
 app.engine('hbs', hbs({ defaultLayout: 'main.hbs', extname: 'hbs' }));
@@ -50,7 +57,7 @@ app.use((req, res, next) => {
 })
 
 ///local para chamar a configuração do bot
-boot.main()
+//boot.main()
 
 
 app.use(routes)
@@ -61,7 +68,7 @@ app.use('/config', config)
 
 
 const port = process.env.PORT || 3000
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
     console.log('Break Server CTRL + C')
 })
