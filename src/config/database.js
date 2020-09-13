@@ -6,8 +6,6 @@
     database: 'bootwhatsapp'
 }*/
 
-
-
 module.exports = {
     dialect: 'mysql',
     host: 'db4free.net',
