@@ -6,7 +6,6 @@
             </div>
         </div>
     </div>
-    <audio id="sound" src="/audio/campainha.mp3"></audio>
     <div class="col-sm-8">
         <div class="page-header float-right">
             <div class="page-title">
@@ -311,16 +310,16 @@
 <!-- Right Panel -->
 
 <script type="text/javascript">
-    var socket = io('http://localhost:3000')
+        var socket = io('http://localhost:3000')
 
-    socket.on('PedidoConcluido',function(data){
-        playSound() 
-    })
-    //Enviar o User e o Status do pedido quando mudar para o backend
+        socket.on('PedidoConcluido', function (data) {
+            playSound()
+        })
+        //Enviar o User e o Status do pedido quando mudar para o backend
 
 
-    function playSound() {
-        const som =  document.getElementById("sound")
-        som.play();
-    }
-</script>
+        function playSound() {
+            const som = document.getElementById("sound")
+            som.play();
+        }
+    </script>
