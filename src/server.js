@@ -30,9 +30,8 @@ app.use((req, res, next) => {
         //Broadcast envia para todos os clientes
         //emit para apenas 1
  })
- function enviaParaFrontend (dados)  {
-       
-    io.emit('PedidoConcluido', 'oi')    
+function enviaParaFrontend (dados='')  {
+    io.emit('PedidoConcluido', dados)    
    
 }
 
