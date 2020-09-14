@@ -11,30 +11,45 @@ const User = require('@models/Users');
 
 function main() {
     //Adicionar browserArgs: ['--no-sandbox']
-    venom.create('Delivery', (base64Qr, asciiQR) => {
-        // Mostra o Qr Code no Terminal
-        console.log(asciiQR);
+  
+        venom.create('Delivery', (base64Qr, asciiQR) => {
+            // Mostra o Qr Code no Terminal
+            console.log(asciiQR);
 
-        // Cria o arquivo png
-        exportQR(base64Qr, 'qrCode.png');
-    }).then((client) => start(client));
+            // Cria o arquivo png
+            exportQR(base64Qr, 'qrCode.png');
+        }).then((client) => start(client));
 
-    function exportQR(qrCode, path) {
-        qrCode = qrCode.replace('data:image/png;base64,', '');
-        const imageBuffer = Buffer.from(qrCode, 'base64');
-        fs.writeFileSync(path, imageBuffer);
-    }
+        function exportQR(qrCode, path) {
+            qrCode = qrCode.replace('data:image/png;base64,', '');
+            const imageBuffer = Buffer.from(qrCode, 'base64');
+            fs.writeFileSync(path, imageBuffer);
+        }
+    
 
     function close(client) {
         client.close().then(() => console.log('boot Desativado')).catch(() => console.log('erro'))
     }
 
-    function start(client) {
-        //  setTimeout(() => close(client), 10000)
 
-        client.onMessage(async(message) => {
+function start(client) {
+        //  setTimeout(() => close(client), 10000)
+        client.onStateChange((state) => {
+            console.log(state);
+            const conflits = [
+              venom.SocketState.CONFLICT,
+              venom.SocketState.UNPAIRED,
+              venom.SocketState.UNLAUNCHED,
+            ];
+            if (conflits.includes(state)) {
+              client.useHere();
+            }
+          });
+
+      client.onMessage(async (message) => {
             const user = await User.findAll({ where: { telephone: message.sender.id } })
             console.log(user.length)
+            
             if (user.length === 0) {
                 try {
                     let resposta = await stages.step[getStage(message.from)].obj.execute(
