@@ -26,14 +26,8 @@ app.use( (req, res, next) => {
     next();
  });
 
-io.on('connection',socket=>{
-    //Broadcast envia para todos os clientes
-    //emit para apenas 1
-    console.log('Usuario Conectado '+socket.id)
 
-
-
-})
+require('../src/controller/flow/02').enviaPedidoFrontend(io)
 
 
 //Config handlebars

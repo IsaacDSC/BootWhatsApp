@@ -5,7 +5,6 @@ const escolha = require("@data/escolha");
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu');
 const cadastardb = require('../../helpers/02.cadastrarDB')
-//envia o pedido via socket.io Para o frontend
 
 key = 0
 
@@ -146,7 +145,7 @@ async function execute(user, msg) {
     }
     //Finalizar Boot para o cliente
     if (key == 6 && msg.toUpperCase() == 'OK') {
-        
+        enviaPedidoFrontend()('oi')
         return ['Seu pedido foi realizado com sucesso']
     }
     if (key == 6) {
@@ -155,7 +154,7 @@ async function execute(user, msg) {
 
 
 
-//parte abaixo não usada
+    //parte abaixo não usada
     if (msg === "*") {
         setStage.envStageDb(user, 0)
 
@@ -166,7 +165,6 @@ async function execute(user, msg) {
 
     if (msg === "#") {
         setStage.envStageDb(user, 3)
-
         banco.db[user].stage = 3;
         return ["Digite o endereço completo por favor :"];
     }
@@ -186,5 +184,24 @@ async function execute(user, msg) {
 
     return [resumo, "Para confirmar digite # ou para cancelar digite * "];
 }
+
+
+function enviaPedidoFrontend(io) {
+  
+
+    this.chamada1 = function funcao() {
+        console.log("teste");
+    }
+    io.on('connection', function(socket) {
+        console.log('Usuario Conectado ' + socket.id)
+        //Broadcast envia para todos os clientes
+        //emit para apenas 1
+     
+        socket.emit('PedidoConcluido','dados')
+        
+    })
+}
+
+exports.enviaPedidoFrontend= enviaPedidoFrontend
 
 exports.execute = execute;
