@@ -42,7 +42,8 @@
         "@Config_Json": "config/JSON/Json",
         "@helpers": "src/helpers",
         "@models": "src/models",
-        "@controller": "src/controller"
+        "@controller": "src/controller",
+        "@database": "src/database"
     },
     "devDependencies": {
         "nodemon": "^2.0.4",

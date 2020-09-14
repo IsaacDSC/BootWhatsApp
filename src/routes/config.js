@@ -1,18 +1,18 @@
 const express = require('express')
 const router = express.Router()
 
-const Entregas_Config = require('@models/Config_Entrega')
+const Delivery = require('@models/RoteDelivery')
 
-router.get('/entregas', (req, res) => {
+router.get('/delivery', (req, res) => {
     res.render('config/entrega')
 })
 
-router.post('/entregas', (req, res) => {
-    Entregas_Config.create({
-        bairro: req.body.bairro,
-        cidade: req.body.cidade,
-        valor: req.body.valor,
-        tempoEspera: req.body.tempoEspera
+router.post('/delivery', (req, res) => {
+    Delivery.create({
+        city: req.body.cidade,
+        neighborhoods: req.body.bairro,
+        cost: req.body.valor,
+        timeDelivery: req.body.tempoEspera
     }).then(() => {
         req.flash('success_msg', 'Configurações sobre Entregas Salva com Sucesso')
         res.render('/config')
