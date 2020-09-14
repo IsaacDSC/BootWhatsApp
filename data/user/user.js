@@ -4,7 +4,6 @@ const Banco = {
         itens: [],
         mapEscolha: []
     },
-
     '5524988180688@c.us': {
         stage: 0,
         itens: [],

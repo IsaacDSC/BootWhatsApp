@@ -6,7 +6,7 @@
         </div>
         <div class="card-body">
             <div class="row col-12">
-                <form action="" method="post">
+                <form action="/config/delivery" method="post">
                     <div class="form-group col-12">
                         <label for="">Cadastre os Bairros disponíveis para entrega</label>
                         <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Digite o nome do bairro">
@@ -15,15 +15,17 @@
                         <label for="">Cadastre as cidades disponíveis para entrega</label>
                         <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Digite o nome da cidade">
                     </div>
-                    <div class="form-group col-12">
+                    <div class="row col-12">
+                        <div class="form-group col-6">
                         <label for="">Valor da Entrega</label>
                         <input type="text" name="valor" id="valor" class="form-control" placeholder="Digite o valor da entrega">
                     </div>
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                         <label for="">Tempo Médio para Entrega</label>
-                        <input type="text" name="tempoEspera" id="tempoEspera" class="form-control"
+                        <input type="time" name="tempoEspera" id="tempoEspera" class="form-control"
                             placeholder="Digite o Tempo médio para entrega">
                     </div>
+                    </div>                    
                     <div class="form-group col-12 mt-2">
                         <button class="btn btn-success col-12">Enviar Configurações</button>
                     </div>

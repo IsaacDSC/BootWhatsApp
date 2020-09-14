@@ -6,18 +6,6 @@ const setStage = require('@helpers/setStage')
 
 function execute(user, msg) {
 
-
-
-
-
-
-
-
-
-
-
-
-
     if (msg === "*") {
         setStage.envStageDb(user, 3)
         banco.db[user].stage = 3;

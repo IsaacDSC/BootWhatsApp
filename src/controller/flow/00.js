@@ -28,8 +28,6 @@ async function execute(user, msg, contato) {
        
         //Nome da pessoa já Cadastrada na sua lista de contatos
         banco.db[user].stage = 1;
-        //console.log('\n\n' + user + '\n\n')
-        // passando user para estagio 01
         setStage.envStageDb(user, 1)
 
         return [
