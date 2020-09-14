@@ -308,18 +308,3 @@
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
-
-<script type="text/javascript">
-        var socket = io('http://localhost:3000')
-
-        socket.on('PedidoConcluido', function (data) {
-            playSound()
-        })
-        //Enviar o User e o Status do pedido quando mudar para o backend
-
-
-        function playSound() {
-            const som = document.getElementById("sound")
-            som.play();
-        }
-    </script>
