@@ -5,10 +5,26 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const { auth } = require('@helpers/auth')
 const Requests = require('@models/Requests')
+const User = require('@models/Users')
 const Menu = require('@models/Menu')
 
 router.get('/', auth, (req, res) => {
-    res.render('index/index')
+    Requests.findAll().then((pedidos) => {
+        pedidos.forEach(elementRequest => {
+            //console.log(elementOne.MenuNameId)
+            User.findAll(({ where: { id: elementRequest.UserId } })).then((users) => {
+                users.forEach(elementUser => {
+                    Menu.findAll({ where: { id: elementRequest.MenuNameId } }).then((menus) => {
+                        menus.forEach(elementMenu => {
+                            //console.log(`${elementUser.name} comprou ${elementRequest.quantity}x - ${elementMenu.name} no valor de ${elementRequest.profit}`)
+                            res.render('index/index', { elementRequest: elementRequest, elementUser: elementUser, elementMenu: elementMenu })
+                        })
+                    })
+                })
+            })
+        })
+    })
+
 })
 
 router.get('/login', (req, res) => {
