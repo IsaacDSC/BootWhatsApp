@@ -5,6 +5,7 @@ const escolha = require("@data/escolha");
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu');
 const cadastardb = require('../../helpers/02.cadastrarDB')
+//envia o pedido via socket.io Para o frontend
 
 key = 0
 
@@ -20,7 +21,6 @@ let dadosEntrega;
 let observacao;
 
 async function execute(user, msg) {
-
     let menu
     await getMenu.getMenu().then((res) => menu = res.toString())
 
@@ -146,12 +146,16 @@ async function execute(user, msg) {
     }
     //Finalizar Boot para o cliente
     if (key == 6 && msg.toUpperCase() == 'OK') {
+        
         return ['Seu pedido foi realizado com sucesso']
     }
     if (key == 6) {
         return ['Comando Invalido Digite Ok ou C']
     }
 
+
+
+//parte abaixo não usada
     if (msg === "*") {
         setStage.envStageDb(user, 0)
 

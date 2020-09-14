@@ -25,7 +25,16 @@ app.use( (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); //The ionic server
     next();
  });
-io.on('connection',socket=>console.log('Usuario Conectado '+socket.id))
+
+io.on('connection',socket=>{
+    //Broadcast envia para todos os clientes
+    //emit para apenas 1
+    console.log('Usuario Conectado '+socket.id)
+
+
+
+})
+
 
 //Config handlebars
 app.engine('hbs', hbs({ defaultLayout: 'main.hbs', extname: 'hbs' }));
@@ -57,7 +66,7 @@ app.use((req, res, next) => {
 })
 
 ///local para chamar a configuração do bot
-//boot.main()
+boot.main()
 
 
 app.use(routes)

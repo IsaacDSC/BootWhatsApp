@@ -17,7 +17,6 @@ async function execute(user, msg, contato) {
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
         setStage.envStageDb(user, 1)
-
         return [
             `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
             menu,
@@ -26,6 +25,7 @@ async function execute(user, msg, contato) {
 
 
     if (contato) {
+       
         //Nome da pessoa já Cadastrada na sua lista de contatos
         banco.db[user].stage = 1;
         //console.log('\n\n' + user + '\n\n')
