@@ -21,7 +21,6 @@ let observacao;
 
 async function execute(user, msg) {
 
-
     let menu
     await getMenu.getMenu().then((res) => menu = res.toString())
 

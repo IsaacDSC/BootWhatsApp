@@ -6,7 +6,7 @@
             </div>
         </div>
     </div>
-    <audio autoplay='true' src="campainha.mp3"></audio>
+    <audio id="sound" src="/audio/campainha.mp3"></audio>
     <div class="col-sm-8">
         <div class="page-header float-right">
             <div class="page-title">
@@ -288,7 +288,7 @@
                 <div class="stat-widget-one">
                     <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
                     <div class="stat-content dib">
-                        <div class="stat-text" onclick="playSound()">Gasto materiais</div>
+                        <div class="stat-text" >Gasto materiais</div>
                         <div class="stat-digit">770</div>
                     </div>
                 </div>
@@ -303,11 +303,11 @@
 <script type="text/javascript">
     var socket = io('http://localhost:3000')
 
+    
 
 
     function playSound() {
-        alert('oi')
-      //  const som =  document.getElementById("sound")
-       // som.play();
+        const som =  document.getElementById("sound")
+        som.play();
     }
 </script>
