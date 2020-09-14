@@ -2,11 +2,11 @@ require('module-alias/register')
 const banco = require('@data/user/user')
 const Menu = require('../../helpers/getMenu')
 const setStage = require('../../helpers/setStage')
-
 let key = 0
 
 
 async function execute(user, msg, contato) {
+  
     let menu
     await Menu.getMenu().then((res) => menu = res.toString())
 
@@ -25,7 +25,7 @@ async function execute(user, msg, contato) {
 
 
     if (contato) {
-       
+        
         //Nome da pessoa já Cadastrada na sua lista de contatos
         banco.db[user].stage = 1;
         setStage.envStageDb(user, 1)

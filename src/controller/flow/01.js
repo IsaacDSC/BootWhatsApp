@@ -11,7 +11,6 @@ const banco = require('@data/user/user') //configuração que fica ate o final a
     //arquivos que devem estar em pastas controllers porem se encontram em helpers ainda
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu')
-
 let key = 0;
 //usada para voltar ao menu 
 let voltaMenu =' '

@@ -5,7 +5,7 @@ const escolha = require("@data/escolha");
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu');
 const cadastardb = require('../../helpers/02.cadastrarDB')
-
+const enviaParaFrontend =require('../../server')
 key = 0
 
 //Guarda o endereço
@@ -145,7 +145,8 @@ async function execute(user, msg) {
     }
     //Finalizar Boot para o cliente
     if (key == 6 && msg.toUpperCase() == 'OK') {
-        enviaPedidoFrontend()('oi')
+        //socket io
+        enviaParaFrontend.enviaParaFrontend('dados')
         return ['Seu pedido foi realizado com sucesso']
     }
     if (key == 6) {
@@ -186,22 +187,7 @@ async function execute(user, msg) {
 }
 
 
-function enviaPedidoFrontend(io) {
-  
+ 
 
-    this.chamada1 = function funcao() {
-        console.log("teste");
-    }
-    io.on('connection', function(socket) {
-        console.log('Usuario Conectado ' + socket.id)
-        //Broadcast envia para todos os clientes
-        //emit para apenas 1
-     
-        socket.emit('PedidoConcluido','dados')
-        
-    })
-}
-
-exports.enviaPedidoFrontend= enviaPedidoFrontend
 
 exports.execute = execute;
