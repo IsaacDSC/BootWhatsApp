@@ -154,6 +154,7 @@ async function execute(user, msg) {
     }
 
 
+    
 
     //parte abaixo não usada
     if (msg === "*") {

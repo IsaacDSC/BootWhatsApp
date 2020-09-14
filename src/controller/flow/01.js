@@ -97,6 +97,7 @@ async function execute(user, msg) {
         console.log(`Quantidade(${msg}) adiconado com sucesso `)
 
         banco.db[user].itens.push(cardapio.menu[msg]);
+        console.log(banco.db)
         return [`👏  Produto *gravado* no carrinho.`, 'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *' + MenuNameId[0].dataValues.class.toUpperCase() + '*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
 
     }

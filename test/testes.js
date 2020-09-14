@@ -1,5 +1,6 @@
-const escolha = require("../data/escolha");
+const escolha = require("../data/save");
 
-escolha.db.push({'id':1 ,'class':'arroz'},{'id':5 ,'class':'feijao'},{'ss':5 ,'class':'feijao'})
+const user = 23
+escolha.db[user].itens.push({'id':1 ,'class':'arroz'})
 
 console.log( escolha.db.filter(e=>{return e.id}).length)
