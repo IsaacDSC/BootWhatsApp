@@ -26,7 +26,6 @@ async function execute(user, msg, contato) {
 
 
     if (contato) {
-
         //Nome da pessoa já Cadastrada na sua lista de contatos
         banco.db[user].stage = 1;
         setStage.envStageDb(user, 1)
