@@ -5,19 +5,10 @@ const banco = require('@data/user/user') //arquivo que contem o USER e o stagio 
 const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 const cardapio = require('@data/cardapio/cardapio')
-
+const enviar = require('../../test/testes')
 //Models
 const User = require('@models/Users');
 
-function enviar(client){
-     
-    async function mandaMensagem(numero,mensagem){
-        await client.sendText(numero, mensagem);
-    }
-    setInterval(()=> mandaMensagem('5524988180688@c.us','oi'),10000)
-       
-   
-}
 
 
 function main() {
@@ -35,8 +26,8 @@ function main() {
     { 
       logQR: true, // Logs QR automatically in terminal
       browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
-      autoClose: 0, // Automatically closes the venom-bot only when scanning the QR code (default 60 seconds, if you want to turn it off, assign 0 or false)
-    }).then((client) => {start(client); enviar(client)});
+      autoClose: 60000*10, 
+    }).then((client) => {start(client); enviar.enviar(client)});
 
     function exportQR(qrCode, path) {
         qrCode = qrCode.replace('data:image/png;base64,', '');
