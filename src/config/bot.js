@@ -1,6 +1,5 @@
 const fs = require('fs');
 const venom = require('venom-bot');
-
 //dependencies files.js 
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const escolha = require('@data/escolha')

@@ -12,7 +12,6 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
 const boot = require('@config/bot') //para chamar configuração do bot
-
 const routes = require('@routes/routes')
 const menu = require("@routes/menu")
 const clients = require('@routes/clients');
