@@ -1,11 +1,7 @@
 require('module-alias/register')
-const cardapio = require('@data/cardapio/promocoes') // tirar e excluir dependência de arquivo
 const escolha = require("@data/escolha"); //arquivo com diretorio errado tbm tirar dependencia e excluir
 //models do banco de dados
 const Menu = require('@models/Menu')
-const User = require('@models/Users')
-const Requests = require('@models/Requests')
-
 const banco = require('@data/user/user') //configuração que fica ate o final armazenando usuarios que o boot responderá e armazenando os itens para Total da compra
     //arquivos que devem estar em pastas controllers porem se encontram em helpers ainda
 const setStage = require('@helpers/setStage')

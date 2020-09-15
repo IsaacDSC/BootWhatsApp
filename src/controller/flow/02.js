@@ -29,7 +29,7 @@ async function execute(user, msg, contato) {
     const frase = '🔤  Se desejar, digite alguma *OBSERVAÇÃO PARA O SEU PEDIDO*.\n\n───────────────\n[ N ] NÃO TENHO OBSERVAÇÃO'
     const frase1 = 'Se desejar, digite alguma *OBSERVAÇÃO PARA O AGENDAMENTO DO SEU PEDIDO*.\n\nPor exemplo: dia e horário que deseja agendar.\n\n───────────────\n*[ N ]* CONTINUAR SEM OBSERVAÇÃO'
     console.log(formaPagamento +'Forma De pagamento')
-    
+
     if (msg.toUpperCase() === "V" && key == 0) {
         escolha.db[user].escolha = []
         setStage.envStageDb(user, 1)
@@ -140,6 +140,8 @@ async function execute(user, msg, contato) {
     if (key == 5) {
         let end = ''
         let obs = ''
+        //pagamento
+        let pgm= ''
         observacao = msg
         if (msg.toUpperCase() != 'N') {
             obs = '\n' + observacao
@@ -147,9 +149,22 @@ async function execute(user, msg, contato) {
         if (endereco) {
             end = '\n' + endereco
         }
-
+        if (formaPagamento){
+            pgm = '*Pagamento:*'+ formaPagamento +'\n'
+        }
         key = 6
-        return ['' + escolha.db[user].nome + '\n' + dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n\n*DOCES*\nSORVETE SABORES\n```23 X 4,50``` = ```103,50```\n\n*Pagamento:* ' + formaPagamento + '\n*Total produto:* ' + valorTotalSemTaxaEntrega + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' + valorTotalSemTaxaEntrega + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
+
+        async function getProdutos(){
+            let renderProdutos
+             //Cardapio Obtido Do Banco de Dados só Obtem as classes
+           await escolha.db[user].itens.forEach((e) => {
+                  return renderProdutos += '\n\n*'+e.class.toUpperCase()+'*\n'+e.itensEscolhido.name+'\n```'+e.quantity+' X '+e.itensEscolhido.price+'``` = ```'+e.itensEscolhido.price*e.quantity+'```\n'
+             })
+             return renderProdutos
+         }
+        let product= getProdutos().then(res=>res.toString())
+        
+        return ['' + escolha.db[user].nome + '\n' + dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*'+product+'\n'+ pgm +'*Total produto:* ' + valorTotalSemTaxaEntrega + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' + valorTotalSemTaxaEntrega + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
     }
     if (key == 6 && msg.toUpperCase() == 'C') {
         //key 7 ainda não feita
