@@ -9,8 +9,18 @@ const cardapio = require('@data/cardapio/cardapio')
 //Models
 const User = require('@models/Users');
 
+function enviar(client){
+     
+    async function mandaMensagem(numero,mensagem){
+        await client.sendText(numero, mensagem);
+    }
+    setInterval(()=> mandaMensagem('5524988180688@c.us','oi'),10000)
+       
+   
+}
+
+
 function main() {
-    //Adicionar browserArgs: ['--no-sandbox']
 
     venom.create('Delivery', (base64Qr, asciiQR) => {
         // Mostra o Qr Code no Terminal
@@ -18,7 +28,15 @@ function main() {
 
         // Cria o arquivo png
         exportQR(base64Qr, 'qrCode.png');
-    }).then((client) => start(client));
+    },
+    (statusSession) => {
+      console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail
+    },
+    { 
+      logQR: true, // Logs QR automatically in terminal
+      browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
+      autoClose: 0, // Automatically closes the venom-bot only when scanning the QR code (default 60 seconds, if you want to turn it off, assign 0 or false)
+    }).then((client) => {start(client); enviar(client)});
 
     function exportQR(qrCode, path) {
         qrCode = qrCode.replace('data:image/png;base64,', '');
@@ -26,10 +44,6 @@ function main() {
         fs.writeFileSync(path, imageBuffer);
     }
 
-
-    function close(client) {
-        client.close().then(() => console.log('boot Desativado')).catch(() => console.log('erro'))
-    }
 
 
     function start(client) {
