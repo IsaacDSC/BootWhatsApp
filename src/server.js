@@ -33,9 +33,7 @@ function enviaParaFrontend (dados='')  {
     io.emit('PedidoConcluido', dados)    
    
 }
-
-
-
+    
 
 //Config handlebars
 app.engine('hbs', hbs({ defaultLayout: 'main.hbs', extname: 'hbs' }));

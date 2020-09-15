@@ -18,7 +18,7 @@ function main() {
         console.log(asciiQR);
 
         // Cria o arquivo png
-        exportQR(base64Qr, 'qrCode.png');
+        exportQR(base64Qr, './public/images/qrCode.png');
     },
     (statusSession) => {
       console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail

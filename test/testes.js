@@ -1,13 +1,15 @@
-var mensagem
+let mensagem=0
 
 setTimeout(() => {
-    mensagem=3
-}, 6000);
+    mensagem = 'Olá Mundo'
+}, 15000);
 
 function enviar(client){
-   if(mensagem){
-        mandaMensagem('5524988180688@c.us','oii')
-    }
+    setInterval(()=>{
+     if(mensagem!=0){
+    mandaMensagem('5524988180688@c.us',mensagem)
+    mensagem=0
+    }},10000)
     async function mandaMensagem(numero,mensagem){
         await client.sendText(numero, mensagem).then(()=>console.log('Mensagem Enviada Com Sucesso'))
     }  
