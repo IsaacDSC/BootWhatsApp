@@ -5,6 +5,7 @@ const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu');
 const cadastardb = require('../../helpers/02.cadastrarDB')
 const enviaParaFrontend = require('../../server')
+const formataReal = require('@helpers/formataReal')
 key = 0
 
 //Guarda o endereço
@@ -28,7 +29,7 @@ async function execute(user, msg, contato) {
     })
     const frase = '🔤  Se desejar, digite alguma *OBSERVAÇÃO PARA O SEU PEDIDO*.\n\n───────────────\n[ N ] NÃO TENHO OBSERVAÇÃO'
     const frase1 = 'Se desejar, digite alguma *OBSERVAÇÃO PARA O AGENDAMENTO DO SEU PEDIDO*.\n\nPor exemplo: dia e horário que deseja agendar.\n\n───────────────\n*[ N ]* CONTINUAR SEM OBSERVAÇÃO'
-    console.log(formaPagamento +'Forma De pagamento')
+
 
     if (msg.toUpperCase() === "V" && key == 0) {
         escolha.db[user].escolha = []
@@ -142,6 +143,7 @@ async function execute(user, msg, contato) {
         let obs = ''
         //pagamento
         let pgm= ''
+        let product
         observacao = msg
         if (msg.toUpperCase() != 'N') {
             obs = '\n' + observacao
@@ -155,16 +157,16 @@ async function execute(user, msg, contato) {
         key = 6
 
         async function getProdutos(){
-            let renderProdutos
+            let renderProdutos=''
              //Cardapio Obtido Do Banco de Dados só Obtem as classes
            await escolha.db[user].itens.forEach((e) => {
-                  return renderProdutos += '\n\n*'+e.class.toUpperCase()+'*\n'+e.itensEscolhido.name+'\n```'+e.quantity+' X '+e.itensEscolhido.price+'``` = ```'+e.itensEscolhido.price*e.quantity+'```\n'
+                  return renderProdutos += '\n*'+e.class.toUpperCase()+'*\n'+e.itensEscolhido.name+'\n```'+e.quantity+' X '+ formataReal.dinheiroReal(e.itensEscolhido.price)+'``` = ```'+formataReal.dinheiroReal(e.itensEscolhido.price*e.quantity)+'```\n'
              })
              return renderProdutos
          }
-        let product= getProdutos().then(res=>res.toString())
+        await getProdutos().then(res=>product= res.toString())
         
-        return ['' + escolha.db[user].nome + '\n' + dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*'+product+'\n'+ pgm +'*Total produto:* ' + valorTotalSemTaxaEntrega + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' + valorTotalSemTaxaEntrega + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
+        return ['' + escolha.db[user].nome + '\n' + dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n'+product+'\n'+ pgm +'*Total produto:* ' + formataReal.dinheiroReal(valorTotalSemTaxaEntrega) + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' +formataReal.dinheiroReal( valorTotalSemTaxaEntrega )+ '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
     }
     if (key == 6 && msg.toUpperCase() == 'C') {
         //key 7 ainda não feita

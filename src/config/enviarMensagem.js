@@ -1,8 +1,5 @@
 let mensagem=0
 
-setTimeout(() => {
-    mensagem = 'Olá Mundo'
-}, 15000);
 
 function enviar(client){
   //  setInterval(()=>{
