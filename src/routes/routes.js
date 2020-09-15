@@ -9,12 +9,14 @@ const User = require('@models/Users')
 const Menu = require('@models/Menu')
 
 router.get('/', auth, (req, res) => {
-    res.render('index/index')
+    res.render('index/index', { layout: 'main.hbs' })
+
 })
 
 router.get('/login', (req, res) => {
     res.render('login/login', { layout: 'login.hbs' })
 })
+
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
