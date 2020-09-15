@@ -18,11 +18,14 @@ let dadosEntrega;
 //A observação do produto
 let observacao;
 
-let valorTotalSemTaxaEntrega=0
+let valorTotalSemTaxaEntrega
 async function execute(user, msg,contato) {
+    valorTotalSemTaxaEntrega=0
     let menu
     await getMenu.getMenu(user).then((res) => menu = res.toString())
-    await escolha.db[user].itens.forEach(e=>valorTotalSemTaxaEntrega+= e.itensEscolhido.price * e.quantity)
+    await escolha.db[user].itens.forEach(e=>{
+        valorTotalSemTaxaEntrega+= e.itensEscolhido.price * e.quantity
+    })
 
     const frase = '🔤  Se desejar, digite alguma *OBSERVAÇÃO PARA O SEU PEDIDO*.\n\n───────────────\n[ N ] NÃO TENHO OBSERVAÇÃO'
     const frase1 = 'Se desejar, digite alguma *OBSERVAÇÃO PARA O AGENDAMENTO DO SEU PEDIDO*.\n\nPor exemplo: dia e horário que deseja agendar.\n\n───────────────\n*[ N ]* CONTINUAR SEM OBSERVAÇÃO'
