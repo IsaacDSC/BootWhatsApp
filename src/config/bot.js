@@ -3,7 +3,7 @@ const venom = require('venom-bot');
 
 //dependencies files.js 
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
-const save = require('@data/save')
+const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 const cardapio = require('@data/cardapio/cardapio')
 
@@ -92,15 +92,15 @@ function main() {
 }
 
 function getStage(user) {
-    if (save.db[user]) {
+    if (escolha.db[user]) {
         //Se existir esse numero no banco de dados
         return banco.db[user].stage;
     } else {
         //Se for a primeira vez que entra e contato
-        save.db[user] = {
+        escolha.db[user] = {
             escolha: [],
             itens: [],
-
+            nome: ''           
         };
         return banco.db[user].stage;
     }

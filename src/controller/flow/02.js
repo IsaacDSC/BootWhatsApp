@@ -1,6 +1,5 @@
 require('module-alias/register')
 const banco = require('@data/user/user')
-const User = require('@models/Users')
 const escolha = require("@data/escolha");
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu');
@@ -19,15 +18,17 @@ let dadosEntrega;
 //A observação do produto
 let observacao;
 
-async function execute(user, msg) {
+let valorTotalSemTaxaEntrega=0
+async function execute(user, msg,contato) {
     let menu
-    await getMenu.getMenu().then((res) => menu = res.toString())
+    await getMenu.getMenu(user).then((res) => menu = res.toString())
+    await escolha.db[user].itens.forEach(e=>valorTotalSemTaxaEntrega+= e.itensEscolhido.price * e.quantity)
 
     const frase = '🔤  Se desejar, digite alguma *OBSERVAÇÃO PARA O SEU PEDIDO*.\n\n───────────────\n[ N ] NÃO TENHO OBSERVAÇÃO'
     const frase1 = 'Se desejar, digite alguma *OBSERVAÇÃO PARA O AGENDAMENTO DO SEU PEDIDO*.\n\nPor exemplo: dia e horário que deseja agendar.\n\n───────────────\n*[ N ]* CONTINUAR SEM OBSERVAÇÃO'
 
     if (msg.toUpperCase() === "V" && key == 0) {
-        escolha.db = []
+        escolha.db[user].escolha  = []
         setStage.envStageDb(user, 1)
         banco.db[user].stage = 1;
         return [menu];
@@ -37,7 +38,7 @@ async function execute(user, msg) {
         return ["👏  *Está quase no final.*\nVamos definir os dados de entrega e o pagamento.", ' 🔢  Como deseja receber o pedido:\n\n*[ 1 ]* ENTREGAR NO ENDEREÇO\n*[ 2 ]* RETIRAR NO BALCAO\n*[ 3 ]* COMER AQUI NO LOCAL\n*[ 4 ]* AGENDAR A RETIRADA\n\n───────────────\n*[ V ]* MENU ANTERIOR'];
     }
     //se a msg digitada é diferente da quantidade de opçoes
-    if (msg > 4) {
+    if (msg > 4 && key==0) {
         return ['Opção Invalida escolha dentre esses numeros']
     }
 
@@ -87,31 +88,30 @@ async function execute(user, msg) {
 
     //Manda o endereço para o Banco de Dados
     if (key == 2 && msg == 1) {
-
         key = 3
-        return ['Como você deseja *pagar*?\nValor total com taxa de entrega: *R$ 11,00*\n\n*[ 1 ]*  DINHEIRO\n*[ 2 ]*  CARTAO DE CREDITO\n*[ 3 ]*  CARTAO DE DEBITO\n\n───────────────']
+        return ['Como você deseja *pagar*?\nValor total com taxa de entrega: *'+valorTotalSemTaxaEntrega+'*\n\n*[ 1 ]*  DINHEIRO\n*[ 2 ]*  CARTAO DE CREDITO\n*[ 3 ]*  CARTAO DE DEBITO\n\n───────────────']
     }
     //trata o item acima
     if (key == 3 && msg > 3) {
         return ['Opção De Pagamento Invalida']
     }
     if (key == 3 && msg == 2) {
-        cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
+      //  cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
         key = 5
         formaPagamento = 'CARTAO DE CREDITO'
         return [frase]
     }
     if (key == 3 && msg == 3) {
-        cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
-        formaPagamento = 'CARTAO DE DEBITO'
+    //    cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
         key = 5
+        formaPagamento = 'CARTAO DE DEBITO'
         return [frase]
     }
     if (key == 3 && msg == 1) {
-        cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
+    //    cadastardb.EnvPaymentNote(user, observacao, formaPagamento)
         key = 4
         formaPagamento = 'Dinheiro'
-        return ['💰  11,00  = valor total com a taxa de entrega.\n\nPrecisa de troco para quanto?\nPor exemplo: troco para 50\n\n*[ N ]* NÃO PRECISA DE TROCO']
+        return ['💰  '+valorTotalSemTaxaEntrega+'  = valor total com a taxa de entrega.\n\nPrecisa de troco para quanto?\nPor exemplo: troco para 50\n\n*[ N ]* NÃO PRECISA DE TROCO']
     }
     if (key == 4 && msg.toUpperCase() == "N") {
         trocoPara = "Não Precisa De Troco"
@@ -119,7 +119,7 @@ async function execute(user, msg) {
         return [frase]
     }
     //também tratar se o troco é menor que o valor do pedido
-    if (key == 4 && msg.split("").filter(n => (Number(n) || n == 0)).join("") < 50 || key == 4 && !Number(msg.split("").filter(n => (Number(n) || n == 0)).join(""))) {
+    if (key == 4 && msg.split("").filter(n => (Number(n) || n == 0)).join("") < valorTotalSemTaxaEntrega || key == 4 && !Number(msg.split("").filter(n => (Number(n) || n == 0)).join(""))) {
 
         return ["Por favor Informe Um troco Valido"]
     }
@@ -136,55 +136,30 @@ async function execute(user, msg) {
     //Passar a key 5 e 6 para o estagio 3
     if (key == 5) {
         observacao = msg
+        let end=''
+        if(endereco){
+            end='\n'+endereco
+        }
 
         key = 6
-        return ['Mostra o pedido']
+        return [''+escolha.db[user].nome+'\n'+dadosEntrega+''+end+'\n\n*[ PRODUTOS ]*\n\n*DOCES*\nSORVETE SABORES\n```23 X 4,50``` = ```103,50```\n\n*Pagamento:* '+formaPagamento+'\n*Total produto:* '+valorTotalSemTaxaEntrega+'\nTaxa entrega: R$ 0,00\n*Total do pedido: '+valorTotalSemTaxaEntrega+'*\n\nTel: '+contato+' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo','*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
     }
     if (key == 6 && msg.toUpperCase() == 'C') {
+        //key 7 ainda não feita
+        key=7
         return ['Corrigi O produto']
     }
     //Finalizar Boot para o cliente
     if (key == 6 && msg.toUpperCase() == 'OK') {
         //socket io
+        key=7
         enviaParaFrontend.enviaParaFrontend('dados')
-        return ['Seu pedido foi realizado com sucesso']
+        return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
     }
     if (key == 6) {
         return ['Comando Invalido Digite Ok ou C']
     }
 
-
-    
-
-    //parte abaixo não usada
-    if (msg === "*") {
-        setStage.envStageDb(user, 0)
-
-        banco.db[user].stage = 0;
-        banco.db[user] = ""
-        return ["Pedido cancelado com sucesso"];
-    }
-
-    if (msg === "#") {
-        setStage.envStageDb(user, 3)
-        banco.db[user].stage = 3;
-        return ["Digite o endereço completo por favor :"];
-    }
-
-    let resumo = "  RESUMO DO PEDIDO \n";
-    let total = 0;
-    //Pegar esses itens do Banco de Dados
-    banco.db[user].itens.forEach((value) => {
-        console.log(value);
-        resumo += `${value.descricao} --- ${value.preco} \n`;
-
-        total += value.preco;
-    });
-
-    resumo += "-------------------------\n";
-    resumo += ` Total R$ ${total}`;
-
-    return [resumo, "Para confirmar digite # ou para cancelar digite * "];
 }
 
 
