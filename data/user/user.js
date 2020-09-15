@@ -28,6 +28,11 @@ const Banco = {
         stage: 0,
         itens: [],
         mapEscolha: []
+    },
+    '553587219816@c.us': {
+        stage: 0,
+        itens: [],
+        mapEscolha: []
     }
 }
 exports.db = Banco
