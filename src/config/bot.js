@@ -26,7 +26,7 @@ function main() {
       logQR: true, // Logs QR automatically in terminal
       browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
       autoClose: 60000*10, 
-    }).then((client) => {start(client); enviar.enviar(client)});
+    }).then((client) => {start(client);enviar.enviar(client)});
 
     function exportQR(qrCode, path) {
         qrCode = qrCode.replace('data:image/png;base64,', '');
@@ -34,10 +34,9 @@ function main() {
         fs.writeFileSync(path, imageBuffer);
     }
 
+    
 
-
-    function start(client) {
-        //  setTimeout(() => close(client), 10000)
+function start(client) {
         client.onStateChange((state) => {
             console.log(state);
             const conflits = [
@@ -49,11 +48,10 @@ function main() {
                 client.useHere();
             }
         });
-
+        
         client.onMessage(async (message) => {
             const user = await User.findAll({ where: { telephone: message.sender.id } })
             console.log(user.length)
-
             if (user.length === 0) {
                 try {
                     let resposta = await stages.step[getStage(message.from)].obj.execute(
