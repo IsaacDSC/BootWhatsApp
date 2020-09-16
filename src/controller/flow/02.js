@@ -141,8 +141,8 @@ async function execute(user, msg, contato) {
     if (key == 5) {
         let end = ''
         let obs = ''
-        //pagamento
-        let pgm= ''
+            //pagamento
+        let pgm = ''
         let product
         observacao = msg
         if (msg.toUpperCase() != 'N') {
@@ -151,22 +151,22 @@ async function execute(user, msg, contato) {
         if (endereco) {
             end = '\n' + endereco
         }
-        if (formaPagamento){
-            pgm = '*Pagamento:*'+ formaPagamento +'\n'
+        if (formaPagamento) {
+            pgm = '*Pagamento:*' + formaPagamento + '\n'
         }
         key = 6
 
-        async function getProdutos(){
-            let renderProdutos=''
-             //Cardapio Obtido Do Banco de Dados só Obtem as classes
-           await escolha.db[user].itens.forEach((e) => {
-                  return renderProdutos += '\n*'+e.class.toUpperCase()+'*\n'+e.itensEscolhido.name+'\n```'+e.quantity+' X '+ e.itensEscolhido.price+'``` = ```'+e.itensEscolhido.price*e.quantity+'```\n'
-             })
-             return renderProdutos
-         }
-        await getProdutos().then(res=>product= res.toString())
-        
-        return ['' + escolha.db[user].nome + '\n' + dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n'+product+'\n'+ pgm +'*Total produto:* ' + formataReal.dinheiroReal(valorTotalSemTaxaEntrega) + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' +formataReal.dinheiroReal( valorTotalSemTaxaEntrega )+ '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
+        async function getProdutos() {
+            let renderProdutos = ''
+                //Cardapio Obtido Do Banco de Dados só Obtem as classes
+            await escolha.db[user].itens.forEach((e) => {
+                return renderProdutos += '\n*' + e.class.toUpperCase() + '*\n' + e.itensEscolhido.name + '\n```' + e.quantity + ' X ' + e.itensEscolhido.price + '``` = ```' + e.itensEscolhido.price * e.quantity + '```\n'
+            })
+            return renderProdutos
+        }
+        await getProdutos().then(res => product = res.toString())
+
+        return ['' + escolha.db[user].nome + '\n' + dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotalSemTaxaEntrega) + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' + formataReal.dinheiroReal(valorTotalSemTaxaEntrega) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
     }
     if (key == 6 && msg.toUpperCase() == 'C') {
         //key 7 ainda não feita
@@ -177,9 +177,7 @@ async function execute(user, msg, contato) {
     if (key == 6 && msg.toUpperCase() == 'OK') {
         //socket io
 
-
-
-
+        console.log(escolha.db[user])
 
 
         key = 7
