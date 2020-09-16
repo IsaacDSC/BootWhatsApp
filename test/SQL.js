@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-    host: 'db4free.net',
+    host: 'localhost',
     port: '3306',
-    user: 'matheusmlol',
-    password: '12052000a',
+    user: 'dev',
+    password: 'secret',
     database: 'bootwhatsapp'
 })
 

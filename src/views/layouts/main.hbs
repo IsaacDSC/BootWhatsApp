@@ -46,7 +46,7 @@
     <script src="/assets/js/main.js"></script>
 
     <script type="text/javascript">
-        var socket = io('https://boot-zap.herokuapp.com')
+        var socket = io('http://localhost:3000')
 
         socket.on('PedidoConcluido', function (data) {
             playSound()

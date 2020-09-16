@@ -6,7 +6,7 @@ const banco = require('@data/user/user') //configuração que fica ate o final a
     //arquivos que devem estar em pastas controllers porem se encontram em helpers ainda
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu')
-
+let idItem
 let key = 0;
 //usada para voltar ao menu 
 let voltaMenu =' '
@@ -66,7 +66,9 @@ async function execute(user, msg) {
     if (key === 1) {
         msgItem = msg
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == msgItem })
-
+        
+        await Menu.findAll({where:{name: itemEscolhido[0].name}})
+        idItem =idItem.dataValues.id
         itensEscolhido= {name: itemEscolhido[0].name,price: itemEscolhido[0].price}
         key = 2
         return ['🔢  Quantos produtos *' + itemEscolhido[0].name + '* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
@@ -80,7 +82,7 @@ async function execute(user, msg) {
     if (key == 2) { //esta no stage01
         key = 3 //levar para arquivo 03.js
 
-        escolha.db[user].itens.push({itensEscolhido,quantity:msg,class:classeDoProduto})
+        escolha.db[user].itens.push({itensEscolhido,quantity:msg,class:classeDoProduto,id:idItem})
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == msgItem })
         const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id', 'class'] })
 
@@ -99,6 +101,7 @@ async function execute(user, msg) {
         const classe = quantidadedeEscolhas[msgItemMais - 1].dataValues.class
         classeDoProduto= classe
         const itensMenu = await Menu.findAll({ where: { class: classe } })
+    
         let message = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
         
         itensMenu.forEach((e, index) => {

@@ -8,7 +8,6 @@ const stages = require('@controller/controller') //arquivo com a desc e o aponta
 const User = require('@models/Users');
 
 
-
 const ven = venom.create('Delivery', (base64Qr, asciiQR) => {
     // Mostra o Qr Code no Terminal
     console.log(asciiQR);
@@ -17,6 +16,7 @@ const ven = venom.create('Delivery', (base64Qr, asciiQR) => {
     exportQR(base64Qr, './public/images/qrCode.png');
 },
     (statusSession) => {
+      
         console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail
     },
     {
