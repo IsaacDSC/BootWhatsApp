@@ -67,7 +67,6 @@ app.use((req, res, next) => {
 ///local para chamar a configuração do bot
 boot.main()
 
-
 app.use(routes)
 app.use(menu)
 app.use(clients)
