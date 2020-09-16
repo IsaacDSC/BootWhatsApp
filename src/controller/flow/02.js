@@ -93,7 +93,7 @@ async function execute(user, msg, contato) {
     //Manda o endereço para o Banco de Dados
     if (key == 2 && msg == 1) {
         key = 3
-        return ['Como você deseja *pagar*?\nValor total com taxa de entrega: *' + valorTotalSemTaxaEntrega + '*\n\n*[ 1 ]*  DINHEIRO\n*[ 2 ]*  CARTAO DE CREDITO\n*[ 3 ]*  CARTAO DE DEBITO\n\n───────────────']
+        return ['Como você deseja *pagar*?\nValor total com taxa de entrega: *' + formataReal.dinheiroReal(valorTotalSemTaxaEntrega) + '*\n\n*[ 1 ]*  DINHEIRO\n*[ 2 ]*  CARTAO DE CREDITO\n*[ 3 ]*  CARTAO DE DEBITO\n\n───────────────']
     }
     //trata o item acima
     if (key == 3 && msg > 3) {
@@ -160,7 +160,7 @@ async function execute(user, msg, contato) {
             let renderProdutos=''
              //Cardapio Obtido Do Banco de Dados só Obtem as classes
            await escolha.db[user].itens.forEach((e) => {
-                  return renderProdutos += '\n*'+e.class.toUpperCase()+'*\n'+e.itensEscolhido.name+'\n```'+e.quantity+' X '+ formataReal.dinheiroReal(e.itensEscolhido.price)+'``` = ```'+formataReal.dinheiroReal(e.itensEscolhido.price*e.quantity)+'```\n'
+                  return renderProdutos += '\n*'+e.class.toUpperCase()+'*\n'+e.itensEscolhido.name+'\n```'+e.quantity+' X '+ e.itensEscolhido.price+'``` = ```'+e.itensEscolhido.price*e.quantity+'```\n'
              })
              return renderProdutos
          }
@@ -171,9 +171,9 @@ async function execute(user, msg, contato) {
     if (key == 6 && msg.toUpperCase() == 'C') {
         //key 7 ainda não feita
         key = 7
-        return ['Corrigi O produto']
+        return ['📝  *ABAIXO O QUE JÁ ESCOLHEU:*\n\n*[ 1 ] LANCHES*\n```COMBO LANCHE + BEBIDA```\n```5 X 23,00``` = ```115,00```\n\n*Parcial do pedido R$ 115,00*\n\n_Digite o número que é para apagar_\n\n───────────────\n*[ F ]* PARA FECHAR O PEDIDO\n*[ E ]* ESCOLHER OUTRO PRODUTO']
     }
-    //Finalizar Boot para o cliente
+    //Sai do fluxo
     if (key == 6 && msg.toUpperCase() == 'OK') {
         //socket io
         key = 7
@@ -181,12 +181,10 @@ async function execute(user, msg, contato) {
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
     }
     if (key == 6) {
-        return ['Comando Invalido Digite Ok ou C']
+        return ['Você precisa digitar *OK* para que eu possa preparar seu pedido.']
     }
 
 }
-
-
 
 
 
