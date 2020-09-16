@@ -4,15 +4,21 @@ const Admin = require('@models/Admin')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const { auth } = require('@helpers/auth')
+const db = require('@database/sql')
 const Requests = require('@models/Requests')
 const User = require('@models/Users')
 const Menu = require('@models/Menu')
+const connection = require('@/database/index')
 
 router.get('/', auth, (req, res) => {
-    res.render('index/index', { layout: 'main.hbs' })
+    let sql = 'SELECT menus.name, menu_requests.formPayment,users.name FROM menus INNER JOIN menu_requests ON menus.id = menu_requests.MenuNameId INNER JOIN users ON users.id = menu_requests.UserId;'
+    db.connection.query(sql, (err, result) => {
+        if (err) throw err
+        console.console(result)
+        res.render('index/index', { requests: result })
+    })
 
 })
-
 
 router.get('/login', (req, res) => {
     res.render('login/login', { layout: 'login.hbs' })
