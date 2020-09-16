@@ -163,7 +163,7 @@
                 <div class="row">
 
                     {{!-- fazer o carregamento de cada pedido começando por aqui --}}
-
+{{#each requests}}
                     <div class="col-sm-4">
                         <h4 class="card-title mb-0">Pedidos</h4>
                         <div class="small text-muted">October 2017</div>
@@ -190,12 +190,12 @@
                         <div class="form-group col-4">
                             <h6 class=""><strong>Pedido: </strong> #</h6>
                         </div>
-                        {{#each requests}}
+                        
                         <div class="form-group col-8">
                             <h6 class=""><strong>Nome: </strong> {{this.name}} &nbsp;&nbsp;&nbsp;<strong>Telefone:
                                 </strong> 24988888888</h6>
                         </div>
-                        {{/each}}
+                        
                         <div class="form-group ml-3">
                             <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> R$ 30,00</i></h6>
                             <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> R$ 50,00
@@ -239,7 +239,7 @@
                         </table>
                         <hr class="mt-5">
                     </div>
-
+{{/each}}
                     {{!-- Fim do each  --}}
 
                     {{!-- Inicio Pagination --}}
