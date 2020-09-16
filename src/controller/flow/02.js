@@ -176,6 +176,12 @@ async function execute(user, msg, contato) {
     //Sai do fluxo
     if (key == 6 && msg.toUpperCase() == 'OK') {
         //socket io
+
+
+
+
+
+
         key = 7
         enviaParaFrontend.enviaParaFrontend('dados')
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
