@@ -4,7 +4,6 @@ const venom = require('venom-bot');
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
-const statusSessio = require('@data/statusSession')
 const enviar = require('./enviarMensagem')
 //Models
 const User = require('@models/Users');
@@ -20,8 +19,6 @@ function main() {
         exportQR(base64Qr, './public/images/qrCode.png');
     },
     (statusSession) => {
-      
-        statusSessio.db.push(statusSession)
       console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail
     },
     { 
