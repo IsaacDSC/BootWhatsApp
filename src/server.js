@@ -11,7 +11,7 @@ const flash = require('express-flash')
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
-const boot = require('@config/bot') //para chamar configuração do bot
+const boot = require('@config/bot') //para chamar o bot precisa estar aqui
 const routes = require('@routes/routes')
 const menu = require("@routes/menu")
 const clients = require('@routes/clients');
@@ -19,21 +19,32 @@ const msg = require('@routes/msg')
 const config = require('@routes/config')
 
 
+   /*function fechar(client) {
+      setTimeout(()=>{
+        client.close().then(()=>console.log('Cliente fechado com sucesso'))
+       
+      },15000) 
+      }*/
+boot.start()
+//boot.ven.then(client => fechar(client))
+
+
+
 //socketio
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); //The ionic server
     next();
 });
- io.on('connection', function (socket) {
-        console.log('Usuario Conectado ' + socket.id)
-        //Broadcast envia para todos os clientes
-        //emit para apenas 1
- })
-function enviaParaFrontend (dados='')  {
-    io.emit('PedidoConcluido', dados)    
-   
+io.on('connection', function (socket) {
+    console.log('Usuario Conectado ' + socket.id)
+    //Broadcast envia para todos os clientes
+    //emit para apenas 1
+})
+function enviaParaFrontend(dados = '') {
+    io.emit('PedidoConcluido', dados)
+
 }
-    
+
 
 //Config handlebars
 app.engine('hbs', hbs({ defaultLayout: 'main.hbs', extname: 'hbs' }));
@@ -65,7 +76,7 @@ app.use((req, res, next) => {
 })
 
 ///local para chamar a configuração do bot
-boot.main()
+//boot.main()
 
 app.use(routes)
 app.use(menu)
