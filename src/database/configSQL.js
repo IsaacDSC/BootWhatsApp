@@ -8,5 +8,4 @@ const connection = mysql.createConnection({
     database: 'bootwhatsapp'
 })
 
-
-module.exports = connection
+exports.connection = connection
