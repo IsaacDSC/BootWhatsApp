@@ -67,8 +67,9 @@ async function execute(user, msg) {
         msgItem = msg
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == msgItem })
         
-        await Menu.findAll({where:{name: itemEscolhido[0].name}})
-        idItem =idItem.dataValues.id
+        await Menu.findOne({where:{name: itemEscolhido[0].name}}).then(res=>idItem=res.dataValues.id)
+        
+       
         itensEscolhido= {name: itemEscolhido[0].name,price: itemEscolhido[0].price}
         key = 2
         return ['🔢  Quantos produtos *' + itemEscolhido[0].name + '* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
