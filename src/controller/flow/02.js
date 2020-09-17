@@ -180,11 +180,27 @@ async function execute(user, msg, contato) {
         //socket io
 
         //console.log(escolha.db[user])
-        await escolha.db[user].itens.forEach(e => {
-            console.log(e)
-            connection.connection.query(`INSERT INTO menu_requests ('MenuNameId', 'formPayment',profit, spent, createdAt ) VALUES ('${e.id}','${fomaPagamento}', ${e.profit}, ${e.spent}, ${Date.now()});`)
-
-        })
+        async function EnviarRequest() {
+            await escolha.db[user].itens.forEach(e => {
+                console.log(e)
+                if (!formaPagamento) {
+                    let sql = `INSERT INTO menu_requests ('MenuNameId', 'UserId',profit, spent, createdAt ) VALUES ('${e.id}','1', ${e.profit}, ${e.spent}, ${Date.now()});`
+                    connection.connection.query(sql, (err, result) => {
+                        console.log(result)
+                    })
+                } else {
+                    let sql = `insert into menu_requests (MenuNameId,UserId,quantity,status,profit, spent, createdAt,updatedAt) values (${e.id},'1','1','0','${e.profit}','${e.spent}','${Date.now()}','${Date.now()}');`
+                    connection.connection.query(sql, (err, result) => {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            console.log("Enviado menu_requests:  " + result)
+                        }
+                    })
+                }
+            })
+        }
+        EnviarRequest()
 
         key = 7
         enviaParaFrontend.enviaParaFrontend({
