@@ -25,7 +25,7 @@ const config = require('@routes/config')
        
       },15000) 
       }*/
-boot.start()
+boot.client()
 //boot.ven.then(client => fechar(client))
 
 

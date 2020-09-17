@@ -1,14 +1,28 @@
 const fs = require('fs');
-const venom = require('venom-bot');
+const {create} = require('venom-bot');
 //dependencies files.js 
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 //Models
 const User = require('@models/Users');
+const { start } = require('repl');
+
+let venom_client;
+
+const sendText = async (telephone, msg) => {
+	if(!venom_client) {
+		console.log('client not created yet');
+		await client();
+	}
+	return await venom_client.sendText(telephone, msg);
+}
 
 
-const ven = venom.create('Delivery', (base64Qr, asciiQR) => {
+
+async function client(){
+    if(venom_client) return venom_client;
+    venom_client = create('Delivery', (base64Qr, asciiQR) => {
     // Mostra o Qr Code no Terminal
     console.log(asciiQR);
 
@@ -23,7 +37,7 @@ const ven = venom.create('Delivery', (base64Qr, asciiQR) => {
         logQR: true, // Logs QR automatically in terminal
         browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
         autoClose: 60000 * 10,
-    }).then((client) =>  client );
+    }).then((client) =>  start(client) );
 
 function exportQR(qrCode, path) {
     qrCode = qrCode.replace('data:image/png;base64,', '');
@@ -33,8 +47,8 @@ function exportQR(qrCode, path) {
 
 
 
-function start(){
-ven.then(client =>  {
+
+function start (client){
     console.log('Iniciado Com Sucesso')
     client.onStateChange((state) => {
         console.log(state);
@@ -89,7 +103,7 @@ ven.then(client =>  {
 
 
     });
-}) }
+ }}
 
 
 function getStage(user) {
@@ -107,5 +121,8 @@ function getStage(user) {
     }
 }
 
-exports.ven = ven
 exports.start = start
+exports.sendText= sendText
+exports.client = client
+exports.venom_client = venom_client
+
