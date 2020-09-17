@@ -11,7 +11,7 @@ const flash = require('express-flash')
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
-const {client,stopClient,venom_client} = require('@config/bot') //para chamar o bot precisa estar aqui
+const {client,stopClient,venom_client} = require('@config/bot') 
 const routes = require('@routes/routes')
 const menu = require("@routes/menu")
 const clients = require('@routes/clients');

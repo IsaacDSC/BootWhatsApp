@@ -51,7 +51,7 @@ function exportQR(qrCode, path) {
 }
 
 
-start(venom_client)
+await start(venom_client)
 
 async function start (client){
     console.log('Iniciado Com Sucesso')
@@ -70,12 +70,13 @@ async function start (client){
     client.onMessage(async (message) => {
         const user = await User.findAll({ where: { telephone: message.sender.id } })
         console.log(user.length)
+
         if (user.length === 0) {
             try {
                 let resposta = await stages.step[getStage(message.from)].obj.execute(
                     message.from,
                     message.body,
-                    message.sender.name
+                    message.sender.name,
                 )
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
