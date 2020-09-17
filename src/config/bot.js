@@ -32,6 +32,7 @@ function exportQR(qrCode, path) {
 }
 
 
+
 function start(){
 ven.then(client =>  {
     console.log('Iniciado Com Sucesso')
