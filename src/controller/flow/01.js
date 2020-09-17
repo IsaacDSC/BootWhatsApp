@@ -9,7 +9,9 @@ const getMenu = require('@helpers/getMenu')
 let idItem
 let key = 0;
 //usada para voltar ao menu 
+let price
 let voltaMenu =' '
+let productionCost
 let msgItem
 let msgItemMais
 let quantidaDeProdutos
@@ -67,9 +69,9 @@ async function execute(user, msg) {
         msgItem = msg
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == msgItem })
         
-        await Menu.findOne({where:{name: itemEscolhido[0].name}}).then(res=>idItem=res.dataValues.id)
+        await Menu.findOne({where:{name: itemEscolhido[0].name}}).then(res=>{idItem=res.dataValues.id; productionCost=res.dataValues.costProduce})
         
-       
+        price = itemEscolhido[0].price
         itensEscolhido= {name: itemEscolhido[0].name,price: itemEscolhido[0].price}
         key = 2
         return ['🔢  Quantos produtos *' + itemEscolhido[0].name + '* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
@@ -83,7 +85,7 @@ async function execute(user, msg) {
     if (key == 2) { //esta no stage01
         key = 3 //levar para arquivo 03.js
 
-        escolha.db[user].itens.push({itensEscolhido,quantity:msg,class:classeDoProduto,id:idItem})
+        escolha.db[user].itens.push({itensEscolhido,quantity:msg,class:classeDoProduto,id:idItem, profit: (price - productionCost )* msg,spent:productionCost*msg})
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == msgItem })
         const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id', 'class'] })
 
