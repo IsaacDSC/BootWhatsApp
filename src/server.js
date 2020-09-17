@@ -11,7 +11,7 @@ const flash = require('express-flash')
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
-const boot = require('@config/bot') //para chamar o bot precisa estar aqui
+const {client,sendText} = require('@config/bot') //para chamar o bot precisa estar aqui
 const routes = require('@routes/routes')
 const menu = require("@routes/menu")
 const clients = require('@routes/clients');
@@ -19,15 +19,9 @@ const msg = require('@routes/msg')
 const config = require('@routes/config')
 
 
-   /*function fechar(client) {
-      setTimeout(()=>{
-        client.close().then(()=>console.log('Cliente fechado com sucesso'))
-       
-      },15000) 
-      }*/
-boot.client()
-//boot.ven.then(client => fechar(client))
-
+    
+//Inicia O client
+client()
 
 
 //socketio

@@ -6,7 +6,6 @@ const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 //Models
 const User = require('@models/Users');
-const { start } = require('repl');
 
 let venom_client;
 
@@ -17,7 +16,6 @@ const sendText = async (telephone, msg) => {
 	}
 	return await venom_client.sendText(telephone, msg);
 }
-
 
 
 async function client(){
@@ -121,7 +119,6 @@ function getStage(user) {
     }
 }
 
-exports.start = start
 exports.sendText= sendText
 exports.client = client
 exports.venom_client = venom_client
