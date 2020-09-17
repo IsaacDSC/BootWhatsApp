@@ -188,7 +188,7 @@ async function execute(user, msg, contato) {
             total:valorTotalSemTaxaEntrega,
             OrderTime:3,
             Address: endereco,
-            FomadePagamento,
+            formaPagamento,
             request:escolha.db[user].itens,
         })
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
