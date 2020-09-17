@@ -39,7 +39,6 @@ io.on('connection', function (socket) {
 })
 function enviaParaFrontend(dados = '') {
     io.emit('PedidoConcluido', dados)
-
 }
 
 

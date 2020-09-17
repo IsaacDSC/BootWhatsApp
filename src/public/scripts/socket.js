@@ -1,6 +1,7 @@
 var socket = io('http://localhost:3000')
 
 socket.on('PedidoConcluido', function (data) {
+    console.log(data)
     renderPedido(data)
     playSound()
 })
@@ -50,7 +51,7 @@ const html = ` <div class="col-sm-4">
     </h6>
     <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
             Cartao</i></h6>
-    <h6 class="mt-1"><strong>Endereço: </strong> BARRA MANSA, ANO BOM, 200</h6>
+    <h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address}</h6>
     <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
         22:00Hr</i></h6>
     <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>

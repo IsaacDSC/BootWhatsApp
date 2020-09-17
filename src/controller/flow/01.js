@@ -84,7 +84,7 @@ async function execute(user, msg) {
     if (key == 2) { //esta no stage01
         key = 3 //levar para arquivo 03.js
 
-        escolha.db[user].itens.push({itensEscolhido,quantity:msg,class:classeDoProduto,id:idItem, profit: (price - productionCost )* msg,spent:productionCost*msg})
+        escolha.db[user].itens.push({itensEscolhido,quantity:msg,class:classeDoProduto,id:idItem, profit: (price* msg) - (productionCost* msg) ,spent:productionCost*msg})
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == msgItem })
         const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id', 'class'] })
         escolha.db[user].escolha = []
