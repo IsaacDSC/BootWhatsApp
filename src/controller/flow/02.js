@@ -6,6 +6,7 @@ const getMenu = require('@helpers/getMenu');
 const cadastardb = require('../../helpers/02.cadastrarDB')
 const enviaParaFrontend = require('../../server')
 const formataReal = require('@helpers/formataReal')
+const connection = require('@database/configSQL')
 key = 0
 
 //Guarda o endereço
@@ -21,7 +22,7 @@ let observacao;
 
 let valorTotalSemTaxaEntrega
 async function execute(user, msg, contato) {
-    
+
     valorTotalSemTaxaEntrega = 0
     let menu
     await getMenu.getMenu(user).then((res) => menu = res.toString())
@@ -178,18 +179,22 @@ async function execute(user, msg, contato) {
     if (key == 6 && msg.toUpperCase() == 'OK') {
         //socket io
 
-        console.log(escolha.db[user])
+        //console.log(escolha.db[user])
+        await escolha.db[user].itens.forEach(e => {
+            console.log(e)
+            connection.connection.query(`INSERT INTO menu_requests ('MenuNameId', 'formPayment',profit, spent, createdAt ) VALUES ('${e.id}','${fomaPagamento}', '${e.itensEscolhido.price}', ${e.profit}, ${e.spent}, ${Date.now()});`)
 
+        })
 
         key = 7
         enviaParaFrontend.enviaParaFrontend({
-            name:escolha.db[user].name, 
+            name: escolha.db[user].name,
             telephone: user,
-            total:valorTotalSemTaxaEntrega,
-            OrderTime:3,
+            total: valorTotalSemTaxaEntrega,
+            OrderTime: 3,
             Address: endereco,
             formaPagamento,
-            request:escolha.db[user].itens,
+            request: escolha.db[user].itens,
         })
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
     }
