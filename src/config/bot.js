@@ -11,16 +11,23 @@ let venom_client;
 
 const sendText = async (telephone, msg) => {
 	if(!venom_client) {
-		console.log('client not created yet');
+		console.log('client ainda não criado!');
 		await client();
 	}
 	return await venom_client.sendText(telephone, msg);
 }
 
+const stopClient = async () => {
+	if(venom_client) { 
+        
+       return await venom_client.close().then(()=>console.log('Cliente Desativado'))
+	}
+	return console.log('client ainda não criado!');
+}
 
 async function client(){
     if(venom_client) return venom_client;
-    venom_client = create('Delivery', (base64Qr, asciiQR) => {
+     venom_client = await create('Delivery', (base64Qr, asciiQR) => {
     // Mostra o Qr Code no Terminal
     console.log(asciiQR);
 
@@ -35,7 +42,7 @@ async function client(){
         logQR: true, // Logs QR automatically in terminal
         browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
         autoClose: 60000 * 10,
-    }).then((client) =>  start(client) );
+    });
 
 function exportQR(qrCode, path) {
     qrCode = qrCode.replace('data:image/png;base64,', '');
@@ -44,9 +51,9 @@ function exportQR(qrCode, path) {
 }
 
 
+start(venom_client)
 
-
-function start (client){
+async function start (client){
     console.log('Iniciado Com Sucesso')
     client.onStateChange((state) => {
         console.log(state);
@@ -122,4 +129,4 @@ function getStage(user) {
 exports.sendText= sendText
 exports.client = client
 exports.venom_client = venom_client
-
+exports.stopClient=stopClient
