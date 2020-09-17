@@ -11,7 +11,7 @@ const flash = require('express-flash')
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
-const boot = require('@config/bot') //para chamar o bot precisa estar aqui
+//const boot = require('@config/bot') //para chamar o bot precisa estar aqui
 const routes = require('@routes/routes')
 const menu = require("@routes/menu")
 const clients = require('@routes/clients');
@@ -25,7 +25,7 @@ const config = require('@routes/config')
        
       },15000) 
       }*/
-boot.start()
+//boot.start()
 //boot.ven.then(client => fechar(client))
 
 
@@ -47,7 +47,16 @@ function enviaParaFrontend(dados = '') {
 
 
 //Config handlebars
-app.engine('hbs', hbs({ defaultLayout: 'main.hbs', extname: 'hbs' }));
+app.engine('hbs', hbs({ defaultLayout: 'main.hbs', extname: 'hbs' ,helpers:{
+
+    trataTelephone: function(value){
+        return value.split('@')[0]
+    }
+
+
+}
+
+}));
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "/views/")) //resolvendo problema, direcionando views para dentro de src
 //consfig BodyParser

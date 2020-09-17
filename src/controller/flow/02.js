@@ -21,6 +21,7 @@ let observacao;
 
 let valorTotalSemTaxaEntrega
 async function execute(user, msg, contato) {
+    escolha.db[user].escolha = []
     valorTotalSemTaxaEntrega = 0
     let menu
     await getMenu.getMenu(user).then((res) => menu = res.toString())
@@ -32,7 +33,6 @@ async function execute(user, msg, contato) {
 
 
     if (msg.toUpperCase() === "V" && key == 0) {
-        escolha.db[user].escolha = []
         setStage.envStageDb(user, 1)
         banco.db[user].stage = 1;
         return [menu];
@@ -181,7 +181,10 @@ async function execute(user, msg, contato) {
 
 
         key = 7
-        enviaParaFrontend.enviaParaFrontend('dados')
+        enviaParaFrontend.enviaParaFrontend({
+            name:'Matheus', 
+            telephone:'3654432432',
+            total:43})
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
     }
     if (key == 6) {

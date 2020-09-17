@@ -160,7 +160,7 @@
     <div class="col-xl-9">
         <div class="card">
             <div class="card-body">
-                <div class="row">
+                <div id="pedidos" class="row">
 
                     {{!-- fazer o carregamento de cada pedido começando por aqui --}}
 {{#each requests}}
@@ -193,7 +193,7 @@
                         
                         <div class="form-group col-8">
                             <h6 class=""><strong>Nome: </strong> {{this.name}} &nbsp;&nbsp;&nbsp;<strong>Telefone:
-                                </strong> 24988888888</h6>
+                                </strong> {{trataTelephone this.telephone}}</h6>
                         </div>
                         
                         <div class="form-group ml-3">

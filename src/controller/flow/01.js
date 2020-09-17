@@ -45,7 +45,7 @@ async function execute(user, msg) {
         const itensMenu = await Menu.findAll({ where: { class: classe } })
         let message = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
         
-        itensMenu.forEach((e, index) => {
+       itensMenu.forEach((e, index) => {
                 quantidaDeProdutos = index+1
                 escolha.db[user].escolha.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
 
@@ -53,7 +53,6 @@ async function execute(user, msg) {
             })
             //parte final da String
         message += "\n───────────────\n*[ V ]* MENU ANTERIOR"
-
         return [message];
     }
     if(key==1 && msg.toUpperCase()=="V"){
@@ -88,7 +87,7 @@ async function execute(user, msg) {
         escolha.db[user].itens.push({itensEscolhido,quantity:msg,class:classeDoProduto,id:idItem, profit: (price - productionCost )* msg,spent:productionCost*msg})
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == msgItem })
         const MenuNameId = await Menu.findAll({ where: { name: itemEscolhido[0].name }, attributes: ['id', 'class'] })
-
+        escolha.db[user].escolha = []
         //Coloca o Item escolhido do usuario ao banco de dados 
         return [`👏  Produto *gravado* no carrinho.`, 'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *' + MenuNameId[0].dataValues.class.toUpperCase() + '*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
 
