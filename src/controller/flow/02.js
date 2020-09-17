@@ -182,7 +182,7 @@ async function execute(user, msg, contato) {
         //console.log(escolha.db[user])
         await escolha.db[user].itens.forEach(e => {
             console.log(e)
-            connection.connection.query(`INSERT INTO menu_requests ('MenuNameId', 'formPayment',profit, spent, createdAt ) VALUES ('${e.id}','${fomaPagamento}', '${e.itensEscolhido.price}', ${e.profit}, ${e.spent}, ${Date.now()});`)
+            connection.connection.query(`INSERT INTO menu_requests ('MenuNameId', 'formPayment',profit, spent, createdAt ) VALUES ('${e.id}','${fomaPagamento}', ${e.profit}, ${e.spent}, ${Date.now()});`)
 
         })
 
