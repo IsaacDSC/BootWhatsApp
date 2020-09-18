@@ -180,7 +180,7 @@ async function execute(user, msg, contato) {
         //socket io
 
         //console.log(escolha.db[user])
-        async function EnviarRequest() {
+  /*      async function EnviarRequest() {
             await escolha.db[user].itens.forEach(e => {
                 console.log(e)
                 if (!formaPagamento) {
@@ -201,16 +201,19 @@ async function execute(user, msg, contato) {
             })
         }
         EnviarRequest()
-
+*/
         key = 7
         enviaParaFrontend.enviaParaFrontend({
-            name: escolha.db[user].name,
+            name: contato,
             telephone: user,
             total: valorTotalSemTaxaEntrega,
-            OrderTime: 3,
+            OrderTime: new Date().toTimeString(),
             Address: endereco,
             formaPagamento,
             request: escolha.db[user].itens,
+            observacao,
+            trocoPara,
+            dadosEntrega
         })
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
     }
