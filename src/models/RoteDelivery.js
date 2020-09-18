@@ -3,7 +3,6 @@ const db = require('../database/index')
 const Delivery = db.define('delivery', {
     city: {
         type: db.Sequelize.STRING,
-        unique: true,
         require: true
     },
     neighborhoods: {
@@ -11,10 +10,10 @@ const Delivery = db.define('delivery', {
         require: true
     },
     cost: {
-        type: db.Sequelize.FLOAT
+        type: db.Sequelize.FLOAT,
     },
     timeDelivery: {
-        type: db.Sequelize.STRING
+        type: db.Sequelize.DATE
     }
 })
 

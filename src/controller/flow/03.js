@@ -1,31 +1,38 @@
 require('module-alias/register')
-const stages = require("@data/stages")
+const stages = require("@controller/controller")
 const banco = require('@data/user/user')
 const User = require('@models/Users')
 const setStage = require('@helpers/setStage')
+const escolha = require('@data/escolha')
+const Menu = require('@models/Menu')
 
-function execute(user, msg) {
 
-    if (msg === "*") {
-        setStage.envStageDb(user, 3)
-        banco.db[user].stage = 3;
-        banco.db[user] = ""
-        return ["Digite o endereço completo por favor :"];
+async function execute(user, msg) {
+    let nameItens = escolha.db[user].itensEscolhido.name
+    let classeDoProduto = escolha.db[user].classeDoProduto
+    let idItem = escolha.db[user].idItem
+    let price = escolha.db[user].itensEscolhido.price
+    let productionCost = escolha.db[user].productionCost
+    let msgItem
+
+    if (msg > 100) {
+        return ['🔢  Quantidade muito alta.\nLimite máximo por pedido 100 unidades.']
     }
-
-    if (msg === "#") {
-        setStage.envStageDb(user, 4)
-
+    if (!Number(msg)) {
+        return ['🔢  Por Favor digte a Quantidade.\nLimite máximo por pedido 100 unidades.']
+    } else { //esta no stage01        
+        //enviando para Itens
         banco.db[user].stage = 4;
 
-        return stages.step[4].obj.execute(user, "");
+        let itens = { name: nameItens, price: price }
+        console.log(nameItens, classeDoProduto, idItem, price, productionCost)
+        escolha.db[user].itens.push({ itens, quantity: msg, class: classeDoProduto, id: idItem, profit: (price * msg) - (productionCost * msg), spent: productionCost * msg })
+            //e.index == banco.db[user].msgItem
+
+        //Coloca o Item escolhido do usuario ao banco de dados 
+        return [`👏  Produto *gravado* no carrinho.`, 'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *' + escolha.db[user].classeDoProduto.toUpperCase() + '*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
+
     }
-    banco.db[user].itens.push({ endereço: msg });
-    console.log(banco.db[user])
-    return [
-        `Confirma endereco de entrega : \n ${msg}`,
-        "```Digite # para continuar ou * para voltar```",
-    ];
 }
 
 exports.execute = execute;

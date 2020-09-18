@@ -1,17 +1,11 @@
+require('module-alias/register')
+const db = require('@database/configSQL')
 
-
-function desligar(client){
-     
-    client.close()
-    close(client)
-
-}
-
-
-
-
-
-
-
-
-exports.desligar = desligar
+let SQL = 'SELECT neighborhoods FROM deliveries'
+db.connection.query(SQL, (err, result) => {
+    if (err) {
+        console.log(err)
+    } else {
+        console.log(result)
+    }
+})

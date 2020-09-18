@@ -12,7 +12,7 @@ const stages = {
     },
     02: {
         desc: "Resumo",
-        obj: require('@controller/flow/02')
+        obj: require('@/controller/flow/er02')
     },
     03: {
         desc: "Resumo",

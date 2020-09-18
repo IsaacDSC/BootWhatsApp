@@ -15,7 +15,8 @@
         "@helpers/*": ["src/helpers/*"],
         "@models/*": ["src/models/*"],
         "@controller/*": ["src/controller/*"],
-        "@database/*": ["src/database/*"]
+        "@database/*": ["src/database/*"],
+        "@public/*":["src/public/*"],
       }
     },
     "exclude": ["node_modules", "dist"]

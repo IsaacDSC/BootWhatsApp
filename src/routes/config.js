@@ -8,11 +8,11 @@ router.get('/delivery', (req, res) => {
 })
 
 router.post('/delivery', (req, res) => {
+    //res.send(req.body.tempoEspera)
     Delivery.create({
-        city: req.body.cidade,
         neighborhoods: req.body.bairro,
+        city: req.body.cidade,
         cost: req.body.valor,
-        timeDelivery: req.body.tempoEspera
     }).then(() => {
         req.flash('success_msg', 'Configurações sobre Entregas Salva com Sucesso')
         res.render('/config')

@@ -5,7 +5,7 @@
     "main": "./src/server.js",
     "scripts": {
         "start": "nodemon",
-        "test": "true"
+        "test": "nodeTdd.reporter"
     },
     "repository": {
         "type": "git",
@@ -45,7 +45,8 @@
         "@helpers": "src/helpers",
         "@models": "src/models",
         "@controller": "src/controller",
-        "@database": "src/database"
+        "@database": "src/database",
+        "@public": "src/public"
     },
     "devDependencies": {
         "nodemon": "^2.0.4",
