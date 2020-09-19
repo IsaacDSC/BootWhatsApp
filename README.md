@@ -26,3 +26,9 @@ Build Pack Heroku:
 
 https://buildpack-registry.s3.amazonaws.com/buildpacks/jontewks/puppeteer.tgz
 heroku/nodejs
+
+
+
+
+ALTER TABLE relacionamentos ADD COLUMN MenuId int first;
+ALTER TABLE relacionamentos ADD FOREIGN KEY (cardapioId) REFERENCES menus(id);

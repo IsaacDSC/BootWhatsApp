@@ -1,30 +1,11 @@
 const db = require('../database/index')
 
-const Requests = db.define('menu_request', {
+const Requests = db.define('request', {
     id: {
         type: db.Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-    },
-    MenuNameId: {
-        type: db.Sequelize.INTEGER,
-        references: {
-            model: 'menus',
-            key: 'id'
-        },
-        onDelete: 'CASCADE',
-        allowNull: false
-
-    },
-    UserId: {
-        type: db.Sequelize.INTEGER,
-        references: {
-            model: 'users',
-            key: 'id'
-        },
-        onDelete: 'CASCADE',
-        allowNull: false
     },
     quantity: {
         type: db.Sequelize.INTEGER,
@@ -36,7 +17,6 @@ const Requests = db.define('menu_request', {
     },
     delivery: {
         type: db.Sequelize.FLOAT,
-
         allowNull: true,
     },
     formPayment: {

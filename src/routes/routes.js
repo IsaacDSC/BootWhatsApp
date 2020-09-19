@@ -1,3 +1,4 @@
+require('module-alias/register')
 const express = require('express')
 const router = express.Router()
 const Admin = require('@models/Admin')
@@ -12,15 +13,17 @@ const RegisterUsers = require('@models/RegistersUsers')
 
 
 router.get('/', auth, (req, res) => {
-    let sql = 'SELECT users.telephone,menu_requests.quantity, menus.name, menu_requests.formPayment,users.name FROM menus INNER JOIN menu_requests ON menus.id = menu_requests.MenuNameId INNER JOIN users ON users.id = menu_requests.UserId;'
-    let countRequest = `SELECT COUNT(createdAt) as createdAt FROM menu_requests  WHERE DATE(createdAt) = DATE(NOW());`
-    let countPreparo = `SELECT COUNT(status) as status FROM menu_requests  WHERE  DATE(createdAt) = DATE(NOW()) and status = 1;`
-    db.connection.query(sql, (err, result) => {
-        db.connection.query(countRequest, (err, countRequests) => {
-            res.render('index/index', { requests: result, countRequests: countRequests[0].createdAt })
-        })
-    });
+    //  let sql = 'SELECT users.telephone,menu_requests.quantity, menus.name, menu_requests.formPayment,users.name FROM menus INNER JOIN menu_requests ON menus.id = menu_requests.MenuNameId INNER JOIN users ON users.id = menu_requests.UserId;'
+    // let countRequest = `SELECT COUNT(createdAt) as createdAt FROM menu_requests  WHERE DATE(createdAt) = DATE(NOW());`
+    // let countPreparo = `SELECT COUNT(status) as status FROM menu_requests  WHERE  DATE(createdAt) = DATE(NOW()) and status = 1;`
+    // db.connection.query(sql, (err, result) => {
+    //     db.connection.query(countRequest, (err, countRequests) => {
+    //     })
 
+    //{ requests: result, countRequests: countRequests[0].createdAt }
+    // });
+
+    res.render('index/index')
 
 })
 router.get('/qrcode', (req, res) => {

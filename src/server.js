@@ -21,9 +21,9 @@ const config = require('@routes/config')
 
 
 //Inicia O client
-//client()
-//Para o Client
-//stopClient()
+client()
+    //Para o Client
+    //stopClient()
 
 
 
