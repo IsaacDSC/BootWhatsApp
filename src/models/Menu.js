@@ -12,6 +12,11 @@ const Menu = db.define('menu', {
     name: {
         type: db.Sequelize.STRING,
         require: true,
+        unique: true,
+        allowNull: false
+    },
+    class: {
+        type: db.Sequelize.STRING
     },
     desc: {
         type: db.Sequelize.TEXT,
