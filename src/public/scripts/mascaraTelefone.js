@@ -3,6 +3,7 @@ function mascara(o,f){
     v_fun=f
     setTimeout("execmascara()",1)
 }
+
 function execmascara(){
     v_obj.value=v_fun(v_obj.value)
 }
@@ -15,8 +16,10 @@ function mtel(v){
 function id( el ){
 	return document.getElementById( el );
 }
+
+
 window.onload = function(){
 	id('telephone').onkeyup = function(){
 		mascara( this, mtel );
-	}
+    }
 }
