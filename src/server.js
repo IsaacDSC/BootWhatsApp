@@ -21,9 +21,9 @@ const config = require('@routes/config')
 
 
 //Inicia O client
-//client()
-//Para o Client
-//stopClient()
+client()
+    //Para o Client
+    //stopClient()
 
 
 
@@ -94,7 +94,7 @@ app.use('/msg', msg)
 app.use('/config', config)
 
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 server.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
     console.log('Break Server CTRL + C')

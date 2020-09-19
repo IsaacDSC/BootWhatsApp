@@ -15,5 +15,5 @@ function Dt() {
 
 window.onload = function() {
     Dt()
-    setInterval(Dt(), 60000)
+    setInterval(() => Dt(), 60000)
 }

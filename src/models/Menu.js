@@ -3,20 +3,15 @@ const db = require('../database/index')
 
 
 const Menu = db.define('menu', {
-    id:{
+    id: {
         type: db.Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        unique:true,
     },
     name: {
         type: db.Sequelize.STRING,
         require: true,
-        unique: true,
-        allowNull: false
-    }, class: {
-        type: db.Sequelize.STRING
     },
     desc: {
         type: db.Sequelize.TEXT,

@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     database: 'bootwhatsapp'
 })
 
-  /* 
+/* 
 module.exports = {
     dialect: 'mysql',
     host: 'db4free.net',
@@ -17,7 +17,7 @@ module.exports = {
     database: 'bootwhatsapp'
 }*/
 
-let sql = 'select users.name, users.telephone, menu_requests.delivery from users of menu_requests on users.id = menu_requests.MenuNameId;'
+let sql = 'select * from users;'
 connection.query(sql, (err, result) => {
     if (err) throw err
     console.log(result)

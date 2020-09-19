@@ -1,23 +1,23 @@
-var socket = io('http://localhost:3000')
+var socket = io('http://localhost:3001')
 
-socket.on('PedidoConcluido', function (data) {
-    console.log(data)
-    renderPedido(data)
-    playSound()
-})
-//Enviar o User e o Status do pedido quando mudar para o backend
+socket.on('PedidoConcluido', function(data) {
+        renderPedido(data)
+        somaPedidosDia()
+        playSound()
+    })
+    //Enviar o User e o Status do pedido quando mudar para o backend
 
 var elemento = document.getElementById('pedidos');
 
 
 async function renderPedido(dados) {
     let produtos;
-    let total=0
-    await dados.request.forEach(e =>total += e.quantity * e.itens.price)
+    let total = 0
+    await dados.request.forEach(e => total += e.quantity * e.itens.price)
     async function getProdutos() {
         let renderProdutos = ''
         await dados.request.forEach(e =>
-         renderProdutos += `
+            renderProdutos += `
         <tr>
         <td class="text-center">${e.class.toUpperCase()}</td>
             <td class="text-center">${e.itens.name.toUpperCase()}</td>
@@ -33,7 +33,7 @@ async function renderPedido(dados) {
     await getProdutos().then(res => produtos = res.toString())
 
 
-  
+
 
     const html = ` <div class="col-sm-4">
 <h4 class="card-title mb-0">Pedidos</h4>
@@ -98,24 +98,14 @@ async function renderPedido(dados) {
 <hr class="mt-5">
 </div>`
 
+elemento.insertAdjacentHTML('afterbegin', html);
+}
 
-
-
-
-    elemento.insertAdjacentHTML('afterbegin', html);
-
-
-
-
-
-
-
-
-
-
-
-
-
+function somaPedidosDia(){
+    const soma = document.getElementById("somaPedido")
+    const text= soma.textContent
+    let SomaNumber = Number(text)+1
+    soma.innerText = SomaNumber
 }
 
 function playSound() {

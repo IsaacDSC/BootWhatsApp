@@ -32,7 +32,7 @@ async function client() {
             console.log(asciiQR);
 
             // Cria o arquivo png
-            exportQR(base64Qr, './src/public/images/qrCode.png');
+            exportQR(base64Qr, __dirname + '/public/images/qrCode.png');
         },
         (statusSession) => {
 
@@ -123,7 +123,7 @@ function getStage(user) {
             escolha: [],
             itens: [],
             nome: '',
-            valorTaxa:'',
+            valorTaxa: '',
             itensEscolhido: '',
             quantidaDeProdutos: '',
             productionCost: '',
@@ -135,7 +135,7 @@ function getStage(user) {
             endereco: '',
             formaPagamento: '',
             trocoPara: '',
-            observacao:'',
+            observacao: '',
             valorTotal: 0
 
         };
