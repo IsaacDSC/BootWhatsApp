@@ -180,7 +180,7 @@ async function execute(user, msg, contato) {
         //socket io
 
         //console.log(escolha.db[user])
-  /*      async function EnviarRequest() {
+        /*      async function EnviarRequest() {
             await escolha.db[user].itens.forEach(e => {
                 console.log(e)
                 if (!formaPagamento) {

@@ -1,32 +1,39 @@
-<div class="container">
-    {{>_msg}}
-    <div class="card  mt-5">
-        <div class="card-body mt-5">
-            <h1 class="text-center">Nome da Empresa</h1>
-            <div class="container mt-3">
-                <form action="/login" method="post">
-                    <div class="row col-12">
-                        <div class="form-group col-12">
-                            <label for="">E-mail</label>
-                            <input type="text" placeholder="Digite seu E-mail" class="form-control" name="email" value="admin@gmail.com">
+<form action="/login" method="post">
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="index.html">
+                        <img class="align-content" src="/images/logo.png" alt="Logotipo">
+                    </a>
+                </div>
+                <div class="login-form">
+                    {{>_msg}}
+                    <form>
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" class="form-control"  name="email" placeholder="Email" value="admin@gmail.com">
                         </div>
-                    </div>
-                    <div class="row col-12">
-                        <div class="form-group col-12">
-                            <label for="">Senha</label>
-                            <input type="password" placeholder="Digite sua Senha" class="form-control" name="password" value="secret(!@#)">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password" value="secret(!@#)">
                         </div>
-                    </div>
-                    <div class="row col-12 mt-2 ml-5">
-                        <div class="form-group col-12 ml-5">
-                            <Button class="btn btn-success col-8 ml-5">Enviar</Button>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Remember Me
+                            </label>
+                            <label class="pull-right">
+                                <a href="#">Esqueceu a Senha?</a>
+                            </label>
+
                         </div>
-                    </div>
-                    <div class="row">
-                        <a href="" class="text-center">Esqueci minha Senha</a>
-                    </div>
-                </form>
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
+                        <div class="register-link m-t-15 text-center mt-5">
+                            <p>Seu outra lanchonete ainda não possui uma conta? <a href="/register"> Crie uma conta agora e ganhe até 10% em desconto</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>

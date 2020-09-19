@@ -1,0 +1,45 @@
+<div class="sufee-login d-flex align-content-center flex-wrap">
+    <div class="container">
+        <div class="login-content">
+            <div class="login-logo">
+                <a href="index.html">
+                    <img class="align-content" src="" alt="Logo TEch">
+                </a>
+            </div>
+            {{>_msg}}
+            <div class="login-form">
+                <form action="/register" method="post">
+                    <div class="form-group">
+                        <label>Nome da Lanchonete</label>
+                        <input type="text" name="businessName" class="form-control" placeholder="Digite o nome da Lanchonete">
+                    </div>
+                    <div class="form-group">
+                        <label>CNPJ / CPF</label>
+                        <input type="text" name="document" id="document" maxlength="18" class="form-control" placeholder="Digite o CPF ou CNPJ">
+                    </div>
+                    <div class="form-group">
+                        <label>Digite o seu nome completo</label>
+                        <input type="email" name="name"  class="form-control" placeholder="Digite o seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail para contato</label>
+                        <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label>Numero para contato</label>
+                        <input  name="telephone" id="telephone" class="form-control" placeholder="Digite seu numero que entramos em contato">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"><a href="" style="color: rgb(116, 115, 115);"> Agree the terms and policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>                    
+                    <div class="register-link m-t-15 text-center mt-3">
+                        <p>Ja tem conta ? <a href="/login"> Entre Agora</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
