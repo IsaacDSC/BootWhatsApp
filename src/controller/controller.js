@@ -53,6 +53,10 @@ const stages = {
     12: {
         desc: "Finalização",
         obj: require('@controller/flow/12')
+    },
+    13: {
+        desc: "Correção do Pedido",
+        obj: require('@controller/flow/13')
     }
 
 }

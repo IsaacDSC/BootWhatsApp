@@ -13,7 +13,7 @@ async function execute(user, msg, contato) {
     escolha.db[user].observacao = msg
     banco.db[user].stage = 12
     if (msg.toUpperCase() != 'N') {
-        obs = '\n' + escolha.db[user].observacao
+        obs = '\nObs:' + escolha.db[user].observacao
     }
     if (endereco) {
         end = '\n' + endereco

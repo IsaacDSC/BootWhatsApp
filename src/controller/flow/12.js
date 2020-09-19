@@ -28,7 +28,8 @@ async function execute(user, msg, contato) {
     
     }
     if (msg.toUpperCase() == 'C') {
-        //key 7 ainda não feita
+    //falta terminar
+        banco.db[user].stage = 13
         return ['📝  *ABAIXO O QUE JÁ ESCOLHEU:*\n\n*[ 1 ] LANCHES*\n```COMBO LANCHE + BEBIDA```\n```5 X 23,00``` = ```115,00```\n\n*Parcial do pedido R$ 115,00*\n\n_Digite o número que é para apagar_\n\n───────────────\n*[ F ]* PARA FECHAR O PEDIDO\n*[ E ]* ESCOLHER OUTRO PRODUTO']
     }
 
