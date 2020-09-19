@@ -12,16 +12,18 @@ var elemento = document.getElementById('pedidos');
 
 async function renderPedido(dados) {
     let produtos;
+    let total=0
+    await dados.request.forEach(e =>total += e.quantity * e.itens.price)
     async function getProdutos() {
         let renderProdutos = ''
         await dados.request.forEach(e =>
-            renderProdutos += `
+         renderProdutos += `
         <tr>
         <td class="text-center">${e.class.toUpperCase()}</td>
-            <td class="text-center">${e.itensEscolhido.name.toUpperCase()}</td>
+            <td class="text-center">${e.itens.name.toUpperCase()}</td>
             <td class="text-center">${dados.observacao.toUpperCase()}</td>
             <td class="text-center">${e.quantity}x</td>
-            <td class="text-center">${(e.quantity * e.itensEscolhido.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
+            <td class="text-center">${(e.quantity * e.itens.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
         </tr>
 `
         )
@@ -29,6 +31,9 @@ async function renderPedido(dados) {
     }
 
     await getProdutos().then(res => produtos = res.toString())
+
+
+  
 
     const html = ` <div class="col-sm-4">
 <h4 class="card-title mb-0">Pedidos</h4>
@@ -63,7 +68,7 @@ async function renderPedido(dados) {
 </div>
 
 <div class="form-group ml-3">
-    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${dados.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}  ${dados.trocoPara ? `Troco Para:${dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` : ''}</i></h6>
+    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}  ${dados.trocoPara ? `Troco Para:${dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` : ''}</i></h6>
     <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> R$ 50,00
     </h6>
     <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
