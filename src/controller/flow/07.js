@@ -6,12 +6,14 @@ const neigborhoods = require('@helpers/getNeighborhoods')
 let escolhaBairroAtivo = false
 const formataReal = require('@helpers/formataReal')
 
-async function execute(user, msg, contato) {
+async function execute(user, msg) {
 
-    valorTotalSemTaxaEntrega = 0
+     //Coloar o valor da taxa 
+     escolha.db[user].valorTaxa = 5 
+     escolha.db[user].valorTotal = 0 + escolha.db[user].valorTaxa
 
     await escolha.db[user].itens.forEach(e => {
-        valorTotalSemTaxaEntrega += e.itens.price * e.quantity
+         escolha.db[user].valorTotal += e.itens.price * e.quantity
     })
 
 
@@ -27,7 +29,7 @@ async function execute(user, msg, contato) {
     if (msg == 1) {
         banco.db[user].stage = 9
 
-        return ['Como você deseja *pagar*?\nValor total com taxa de entrega: *' + formataReal.dinheiroReal(valorTotalSemTaxaEntrega) + '*\n\n*[ 1 ]*  DINHEIRO\n*[ 2 ]*  CARTAO DE CREDITO\n*[ 3 ]*  CARTAO DE DEBITO\n\n───────────────']
+        return ['Como você deseja *pagar*?\nValor total com taxa de entrega: *' + formataReal.dinheiroReal( escolha.db[user].valorTotal) + '*\n\n*[ 1 ]*  DINHEIRO\n*[ 2 ]*  CARTAO DE CREDITO\n*[ 3 ]*  CARTAO DE DEBITO\n\n───────────────']
     }
     if (msg == 2) {
         banco.db[user].stage = 5;

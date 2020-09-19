@@ -5,7 +5,7 @@ const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu');
 
 
-async function execute(user, msg, contato) {
+async function execute(user, msg) {
 
     await getMenu.getMenu(user).then((res) => menu = res.toString())
 

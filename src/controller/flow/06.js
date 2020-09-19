@@ -2,7 +2,7 @@ require('module-alias/register')
 const banco = require('@data/user/user')
 const escolha = require("@data/escolha");
 
-async function execute(user, msg, contato) {
+async function execute(user, msg) {
 
     if (msg.toUpperCase() == 'V') {
         banco.db[user].stage = 5;
@@ -16,12 +16,6 @@ async function execute(user, msg, contato) {
     escolha.db[user].endereco = msg
     banco.db[user].stage = 7;
     return ['🏠  É para entregar no endereço abaixo?\n\n' + msg.toUpperCase() + '\n\n───────────────\n*[ 1 ]* CONFIRMAR ENDEREÇO 👈\n*[ 2 ]* ALTERAR O ENDEREÇO']
-
-
-    return ['Opção Invalida']
-
-
-
 
 
 }

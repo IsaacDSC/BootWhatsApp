@@ -134,6 +134,8 @@ function getStage(user) {
             endereco: '',
             formaPagamento: '',
             trocoPara: '',
+            observacao:'',
+            valorTotal: 0
 
         };
         return banco.db[user].stage;

@@ -1,46 +1,42 @@
 require('module-alias/register')
 const banco = require('@data/user/user')
 const escolha = require("@data/escolha");
-
-
+const formataReal = require('@helpers/formataReal')
 
 async function execute(user, msg, contato) {
-
-    return ['Fim Do Pedido']
-    let end = ''
-    let obs = ''
-        //pagamento
     let pgm = ''
     let product
+    let end = ' '
+    let endereco = escolha.db[user].endereco
+    let obs = ''
+    let valorTotal = 0
     escolha.db[user].observacao = msg
+    banco.db[user].stage = 12
     if (msg.toUpperCase() != 'N') {
         obs = '\n' + escolha.db[user].observacao
     }
-    if (escolha.db[user].endereco) {
-        end = '\n' + escolha.db[user].endereco
+    if (endereco) {
+        end = '\n' + endereco
     }
     if (escolha.db[user].formaPagamento) {
-        pgm = '*Pagamento:*' + escolha.db[user].formaPagamento + '\n'
+        pgm = '*Pagamento:* ' + escolha.db[user].formaPagamento + '\n'
     }
+
 
     async function getProdutos() {
         let renderProdutos = ''
-            //Cardapio Obtido Do Banco de Dados só Obtem as classes
+        //Cardapio Obtido Do Banco de Dados só Obtem as classes
         await escolha.db[user].itens.forEach((e) => {
+            valorTotal += e.quantity * e.itens.price
             return renderProdutos += '\n*' + e.class.toUpperCase() + '*\n' + e.itens.name + '\n```' + e.quantity + ' X ' + e.itens.price + '``` = ```' + e.itens.price * e.quantity + '```\n'
         })
         return renderProdutos
     }
     await getProdutos().then(res => product = res.toString())
 
-    return ['' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(1) + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' + formataReal.dinheiroReal(1) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
-
-
+    return ['' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotal) + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' + formataReal.dinheiroReal(valorTotal) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
 
 }
-
-
-
 
 module.exports = {
     execute: execute
