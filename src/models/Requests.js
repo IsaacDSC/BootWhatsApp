@@ -7,6 +7,15 @@ const Requests = db.define('request', {
         autoIncrement: true,
         primaryKey: true,
     },
+    IdUsuario:{
+        type: db.Sequelize.INTEGER,
+        references: {
+            model: 'users',
+            key: 'id'
+        },
+        onDelete: 'CASCADE',
+        allowNull: false
+    },
     quantity: {
         type: db.Sequelize.INTEGER,
         allowNull: false,

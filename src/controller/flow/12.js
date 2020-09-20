@@ -63,7 +63,7 @@ async function execute(user, msg, contato) {
         })
 
         //seta o escolha
-        //  escolha.db[user] = {}
+        escolha.db[user] = {}
 
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
 
