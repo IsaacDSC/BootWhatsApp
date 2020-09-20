@@ -1,6 +1,6 @@
 const db = require('../database/index')
 
-const Delivery = db.define('delivery', {
+const Delivery = db.define('deliverie', {
     city: {
         type: db.Sequelize.STRING,
         require: true

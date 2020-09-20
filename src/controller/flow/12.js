@@ -10,44 +10,6 @@ const SubmitRequest = require('@helpers/submitRequest')
 async function execute(user, msg, contato) {
 
     if (msg.toUpperCase() == 'OK') {
-        //chama função para pegar id do telefone vindo como parametro de user
-        await SubmitRequest.submit(user) //chama a função e envia os dados para a table request
-
-
-
-
-        /* await db.connection.query(sql, (err, UserId) => {
-             if (err) {
-                 throw err
-             } else {
-                 mandaParaBd()
-
-                 console.log(`\n\n${UserId[0].id}\n\n`)
-                 async function mandaParaBd() {
-                     await escolha.db[user].itens.forEach(e => {
-                         let SQL_request = `INSERT INTO requests 
-                         (quantity, note, delivery, formPayment, profit, spent, status)
-                         VALUES 
-                         (${Number(e.quantity)},
-                         ${escolha.db[user].observacao}, ${escolha.db[user].endereco}, ${escolha.db[user].formaPagamento},
-                         ${Number(e.profit)},${Number(e.spent)}, 'Preparo');`
-                         db.connection.query(SQL_request, (err, result) => {
-                             if (err) {
-                                 throw err
-                             } else {
-                                 console.log(`\n\n Cadastrado com sucesso \n\n${result}\n\n`)
-                             }
-
-                         })
-                     })
-                 }
-             }
-
-         }) */
-
-
-
-
 
         await enviaParaFrontend.enviaParaFrontend({
             name: contato,
@@ -62,8 +24,8 @@ async function execute(user, msg, contato) {
             dadosEntrega: escolha.db[user].dadosEntrega
         })
 
-        //seta o escolha
-        escolha.db[user] = {}
+        await SubmitRequest.submit(user) //chama a função e envia os dados para a table request
+            //seta o escolha
 
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
 

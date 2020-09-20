@@ -11,7 +11,6 @@ router.post('/delivery', (req, res) => {
     //res.send(req.body.tempoEspera)
     Delivery.create({
         neighborhoods: req.body.bairro,
-        city: req.body.cidade,
         cost: req.body.valor,
     }).then(() => {
         req.flash('success_msg', 'Configurações sobre Entregas Salva com Sucesso')

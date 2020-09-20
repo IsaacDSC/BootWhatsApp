@@ -9,7 +9,6 @@ async function execute(user, msg, contato) {
     const frase = '🔤  Se desejar, digite alguma *OBSERVAÇÃO PARA O SEU PEDIDO*.\n\n───────────────\n[ N ] NÃO TENHO OBSERVAÇÃO'
 
     //Coloar o valor da taxa 
-    escolha.db[user].valorTaxa = 5 
     escolha.db[user].valorTotal = 0 + escolha.db[user].valorTaxa
 
     await escolha.db[user].itens.forEach(e => {
@@ -19,7 +18,7 @@ async function execute(user, msg, contato) {
     if (msg == '1') {
         escolha.db[user].formaPagamento = 'DINHEIRO'
         banco.db[user].stage = 10
-        return ['💰  ' + escolha.db[user].valorTotal + '  = valor total com a taxa de entrega.\n\nPrecisa de troco para quanto?\nPor exemplo: troco para 50\n\n*[ N ]* NÃO PRECISA DE TROCO']
+        return ['Valor total com a taxa de entrega: ' + escolha.db[user].valorTotal + ' 💰 ' + '\n\nPrecisa de troco para quanto?\nPor exemplo: troco para 50\n\n*[ N ]* NÃO PRECISA DE TROCO']
     }
 
     if (msg == '2') {

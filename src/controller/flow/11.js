@@ -25,7 +25,7 @@ async function execute(user, msg, contato) {
 
     async function getProdutos() {
         let renderProdutos = ''
-        //Cardapio Obtido Do Banco de Dados só Obtem as classes
+            //Cardapio Obtido Do Banco de Dados só Obtem as classes
         await escolha.db[user].itens.forEach((e) => {
             valorTotal += e.quantity * e.itens.price
             return renderProdutos += '\n*' + e.class.toUpperCase() + '*\n' + e.itens.name + '\n```' + e.quantity + ' X ' + e.itens.price + '``` = ```' + e.itens.price * e.quantity + '```\n'
@@ -34,7 +34,7 @@ async function execute(user, msg, contato) {
     }
     await getProdutos().then(res => product = res.toString())
 
-    return ['' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotal) + '\nTaxa entrega: R$ 0,00\n*Total do pedido: ' + formataReal.dinheiroReal(valorTotal) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
+    return ['' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotal) + '\nTaxa entrega: ' + formataReal.dinheiroReal(escolha.db[user].valorTaxa) + '\n*Total do pedido: ' + formataReal.dinheiroReal(valorTotal + escolha.db[user].valorTaxa) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
 
 }
 
