@@ -29,7 +29,7 @@ async function submit(user) {
                         throw err
                     } else {
                         console.log(err)
-                        console.log(`Cadastrado com sucesso!\n${result}\n\n Amem`)
+                        console.log(`Cadastrado com sucesso!\n`)
                     }
                 })
 
