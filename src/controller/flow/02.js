@@ -27,7 +27,7 @@ async function execute(user, msg) {
 
         banco.db[user].stage = 3;
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == escolha.db[user].msgItem })
-
+        console.log(itemEscolhido)
         await Menu.findOne({ where: { name: itemEscolhido[0].name } }).then(res => {
             escolha.db[user].idItem = res.dataValues.id;
             escolha.db[user].productionCost = res.dataValues.costProduce
