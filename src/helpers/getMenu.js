@@ -13,11 +13,10 @@ async function getMenu(user) {
         escolha.db[user].escolha.push({ 'id': index + 1, 'class': e.dataValues.class })
         return menu += `*[ ${index+1} ]* ${e.dataValues.class.toUpperCase()} \n`
     })
-    console.log(escolha.db[user].itens.length+'Tamanho')
     menu += '\nDica:\nse quer *' + escolha.db[user].escolha[0].class.toUpperCase() + '* envie o número *1*.\n\n───────────────'
 
     if(escolha.db[user].itens.length>0){
-        menu+= '\n\n*[ F ]* *PARA FECHAR O PEDIDO*'
+        menu+= '\n*[ F ]* *FECHAR O PEDIDO*'
     }
     return menu 
 }

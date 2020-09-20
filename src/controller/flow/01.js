@@ -17,7 +17,10 @@ async function execute(user, msg) {
         attributes: ['class'],
         group: ['class']
     })
-
+    if(msg.toUpperCase() =='F' && escolha.db[user].itens.length>0){
+        banco.db[user].stage = 5;
+        return ["👏  *Está quase no final.*\nVamos definir os dados de entrega e o pagamento.", ' 🔢  Como deseja receber o pedido:\n\n*[ 1 ]* ENTREGAR NO ENDEREÇO\n*[ 2 ]* RETIRAR NO BALCAO\n*[ 3 ]* COMER AQUI NO LOCAL\n*[ 4 ]* AGENDAR A RETIRADA\n\n───────────────\n*[ V ]* MENU ANTERIOR'];
+    }
     //quantidade de classes verifica se o estagio 0 passou corretamente
     if (msg > quantidadedeEscolhas.length || !Number(msg)) {
         return ["Você *precisa* escolher um número da categoria."]
