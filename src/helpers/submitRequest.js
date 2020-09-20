@@ -7,7 +7,7 @@ async function submit(user) {
     console.log(escolha.db[user])
     let sql = `SELECT id FROM users where telephone = '${user}';`
     let sql_adress = `UPDATE users SET address = '${escolha.db[user].endereco}' WHERE telephone = '${user}';`
-        //let sql_relacionamentos = `ISERT INTO relacionamentos (UserId,MenuId,PedidosId,createdAt, updateAt) VALUES ('${UserId[0].id}','${escolha.db[user].idItem}','',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),`
+        //let sql_relacionamentos = `ISERT INTO relacionamentos (UserId,MenuId,PedidosId,createdAt, updateAt) VALUES ('${UserId[0].id}','${escolha.db[user].itens.id}','',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),`
     await db.connection.query(sql_adress, (err, resultado) => {
         if (err) {
             throw err
