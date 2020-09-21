@@ -6,8 +6,7 @@ const banco = require('@data/user/user') //configuração que fica ate o final a
     //arquivos que devem estar em pastas controllers porem se encontram em helpers ainda
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu')
-
-let msgItemMais
+const formataReal = require('@helpers/formataReal')
 
 async function execute(user, msg) {
 
@@ -38,7 +37,7 @@ async function execute(user, msg) {
 
                 escolha.db[user].quantidaDeProdutos = index + 1
                 escolha.db[user].escolha.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
-                return message += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${e.dataValues.value}_ \n`;
+                return message += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${formataReal.dinheiroReal(e.dataValues.value)}_ \n`;
             })
             //parte final da String
         message += "\n───────────────\n*[ V ]* MENU ANTERIOR"
