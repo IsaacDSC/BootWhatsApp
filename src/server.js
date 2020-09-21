@@ -51,11 +51,16 @@ app.engine('hbs', hbs({
 
         trataTelephone: function(value) {
             return value.split('@')[0]
+        },
+        maiuscula: function(value){
+            return value.toUpperCase()
+        },
+        dinheiro: function(value){
+            return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
         }
 
 
     }
-
 }));
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "/views/")) //resolvendo problema, direcionando views para dentro de src
