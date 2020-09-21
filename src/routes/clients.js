@@ -8,9 +8,6 @@ router.get('/clients/:pag', auth, (req, res) => {
     let desc = req.params.pag
     let sql = `SELECT * FROM users ORDER BY id=${desc} DESC LIMIT 1;`
     db.connection.query(sql, (err, result) => {
-        result.forEach(element => {
-            element.id
-        });
         res.render('clients/clients', { clients: result })
     })
 
