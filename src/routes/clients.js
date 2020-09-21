@@ -1,13 +1,19 @@
 require('module-alias/register')
 const express = require('express')
 const router = express.Router()
-const Users = require('@models/Users')
 const { auth } = require('@helpers/auth')
+const db = require('@database/configSQL')
 
-router.get('/clients', auth, (req, res) => {
-    Users.findAll().then((clients) => {
-        res.render('clients/clients', { clients: clients })
+router.get('/clients/:pag', auth, (req, res) => {
+    let desc = req.params.pag
+    let sql = `SELECT * FROM users ORDER BY id=${desc} DESC LIMIT 1;`
+    db.connection.query(sql, (err, result) => {
+        result.forEach(element => {
+            element.id
+        });
+        res.render('clients/clients', { clients: result })
     })
+
 })
 
 module.exports = router

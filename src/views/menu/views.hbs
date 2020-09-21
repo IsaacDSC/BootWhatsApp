@@ -3,30 +3,34 @@
         <div class="card-body">
             <div class="h2">Vizualização de Cardápios Cadastrados</div>
             <hr>
-            <div class="row col-12">
-                <div class="form-group col-12">
-                    <select name="" id="" class="form-control">
-                        <option value="">Selecione</option>
-                        <option value="">Hamburgue</option>
-                        <option value="">Pizza</option>
-                        <option value="">Bebidas</option>
-                        <option value="">Doces</option>
-                    </select>
-                    <button class="btn btn-outline-success mt-2 col-12">Pesquisar</button>
-                    <hr class="mt-4">
+            <form action="/menu/views" method="post">
+                <div class="row col-12">
+                    <div class="form-group col-12">
+                        <label for="class">Selecione a classe de alimento que deseja visualizar</label>
+                        <select name="class" id="class" class="form-control">
+                            <option value="">Selecione</option>
+                            {{#each class}}
+                            <option value="{{class}}">{{class}}</option>
+                            {{/each}}
+                        </select>
+                        <button class="btn btn-outline-success mt-2 col-12">Pesquisar</button>
+                        <hr class="mt-4">
+                    </div>
                 </div>
-            </div>
-            <div class="row col-12 mt-3">
-                {{#each menu}}
-                <div class="form-group col-6">
-                    <p><strong>Nome: </strong>{{dataValues.name}}</p>
-                    <p><strong>Descrição: </strong>{{dataValues.desc}}</p>
-                    <p><strong>Valor do Produto: </strong>R$ {{dataValues.value}}</p>
-                    <p><strong>Gasto para Produzir: </strong>R$ {{dataValues.costProduce}}</p>
-                    <hr>
+            </form>
+            <form action="/menu/delete" method="post">
+                <div class="row col-12 mt-3">
+                    {{#each data}}
+                    <div class="form-group col-6">
+                        <p><strong>Nome: </strong>{{name}}</p>
+                        <p><strong>Descrição: </strong>{{desc}}</p>
+                        <p><strong>Valor do Produto: </strong>R$ {{value}}</p>
+                        <p><strong>Gasto para Produzir: </strong>R$ {{costProduce}}</p>
+                        <hr>
+                    </div>
+                    {{/each}}
                 </div>
-                {{/each}}
-            </div>
+            </form>
         </div>
     </div>
 </div>

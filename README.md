@@ -28,7 +28,23 @@ https://buildpack-registry.s3.amazonaws.com/buildpacks/jontewks/puppeteer.tgz
 heroku/nodejs
 
 
+Retirar emojis para não enviar ao banco de dados: text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
+Para aceitar Emojis no Banco de dados: ALTER TABLE tabela MODIFY coluna VARCHAR(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
 
 
 ALTER TABLE relacionamentos ADD COLUMN MenuId int first;
 ALTER TABLE relacionamentos ADD FOREIGN KEY (cardapioId) REFERENCES menus(id);
+
+Para Inserir na tabela os dados e retornar o id: {
+    INSERT INTO  admins (name,email,password,createdAt,updatedAt) 
+    VALUES('bob','asdasd','sdasd','2020-09-20 01:51:52','2020-09-20 01:51:52');
+    SELECT LAST_INSERT_ID();
+}
+
+
+
+function check() {
+  document.getElementById("radio").checked = true;
+}

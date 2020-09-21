@@ -23,13 +23,20 @@ async function submit(user) {
         } else {
             console.log(`\n\n IdUser: ${UserId[0].id}\n\n`)
             escolha.db[user].itens.forEach(e => {
-                let SQL = `INSERT INTO requests (IdUsuario,quantity, note, delivery, formPayment, profit, spent, status,createdAt,updatedAt) VALUES ('${UserId[0].id}','${Number(e.quantity)}','${escolha.db[user].observacao}', '${1.99}', '${escolha.db[user].formaPagamento}', '${Number(e.profit)}','${Number(e.spent)}','${'Preparando'}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);`
+                let SQL = `INSERT INTO requests (IdUsuario,quantity, note, delivery, formPayment, profit, spent, status,createdAt,updatedAt) VALUES ('${UserId[0].id}','${Number(e.quantity)}','${escolha.db[user].observacao}', '${1.99}', '${escolha.db[user].formaPagamento}', '${Number(e.profit)}','${Number(e.spent)}','${'Preparando'}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP); SELECT LAST_INSERT_ID();`
                 db.connection.query(SQL, (err, result) => {
                     if (err) {
                         throw err
+                            .catch((err) => {
+                                console.log(err)
+                            })
                     } else {
-                        console.log(err)
-                        console.log(`Cadastrado com sucesso!\n`)
+                        let id = result[0].id
+                        escolha.db[user].push({ idRequest: id }).then(() => {
+                            console.log(`\nCadastrado com sucesso!\n`)
+                        }).catch((err) => {
+                            console.log(err)
+                        })
                     }
                 })
 
