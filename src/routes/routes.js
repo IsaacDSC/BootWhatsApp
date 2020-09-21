@@ -10,6 +10,7 @@ const User = require('@models/Users')
 const Menu = require('@models/Menu')
 const db = require('@database/configSQL')
 const RegisterUsers = require('@models/RegistersUsers')
+const email = require('../helpers/EmailRedefinirSenha')
 
 
 router.get('/', auth, (req, res) => {
@@ -92,27 +93,6 @@ router.get('/register', (req, res) => {
     }
 
 })
-
-router.get('/reset', (req, res) => {
-    const pwd = 'secret(!@#)'
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(pwd, salt, (err, hash) => {
-            if (err) {
-                res.send('Erro ao criptogradar esta senha: ' + err)
-            } else {
-                const pass = hash
-                Admin.create({
-                    name: 'Administrador',
-                    email: 'admin@gmail.com',
-                    password: pass
-                }).then(() => res.send('OK')).catch((err) => {
-                    res.send('Erro ao enviar ao banco de dados: ' + err)
-                })
-            }
-        })
-    })
-})
-
 
 
 
