@@ -4,10 +4,18 @@ const escolha = require("@data/escolha");
 const enviaParaFrontend = require('../../server');
 const SubmitRequest = require('@helpers/submitRequest')
 const formataReal = require('@helpers/formataReal')
+const getMenu = require('@helpers/getMenu')
 
 let valorTotal = 0
 
 async function execute(user, msg, contato) {
+   
+    await getMenu.getMenu(user).then((res) => menu = res.toString())
+
+    if(escolha.db[user].itens.length==0){
+        banco.db[user].stage = 1;
+        return [menu];
+    }
 
     if (msg.toUpperCase() == 'OK') {
 
@@ -38,16 +46,15 @@ async function execute(user, msg, contato) {
         async function getProdutos() {
             let renderProdutos = ''
                 //Cardapio Obtido Do Banco de Dados só Obtem as classes
-            await escolha.db[user].itens.forEach((e) => {
+            await escolha.db[user].itens.forEach((e,i) => {
                 valorTotal += e.quantity * e.itens.price
-                return renderProdutos += '\n*' + e.class.toUpperCase() + '*\n' + e.itens.name + '\n```' + e.quantity + ' X ' + e.itens.price + '``` = ```' + e.itens.price * e.quantity + '```\n'
+                return renderProdutos += '\n*'+`[ ${i+1} ] ` + e.class.toUpperCase() + '*\n' + e.itens.name + '\n```' + e.quantity + ' X ' + e.itens.price + '``` = ```' + e.itens.price * e.quantity + '```\n'
             })
             return renderProdutos
         }
         await getProdutos().then(res => product = res.toString())
 
-
-        return ['📝  *ABAIXO O QUE JÁ ESCOLHEU:*\n\n*[ 1 ] LANCHES*\n```COMBO LANCHE + BEBIDA```\n```5 X 23,00``` = ```115,00```\n\n*Parcial do pedido '+formataReal.dinheiroReal(valorTotal)+'*\n\n_Digite o número que é para apagar_\n\n───────────────\n*[ F ]* PARA FECHAR O PEDIDO\n*[ E ]* ESCOLHER OUTRO PRODUTO']
+        return ['📝  *ABAIXO O QUE JÁ ESCOLHEU:*\n'+product+'\n*Parcial do pedido '+formataReal.dinheiroReal(valorTotal)+'*\n\n_Digite o número que é para apagar_\n\n───────────────\n*[ F ]* PARA FECHAR O PEDIDO\n*[ E ]* ESCOLHER OUTRO PRODUTO']
     }
 
     return ['Você precisa digitar *OK* para que eu possa preparar seu pedido.']

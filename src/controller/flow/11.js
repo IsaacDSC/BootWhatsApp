@@ -4,6 +4,8 @@ const escolha = require("@data/escolha");
 const formataReal = require('@helpers/formataReal')
 
 async function execute(user, msg, contato) {
+    //new
+    escolha.db[user].escolha
     let pgm = ''
     let product
     let end = ' '
