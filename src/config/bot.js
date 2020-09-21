@@ -6,7 +6,6 @@ const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
     //Models
 const User = require('@models/Users');
-const { start } = require('repl');
 
 let venom_client;
 
@@ -146,6 +145,5 @@ function getStage(user) {
 
 exports.sendText = sendText
 exports.client = client
-exports.start = start
 exports.venom_client = venom_client
 exports.stopClient = stopClient
