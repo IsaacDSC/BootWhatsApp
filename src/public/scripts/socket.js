@@ -68,7 +68,7 @@ async function renderPedido(dados) {
 </div>
 
 <div class="form-group ml-3">
-    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}  ${dados.trocoPara ? `Troco Para:${dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` : ''}</i></h6>
+    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}  ${dados.trocoPara ? ` Troco Para: ${(dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))}` : ''}</i></h6>
     <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> R$ 50,00
     </h6>
     <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
