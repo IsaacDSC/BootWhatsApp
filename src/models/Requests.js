@@ -7,7 +7,7 @@ const Requests = db.define('request', {
         autoIncrement: true,
         primaryKey: true,
     },
-    IdUsuario:{
+    IdUsuario: {
         type: db.Sequelize.INTEGER,
         references: {
             model: 'users',
@@ -15,6 +15,10 @@ const Requests = db.define('request', {
         },
         onDelete: 'CASCADE',
         allowNull: false
+    },
+    order: {
+        type: db.Sequelize.STRING(15),
+        allowNull: false,
     },
     quantity: {
         type: db.Sequelize.INTEGER,
@@ -45,7 +49,7 @@ const Requests = db.define('request', {
         type: db.Sequelize.STRING,
         allowNull: false,
     },
-    deliveryType:{
+    deliveryType: {
         type: db.Sequelize.STRING,
         allowNull: false,
     }
