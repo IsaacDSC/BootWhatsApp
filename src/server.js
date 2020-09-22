@@ -26,7 +26,7 @@ const suporteTecnico = require('@routes/suporteTecnico')
 
 
 //Inicia O client
-//client()
+client()
 //Para o Client
 //stopClient()
 
