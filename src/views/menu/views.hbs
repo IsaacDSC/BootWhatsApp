@@ -10,7 +10,7 @@
                         <select name="class" id="class" class="form-control">
                             <option value="">Selecione</option>
                             {{#each class}}
-                            <option value="{{class}}">{{class}}</option>
+                            <option value="{{class}}">{{maiuscula class}}</option>
                             {{/each}}
                         </select>
                         <button class="btn btn-outline-success mt-2 col-12">Pesquisar</button>
@@ -24,8 +24,8 @@
                     <div class="form-group col-6">
                         <p><strong>Nome: </strong>{{name}}</p>
                         <p><strong>Descrição: </strong>{{desc}}</p>
-                        <p><strong>Valor do Produto: </strong>R$ {{value}}</p>
-                        <p><strong>Gasto para Produzir: </strong>R$ {{costProduce}}</p>
+                        <p><strong>Valor do Produto: </strong>{{dinheiro value}}</p>
+                        <p><strong>Gasto para Produzir: </strong>{{dinheiro costProduce}}</p>
                         <hr>
                     </div>
                     {{/each}}

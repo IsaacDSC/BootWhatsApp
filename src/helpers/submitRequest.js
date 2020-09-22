@@ -27,9 +27,7 @@ async function submit(user) {
                 db.connection.query(SQL, (err, result) => {
                     if (err) {
                         throw err
-                            .catch((err) => {
-                                console.log(err)
-                            })
+                    
                     } else {
                         let id = result[0].id
                         escolha.db[user].push({ idRequest: id }).then(() => {

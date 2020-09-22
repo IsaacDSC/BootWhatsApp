@@ -69,7 +69,6 @@ async function start(client) {
         client.onMessage(async(message) => {
             const user = await User.findAll({ where: { telephone: message.sender.id } })
             console.log(user.length)
-
             if (user.length === 0) {
                 try {
                     let resposta = await stages.step[getStage(message.from)].obj.execute(

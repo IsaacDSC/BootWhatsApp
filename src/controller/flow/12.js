@@ -6,16 +6,16 @@ const SubmitRequest = require('@helpers/submitRequest')
 const formataReal = require('@helpers/formataReal')
 const getMenu = require('@helpers/getMenu')
 
-let valorTotal = 0
+
 
 async function execute(user, msg, contato) {
-   
-    await getMenu.getMenu(user).then((res) => menu = res.toString())
+    let valorTotal = 0
+    /*await getMenu.getMenu(user).then((res) => menu = res.toString())
 
     if(escolha.db[user].itens.length==0){
         banco.db[user].stage = 1;
         return [menu];
-    }
+    } */
 
     if (msg.toUpperCase() == 'OK') {
 
@@ -32,14 +32,14 @@ async function execute(user, msg, contato) {
             dadosEntrega: escolha.db[user].dadosEntrega
         })
 
-        await SubmitRequest.submit(user) //chama a função e envia os dados para a table request
+      // await SubmitRequest.submit(user) //chama a função e envia os dados para a table request
             //seta o escolha
 
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
 
     }
     if (msg.toUpperCase() == 'C') {
-        //falta terminar
+   
         banco.db[user].stage = 13
 
 
