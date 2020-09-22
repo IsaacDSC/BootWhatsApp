@@ -23,18 +23,28 @@ async function submit(user) {
         } else {
             console.log(`\n\n IdUser: ${UserId[0].id}\n\n`)
             escolha.db[user].itens.forEach(e => {
-                let SQL = `INSERT INTO requests (IdUsuario,quantity, note, delivery, formPayment, profit, spent, status,createdAt,updatedAt) VALUES ('${UserId[0].id}','${Number(e.quantity)}','${escolha.db[user].observacao}', '${1.99}', '${escolha.db[user].formaPagamento}', '${Number(e.profit)}','${Number(e.spent)}','${'Preparando'}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP); SELECT LAST_INSERT_ID();`
+                let SQL = `INSERT INTO requests (IdUsuario,quantity, note, delivery, formPayment, profit, spent, status,createdAt,updatedAt) VALUES ('${UserId[0].id}','${Number(e.quantity)}','${escolha.db[user].observacao}', '${1.99}', '${escolha.db[user].formaPagamento}', '${Number(e.profit)}','${Number(e.spent)}','${'Preparando'}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP); `
                 db.connection.query(SQL, (err, result) => {
                     if (err) {
                         throw err
                     
                     } else {
-                        let id = result[0].id
-                        escolha.db[user].push({ idRequest: id }).then(() => {
-                            console.log(`\nCadastrado com sucesso!\n`)
-                        }).catch((err) => {
-                            console.log(err)
+                        //idRequest=result.insertId
+                        //id menu = e.id
+                        //user id = UserId[0].id 
+                    let insert_SQL = `INSERT INTO relacionamentos (UserId,MenuId, PedidosId,createdAt,updatedAt) VALUES (${UserId[0].id},${e.id},${result.insertId},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);`
+                        db.connection.query(insert_SQL, (err, result) => {
+                            if(err){
+                                throw err
+                            }
+                            else{
+
+                                console.log('Inserido com sucesso na tabela relacionamento')
+                            }
+                          
                         })
+
+
                     }
                 })
 

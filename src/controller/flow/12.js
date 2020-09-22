@@ -32,7 +32,7 @@ async function execute(user, msg, contato) {
             dadosEntrega: escolha.db[user].dadosEntrega
         })
 
-      // await SubmitRequest.submit(user) //chama a função e envia os dados para a table request
+      await SubmitRequest.submit(user) //chama a função e envia os dados para a table request
             //seta o escolha
 
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
