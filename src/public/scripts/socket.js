@@ -32,7 +32,7 @@ async function renderPedido(dados) {
 
     await getProdutos().then(res => produtos = res.toString())
 
-
+   await somaProfit(total)
 
 
     const html = ` <div class="col-sm-4">
@@ -106,6 +106,16 @@ function somaPedidosDia(){
     const text= soma.textContent
     let SomaNumber = Number(text)+1
     soma.innerText = SomaNumber
+}
+
+function somaProfit(total){
+    
+    const soma = document.getElementById("totalLucro")
+    const text= soma.textContent.replace('R$','')
+    let SomaNumber = Number(text) + total
+    console.log(SomaNumber)
+    soma.innerText = SomaNumber.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+
 }
 
 function playSound() {
