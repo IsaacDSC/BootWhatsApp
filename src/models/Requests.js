@@ -45,6 +45,10 @@ const Requests = db.define('request', {
         type: db.Sequelize.STRING,
         allowNull: false,
     },
+    deliveryType:{
+        type: db.Sequelize.STRING,
+        allowNull: false,
+    }
 
 
 })

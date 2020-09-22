@@ -162,6 +162,7 @@
 
                     {{!-- fazer o carregamento de cada pedido começando por aqui --}}
 {{#each requests}}
+
                     <div class="col-sm-4">
                         <h4 class="card-title mb-0">Pedidos</h4>
                         <div class="small text-muted">October 2017</div>
@@ -177,14 +178,13 @@
 
                         </div>
                     </div>
-                    <form action="" method="post">
+
                     <div class="form-group mt-1 col-12">
                         <p class="ml-3">Preparando <input type="radio" name="" id="" value="">&nbsp;&nbsp; Saiu para
                             Entrega <input type="radio" name="" id="" value="">&nbsp;&nbsp; Entregue <input type="radio"
                                 name="" id="" value=""></p>
                         <hr>
                     </div>
-                    </form>
                     <div class="form-group col-12">
                         <div class="form-group col-4">
                             <h6 class=""><strong>Pedido: </strong> #</h6>
@@ -196,8 +196,10 @@
                         </div>
                         
                         <div class="form-group ml-3">
-                            <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong></i></h6>
-                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i>{{dinheiro this.formPayment}}</h6>
+                            <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i>{{dinheiro this.total}}</strong></i></h6>
+                            {{#if this.formPayment}}
+                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> {{dinheiro this.formPayment}}</h6>
+                            {{/if}}
                             <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
                                     Cartao</i></h6>
                             <h6 class="mt-1"><strong>Endereço: </strong>{{this.address}}</h6>

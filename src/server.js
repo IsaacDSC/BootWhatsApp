@@ -62,8 +62,9 @@ app.engine('hbs', hbs({
             return value.toUpperCase()
         },
         dinheiro: function(value) {
-
-            return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            if(value){
+            return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+            return
         },
         multiplica: function(value1, value2) {
             return (value1 * value2)

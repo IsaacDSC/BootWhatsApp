@@ -12,8 +12,11 @@ var elemento = document.getElementById('pedidos');
 
 async function renderPedido(dados) {
     let produtos;
-    let total = 0
-    await dados.request.forEach(e => total += e.quantity * e.itens.price)
+    let total = 0;
+    let profit=0;
+    await dados.request.forEach(e => {total += e.quantity * e.itens.price;
+      
+    })
     async function getProdutos() {
         let renderProdutos = ''
         await dados.request.forEach(e =>
@@ -32,7 +35,7 @@ async function renderPedido(dados) {
 
     await getProdutos().then(res => produtos = res.toString())
 
-   await somaProfit(total)
+   await somaProfit(profit)
 
 
     const html = ` <div class="col-sm-4">
