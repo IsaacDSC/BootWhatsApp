@@ -66,8 +66,6 @@ router.get('/', auth, async(req, res) => {
             }
         }
 
-
-
         db.connection.query(countRequest, (err, countRequests) => {
             db.connection.query(countPreparo, (err, countPreparo) => {
                 db.connection.query(profitSpent, (err, profitSpent) => {
@@ -149,8 +147,17 @@ router.get('/register', (req, res) => {
 
 })
 
-router.get('/', (req, res) => {
-
+router.post('/debug', (req, res) => {
+    //res.send(req.body.status)
+    let sql = `UPDATE requests SET status = '${req.body.status}' WHERE 'id=${req.body.id}';`
+    db.connection.query(sql, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(result)
+            res.redirect('/')
+        }
+    })
 })
 
 module.exports = router
