@@ -26,7 +26,7 @@ const suporteTecnico = require('@routes/suporteTecnico')
 
 
 //Inicia O client
-client()
+//client()
     //Para o Client
     //stopClient()
 
@@ -64,6 +64,9 @@ app.engine('hbs', hbs({
         dinheiro: function(value) {
 
             return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+        },
+        multiplica: function(value1,value2){
+            return (value1*value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
         }
 
 

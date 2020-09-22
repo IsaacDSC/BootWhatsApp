@@ -190,17 +190,16 @@
                         </div>
                         
                         <div class="form-group col-8">
-                            <h6 class=""><strong>Nome: </strong> {{this.name}} &nbsp;&nbsp;&nbsp;<strong>Telefone:
+                            <h6 class=""><strong>Nome: </strong> {{this.nome}} &nbsp;&nbsp;&nbsp;<strong>Telefone:
                                 </strong> {{trataTelephone this.telephone}}</h6>
                         </div>
                         
                         <div class="form-group ml-3">
                             <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> R$ 30,00</i></h6>
-                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> R$ 50,00
-                            </h6>
+                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i>{{dinheiro this.formPayment}}</h6>
                             <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
                                     Cartao</i></h6>
-                            <h6 class="mt-1"><strong>Endereço: </strong> BARRA MANSA, ANO BOM, 200</h6>
+                            <h6 class="mt-1"><strong>Endereço: </strong>{{this.address}}</h6>
                             <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
                                 22:00Hr</i></h6>
                             <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
@@ -214,26 +213,22 @@
                         <h5 class="text-center">Dados do Pedido</h5>
                         <table style="width:100%" border="1px black solid" class="mt-1">
                             <tr>
-                                <th class="text-center">Id</th>
+                                <th class="text-center">Tipo</th>
                                 <th class="text-center">Nome</th>
                                 <th class="text-center">Observação</th>
                                 <th class="text-center">Quantidade</th>
                                 <th class="text-center">Subtotal</th>
                             </tr>
+                            {{#each pedidos}}
                             <tr>
-                                <td class="text-center"></td>
-                                <td class="text-center"> X-Tudo</td>
-                                <td class="text-center"></td>
-                                <td class="text-center">x</td>
-                                <td class="text-center">R$ 12,00</td>
+                                <td class="text-center">{{maiuscula this.class}}</td>
+                                <td class="text-center">{{this.nome}}</td>
+                                <td class="text-center">{{maiuscula this.note}}</td>
+                                <td class="text-center">{{this.quantity}}x</td>
+                                <td class="text-center">{{multiplica this.value this.quantity}}</td>
                             </tr>
-                            <tr>
-                                <td class="text-center"></td>
-                                <td class="text-center">Bebidas</td>
-                                <td class="text-center">sem milho</td>
-                                <td class="text-center">2x</td>
-                                <td class="text-center">R$ 12,00</td>
-                            </tr>
+                            {{/each}}
+                        
                         </table>
                         <hr class="mt-5">
                     </div>

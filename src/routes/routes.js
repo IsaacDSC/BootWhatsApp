@@ -13,18 +13,70 @@ const RegisterUsers = require('@models/RegistersUsers')
 const email = require('../helpers/EmailRedefinirSenha')
 
 
-router.get('/', auth, (req, res) => {
-    //  let sql = 'SELECT users.telephone,menu_requests.quantity, menus.name, menu_requests.formPayment,users.name FROM menus INNER JOIN menu_requests ON menus.id = menu_requests.MenuNameId INNER JOIN users ON users.id = menu_requests.UserId;'
-    // let countRequest = `SELECT COUNT(createdAt) as createdAt FROM menu_requests  WHERE DATE(createdAt) = DATE(NOW());`
+router.get('/', auth, async(req, res) => {
+    let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address, menus.name, menus.class, menus.desc, menus.value, requests.id, requests.quantity, requests.note, requests.delivery, requests.formPayment, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Preparando' OR status= 'Saiu para Entrega';`
+    let countRequest = `SELECT COUNT(createdAt) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW());`
+
     // let countPreparo = `SELECT COUNT(status) as status FROM menu_requests  WHERE  DATE(createdAt) = DATE(NOW()) and status = 1;`
-    // db.connection.query(sql, (err, result) => {
-    //     db.connection.query(countRequest, (err, countRequests) => {
-    //     })
+   
+    db.connection.query(sql, (err, result) => {
+         
+        var saida = [];
 
-    //{ requests: result, countRequests: countRequests[0].createdAt }
-    // });
+        for (var i = 0; i < result.length; i++) {
 
-    res.render('index/index')
+            var telehpneIgual = false;
+            
+            for (var j = 0; j < i; j++) {
+                if (saida[j] && result[i].telephone == saida[j].telephone) {
+                    saida[j].pedidos.push({
+                        nome: result[i].name,
+                        class: result[i].class,
+                        value: result[i].value,
+                        id:result[i].id,
+                        profit:result[i].profit,
+                        spent:result[i].spent,
+                        quantity:result[i].quantity,
+                        note:result[i].note,
+               
+                    })
+                    telehpneIgual = true;
+                    break;
+                }
+            }
+            
+            if (!telehpneIgual) {
+                saida.push({
+                    telephone: result[i].telephone,
+                    nome: result[i].nome,
+                    neighborhood: result[i].neighborhood,
+                    address: result[i].address,
+                    delivery:result[i].delivery,
+                    status:result[i].status,
+                    formPayment:result[i].formPayment,
+                    pedidos: [{
+                        nome: result[i].name,
+                        class: result[i].class,
+                        value: result[i].value,
+                        id:result[i].id,
+                        profit:result[i].profit,
+                        spent:result[i].spent,
+                        quantity:result[i].quantity,
+                        note:result[i].note,
+                    }]
+                })
+            }
+        }
+
+
+        
+      db.connection.query(countRequest, (err, countRequests) => {
+            console.log(saida[0])        
+        res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt })
+    })
+    });
+
+    //res.render('index/index')
 
 })
 router.get('/qrcode', (req, res) => {
