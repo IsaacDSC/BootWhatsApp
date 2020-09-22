@@ -6,6 +6,7 @@ const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
     //Models
 const User = require('@models/Users');
+//const public = require('@public/images')
 
 let venom_client;
 
@@ -32,7 +33,8 @@ async function client() {
             console.log(asciiQR);
 
             // Cria o arquivo png
-            exportQR(base64Qr, __dirname + '/public/images/qrCode.png');
+            let dir = './src/public/images/qrCode.png'
+            exportQR(base64Qr, dir);
         },
         (statusSession) => {
 
@@ -52,7 +54,7 @@ async function client() {
 
     await start(venom_client)
 
-async function start(client) {
+    async function start(client) {
         console.log('Iniciado Com Sucesso')
         client.onStateChange((state) => {
             console.log(state);

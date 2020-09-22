@@ -1,8 +1,6 @@
 require('module-alias/register')
 const express = require('express')
 const router = express.Router()
-const Admin = require('@models/Admin')
-const bcrypt = require('bcrypt')
 const passport = require('passport')
 const { auth } = require('@helpers/auth')
 const Requests = require('@models/Requests')
@@ -13,7 +11,7 @@ const RegisterUsers = require('@models/RegistersUsers')
 const email = require('../helpers/EmailRedefinirSenha')
 
 
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, async(req, res) => {
     let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address, menus.name, menus.class, menus.desc, menus.value, requests.id, requests.quantity, requests.note, requests.delivery, requests.formPayment, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Pendente' OR status = 'Preparando' OR status= 'Saiu para Entrega';`
     let countRequest = `SELECT COUNT(distinct  UserId) as createdAt FROM relacionamentos  WHERE DATE(createdAt) = DATE(NOW());`
     let countPreparo = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Preparando';`
@@ -73,9 +71,9 @@ router.get('/', auth, async (req, res) => {
             db.connection.query(countPreparo, (err, countPreparo) => {
                 db.connection.query(profitSpent, (err, profitSpent) => {
 
-                res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt,profit: profitSpent[0].profit,spent:profitSpent[0].spent})
+                    res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent })
 
-            })
+                })
             })
         })
     });
@@ -150,8 +148,8 @@ router.get('/register', (req, res) => {
 
 })
 
+router.get('/', (req, res) => {
 
-
-
+})
 
 module.exports = router
