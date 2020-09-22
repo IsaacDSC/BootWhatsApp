@@ -66,7 +66,7 @@ app.engine('hbs', hbs({
             return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
         },
         multiplica: function(value1,value2){
-            return (value1*value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            return (value1*value2)
         }
 
 
