@@ -57,17 +57,12 @@ app.engine('hbs', hbs({
         trataTelephone: function(value) {
             return value.split('@')[0]
         },
-<<<<<<< HEAD
+
         maiuscula: function(value) {
             return value.toUpperCase()
         },
         dinheiro: function(value) {
-=======
-        maiuscula: function(value){
-            return value.toUpperCase()
-        },
-        dinheiro: function(value){
->>>>>>> refs/remotes/origin/master
+
             return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
         }
 
