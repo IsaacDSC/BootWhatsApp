@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count">{{countPreparo}}</span>
                 </h4>
                 <p class="text-light">Preparo</p>
 
@@ -195,7 +195,7 @@
                         </div>
                         
                         <div class="form-group ml-3">
-                            <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> R$ 30,00</i></h6>
+                            <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong></i></h6>
                             <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i>{{dinheiro this.formPayment}}</h6>
                             <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
                                     Cartao</i></h6>
@@ -265,7 +265,7 @@
                     <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
                     <div class="stat-content dib">
                         <div class="stat-text">Total Lucro</div>
-                        <div class="stat-digit">1,012</div>
+                        <div class="stat-digit">{{dinheiro profit}}</div>
                     </div>
                 </div>
             </div>
@@ -294,7 +294,7 @@
                     <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
                     <div class="stat-content dib">
                         <div class="stat-text">Gasto materiais</div>
-                        <div class="stat-digit">770</div>
+                        <div class="stat-digit">{{dinheiro spent}}</div>
                     </div>
                 </div>
             </div>

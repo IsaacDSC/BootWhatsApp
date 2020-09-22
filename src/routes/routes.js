@@ -13,67 +13,71 @@ const RegisterUsers = require('@models/RegistersUsers')
 const email = require('../helpers/EmailRedefinirSenha')
 
 
-router.get('/', auth, async(req, res) => {
-    let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address, menus.name, menus.class, menus.desc, menus.value, requests.id, requests.quantity, requests.note, requests.delivery, requests.formPayment, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Preparando' OR status= 'Saiu para Entrega';`
-    let countRequest = `SELECT COUNT(createdAt) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW());`
-
-    // let countPreparo = `SELECT COUNT(status) as status FROM menu_requests  WHERE  DATE(createdAt) = DATE(NOW()) and status = 1;`
-   
+router.get('/', auth, async (req, res) => {
+    let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address, menus.name, menus.class, menus.desc, menus.value, requests.id, requests.quantity, requests.note, requests.delivery, requests.formPayment, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Pendente' OR status = 'Preparando' OR status= 'Saiu para Entrega';`
+    let countRequest = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW());`
+    let countPreparo = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Preparando';`
+    let profitSpent = `SELECT sum(requests.profit) as profit, sum(requests.spent) as spent FROM relacionamentos  join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) WHERE DATE(requests.createdAt) = DATE(NOW());`
     db.connection.query(sql, (err, result) => {
-         
+
         var saida = [];
 
         for (var i = 0; i < result.length; i++) {
 
             var telehpneIgual = false;
-            
+
             for (var j = 0; j < i; j++) {
                 if (saida[j] && result[i].telephone == saida[j].telephone) {
                     saida[j].pedidos.push({
                         nome: result[i].name,
                         class: result[i].class,
                         value: result[i].value,
-                        id:result[i].id,
-                        profit:result[i].profit,
-                        spent:result[i].spent,
-                        quantity:result[i].quantity,
-                        note:result[i].note,
-               
+                        id: result[i].id,
+                        profit: result[i].profit,
+                        spent: result[i].spent,
+                        quantity: result[i].quantity,
+                        note: result[i].note,
+
                     })
                     telehpneIgual = true;
                     break;
                 }
             }
-            
+
             if (!telehpneIgual) {
                 saida.push({
                     telephone: result[i].telephone,
                     nome: result[i].nome,
                     neighborhood: result[i].neighborhood,
                     address: result[i].address,
-                    delivery:result[i].delivery,
-                    status:result[i].status,
-                    formPayment:result[i].formPayment,
+                    delivery: result[i].delivery,
+                    status: result[i].status,
+                    formPayment: result[i].formPayment,
                     pedidos: [{
                         nome: result[i].name,
                         class: result[i].class,
                         value: result[i].value,
-                        id:result[i].id,
-                        profit:result[i].profit,
-                        spent:result[i].spent,
-                        quantity:result[i].quantity,
-                        note:result[i].note,
+                        id: result[i].id,
+                        profit: result[i].profit,
+                        spent: result[i].spent,
+                        quantity: result[i].quantity,
+                        note: result[i].note,
                     }]
                 })
             }
         }
 
 
-        
-      db.connection.query(countRequest, (err, countRequests) => {
-            console.log(saida[0])        
-        res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt })
-    })
+
+        db.connection.query(countRequest, (err, countRequests) => {
+            db.connection.query(countPreparo, (err, countPreparo) => {
+                db.connection.query(profitSpent, (err, profitSpent) => {
+
+                res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt,profit: profitSpent[0].profit,spent:profitSpent[0].spent})
+
+            })
+            })
+        })
     });
 
     //res.render('index/index')
