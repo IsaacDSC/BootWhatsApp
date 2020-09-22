@@ -12,11 +12,16 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
 const { client, stopClient, venom_client } = require('@config/bot')
-const routes = require('@routes/routes')
-const menu = require("@routes/menu")
+
+
+//consfigurando rotas
 const clients = require('@routes/clients');
-const msg = require('@routes/msg')
 const config = require('@routes/config')
+const menu = require("@routes/menu")
+const msg = require('@routes/msg')
+const reset = require('@routes/reset')
+const routes = require('@routes/routes')
+const suporteTecnico = require('@routes/suporteTecnico')
 
 
 
@@ -52,10 +57,10 @@ app.engine('hbs', hbs({
         trataTelephone: function(value) {
             return value.split('@')[0]
         },
-        maiuscula: function(value){
+        maiuscula: function(value) {
             return value.toUpperCase()
         },
-        dinheiro: function(value){
+        dinheiro: function(value) {
             return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
         }
 
@@ -97,7 +102,8 @@ app.use(menu)
 app.use(clients)
 app.use('/msg', msg)
 app.use('/config', config)
-
+app.use(reset)
+app.use('/suporteTecnico', suporteTecnico)
 
 const port = process.env.PORT || 3001
 server.listen(port, () => {
