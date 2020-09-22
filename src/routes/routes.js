@@ -51,7 +51,7 @@ router.get('/', auth, async(req, res) => {
                     delivery: result[i].delivery,
                     status: result[i].status,
                     formPayment: result[i].formPayment,
-                    total: result[i].profit+result[i].spent,
+                    total: result[i].profit + result[i].spent,
                     pedidos: [{
                         nome: result[i].name,
                         class: result[i].class,
@@ -148,7 +148,8 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/debug', (req, res) => {
-    //res.send(req.body.status)
+    let ORDER = Math.random().toString(32).substr(2, 9)
+        //res.send(req.body.status)
     let sql = `UPDATE requests SET status = '${req.body.status}' WHERE 'id=${req.body.id}';`
     db.connection.query(sql, (err, result) => {
         if (err) {
