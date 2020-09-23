@@ -23,11 +23,12 @@ const msg = require('@routes/msg')
 const reset = require('@routes/reset')
 const routes = require('@routes/routes')
 const suporteTecnico = require('@routes/suporteTecnico')
+const dados = require('@routes/dados')
 
 
 
 //Inicia O client
-client()
+//client()
 //Para o Client
 //stopClient()
 
@@ -63,13 +64,14 @@ app.engine('hbs', hbs({
             return value.toUpperCase()
         },
         dinheiro: function(value) {
-            if(value){
-            return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+            if (value) {
+                return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            }
             return
         },
         multiplica: function(value1, value2) {
-            if(value1){
-            return (value1 * value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            if (value1) {
+                return (value1 * value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
         }
@@ -115,6 +117,7 @@ app.use('/msg', msg)
 app.use('/config', config)
 app.use(reset)
 app.use('/suporteTecnico', suporteTecnico)
+app.use('/dados', dados)
 
 const port = process.env.PORT || 3001
 server.listen(port, () => {
