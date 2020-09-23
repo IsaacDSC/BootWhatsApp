@@ -16,6 +16,7 @@ const { client, stopClient, venom_client } = require('@config/bot')
 
 //consfigurando rotas
 const clients = require('@routes/clients');
+const lucro = require('@routes/lucro');
 const config = require('@routes/config')
 const menu = require("@routes/menu")
 const msg = require('@routes/msg')
@@ -67,7 +68,10 @@ app.engine('hbs', hbs({
             return
         },
         multiplica: function(value1, value2) {
-            return (value1 * value2)
+            if(value1){
+            return (value1 * value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            }
+            return
         }
 
 
@@ -106,6 +110,7 @@ app.use((req, res, next) => {
 app.use(routes)
 app.use(menu)
 app.use(clients)
+app.use(lucro)
 app.use('/msg', msg)
 app.use('/config', config)
 app.use(reset)

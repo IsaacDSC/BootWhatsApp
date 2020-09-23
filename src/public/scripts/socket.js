@@ -14,8 +14,10 @@ async function renderPedido(dados) {
     let produtos;
     let total = 0;
     let profit=0;
+    let spent=0;
     await dados.request.forEach(e => {total += e.quantity * e.itens.price;
-      
+      profit += e.profit
+      spent +=e.spent
     })
     async function getProdutos() {
         let renderProdutos = ''
@@ -35,7 +37,7 @@ async function renderPedido(dados) {
 
     await getProdutos().then(res => produtos = res.toString())
 
-   await somaProfit(profit)
+   await somaProfit(profit,spent)
 
 
     const html = ` <div class="col-sm-4">
@@ -111,12 +113,16 @@ function somaPedidosDia(){
     soma.innerText = SomaNumber
 }
 
-function somaProfit(total){
-    
+function somaProfit(profit,spent){
     const soma = document.getElementById("totalLucro")
-    const text= soma.textContent.replace('R$','')
-    let SomaNumber = Number(text) + total
-    console.log(SomaNumber)
+    const spent = document.getElementById("gastoMaterial")
+    const text= soma.textContent.replace('R$','').replace(',','.')
+    const textSpent = spent.textContent.replace('R$','').replace(',','.')
+
+    let somaSpent = Number(textSpent)+Number(spent)
+    let SomaNumber = Number(text) + Number(profit)
+    
+    spent.innerText = somaSpent.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
     soma.innerText = SomaNumber.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 
 }

@@ -16,8 +16,8 @@ const Requests = db.define('request', {
         onDelete: 'CASCADE',
         allowNull: false
     },
-    order: {
-        type: db.Sequelize.STRING(15),
+    orderRequest: {
+        type: db.Sequelize.STRING,
         allowNull: false,
     },
     quantity: {
