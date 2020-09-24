@@ -4,16 +4,21 @@ setInterval(()=>{
 },4000)
 
 document.addEventListener('DOMContentLoaded', function () {
+ let key=0
     const checkbox = document.querySelector('input[type="checkbox"]');
     
       checkbox.addEventListener('change', function () {
         if (checkbox.checked) {
+          if(key==0){
+          key=1
           jQuery('.modal').modal();
           $.ajax({
             type: "POST",
             url: 'http://localhost:3001/ligabot',
             success: console.log('Bot Iniciado com sucesso')
-          }).then(()=> jQuery('.modal').modal('hide'))
+          }).then(()=> {jQuery('.modal').modal('hide')
+          key=0
+        })}
         } else {
           $.ajax({
             type: "POST",
