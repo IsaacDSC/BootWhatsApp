@@ -7,7 +7,7 @@ const stages = require('@controller/controller') //arquivo com a desc e o aponta
     //Models
 const User = require('@models/Users');
 //const public = require('@public/images')
-
+let status;
 let venom_client;
 
 const sendText = async(telephone, msg) => {
@@ -20,29 +20,30 @@ const sendText = async(telephone, msg) => {
 
 const stopClient = async() => {
     if (venom_client) {
-
+      //  await venom_client.close()
         return await venom_client.close().then(() => console.log('Cliente Desativado'))
     }
     return console.log('client ainda não criado!');
 }
 
+
 async function client() {
-    if (venom_client) return venom_client;
+   // if (venom_client) return venom_client;
     venom_client = await create('Delivery', (base64Qr, asciiQR) => {
             // Mostra o Qr Code no Terminal
             console.log(asciiQR);
 
             // Cria o arquivo png
-            let dir = './src/public/images/qrCode.png'
+            let dir = './public/images/qrCode.png'
             exportQR(base64Qr, dir);
         },
         (statusSession) => {
-
+            status =statusSession
             console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail
         }, {
             logQR: true, // Logs QR automatically in terminal
             browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
-            autoClose: 60000 * 10,
+            autoClose: false,
         });
 
     function exportQR(qrCode, path) {
@@ -54,62 +55,58 @@ async function client() {
 
     await start(venom_client)
 
-    async function start(client) {
-        console.log('Iniciado Com Sucesso')
-        client.onStateChange((state) => {
-            console.log(state);
-            const conflits = [
-                venom.SocketState.CONFLICT,
-                venom.SocketState.UNPAIRED,
-                venom.SocketState.UNLAUNCHED,
-            ];
-            if (conflits.includes(state)) {
-                client.useHere();
-            }
-        });
+}
+async function start(client) {
+    console.log('Iniciado Com Sucesso')
 
-        client.onMessage(async(message) => {
-            const user = await User.findAll({ where: { telephone: message.sender.id } })
-            console.log(user.length)
-            if (user.length === 0) {
-                try {
-                    let resposta = await stages.step[getStage(message.from)].obj.execute(
-                        message.from,
-                        message.body,
-                        message.sender.name,
-                    )
-                    for (let i = 0; i < resposta.length; i++) {
-                        const element = resposta[i]
-                        client.sendText(message.from, element)
-                    }
-                    console.log('usuario cadastrado')
-                    User.create({
-                        telephone: message.sender.id,
-                        name: message.sender.pushname,
-                        photograph: message.sender.profilePicThumbObj.img,
-                        stage: 0
-                    }).then(() => {
-                        console.log('Usuario enviado ao banco de dados com sucesso!')
-                    })
-                } catch (error) {
-                    console.log(error)
-                }
+    client.onStateChange((state) => {
+        console.log(state);
+        if (state== 'CONFLICT' || state=='UNPAIRED' || state=='UNLAUNCHED') {
+            client.useHere();
+        }
+    });
 
-            } else {
-
-                let resposta = await stages.step[getStage(message.from)].obj.execute(message.from, message.body, message.sender.name)
+    client.onMessage(async(message) => {
+        const user = await User.findAll({ where: { telephone: message.sender.id } })
+        console.log(user.length)
+        if (user.length === 0) {
+            try {
+                let resposta = await stages.step[getStage(message.from)].obj.execute(
+                    message.from,
+                    message.body,
+                    message.sender.name,
+                )
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
                 }
-
-                console.log('cadastrado')
-
+                console.log('usuario cadastrado')
+                User.create({
+                    telephone: message.sender.id,
+                    name: message.sender.pushname,
+                    photograph: message.sender.profilePicThumbObj.img,
+                    stage: 0
+                }).then(() => {
+                    console.log('Usuario enviado ao banco de dados com sucesso!')
+                })
+            } catch (error) {
+                console.log(error)
             }
 
+        } else {
 
-        });
-    }
+            let resposta = await stages.step[getStage(message.from)].obj.execute(message.from, message.body, message.sender.name)
+            for (let i = 0; i < resposta.length; i++) {
+                const element = resposta[i]
+                client.sendText(message.from, element)
+            }
+
+            console.log('cadastrado')
+
+        }
+
+
+    });
 }
 
 
@@ -143,8 +140,9 @@ function getStage(user) {
         return banco.db[user].stage;
     }
 }
-
+setInterval(()=>{console.log(status)},2000)
 exports.sendText = sendText
 exports.client = client
+exports.status =status
 exports.venom_client = venom_client
 exports.stopClient = stopClient

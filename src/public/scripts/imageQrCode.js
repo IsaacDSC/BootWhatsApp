@@ -8,10 +8,20 @@ document.addEventListener('DOMContentLoaded', function () {
     
       checkbox.addEventListener('change', function () {
         if (checkbox.checked) {
+          $.ajax({
+            type: "POST",
+            url: 'http://localhost:3001/ligabot',
+            success: console.log('Bot Iniciado com sucesso')
+          })
            jQuery('.modal').modal();
         } else {
+          $.ajax({
+            type: "POST",
+            url: 'http://localhost:3001/desligabot',
+            success: console.log('Bot Desligado com sucesso')
+          })
       
-          console.log('Not checked');
+          console.log('Bot Desligado');
         }
       });
 });

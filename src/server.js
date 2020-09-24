@@ -11,7 +11,6 @@ const flash = require('express-flash')
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 require('./config/Auhenticated')(passport)
-const { client, stopClient, venom_client } = require('@config/bot')
 
 
 //consfigurando rotas
@@ -26,11 +25,10 @@ const suporteTecnico = require('@routes/suporteTecnico')
 const dados = require('@routes/dados')
 
 
-
 //Inicia O client
-client()
-    //Para o Client
-    //stopClient()
+//client()
+//Para o Client
+//stopClient()
 
 
 

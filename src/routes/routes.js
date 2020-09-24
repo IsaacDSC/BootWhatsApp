@@ -9,6 +9,8 @@ const Menu = require('@models/Menu')
 const db = require('@database/configSQL')
 const RegisterUsers = require('@models/RegistersUsers')
 const email = require('../helpers/EmailRedefinirSenha')
+const { client, stopClient ,venom_client} = require('@config/bot')
+
 
 
 router.get('/', auth, async(req, res) => {
@@ -99,6 +101,22 @@ router.post('/login', (req, res, next) => {
         failureFlash: true
     })(req, res, next)
 })
+
+
+router.post('/ligabot', async(req, res) => {
+    await client()
+    return res.status(200).send('Bot Ligado')
+   
+})
+
+router.post('/desligabot', async(req, res) => {
+    await stopClient()
+
+    return res.status(200).send('Bot Desligado')
+   
+})
+
+
 
 router.get('/logout', (req, res) => {
     req.logout()
