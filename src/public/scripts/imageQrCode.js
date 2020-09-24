@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
       checkbox.addEventListener('change', function () {
         if (checkbox.checked) {
+          jQuery('.modal').modal();
           if(key==0){
           key=1
-          jQuery('.modal').modal();
           $.ajax({
             type: "POST",
             url: 'http://localhost:3001/ligabot',
