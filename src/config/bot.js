@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { create } = require('venom-bot');
+const path = require('path')
 //dependencies files.js 
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const escolha = require('@data/escolha')
@@ -42,7 +43,7 @@ async function client() {
             console.log(asciiQR);
 
             // Cria o arquivo png
-            let dir = './public/images/qrCode.png'
+            let dir = path.resolve(__dirname,'..','public','images','qrCode.png')
             exportQR(base64Qr, dir);
         },
         (statusSession) => {
