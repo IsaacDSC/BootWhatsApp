@@ -5,12 +5,12 @@ const path = require('path')
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
-    //Models
+//Models
 const User = require('@models/Users');
 //const public = require('@public/images')
 let venom_client;
 var status
-const sendText = async(telephone, msg) => {
+const sendText = async (telephone, msg) => {
     if (!venom_client) {
         console.log('client ainda não criado!');
         await client();
@@ -18,17 +18,18 @@ const sendText = async(telephone, msg) => {
     return await venom_client.sendText(telephone, msg);
 }
 
-const stopClient = async() => {
+const stopClient = async () => {
     if (venom_client) {
-      //  await venom_client.close()
+        //  await venom_client.close()
+
         return await venom_client.close().then(() => console.log('Cliente Desativado'))
     }
     return console.log('client ainda não criado!');
 }
 
-const getStatus = async() => {
+const getStatus = async () => {
     if (venom_client) {
-      //  await venom_client.close()
+        //  await venom_client.close()
         return await status
     }
     return console.log('client ainda não criado!');
@@ -37,23 +38,23 @@ const getStatus = async() => {
 
 
 async function client() {
-   // if (venom_client) return venom_client;
+    // if (venom_client) return venom_client;
     venom_client = await create('Delivery', (base64Qr, asciiQR) => {
-            // Mostra o Qr Code no Terminal
-            console.log(asciiQR);
+        // Mostra o Qr Code no Terminal
+        console.log(asciiQR);
 
-            // Cria o arquivo png
-            let dir = path.resolve(__dirname,'..','public','images','qrCode.png')
-            exportQR(base64Qr, dir);
-        },
+        // Cria o arquivo png
+        let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
+        exportQR(base64Qr, dir);
+    },
         (statusSession) => {
             status = statusSession
             console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail
         }, {
-            logQR: true, // Logs QR automatically in terminal
-            browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
-            autoClose: false,
-        });
+        logQR: true, // Logs QR automatically in terminal
+        browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
+        autoClose: false,
+    });
 
     function exportQR(qrCode, path) {
         qrCode = qrCode.replace('data:image/png;base64,', '');
@@ -70,12 +71,12 @@ async function start(client) {
 
     client.onStateChange((state) => {
         console.log(state);
-        if (state== 'CONFLICT' || state=='UNPAIRED' || state=='UNLAUNCHED') {
+        if (state == 'CONFLICT' || state == 'UNPAIRED' || state == 'UNLAUNCHED') {
             client.useHere();
         }
     });
 
-    client.onMessage(async(message) => {
+    client.onMessage(async (message) => {
         const user = await User.findAll({ where: { telephone: message.sender.id } })
         console.log(user.length)
         if (user.length === 0) {
