@@ -28,9 +28,9 @@ const dados = require('@routes/dados')
 
 
 //Inicia O client
-//client()
-//Para o Client
-//stopClient()
+client()
+    //Para o Client
+    //stopClient()
 
 
 
