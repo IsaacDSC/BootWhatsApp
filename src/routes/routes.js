@@ -9,7 +9,7 @@ const Menu = require('@models/Menu')
 const db = require('@database/configSQL')
 const RegisterUsers = require('@models/RegistersUsers')
 const email = require('../helpers/EmailRedefinirSenha')
-const { client, stopClient ,venom_client} = require('@config/bot')
+const { client, stopClient ,getStatus} = require('@config/bot')
 
 
 
@@ -72,7 +72,7 @@ router.get('/', auth, async(req, res) => {
             db.connection.query(countPreparo, (err, countPreparo) => {
                 db.connection.query(profitSpent, (err, profitSpent) => {
 
-                    res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent })
+                    res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, })
 
                 })
             })
@@ -111,7 +111,6 @@ router.post('/ligabot', async(req, res) => {
 
 router.post('/desligabot', async(req, res) => {
     await stopClient()
-
     return res.status(200).send('Bot Desligado')
    
 })

@@ -7,9 +7,8 @@ const stages = require('@controller/controller') //arquivo com a desc e o aponta
     //Models
 const User = require('@models/Users');
 //const public = require('@public/images')
-let status;
 let venom_client;
-
+var status
 const sendText = async(telephone, msg) => {
     if (!venom_client) {
         console.log('client ainda não criado!');
@@ -26,6 +25,15 @@ const stopClient = async() => {
     return console.log('client ainda não criado!');
 }
 
+const getStatus = async() => {
+    if (venom_client) {
+      //  await venom_client.close()
+        return await status
+    }
+    return console.log('client ainda não criado!');
+}
+
+
 
 async function client() {
    // if (venom_client) return venom_client;
@@ -38,7 +46,7 @@ async function client() {
             exportQR(base64Qr, dir);
         },
         (statusSession) => {
-            status =statusSession
+            status = statusSession
             console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail
         }, {
             logQR: true, // Logs QR automatically in terminal
@@ -140,9 +148,9 @@ function getStage(user) {
         return banco.db[user].stage;
     }
 }
-setInterval(()=>{console.log(status)},2000)
+
 exports.sendText = sendText
 exports.client = client
-exports.status =status
+exports.getStatus = getStatus
 exports.venom_client = venom_client
 exports.stopClient = stopClient

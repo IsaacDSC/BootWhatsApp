@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', function () {
     
       checkbox.addEventListener('change', function () {
         if (checkbox.checked) {
+          jQuery('.modal').modal();
           $.ajax({
             type: "POST",
             url: 'http://localhost:3001/ligabot',
             success: console.log('Bot Iniciado com sucesso')
-          })
-           jQuery('.modal').modal();
+          }).then(()=> jQuery('.modal').modal('hide'))
         } else {
           $.ajax({
             type: "POST",
