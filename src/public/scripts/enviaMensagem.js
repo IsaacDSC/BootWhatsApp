@@ -8,3 +8,7 @@ function mandaMensagem(numero,mensagem){
               })
 
 }
+
+function reload(){
+        location.reload()
+}

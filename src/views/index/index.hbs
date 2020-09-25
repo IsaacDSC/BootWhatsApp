@@ -120,8 +120,11 @@
                     <hr>
                     <div class="col-sm-8 hidden-sm-down">
 
-                        <button type="button" class="btn btn-primary float-right bg-flat-color-1"><i
+                        <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
                                 class="fa fa-print"></i></button>
+
+                        <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado');reload()" title="Cancelar Pedido"  class="btn btn-danger float-right"><i
+                                class="fa fa-window-close"></i></button>
                         <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
 
                         </div>
@@ -228,8 +231,8 @@
                 <div class="stat-widget-one">
                     <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
                     <div class="stat-content dib">
-                        <div class="stat-text">Atendimento</div>
-                        <div class="stat-digit">961</div>
+                        <div class="stat-text">Em Atendimento</div>
+                        <div class="stat-digit">0</div>
                     </div>
                 </div>
             </div>

@@ -120,7 +120,7 @@ router.post('/mandamensagem', async (req, res) => {
         let Preparo = '♨  Seu pedido está em *preparo*, assim que estiver pronto estaremos lhe avisando.\n\nObrigado.'
         let SaiuParaEntrega = '🛵  Seu pedido saiu para entrega, basta aguardar.\n\nObrigado.'
         let Entregue = 'Produto Entregue'
-
+        let Cancelado = 'Seu Pedido foi cancelado'
         if (req.body.mensagem == 'Preparando') {
             mensagem = Preparo
         }
@@ -129,6 +129,9 @@ router.post('/mandamensagem', async (req, res) => {
         }
         if (req.body.mensagem == 'Entregue') {
             mensagem = Entregue
+        }
+        if (req.body.mensagem == 'Cancelado') {
+            mensagem = Cancelado
         }
         let sql = await `UPDATE requests INNER JOIN users ON users.id = requests.idUsuario SET requests.status = '${req.body.mensagem}' WHERE telephone = '${req.body.numero}' and requests.status != 'Entregue';`
         await db.connection.query(sql, (err, result) => {
