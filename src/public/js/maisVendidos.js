@@ -8,11 +8,12 @@ function drawChart() {
         ['Eat', 2],
         ['Commute', 2],
         ['Watch TV', 2],
-        ['Sleep', 7]
+        ['Sleep', 7],
+        ['Burger', 7]
     ]);
 
     var options = {
-        title: 'My Daily Activities',
+        title: 'Cardapios mais vendidos',
         pieHole: 0.4,
     };
 
