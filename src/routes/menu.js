@@ -75,18 +75,17 @@ router.post('/menu/editar', (req, res) => {
 
 })
 router.post('/menu/editando', (req, res) => {
-    //res.send(req.body.id)
-    // let id = req.body.id
-    // let SQL = `UPDATE menus SET name = '${req.body.name}', class = '${req.body.class}' ,menus.desc='${req.body.desc}',value='${req.body.value}', costProduce='${req.body.costProduce}',createdAt = 'current_timestamp', updatedAt='current_timestamp' WHERE id='${id}';`
-    // db.connection.query(SQL, (err, result) => {
-    //     //res.send(result)
-    //     if (err) {
-    //         res.send(err)
-    //     } else {
-    //         res.send('Enviado com sucesso\n' + result)
-    //         console.log(result)
-    //     }
-    // })
+    let id = req.body.id
+    let SQL = `UPDATE menus SET name = '${req.body.name}', class = '${req.body.class}' ,menus.desc='${req.body.desc}',value='${req.body.value}', costProduce='${req.body.costProduce}' WHERE id='${id}';`
+    db.connection.query(SQL, (err, result) => {
+        //res.send(result)
+        if (err) {
+            res.send(err)
+        } else {
+            res.send('Enviado com sucesso\n' + result)
+            console.log(result)
+        }
+    })
 
 })
 
