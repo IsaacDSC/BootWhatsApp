@@ -6,6 +6,17 @@ socket.on('PedidoConcluido', async function (data) {
     playSound()
 
 })
+
+socket.on('NovoClienteAtendimento',async function (data){
+    somaAtendimento(data.soma)
+})
+
+function somaAtendimento(data){
+    let elemeto = document.getElementById('EmAtendimento')
+    const text = elemeto.textContent
+    let SomaNumber = Number(text) + data
+    elemeto.innerText = SomaNumber
+}
 //Enviar o User e o Status do pedido quando mudar para o backend
 
 let elemento = document.getElementById('pedidos');
@@ -46,8 +57,11 @@ async function renderPedido(dados) {
 <hr>
 <div class="col-sm-8 hidden-sm-down">
 
-<button type="button" class="btn btn-primary float-right bg-flat-color-1"><i
+<button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
         class="fa fa-print"></i></button>
+        <button type="button" onclick="mandaMensagem('${dados.telephone}','Cancelado')"
+        title="Cancelar Pedido" class="btn btn-danger float-right"><i
+            class="fa fa-window-close"></i></button>
 <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
 
 </div>

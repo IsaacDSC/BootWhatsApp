@@ -5,6 +5,8 @@ const enviaParaFrontend = require('../../server');
 const SubmitRequest = require('@helpers/submitRequest')
 const formataReal = require('@helpers/formataReal')
 const getMenu = require('@helpers/getMenu')
+const NovoClienteAtendimento = require('../../server');
+const setStage = require('../../helpers/setStage')
 
 
 
@@ -18,7 +20,9 @@ async function execute(user, msg, contato) {
     } */
 
     if (msg.toUpperCase() == 'OK') {
-
+        banco.db[user].stage = 14
+        setStage.envStageDb(user, 14)
+        NovoClienteAtendimento.NovoClienteAtendimento({soma: -1})
         await enviaParaFrontend.enviaParaFrontend({
             name: contato,
             telephone: user,
@@ -41,7 +45,7 @@ async function execute(user, msg, contato) {
     if (msg.toUpperCase() == 'C') {
    
         banco.db[user].stage = 13
-
+        setStage.envStageDb(user, 13)
 
         async function getProdutos() {
             let renderProdutos = ''

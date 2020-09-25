@@ -23,6 +23,7 @@ async function execute(user, msg) {
     //If 2 RETIRAR NO BALCAO
     if (msg == 2) {
         banco.db[user].stage = 11;
+        setStage.envStageDb(user, 11)
         escolha.db[user].dadosEntrega = "RETIRAR NO BALCAO"
         return [frase1]
     }
@@ -30,17 +31,20 @@ async function execute(user, msg) {
     if (msg == 3) {
         escolha.db[user].dadosEntrega = "COMER AQUI NO LOCAL"
         banco.db[user].stage = 11;
+        setStage.envStageDb(user, 11)
         return [frase1]
     }
     //If 2 AGENDAR A RETIRADA
     if (msg == 4) {
         escolha.db[user].dadosEntrega = "AGENDAR A RETIRADA"
         banco.db[user].stage = 11;
+        setStage.envStageDb(user, 11)
         return [frase1]
     }
     if (msg == 1) {
         escolha.db[user].dadosEntrega = 'ENTREGAR NO ENDEREÇO'
         banco.db[user].stage = 6;
+        setStage.envStageDb(user, 6)
         return ['🏠  Digite seu endereço (nome da rua, número, complemento e ponto de referência) para entregar.\n\n───────────────\n*[ V ]* MENU ANTERIOR']
     }
 

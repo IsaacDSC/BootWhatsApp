@@ -1,6 +1,7 @@
 require('module-alias/register')
 const banco = require('@data/user/user')
 const escolha = require("@data/escolha");
+const setStage = require('../../helpers/setStage')
 
 async function execute(user, msg) {
 
@@ -16,6 +17,7 @@ async function execute(user, msg) {
     if (msg.toUpperCase() == "N") {
         escolha.db[user].trocoPara = "Não Precisa De Troco"
         banco.db[user].stage = 11
+        setStage.envStageDb(user, 11)
         return [frase]
     }
     if (msg.split("").filter(n => (Number(n) || n == 0)).join("") < (escolha.db[user].valorTaxa+valorTotal) || !Number(msg.split("").filter(n => (Number(n) || n == 0)).join(""))) {
@@ -24,6 +26,7 @@ async function execute(user, msg) {
     }
     escolha.db[user].trocoPara = msg.split("").filter(n => (Number(n) || n == 0)).join("")
     banco.db[user].stage = 11
+    setStage.envStageDb(user, 11)
     return [frase]
 }
 

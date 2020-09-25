@@ -3,8 +3,9 @@ const banco = require('@data/user/user')
 const Menu = require('../../helpers/getMenu')
 const setStage = require('../../helpers/setStage')
 const escolhas = require('@data/escolha')
-let key = 0
+const NovoClienteAtendimento = require('../../server');
 
+let key = 0
 
 async function execute(user, msg, contato) {
   
@@ -12,7 +13,7 @@ async function execute(user, msg, contato) {
     await Menu.getMenu(user).then((res) => menu = res.toString())
 
     if (key === 1) {
-        
+         NovoClienteAtendimento.NovoClienteAtendimento({soma:1})
         //Nome da pessoa Digitado = contato
         contato = msg
         
@@ -23,19 +24,20 @@ async function execute(user, msg, contato) {
         setStage.envStageDb(user, 1)
         return [
             `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
-            menu,
+            menu
         ]
     }
 
 
     if (contato) {
         escolhas.db[user].nome = contato
+         NovoClienteAtendimento.NovoClienteAtendimento({soma: 1})
         //Nome da pessoa já Cadastrada na sua lista de contatos
         banco.db[user].stage = 1;
         setStage.envStageDb(user, 1)
         return [
             `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
-            menu,
+            menu
         ];
     } else {
         setStage.envStageDb(user, 0)

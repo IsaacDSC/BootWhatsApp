@@ -17,6 +17,8 @@ async function execute(user, msg) {
     //Esse redireciona para o arquivo 01
     if (msg.toUpperCase() == 'V') {
         banco.db[user].stage = 1;
+        setStage.envStageDb(user, 1)
+        escolha.db[user].escolha = []
         return [menu];
     }
     if (msg > escolha.db[user].quantidaDeProdutos || !Number(msg)) {
@@ -24,7 +26,7 @@ async function execute(user, msg) {
     } else {
 
         escolha.db[user].msgItem = Number(msg)
-
+        setStage.envStageDb(user, 3)
         banco.db[user].stage = 3;
         const itemEscolhido = await escolha.db[user].escolha.filter(e => { return e.index == escolha.db[user].msgItem })
         console.log(itemEscolhido)

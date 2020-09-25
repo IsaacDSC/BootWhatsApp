@@ -23,9 +23,9 @@ async function execute(user, msg) {
     } else { //esta no stage01        
         //enviando para Itens
         banco.db[user].stage = 4;
+        setStage.envStageDb(user, 4)
         escolha.db[user].escolha= []
         let itens = { name: nameItens, price: price }
-        console.log(nameItens, classeDoProduto, idItem, price, productionCost)
         escolha.db[user].itens.push({ itens, quantity: msg, class: classeDoProduto, id: idItem, profit: (price * msg) - (productionCost * msg), spent: productionCost * msg })
             //e.index == banco.db[user].msgItem
 

@@ -48,6 +48,9 @@ io.on('connection', function(socket) {
 function enviaParaFrontend(dados = '') {
     io.emit('PedidoConcluido', dados)
 }
+function NovoClienteAtendimento(dados) {
+    io.emit('NovoClienteAtendimento',dados)
+}
 
 
 //Config handlebars
@@ -138,4 +141,5 @@ server.listen(port, () => {
     console.log('Break Server CTRL + C')
 })
 
+exports.NovoClienteAtendimento =NovoClienteAtendimento
 exports.enviaParaFrontend = enviaParaFrontend

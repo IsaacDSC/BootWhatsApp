@@ -3,6 +3,7 @@ const banco = require('@data/user/user')
 const escolha = require("@data/escolha");
 const getMenu = require('@helpers/getMenu')
 const formataReal = require('@helpers/formataReal')
+const setStage = require('../../helpers/setStage')
 
 async function execute(user, msg) {
     let valorTotal=0
@@ -25,14 +26,17 @@ async function execute(user, msg) {
 
     if (escolha.db[user].itens.length == 0) {
         banco.db[user].stage = 1;
+        setStage.envStageDb(user, 1)
         return [menu];
     }
 
     if (msg.toUpperCase() == 'E') {
         banco.db[user].stage = 1;
+        setStage.envStageDb(user, 1)
         return [menu];
     }
     if (msg.toUpperCase() == 'F') {
+        setStage.envStageDb(user, 11)
         banco.db[user].stage = 11;
         return [frase];
     } 
@@ -46,6 +50,7 @@ async function execute(user, msg) {
         return ['👍  Excluído com sucesso.', '📝  *ABAIXO O QUE JÁ ESCOLHEU:*\n' + product + '\n*Parcial do pedido ' + formataReal.dinheiroReal(valorTotal) + '*\n\n_Digite o número que é para apagar_\n\n───────────────\n*[ F ]* PARA FECHAR O PEDIDO\n*[ E ]* ESCOLHER OUTRO PRODUTO']}
         else{
             banco.db[user].stage = 1;
+            setStage.envStageDb(user, 1)
             return [menu];
         }
     

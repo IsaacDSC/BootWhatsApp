@@ -109,7 +109,7 @@
                 <div id="pedidos" class="row">
 
                     {{!-- fazer o carregamento de cada pedido começando por aqui --}}
-{{#each requests}}
+                    {{#each requests}}
 
                     <div class="col-sm-4">
                         <h4 class="card-title mb-0">Pedidos</h4>
@@ -123,31 +123,34 @@
                         <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
                                 class="fa fa-print"></i></button>
 
-                        <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado');reload()" title="Cancelar Pedido"  class="btn btn-danger float-right"><i
+                        <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado')"
+                            title="Cancelar Pedido" class="btn btn-danger float-right"><i
                                 class="fa fa-window-close"></i></button>
                         <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
 
                         </div>
                     </div>
-                    
+
                     <div class="form-group mt-1 col-12">
                         {{#if (preparando this.status)}}
                         <p class="ml-3">Preparando <input type="radio" checked>
+                            {{else}}
+                        <p class="ml-3">Preparando <input type="radio"
+                                onchange="mandaMensagem('{{this.telephone}}','Preparando')">
+                            {{/if}}
+                            &nbsp;&nbsp;
+                            {{#if (saiuParaEntrega this.status)}}
+                            Saiu para Entrega <input type="radio" checked>
+                            {{else}}
+                            Saiu para Entrega <input type="radio"
+                                onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega')">
+                            {{/if}}
+                            &nbsp;&nbsp;
+                            {{#if (entregue this.status)}}
+                            Entregue <input type="radio" checked></p>
                         {{else}}
-                        <p class="ml-3">Preparando <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Preparando')" >
+                        Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')"></p>
                         {{/if}}
-                        &nbsp;&nbsp; 
-                        {{#if (saiuParaEntrega this.status)}}
-                        Saiu para Entrega <input type="radio" checked>
-                        {{else}}
-                        Saiu para Entrega <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega')">
-                        {{/if}}
-                        &nbsp;&nbsp; 
-                        {{#if (entregue this.status)}}
-                        Entregue <input type="radio" checked></p>
-                        {{else}}
-                       Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')"></p>
-                       {{/if}}
                         <hr>
                     </div>
 
@@ -169,7 +172,7 @@
                             <h6 class="mt-1"><strong>Tipo de Entrega: </strong>{{this.deliveryType}}</h6>
                             {{#if this.address}}
                             <h6 class="mt-1"><strong>Endereço: </strong>{{this.address}}</h6>
-                             {{/if}}
+                            {{/if}}
                             <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
                                 {{trataHora this.createdAt}}</i></h6>
                             <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
@@ -205,7 +208,7 @@
                     {{/each}}
                     {{!-- Fim do each  --}}
 
-                  
+
                 </div>
             </div>
         </div>
@@ -217,7 +220,11 @@
                     <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
                     <div class="stat-content dib">
                         <div class="stat-text">Total Lucro</div>
+                        {{#if profit}}
                         <div class="stat-digit" id="totalLucro">{{dinheiro profit}}</div>
+                        {{else}}
+                        <div class="stat-digit" id="totalLucro">0</div>
+                        {{/if}}
                     </div>
                 </div>
             </div>
@@ -232,7 +239,7 @@
                     <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
                     <div class="stat-content dib">
                         <div class="stat-text">Em Atendimento</div>
-                        <div class="stat-digit">0</div>
+                        <div class="stat-digit" id="EmAtendimento">0</div>
                     </div>
                 </div>
             </div>
@@ -246,7 +253,11 @@
                     <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
                     <div class="stat-content dib">
                         <div class="stat-text">Gasto materiais</div>
+                        {{#if spent}}
                         <div class="stat-digit" id="gastoMaterial">{{dinheiro spent}}</div>
+                        {{else}}
+                        <div class="stat-digit" id="gastoMaterial">0</div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

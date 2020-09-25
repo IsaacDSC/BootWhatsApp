@@ -2,6 +2,7 @@ require('module-alias/register')
 const banco = require('@data/user/user')
 const escolha = require("@data/escolha");
 const formataReal = require('@helpers/formataReal')
+const setStage = require('../../helpers/setStage')
 
 async function execute(user, msg, contato) {
     //new
@@ -14,6 +15,7 @@ async function execute(user, msg, contato) {
     let valorTotal = 0
     escolha.db[user].observacao = msg
     banco.db[user].stage = 12
+    setStage.envStageDb(user, 12)
     if (msg.toUpperCase() != 'N') {
         obs = '\nObs:' + escolha.db[user].observacao
     }

@@ -12,12 +12,13 @@ async function execute(user, msg) {
     //banco.db[user].stage = 0;
     if (msg.toUpperCase() == 'E') {
         //escolha.db[user].escolha = []
+        setStage.envStageDb(user, 1)
         banco.db[user].stage = 1;
         return [menu];
     }
     if (msg.toUpperCase() == 'M') {
         banco.db[user].stage = 2;
-
+        setStage.envStageDb(user, 2)
         const itensMenu = await Menu.findAll({ where: { class: escolha.db[user].classeDoProduto } })
 
         let message = '🔢 Digite o *número* do produto:\n\n ```Digite apenas 1 número.```\n\n'
@@ -33,6 +34,7 @@ async function execute(user, msg) {
     }
     //Carrega as opçoes de envio do pedido
     if (msg.toUpperCase() == 'F') {
+        setStage.envStageDb(user, 5)
         setStage.envStageDb(user, 5)
         banco.db[user].stage = 5;
         return ["👏  *Está quase no final.*\nVamos definir os dados de entrega e o pagamento.", ' 🔢  Como deseja receber o pedido:\n\n*[ 1 ]* ENTREGAR NO ENDEREÇO\n*[ 2 ]* RETIRAR NO BALCAO\n*[ 3 ]* COMER AQUI NO LOCAL\n*[ 4 ]* AGENDAR A RETIRADA\n\n───────────────\n*[ V ]* MENU ANTERIOR'];
