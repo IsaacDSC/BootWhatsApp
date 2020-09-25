@@ -1,37 +1,41 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            {{#each clients}}
-            <div class="row col-12">
-                <div class="form-group">
-                    <h5><strong>Nome: </strong>{{name}}</h5>
-                    <h5><strong>Telefone: </strong> {{telephone}}</h5>
-                    <a href="{{photograph}}" target="_blank"><strong>Foto: </strong> Ver Foto</a>
-                    <p><strong>stage: </strong>{{stage}}</p>
+            <h5>Clientes Cadastrados</h5>
+            <hr>
+            <div class="centralizar mt-5 ml-5">
+                {{#each clients}}
+                <div class="row col-4 ml-1">
+                    <div class="form-group">
+                        <h5><strong>Nome: </strong>{{name}}</h5>
+                        <h5><strong>Telefone: </strong> {{trataTelephone  telephone}}</h5>
+                        <a href="{{photograph}}" target="_blank"><strong>Foto: </strong> Ver Foto</a>
+                        <p><strong>stage: </strong>{{stage}}</p>
+                    </div>
+                    <hr>
                 </div>
-                <hr>
+                {{/each}}
             </div>
-            {{/each}}                       
         </div>
         <div class="row">
-                <nav aria-label="Page navigation example" style="margin-left: 35%;">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="/clients/-1" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="/clients/1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="/clients/2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="/clients/3">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="/clients/+1" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <nav aria-label="Page navigation example" style="margin-left: 35%;">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="/clients/-1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="/clients/1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/2">2</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/3">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="/clients/+1" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
     </div>
 </div>
