@@ -64,7 +64,7 @@ router.post('/menu/apagar', (req, res) => {
     })
 })
 
-router.get('/menu/editar', (req, res) => {
+router.post('/menu/editar', (req, res) => {
     //res.send(req.body.id)
     let id = req.body.id
     let SQL = `SELECT * FROM menus WHERE id = '${id}';`
@@ -74,13 +74,18 @@ router.get('/menu/editar', (req, res) => {
     })
 
 })
-router.post('/menu/editar', (req, res) => {
-    //res.send(req.body.id)
+router.post('/menu/editando', (req, res) => {
+    //res.send(req.body.name)
     let id = req.body.id
-    let SQL = `UPDATE menus SET name= '${req.body.name}', value='${req.body.value}', costProduce='${req.body.costProduce}' WHERE id='${id}';`
+    let SQL = `UPDATE menus SET name= '${req.body.name}', class = '${req.body.class}' ,menus.desc='${req.body.desc}',value='${req.body.value}', costProduce='${req.body.costProduce}',createdAt = 'current_timestamp', updatedAt='current_timestamp' WHERE id='${id}';`
     db.connection.query(SQL, (err, result) => {
         //res.send(result)
-
+        if (err) {
+            res.send(err)
+        } else {
+            res.send('Enviado com sucesso\n' + result)
+            console.log(result)
+        }
     })
 
 })
