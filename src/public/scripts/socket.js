@@ -1,11 +1,12 @@
 var socket = io('http://127.0.0.1:3001')
 
-socket.on('PedidoConcluido', function(data) {
-        renderPedido(data)
-        somaPedidosDia()
-        playSound()
-    })
-    //Enviar o User e o Status do pedido quando mudar para o backend
+socket.on('PedidoConcluido', function (data) {
+    somaPedidosDia()
+    playSound()
+    renderPedido(data)
+
+})
+//Enviar o User e o Status do pedido quando mudar para o backend
 
 let elemento = document.getElementById('pedidos');
 
@@ -13,11 +14,12 @@ let elemento = document.getElementById('pedidos');
 async function renderPedido(dados) {
     let produtos;
     let total = 0;
-    let profit=0;
-   // let spent=0;
-    await dados.request.forEach(e => {total += e.quantity * e.itens.price;
-      profit += e.profit
-    //  spent +=e.spent
+    let profit = 0;
+    // let spent=0;
+    await dados.request.forEach(e => {
+        total += e.quantity * e.itens.price;
+        profit += e.profit
+        //  spent +=e.spent
     })
     async function getProdutos() {
         let renderProdutos = ''
@@ -37,7 +39,7 @@ async function renderPedido(dados) {
 
     await getProdutos().then(res => produtos = res.toString())
 
-   await somaProfit(profit,spent)
+    await somaProfit(profit)
 
 
     const html = ` <div class="col-sm-4">
@@ -57,11 +59,16 @@ async function renderPedido(dados) {
 </div>
 
 <div class="form-group mt-1 col-12">
-<p class="ml-3">Preparando <input type="radio" name="" id="" value="">&nbsp;&nbsp; Saiu para
-    Entrega <input type="radio" name="" id="" value="">&nbsp;&nbsp; Entregue <input type="radio"
-        name="" id="" value=""></p>
+
+<p class="ml-3">Preparando <input type="radio" onchange="mandaMensagem('${dados.telephone}','Preparando')" >
+&nbsp;&nbsp; Saiu para Entrega <input type="radio" onchange="mandaMensagem('${dados.telephone}','Saiu para Entrega')" >
+&nbsp;&nbsp; Entregue <input type="radio" onchange="mandaMensagem('${dados.telephone}','Entregue')"></p>
+
 <hr>
 </div>
+
+
+
 <div class="form-group col-12">
 <div class="form-group col-4">
     <h6 class=""><strong>Pedido: </strong> #</h6>
@@ -103,20 +110,22 @@ async function renderPedido(dados) {
 <hr class="mt-5">
 </div>`
 
-elemento.insertAdjacentHTML('afterbegin', html);
+    elemento.insertAdjacentHTML('afterbegin', html);
 }
 
-function somaPedidosDia(){
+function somaPedidosDia() {
     const soma = document.getElementById("somaPedido")
-    const text= soma.textContent
-    let SomaNumber = Number(text)+1
+    const text = soma.textContent
+    let SomaNumber = Number(text) + 1
     soma.innerText = SomaNumber
 }
 
-function somaProfit(profit){
+function somaProfit(profit) {
     const soma = document.getElementById("totalLucro")
-    const text= soma.textContent.replace('R$','').replace(',','.')
-
+    const text = soma.textContent.replace('R$', '').replace(',', '.')
+    if (!text) {
+        text = 0
+    }
     let SomaNumber = Number(text) + Number(profit)
 
     soma.innerText = SomaNumber.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })

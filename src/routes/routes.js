@@ -18,6 +18,8 @@ router.get('/', auth, async (req, res) => {
     let countRequest = `SELECT COUNT(distinct  UserId) as createdAt FROM relacionamentos  WHERE DATE(createdAt) = DATE(NOW());`
     let countPreparo = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Preparando';`
     let profitSpent = `SELECT sum(requests.profit) as profit, sum(requests.spent) as spent FROM relacionamentos  join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) WHERE DATE(requests.createdAt) = DATE(NOW());`
+    let countEntregue = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Entregue';`
+   
     db.connection.query(sql, (err, result) => {
         console.log(result)
         var saida = [];
@@ -71,17 +73,18 @@ router.get('/', auth, async (req, res) => {
         db.connection.query(countRequest, (err, countRequests) => {
             db.connection.query(countPreparo, (err, countPreparo) => {
                 db.connection.query(profitSpent, (err, profitSpent) => {
+                    db.connection.query(countEntregue, (err, countEntregue) => {
 
-                    res.render('index/index', { requests: saida, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, })
-
+                    res.render('index/index', { requests: saida,countEntregue:countEntregue[0].createdAt , countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, })
+                    })
                 })
             })
         })
     });
 
-    //res.render('index/index')
 
 })
+
 router.get('/qrcode', (req, res) => {
     res.render('QrCode/QrCode', { layout: 'QrCode.hbs' })
 })
@@ -113,14 +116,17 @@ router.post('/mandamensagem', async (req, res) => {
     try {
         let Preparo = '♨  Seu pedido está em *preparo*, assim que estiver pronto estaremos lhe avisando.\n\nObrigado.'
         let SaiuParaEntrega = '🛵  Seu pedido saiu para entrega, basta aguardar.\n\nObrigado.'
-
-        if (req.body.mensagem == 'Preparo') {
+        let Entregue = 'Produto Entregue'
+      
+        if (req.body.mensagem == 'Preparando') {
             mensagem = Preparo
         }
         if (req.body.mensagem == 'Saiu para Entrega') {
             mensagem = SaiuParaEntrega
         }
-
+        if(req.body.mensagem == 'Entregue'){
+            mensagem = Entregue
+        }
         let sql = await `UPDATE requests INNER JOIN users ON users.id = requests.idUsuario SET requests.status = '${req.body.mensagem}' WHERE telephone = '${req.body.numero}' and requests.status != 'Entregue';`
         await db.connection.query(sql, (err, result) => {
             if (err) {

@@ -7,5 +7,4 @@ function mandaMensagem(numero,mensagem){
                 success: console.log('Mensagem enviada Com Sucesso')
               })
 
-
 }

@@ -38,10 +38,10 @@ app.use((req, res, next) => {
     next();
 });
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
     console.log('Usuario Conectado ' + socket.id)
-        //Broadcast envia para todos os clientes
-        //emit para apenas 1
+    //Broadcast envia para todos os clientes
+    //emit para apenas 1
 })
 
 function enviaParaFrontend(dados = '') {
@@ -55,24 +55,33 @@ app.engine('hbs', hbs({
     extname: 'hbs',
     helpers: {
 
-        trataTelephone: function(value) {
+        trataTelephone: function (value) {
             return value.split('@')[0]
         },
 
-        maiuscula: function(value) {
+        maiuscula: function (value) {
             return value.toUpperCase()
         },
-        dinheiro: function(value) {
+        dinheiro: function (value) {
             if (value) {
                 return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
         },
-        multiplica: function(value1, value2) {
+        multiplica: function (value1, value2) {
             if (value1) {
                 return (value1 * value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
+        },
+        preparando: function (value) {
+            return value == 'Preparando' || value == 'Saiu para Entrega' || value == 'Entregue'
+        },
+        saiuParaEntrega: function (value) {
+            return value == 'Saiu para Entrega' || value == 'Entregue'
+        },
+        entregue: function (value) {
+            return value == 'Entregue'
         }
 
 
@@ -80,23 +89,23 @@ app.engine('hbs', hbs({
 }));
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "/views/")) //resolvendo problema, direcionando views para dentro de src
-    //consfig BodyParser
+//consfig BodyParser
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-    //config pasta Public
+//config pasta Public
 app.use(express.static(path.join(__dirname, 'public')))
-    //config session
+//config session
 app.use(session({
-        secret: 'secret',
-        resave: true,
-        saveUninitialized: true
-    }))
-    //config passport
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}))
+//config passport
 app.use(passport.initialize())
 app.use(passport.session())
-    //config Flahs
+//config Flahs
 app.use(flash())
-    //config midleware flash
+//config midleware flash
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')
