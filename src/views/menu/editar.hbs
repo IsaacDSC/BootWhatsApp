@@ -7,7 +7,8 @@
                 <div class="row col-12">
                     <div class="form-group col-12">
                         {{#each result}}
-                        <input type="text" name="name" value="{{class}}" class="form-control">
+                        <input type="hidden" name="id" value="{{id}}">
+                        <input type="text" name="class" value="{{id}}{{class}}" class="form-control">
                     </div>
                 </div>
                 <div class="row col-12">
