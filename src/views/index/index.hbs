@@ -11,7 +11,7 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <p>Ligar / Desligar &nbsp;&nbsp;</p>
+                    <p>Desligar / Ligar &nbsp;&nbsp;</p>
                     <label class="switch">
                         <input type="checkbox" id="checkbox" data-toggle="modal" checked>
                         <span class="slider round"></span>
@@ -34,22 +34,9 @@
     </div>
 
 
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-2">
         <div class="card text-white bg-flat-color-1">
-            <div class="card-body pb-0">
-                <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
-                        id="dropdownMenuButton1" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Ver Pedidos</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body pb-0 text-center">
                 <h4 class="mb-0">
                     <span class="count" id="somaPedido">{{countRequests}}</span>
                 </h4>
@@ -64,22 +51,9 @@
     </div>
     <!--/.col-->
 
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-2">
         <div class="card text-white bg-flat-color-2">
-            <div class="card-body pb-0">
-                <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
-                        id="dropdownMenuButton2" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Ver Pedidos (Em Preparo)</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body pb-0 text-center">
                 <h4 class="mb-0">
                     <span class="count">{{countPreparo}}</span>
                 </h4>
@@ -94,24 +68,11 @@
     </div>
     <!--/.col-->
 
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-2">
         <div class="card text-white bg-flat-color-3">
-            <div class="card-body pb-0">
-                <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
-                        id="dropdownMenuButton3" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Ver Pedidos (Entregues)</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body pb-0 text-center">
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count">{{countEntregue}}</span>
                 </h4>
                 <p class="text-light">Entregues</p>
 
@@ -124,22 +85,9 @@
     </div>
     <!--/.col-->
 
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-2 ">
         <div class="card text-white bg-flat-color-4">
-            <div class="card-body pb-0">
-                <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
-                        id="dropdownMenuButton4" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Ver Pedidos (Cancelados)</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body pb-0 text-center">
                 <h4 class="mb-0">
                     <span class="count">10468</span>
                 </h4>
@@ -178,11 +126,25 @@
 
                         </div>
                     </div>
-
+                    
                     <div class="form-group mt-1 col-12">
-                        <p class="ml-3">Preparando <input type="radio" name="" id="" value="">&nbsp;&nbsp; Saiu para
-                            Entrega <input type="radio" name="" id="" value="">&nbsp;&nbsp; Entregue <input type="radio"
-                                name="" id="" value=""></p>
+                        {{#if (preparando this.status)}}
+                        <p class="ml-3">Preparando <input type="radio" checked name="" id="" value="">
+                        {{else}}
+                        <p class="ml-3">Preparando <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Preparando')" name="" id="" value="">
+                        {{/if}}
+                        &nbsp;&nbsp; 
+                        {{#if (saiuParaEntrega this.status)}}
+                        Saiu para Entrega <input type="radio" checked name="" id="" value="">
+                        {{else}}
+                        Saiu para Entrega <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega')" name="" id="" value="">
+                        {{/if}}
+                        &nbsp;&nbsp; 
+                         {{#if (entregue this.status)}}
+                        Entregue <input type="radio" checked name="" id="" value=""></p>
+                        {{else}}
+                       Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')" name="" id="" value=""></p>
+                       {{/if}}
                         <hr>
                     </div>
                     <div class="form-group col-12">
@@ -238,25 +200,7 @@
                     {{/each}}
                     {{!-- Fim do each  --}}
 
-                    {{!-- Inicio Pagination --}}
-                    <nav aria-label="Page navigation example" style="margin-left: 35%;">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    {{!-- Fim Pagination --}}
+                  
                 </div>
             </div>
         </div>

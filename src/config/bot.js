@@ -21,7 +21,6 @@ const sendText = async (telephone, msg) => {
 const stopClient = async () => {
     if (venom_client) {
         //  await venom_client.close()
-        
         return await venom_client.close().then(() => console.log('Cliente Desativado'))
     }
     return console.log('client ainda não criado!');
