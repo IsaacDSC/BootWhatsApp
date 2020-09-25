@@ -9,7 +9,7 @@
                         <select name="" id="" class="form-control ml-4 col-11">
                             <option value="">Selecione</option>
                         </select>
-                        <button class="btn btn-outline-success mt-2 ml-4 col-11">Pesquisar</button>
+                        <button class="btn btn-outline-success mt-2 ml-4 col-11">Enviar</button>
                     </div>
                     <hr>
                     <div class="row mt-3">
@@ -37,36 +37,53 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button class="btn btn-secundary">Enviar</button>
+                        <button class="btn btn-outline-info ml-4">Enviar</button>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="form-group col-4">
-
+                        <div class="form-group col-6">
+                            <label for="">Cardápios</label>
+                            <select name="" id="" class="form-control">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="">Qtd</label>
+                            <input type="text" name="" id="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="" class="ml-1">Observação</label>
+                            <textarea name="" id="" cols="30" rows="10" class="form-control col-12 ml-2"
+                                style="height: 100px;" style="background-color: rgba(236, 236, 236, 0.418);"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12 mt-4 ml-2">
+                            <button class="btn btn-outline-info col-12">Enviar Carrinho</button>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-3 mt-4 ml-5"
-                    style="border: rgba(180, 179, 179, 0.582) 1px solid; height:500px; border-radius:5px">
-                    <h6 class="text-center">Comanda</h6>
+                    style="border: rgba(180, 179, 179, 0.281) 1px solid; min-height:500px; border-radius:5px; background-color: rgba(236, 236, 236, 0.418);">
+                    <h6 class="text-center mt-2">Comanda</h6>
                     <hr>
-                    <div class="row mt-3">
+                    <div class="row">
                         <div class="form-group ml-2">
                             <p class="text-center">1x <strong>X-Tudo</strong> 18R$</p>
                         </div>
-                        <div class="form-group ml-2">
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-12">
                             <p>SubTotal: </p>
                             <p>Taixa de Entrega</p>
                             <p>Total: </p>
-                            <p>Desconto: </p>
-                            <input type="text" class="form-control ml-1" placeholder="Cumpom desconto"
-                                style="color: rgba(136, 136, 136, 0.616);">
                         </div>
-
                     </div>
-
                     <form action="" method="post">
-                        <button class="btn btn-success col-12">Enviar</button>
+                        <button class="btn btn-danger col-12">Finalizar Pedido</button>
                     </form>
                 </div>
             </div>
