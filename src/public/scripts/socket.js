@@ -1,9 +1,9 @@
 var socket = io('http://127.0.0.1:3001')
 
-socket.on('PedidoConcluido', function (data) {
+socket.on('PedidoConcluido', async function (data) {
+  await renderPedido(data)
     somaPedidosDia()
     playSound()
-    renderPedido(data)
 
 })
 //Enviar o User e o Status do pedido quando mudar para o backend
@@ -14,12 +14,9 @@ let elemento = document.getElementById('pedidos');
 async function renderPedido(dados) {
     let produtos;
     let total = 0;
-    let profit = 0;
     // let spent=0;
     await dados.request.forEach(e => {
         total += e.quantity * e.itens.price;
-        profit += e.profit
-        //  spent +=e.spent
     })
     async function getProdutos() {
         let renderProdutos = ''
@@ -38,8 +35,6 @@ async function renderPedido(dados) {
     }
 
     await getProdutos().then(res => produtos = res.toString())
-
-    await somaProfit(profit)
 
 
     const html = ` <div class="col-sm-4">
@@ -118,17 +113,6 @@ function somaPedidosDia() {
     const text = soma.textContent
     let SomaNumber = Number(text) + 1
     soma.innerText = SomaNumber
-}
-
-function somaProfit(profit) {
-    const soma = document.getElementById("totalLucro")
-    const text = soma.textContent.replace('R$', '').replace(',', '.')
-    if (!text) {
-        text = 0
-    }
-    let SomaNumber = Number(text) + Number(profit)
-
-    soma.innerText = SomaNumber.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 }
 
 function playSound() {

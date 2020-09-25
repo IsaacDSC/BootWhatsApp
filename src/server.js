@@ -82,6 +82,10 @@ app.engine('hbs', hbs({
         },
         entregue: function (value) {
             return value == 'Entregue'
+        },
+        trataHora: function (value){
+            let data = new Date(value)
+            return `${data.getHours()}:${data.getMinutes()}`
         }
 
 

@@ -89,7 +89,7 @@
         <div class="card text-white bg-flat-color-4">
             <div class="card-body pb-0 text-center">
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count">{{countCancelado}}</span>
                 </h4>
                 <p class="text-light">Cancelados</p>
 
@@ -129,24 +129,25 @@
                     
                     <div class="form-group mt-1 col-12">
                         {{#if (preparando this.status)}}
-                        <p class="ml-3">Preparando <input type="radio" checked name="" id="" value="">
+                        <p class="ml-3">Preparando <input type="radio" checked>
                         {{else}}
-                        <p class="ml-3">Preparando <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Preparando')" name="" id="" value="">
+                        <p class="ml-3">Preparando <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Preparando')" >
                         {{/if}}
                         &nbsp;&nbsp; 
                         {{#if (saiuParaEntrega this.status)}}
-                        Saiu para Entrega <input type="radio" checked name="" id="" value="">
+                        Saiu para Entrega <input type="radio" checked>
                         {{else}}
-                        Saiu para Entrega <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega')" name="" id="" value="">
+                        Saiu para Entrega <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega')">
                         {{/if}}
                         &nbsp;&nbsp; 
-                         {{#if (entregue this.status)}}
-                        Entregue <input type="radio" checked name="" id="" value=""></p>
+                        {{#if (entregue this.status)}}
+                        Entregue <input type="radio" checked></p>
                         {{else}}
-                       Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')" name="" id="" value=""></p>
+                       Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')"></p>
                        {{/if}}
                         <hr>
                     </div>
+
                     <div class="form-group col-12">
                         <div class="form-group col-4">
                             <h6 class=""><strong>Pedido: </strong> #</h6>
@@ -158,15 +159,16 @@
                         </div>
 
                         <div class="form-group ml-3">
-                            <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i>{{dinheiro this.total}}</strong></i></h6>
+                            <h6 class="mt-1"><strong>Total: {{dinheiro this.total}}</strong></i></h6>
                             {{#if this.formPayment}}
-                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> {{dinheiro this.formPayment}}</h6>
+                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong>{{dinheiro this.formPayment}}</h6>
                             {{/if}}
-                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
-                                    Cartao</i></h6>
+                            <h6 class="mt-1"><strong>Tipo de Entrega: </strong>{{this.deliveryType}}</h6>
+                            {{#if this.address}}
                             <h6 class="mt-1"><strong>Endereço: </strong>{{this.address}}</h6>
+                             {{/if}}
                             <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
-                                22:00Hr</i></h6>
+                                {{trataHora this.createdAt}}</i></h6>
                             <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
                                 22:00Hr</i></h6>
                             <h6 class="mt-1"><strong>Entregue: <i class="fa  fa-check"></i></strong> 22:30Hr</i></h6>
