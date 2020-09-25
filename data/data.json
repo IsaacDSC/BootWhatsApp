@@ -1,18 +1,1 @@
-[
-    {
-        "id": "k7hp6ja67",
-        "statusPreparando": 7
-    },
-    {
-        "id": "k7hp6ja67",
-        "statusa_aCaminho": 0
-    },
-    {
-        "id": "k7hp6ja67",
-        "statusEntregue": 0
-    },
-    {
-        "id": "m80suot6f",
-        "QtdAtendimento": 1
-    }
-]
+[{"id":"k7hp6ja67","statusPreparando":7},{"id":"k7hp6ja67","statusa_aCaminho":0},{"id":"k7hp6ja67","statusEntregue":0},{"id":"m80suot6f","QtdAtendimento":1},{"id":"tior7qp9m","QtdAtendimento":1},{"id":"qfqh91qo0","statusCancelado":3},{"id":"k6ou0ogg8","statusPreparando":7},{"id":"k6ou0ogg8","statusa_aCaminho":0},{"id":"k6ou0ogg8","statusEntregue":0},{"id":"k6ou0ogg8","statusCancelado":0},{"id":"l59v6flc7","QtdAtendimento":1},{"id":"kduac2865","statusCancelado":3},{"id":"nas1ctq8g","statusPreparando":7},{"id":"nas1ctq8g","statusa_aCaminho":0},{"id":"nas1ctq8g","statusEntregue":0},{"id":"nas1ctq8g","statusCancelado":0},{"id":"2alcnp5us","QtdAtendimento":1},{"id":"id4e3kor0","statusCancelado":3},{"id":"fhaqglcc8","statusPreparando":7},{"id":"fhaqglcc8","statusa_aCaminho":0},{"id":"fhaqglcc8","statusEntregue":0},{"id":"fhaqglcc8","statusCancelado":0},{"id":"h5lg6fcsc","QtdAtendimento":1},{"id":"gatau9oo1","statusCancelado":3},{"id":"3ck4jdvt7","statusPreparando":7},{"id":"3ck4jdvt7","statusa_aCaminho":0},{"id":"3ck4jdvt7","statusEntregue":0},{"id":"3ck4jdvt7","statusCancelado":0},{"id":"5lpu4leec","QtdAtendimento":1},{"id":"nrfgdq3k8","statusCancelado":3},{"id":"ldctjm42k","statusPreparando":7},{"id":"ldctjm42k","statusa_aCaminho":0},{"id":"ldctjm42k","statusEntregue":0},{"id":"ldctjm42k","statusCancelado":0},{"id":"saaj7sj7r","QtdAtendimento":1},{"id":"taelm78sc","statusCancelado":3},{"id":"rovvios42","statusPreparando":7},{"id":"rovvios42","statusa_aCaminho":0},{"id":"rovvios42","statusEntregue":0},{"id":"rovvios42","statusCancelado":0}]

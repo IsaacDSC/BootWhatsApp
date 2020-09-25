@@ -1,15 +1,14 @@
 google.charts.load("current", { packages: ["corechart"] });
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawChart)
+
+
 
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Day'],
-        ['Work', 11],
-        ['Eat', 2],
-        ['Commute', 2],
-        ['Watch TV', 2],
-        ['Sleep', 7],
-        ['Burger', 7]
+        ['Work', 0],
+        ['Eat', 33],
+        ['Eat', 22],
     ]);
 
     var options = {
@@ -20,3 +19,5 @@ function drawChart() {
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
 }
+
+exports.drawChart = drawChart

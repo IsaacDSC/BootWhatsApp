@@ -3,6 +3,10 @@ const router = express.Router()
 
 const Delivery = require('@models/RoteDelivery')
 
+router.get('/', (req, res) => {
+    res.render('config/config')
+})
+
 router.get('/delivery', (req, res) => {
     res.render('config/entrega')
 })
