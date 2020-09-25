@@ -48,3 +48,5 @@ Para Inserir na tabela os dados e retornar o id: {
 function check() {
   document.getElementById("radio").checked = true;
 }
+
+Mudar o Ip enviaMensagem.js Socket.js ImagemQrCode.js

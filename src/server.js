@@ -37,6 +37,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); //The ionic server
     next();
 });
+
 io.on('connection', function(socket) {
     console.log('Usuario Conectado ' + socket.id)
         //Broadcast envia para todos os clientes

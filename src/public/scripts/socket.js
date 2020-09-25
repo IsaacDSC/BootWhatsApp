@@ -1,4 +1,4 @@
-var socket = io('http://localhost:3001')
+var socket = io('http://127.0.0.1:3001')
 
 socket.on('PedidoConcluido', function(data) {
         renderPedido(data)
@@ -7,17 +7,17 @@ socket.on('PedidoConcluido', function(data) {
     })
     //Enviar o User e o Status do pedido quando mudar para o backend
 
-var elemento = document.getElementById('pedidos');
+let elemento = document.getElementById('pedidos');
 
 
 async function renderPedido(dados) {
     let produtos;
     let total = 0;
     let profit=0;
-    let spent=0;
+   // let spent=0;
     await dados.request.forEach(e => {total += e.quantity * e.itens.price;
       profit += e.profit
-      spent +=e.spent
+    //  spent +=e.spent
     })
     async function getProdutos() {
         let renderProdutos = ''
@@ -113,18 +113,13 @@ function somaPedidosDia(){
     soma.innerText = SomaNumber
 }
 
-function somaProfit(profit,spent){
+function somaProfit(profit){
     const soma = document.getElementById("totalLucro")
-    const spent = document.getElementById("gastoMaterial")
     const text= soma.textContent.replace('R$','').replace(',','.')
-    const textSpent = spent.textContent.replace('R$','').replace(',','.')
 
-    let somaSpent = Number(textSpent)+Number(spent)
     let SomaNumber = Number(text) + Number(profit)
-    
-    spent.innerText = somaSpent.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-    soma.innerText = SomaNumber.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 
+    soma.innerText = SomaNumber.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 }
 
 function playSound() {
