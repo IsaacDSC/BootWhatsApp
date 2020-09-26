@@ -28,4 +28,12 @@ router.post('/', (req, res) => {
     //console.log(data[0].usuario)
 })
 
+router.post('/registerUser', (req, res) => {
+    let SQL = `UPDATE users SET name = '${req.body.name}', telephone = '${req.body.telephone}', neighborhood = '${req.body.neighborhood}, address = '${req.body.address}', updatedAt= 'TIMESTAMP' WHERE id = '${req.body.id}';`
+    db.connection.query(SQL, (err, result) => {
+        res.redirect('/caixa')
+    })
+})
+
 module.exports = router
+    //UPDATE `bootwhatsapp`.`users` SET `neighborhood`='ano bom', `address`='rua ary jorge n200' WHERE `id`='1';
