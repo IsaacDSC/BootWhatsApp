@@ -28,4 +28,15 @@ router.post('/', (req, res) => {
     //console.log(data[0].usuario)
 })
 
+router.post('/pesquisaCliente',async(req,res)=>{
+    
+    let SQL = `SELECT * FROM users WHERE telephone = '${req.body.telephone}';`
+    db.connection.query(SQL, (err, cliente) => {
+
+        res.status(200).send(cliente)
+    })
+    
+
+})
+
 module.exports = router

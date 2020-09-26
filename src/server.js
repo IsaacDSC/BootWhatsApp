@@ -60,6 +60,8 @@ app.engine('hbs', hbs({
     helpers: {
 
         trataTelephone: function(value) {
+            if(!value)
+            {return}
             return value.split('@')[0]
         },
 

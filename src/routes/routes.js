@@ -20,6 +20,7 @@ router.get('/', auth, async (req, res) => {
     let profitSpent = `SELECT sum(requests.profit) as profit, sum(requests.spent) as spent FROM relacionamentos  join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) WHERE DATE(requests.createdAt) = DATE(NOW()) and status !='Cancelado';`
     let countEntregue = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Entregue';`
     let countCancelado = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Cancelado';`
+    let emAtendimento = `select count(stage) as stage from users where stage='1'`
 
     db.connection.query(sql, (err, result) => {
         var saida = [];
@@ -77,7 +78,9 @@ router.get('/', auth, async (req, res) => {
                 db.connection.query(profitSpent, (err, profitSpent) => {
                     db.connection.query(countEntregue, (err, countEntregue) => {
                         db.connection.query(countCancelado, (err, countCancelado) => {
-                            res.render('index/index', { requests: saida,countCancelado:countCancelado[0].createdAt, countEntregue: countEntregue[0].createdAt, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, })
+                            db.connection.query(emAtendimento, (err, emAtendimento) => {
+                                res.render('index/index', { requests: saida,emAtendimento:emAtendimento[0].stage, countCancelado: countCancelado[0].createdAt, countEntregue: countEntregue[0].createdAt, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, })
+                            })
                         })
                     })
                 })
