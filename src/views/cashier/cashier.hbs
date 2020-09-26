@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="">Selecione uma classe do Cardápios</label>
-                            <select name="" id="" class="form-control">
+                            <select name="" id="selectClassCardapio" class="form-control">
                                 <option value="">Selecione uma classe</option>
                                 {{#each cardapios}}
                                 <option value="{{class}}">{{class}}</option>
@@ -17,24 +17,10 @@
                             </select>
                         </div>                        
                         <div class="form-group col-2 mt-2">
-                            <button class="btn btn-outline-dark mt-4">PESQUISAR</button>
+                            <button class="btn btn-outline-dark mt-4" id="pesquisarClasses">PESQUISAR</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="">Cardápios</label>
-                            <select name="" id="" class="form-control">
-                                <option value="">Selecione</option>
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="form-group col-2">
-                            <label for="">Qtd</label>
-                            <input type="text" name="" id="" class="form-control">
-                        </div>
-                        <div class="form-group col-2 mt-2">
-                            <button class="btn btn-outline-dark mt-4">+</button>
-                        </div>
+                    <div id="itensDoCardapio" class="row">
                     </div>                   
                     <div class="row">
                         <div class="form-group col-12">
