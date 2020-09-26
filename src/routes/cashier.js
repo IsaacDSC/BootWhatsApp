@@ -8,7 +8,7 @@ router.get('/', async(req, res) => {
     let SQLCardapios = `SELECT * FROM menus;`
     db.connection.query(SQL, (err, users) => {
         db.connection.query(SQLCardapios, (err, cardapios) => {
-            res.render('cashier/cashier', { users: users, cardapios: cardapios, clients: clients[0] })
+            res.render('cashier/cashier', { users: users, cardapios: cardapios,})
         })
     })
 
