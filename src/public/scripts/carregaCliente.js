@@ -4,7 +4,17 @@ let btnPesquisar = document.getElementById('pesquisarClasses')
 let itensCardapio = document.getElementById('itensDoCardapio')
 let clientCarrinho = document.getElementById('clientCarrinho')
 let btnEnviarClient = document.getElementById('enviarClient')
-let dados = []
+let btnEnviarCarrinho = document.getElementById('enviaraoCarrinho')
+let obsClienteCaixa = document.getElementById('obsClienteCaixa')
+let dados = {
+    obs:'',
+    nomeCLient:'', 
+    telefoneClient:'', 
+    bairro:'', 
+    endereco:'', 
+    idUser:'',    
+    itens:[]
+}
 
 select.addEventListener('change', e => {
     let value = select.options[select.selectedIndex].value;
@@ -72,7 +82,7 @@ btnPesquisar.addEventListener('click', async (e) => {
 })
 
 btnEnviarClient.addEventListener('click', e => {
-    dados = []
+
     e.preventDefault()
     const nomeCLient = $('#nomeDoCliente').val();
     const telefoneClient = $('#numeroTelefone').val();
@@ -85,10 +95,30 @@ btnEnviarClient.addEventListener('click', e => {
     if (!telefoneClient) {
         return alert('Informe o Telefone do Cliente')
     }
-    dados.unshift({ nomeCLient, telefoneClient, bairro, endereco, idUser })
+    dados.nomeCLient = nomeCLient
+    dados.telefoneClient =  telefoneClient
+    dados.bairro =  bairro
+    dados.endereco =  endereco
+    dados.idUser =  idUser 
     jQuery('.modal').modal('hide')
     console.log(dados)
     clientCarrinho.innerText = `Cliente: ${nomeCLient}`
 
 })
 
+
+
+btnEnviarCarrinho.addEventListener('click', e => {
+    dados.itens= []
+    $('#itensDoCardapio').find('select').each(function (index, html) {
+        if (html.options[html.selectedIndex].text != "Selecione")
+        quantidade = $('#itensDoCardapio').find('input')[index].value
+        produto = html.options[html.selectedIndex].text
+        if(quantidade=='0'){
+            return alert('quantidade 0')
+        }
+        dados.itens.push({produto,quantidade})
+    })
+    dados.obs = obsClienteCaixa.value
+    console.log(dados)
+})
