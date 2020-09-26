@@ -8,11 +8,11 @@ async function configGerais() {
     })
 }
 
-async function InsertConfigGerais() {
+async function InsertConfigGerais(bairro, desc, classMenu) {
     await Config.create({
-        neighborhood: 'false',
-        description: 'false',
-        classMenu: 'false'
+        neighborhood: bairro,
+        description: desc,
+        classMenu: classMenu
     }).then(() => {
         console.log('ok')
     }).catch((err) => {
