@@ -12,7 +12,6 @@ router.get('/', async(req, res) => {
     db.connection.query(SQL, (err, users) => {
         db.connection.query(SQL_menus, (err, cardapios) => {
             db.connection.query(SQLCardapios, (err, menus) => {
-
                 res.render('cashier/cashier', { users: users, cardapios: cardapios, menus: menus })
             })
         })
