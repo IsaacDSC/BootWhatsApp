@@ -2,14 +2,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Adione os dados do Cliente</h5>
+                <h5 class="modal-title">Adicione os dados do Cliente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <form action="/caixa" method="post">
+                <div class="row">  
                         <div class="form-group col-8">
                             <select name="telephone" id="telephone" class="form-control">
                                 <option value="">Selecione o Cliente</option>
@@ -18,10 +17,6 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="form-group col-2">
-                            <button class="btn btn-outline-dark">Pesquisar</button>
-                        </div>
-                    </form>
                 </div>
                 <hr>
                 <form action="/caixa/registerUser" method="post">
