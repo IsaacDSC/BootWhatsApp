@@ -31,7 +31,7 @@ router.post('/pesquisaCliente', async(req, res) => {
 })
 
 router.post('/registerUser', (req, res) => {
-    let SQL = `UPDATE users SET name = '${req.body.name}', telephone = '${req.body.telephone}', neighborhood = '${req.body.neighborhood}, address = '${req.body.address}', updatedAt= 'TIMESTAMP' WHERE id = '${req.body.id}';`
+    let SQL = `UPDATE users SET name = '${req.body.name}', telephone = '${req.body.telephone}@c.us', neighborhood = '${req.body.neighborhood}, address = '${req.body.address}', updatedAt= 'TIMESTAMP' WHERE id = '${req.body.id}';`
     db.connection.query(SQL, (err, result) => {
         const content = json.readFile()
         content.push({ IdUser: req.body.id })
