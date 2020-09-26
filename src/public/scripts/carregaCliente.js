@@ -6,6 +6,9 @@ let clientCarrinho = document.getElementById('clientCarrinho')
 let btnEnviarClient = document.getElementById('enviarClient')
 let btnEnviarCarrinho = document.getElementById('enviaraoCarrinho')
 let obsClienteCaixa = document.getElementById('obsClienteCaixa')
+let itensNoCarrinho = document.getElementById('itensNoCarrinho')
+let totalTaxaSub = document.getElementById('totalTaxaSub')
+
 let dados = {
     obs:'',
     nomeCLient:'', 
@@ -117,8 +120,19 @@ btnEnviarCarrinho.addEventListener('click', e => {
         if(quantidade=='0'){
             return alert('quantidade 0')
         }
-        dados.itens.push({produto,quantidade})
+        dados.itens.push({produto,quantidade,valor})
     })
     dados.obs = obsClienteCaixa.value
     console.log(dados)
+    itensNoCarrinho.innerText=''
+    totalTaxaSub.innerText =''
+    dados.itens.forEach(e=>{
+        totalTaxaSub.insertAdjacentHTML('afterbegin',`
+        <p>SubTotal: s</p>
+        <p>Taxa de Entrega:</p>
+        <p>Total: </p>`)
+        itensNoCarrinho.insertAdjacentHTML('afterbegin', `<p class="text-center ml-5">${e.quantidade}x <strong>${e.produto}</strong></p>` );
+    })
+
+    
 })
