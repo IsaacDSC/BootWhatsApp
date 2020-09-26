@@ -1,50 +1,19 @@
+{{>_modalClient}}
 <div class="container">
     <div class="card">
         <div class="card-body">
             <h5 class="card-text">Monte seu pedido de uma forma prática e rápida</h5>
             <hr>
-            <div class="row mt-4">
+            <div class="row mt-2">
                 <div class="form-group col-8">
-                    <div class="row">
-                        <select name="" id="" class="form-control ml-4 col-11">
-                            <option value="">Selecione</option>
-                        </select>
-                        <button class="btn btn-outline-success mt-2 ml-4 col-11">Enviar</button>
-                    </div>
-                    <hr>
-                    <div class="row mt-3">
-                        <div class="form-group col-6">
-                            <label for="" class="ml-2">Nome do Cliente</label>
-                            <input type="text" class="form-control ml-2">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="" class="ml-2">Numero Telefone do Cliente</label>
-                            <input type="text" class="form-control ml-2">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-3">
-                            <label for="" class="ml-2">Bairro do Cliente</label>
-                            <input type="text" class="form-control ml-2">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="" class="ml-2">Rua do Cliente</label>
-                            <input type="text" class="form-control ml-2">
-                        </div>
-                        <div class="form-group col-3">
-                            <label for="" class="ml-2">Rua do Cliente</label>
-                            <input type="text" class="form-control ml-2">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <button class="btn btn-outline-info ml-4">Enviar</button>
-                    </div>
-                    <hr>
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="">Cardápios</label>
                             <select name="" id="" class="form-control">
                                 <option value="">Selecione</option>
+                                {{#each cardapios}}
+                                <option value="">{{class}}</option>
+                                {{/each}}
                             </select>
                         </div>
                         <div class="form-group col-2">
@@ -61,7 +30,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-12 mt-4 ml-2">
-                            <button class="btn btn-outline-info col-12">Enviar Carrinho</button>
+                            <button class="btn btn-outline-dark col-12">Enviar Carrinho</button>
                         </div>
                     </div>
                 </div>
@@ -71,7 +40,7 @@
                     <hr>
                     <div class="row">
                         <div class="form-group ml-2">
-                            <p class="text-center">1x <strong>X-Tudo</strong> 18R$</p>
+                            <p class="text-center ml-5">1x <strong>X-Tudo</strong> 18R$</p>
                         </div>
                     </div>
                     <hr>
@@ -82,8 +51,11 @@
                             <p>Total: </p>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-outline-dark col-12" data-toggle="modal" data-target="#MeuModal">
+                        Cliente
+                    </button>
                     <form action="" method="post">
-                        <button class="btn btn-danger col-12">Finalizar Pedido</button>
+                        <button class="btn btn-danger col-12 mt-2 " data-toggle="modal" data-target="#MeuModal">Finalizar Pedido</button>
                     </form>
                 </div>
             </div>

@@ -15,10 +15,10 @@ async function getMenu(user) {
     })
     menu += '\nDica:\nse quer *' + escolha.db[user].escolha[0].class.toUpperCase() + '* envie o número *1*.\n\n───────────────'
 
-    if(escolha.db[user].itens.length>0){
-        menu+= '\n*[ F ]* *FECHAR O PEDIDO*'
+    if (escolha.db[user].itens.length > 0) {
+        menu += '\n*[ F ]* *FECHAR O PEDIDO*'
     }
-    return menu 
+    return menu
 }
 
 
