@@ -12,7 +12,7 @@ select.addEventListener('change',e=>{
         console.log(res)
     let result = res[0]
     $('#nomeDoCliente').val(result.name);
-    $('#numeroTelefone').val(result.telephone);
+    $('#numeroTelefone').val(result.telephone.split('@')[0]);
     $('#neighborhood').val(result.neighborhood);
     $('#addressClient').val(result.address);
     })

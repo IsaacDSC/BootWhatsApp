@@ -13,7 +13,7 @@
                             <select name="telephone" id="telephone" class="form-control">
                                 <option value="">Selecione o Cliente</option>
                                 {{#each users}}
-                                <option value="{{telephone}}">{{name}} - {{telephone}}</option>
+                                <option value="{{telephone}}">{{name}} - {{trataTelephone telephone}}</option>
                                 {{/each}}
                             </select>
                         </div>
