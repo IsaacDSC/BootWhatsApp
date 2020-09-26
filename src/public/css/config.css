@@ -1,0 +1,11 @@
+#configClass {
+    top: -1000px;
+    position: relative;
+    transition: 600ms;
+}
+
+#config {
+    top: -150px;
+    position: relative;
+    transition: 600ms;
+}

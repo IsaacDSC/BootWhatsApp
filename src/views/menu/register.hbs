@@ -3,15 +3,15 @@
         <div class="card-body">
             <h5>Cadastre seu Cardápio</h5>
             <hr>
+            {{>_msg}}
             <form action="/menu/register" method="post">
                 <div class="row col-12">
                     <div class="form-group col-12">
                         <select name="class" id="class" class="form-control">
-                            <option value="promocoes">Promoções</option>
-                            <option value="lanches">Laches</option>
-                            <option value="pizza">Pizza</option>
-                            <option value="bebidas">Bebidas</option>
-                            <option value="doces">Doces</option>
+                            <option value="promocoes">Selecione uma Classe</option>
+                            {{#each class}}
+                            <option value="lanches">{{classMenu}}</option>
+                            {{/each}}                            
                         </select>
                     </div>
                 </div>

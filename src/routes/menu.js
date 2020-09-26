@@ -5,7 +5,10 @@ const { auth } = require('@helpers/auth')
 const db = require('@database/configSQL')
 
 router.get('/menu/register', auth, (req, res) => {
-    res.render('menu/register')
+    let SQL = `SELECT classMenu FROM configurations; `
+    db.connection.query(SQL, (err, result) => {
+        res.render('menu/register', { class: result })
+    })
 })
 
 router.post('/menu/register', auth, (req, res) => {
@@ -16,7 +19,8 @@ router.post('/menu/register', auth, (req, res) => {
         costProduce: req.body.costProduce,
         class: req.body.class
     }).then(() => {
-        res.send('cardápio cadastrado com sucesso!')
+        req.flash('success_msg', 'cardápio cadastrado com sucesso!')
+        res.redirect('/menu/register')
     }).catch((err) => {
         res.send(err)
     })
@@ -43,7 +47,8 @@ router.post('/menu/views', (req, res) => {
             })
         })
     } else {
-        res.send('selecione uma classe')
+        req.flash('error_msg', 'selecione uma classe para pesquisar')
+        res.redirect('/menu/views')
     }
 })
 
@@ -70,7 +75,13 @@ router.post('/menu/editar', (req, res) => {
     let SQL = `SELECT * FROM menus WHERE id = '${id}';`
     db.connection.query(SQL, (err, result) => {
         //res.send(result)
-        res.render('menu/editar', { result: result })
+        if (err) {
+            req.flash('error_msg', 'Erro por favor preencha os campos corretamente')
+            res.redirect('/menu/editar')
+        } else {
+            req.flash('success')
+            res.render('menu/views', { result: result })
+        }
     })
 
 })
@@ -82,7 +93,8 @@ router.post('/menu/editando', (req, res) => {
         if (err) {
             res.send(err)
         } else {
-            res.send('Enviado com sucesso\n' + result)
+            req.flash('success_msg', 'Menu cadastrado com sucesso!')
+            res.redirect('/menu/views')
             console.log(result)
         }
     })
