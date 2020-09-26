@@ -11,7 +11,10 @@ router.get('/', async(req, res) => {
     let SQL_menus = `SELECT DISTINCT class FROM menus;`
     db.connection.query(SQL, (err, users) => {
         db.connection.query(SQL_menus, (err, cardapios) => {
-            res.render('cashier/cashier', { users: users, cardapios: cardapios, })
+            db.connection.query(SQLCardapios, (err, menus) => {
+
+                res.render('cashier/cashier', { users: users, cardapios: cardapios, menus: menus })
+            })
         })
     })
 
