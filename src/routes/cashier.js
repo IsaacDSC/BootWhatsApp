@@ -32,7 +32,6 @@ router.post('/pesquisaCliente',async(req,res)=>{
     
     let SQL = `SELECT * FROM users WHERE telephone = '${req.body.telephone}';`
     db.connection.query(SQL, (err, cliente) => {
-
         res.status(200).send(cliente)
     })
     
@@ -48,4 +47,3 @@ router.post('/registerUser', (req, res) => {
 
 module.exports = router
 
-module.exports = router
