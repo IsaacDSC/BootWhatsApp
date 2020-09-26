@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const db = require('@database/configSQL')
-const json = require('@config/json')
-const data = []
+let data = []
 
 
 router.get('/', async(req, res) => {
