@@ -4,7 +4,7 @@ const db = require('@database/index')
 const Class = db.define('classMenu', {
     classMenu: {
         type: db.Sequelize.STRING,
-       unique: true,
+        unique: true,
     }
 })
 

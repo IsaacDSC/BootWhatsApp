@@ -30,7 +30,7 @@ router.get('/clients/:pag', auth, (req, res) => {
     //     })
     // }
     let id = Number(req.params.pag)
-    let sql = `SELECT * FROM users ORDER BY id=${id} DESC LIMIT 1;`
+    let sql = `SELECT * FROM users ORDER BY id=${req.params.pag} DESC LIMIT 10;`
     db.connection.query(sql, (err, result) => {
         let id = result[0].id
         console.log(result[0].id)
