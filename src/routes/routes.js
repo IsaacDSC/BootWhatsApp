@@ -20,7 +20,7 @@ router.get('/', auth, async (req, res) => {
     let profitSpent = `SELECT sum(requests.profit) as profit, sum(requests.spent) as spent FROM relacionamentos  join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) WHERE DATE(requests.createdAt) = DATE(NOW()) and status !='Cancelado';`
     let countEntregue = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Entregue';`
     let countCancelado = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Cancelado';`
-    let emAtendimento = `select count(stage) as stage from users where stage='1'`
+    let emAtendimento = `select count(stage) as stage from users where stage !='14'`
 
     db.connection.query(sql, (err, result) => {
         var saida = [];

@@ -8,15 +8,16 @@ let btnEnviarCarrinho = document.getElementById('enviaraoCarrinho')
 let obsClienteCaixa = document.getElementById('obsClienteCaixa')
 let itensNoCarrinho = document.getElementById('itensNoCarrinho')
 let totalTaxaSub = document.getElementById('totalTaxaSub')
+let btnFinalizarPedido = document.getElementById('finalizarPedidoCashier')
 
 let dados = {
-    obs:'',
-    nomeCLient:'', 
-    telefoneClient:'', 
-    bairro:'', 
-    endereco:'', 
-    idUser:'',    
-    itens:[]
+    obs: '',
+    nomeCLient: '',
+    telefoneClient: '',
+    bairro: '',
+    endereco: '',
+    idUser: '',
+    itens: []
 }
 
 select.addEventListener('change', e => {
@@ -56,7 +57,7 @@ btnPesquisar.addEventListener('click', async (e) => {
             let options = ''
             await res.forEach(element => {
 
-                options += `<option value=${element.id}>${element.name} - ${element.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</option>`
+                options += `<option value="${element.id} | ${element.value}">${element.name} - ${element.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</option>`
             })
 
             return options
@@ -64,6 +65,7 @@ btnPesquisar.addEventListener('click', async (e) => {
 
         await getClass().then(res => produto = res.toString())
         let html = `
+  
        <div class="form-group col-6">
        <label for="">${value.toUpperCase()}</label>
        <select name="" id="" class="form-control">
@@ -74,7 +76,13 @@ btnPesquisar.addEventListener('click', async (e) => {
        <div class="form-group col-2">
        <label for="">Qtd</label>
        <input type="text" name="" id="" value="1" class="form-control">
-       </div>`
+       </div>
+       <div class="form-group col-2 mt-2">
+       <button class="btn btn-outline-danger mt-4">-</button>
+       </div>
+
+     
+       `
 
         itensCardapio.insertAdjacentHTML('afterbegin', html);
 
@@ -99,10 +107,10 @@ btnEnviarClient.addEventListener('click', e => {
         return alert('Informe o Telefone do Cliente')
     }
     dados.nomeCLient = nomeCLient
-    dados.telefoneClient =  telefoneClient
-    dados.bairro =  bairro
-    dados.endereco =  endereco
-    dados.idUser =  idUser 
+    dados.telefoneClient = telefoneClient
+    dados.bairro = bairro
+    dados.endereco = endereco
+    dados.idUser = idUser
     jQuery('.modal').modal('hide')
     console.log(dados)
     clientCarrinho.innerText = `Cliente: ${nomeCLient}`
@@ -112,27 +120,47 @@ btnEnviarClient.addEventListener('click', e => {
 
 
 btnEnviarCarrinho.addEventListener('click', e => {
-    dados.itens= []
+    dados.itens = []
     $('#itensDoCardapio').find('select').each(function (index, html) {
         if (html.options[html.selectedIndex].text != "Selecione")
-        quantidade = $('#itensDoCardapio').find('input')[index].value
+            quantidade = $('#itensDoCardapio').find('input')[index].value
         produto = html.options[html.selectedIndex].text
-        if(quantidade=='0'){
+        idItem = html.options[html.selectedIndex].value
+        if (quantidade == '0') {
             return alert('quantidade 0')
         }
-        dados.itens.push({produto,quantidade,valor})
+        console.log(produto)
+        dados.itens.push({ produto, quantidade, valor: quantidade * idItem.split('|')[1], idItem: idItem.split('|')[0] })
     })
     dados.obs = obsClienteCaixa.value
     console.log(dados)
-    itensNoCarrinho.innerText=''
-    totalTaxaSub.innerText =''
-    dados.itens.forEach(e=>{
-        totalTaxaSub.insertAdjacentHTML('afterbegin',`
-        <p>SubTotal: s</p>
-        <p>Taxa de Entrega:</p>
-        <p>Total: </p>`)
-        itensNoCarrinho.insertAdjacentHTML('afterbegin', `<p class="text-center ml-5">${e.quantidade}x <strong>${e.produto}</strong></p>` );
+    itensNoCarrinho.innerText = ''
+    totalTaxaSub.innerText = ''
+    let soma = 0
+    dados.itens.forEach(e => {
+        if (e.produto == 'Selecione') {
+            return
+        }
+        soma += e.valor
+        itensNoCarrinho.insertAdjacentHTML('beforeend', `<p class="text-center ml-5">${e.quantidade}x <strong>${e.produto}</strong></p>`);
     })
+    totalTaxaSub.insertAdjacentHTML('afterbegin', `
+    <p>SubTotal: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</p>
+    <p>Taxa de Entrega:</p>
+    <p>Total: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</p>`)
 
-    
+
+})
+
+btnFinalizarPedido.addEventListener('click', e => {
+    e.preventDefault()
+    let _text = $('#clientCarrinho').html();
+    let _textProduct = $('#itensNoCarrinho').find('p')
+    if(!_text){
+        return alert('Falta Informar o cliente!')
+    }
+    if(_textProduct.length == 0){
+        return alert('Falta escolher algum produto!')
+    }
+
 })

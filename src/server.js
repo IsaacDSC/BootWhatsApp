@@ -15,7 +15,6 @@ require('./config/Auhenticated')(passport)
 
 //consfigurando rotas
 const clients = require('@routes/clients');
-const lucro = require('@routes/lucro');
 const config = require('@routes/config')
 const menu = require("@routes/menu")
 const msg = require('@routes/msg')
@@ -129,7 +128,6 @@ app.use((req, res, next) => {
 app.use(routes)
 app.use(menu)
 app.use(clients)
-app.use(lucro)
 app.use('/msg', msg)
 app.use('/config', config)
 app.use(reset)
