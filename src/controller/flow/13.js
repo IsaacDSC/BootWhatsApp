@@ -47,7 +47,7 @@ async function execute(user, msg) {
 
 
         if(valorTotal>0){
-        return ['👍  Excluído com sucesso.', '📝  *ABAIXO O QUE JÁ ESCOLHEU:*\n' + product + '\n*Parcial do pedido ' + formataReal.dinheiroReal(valorTotal) + '*\n\n_Digite o número que é para apagar_\n\n───────────────\n*[ F ]* PARA FECHAR O PEDIDO\n*[ E ]* ESCOLHER OUTRO PRODUTO']}
+        return ['📝  *ABAIXO O QUE JÁ ESCOLHEU:*\n' + product + '\n*Parcial do pedido ' + formataReal.dinheiroReal(valorTotal) + '*\n\n_Digite o número que é para apagar_\n\n───────────────\n*[ F ]* PARA FECHAR O PEDIDO\n*[ E ]* ESCOLHER OUTRO PRODUTO','👍  Excluído com sucesso.']}
         else{
             banco.db[user].stage = 1;
             setStage.envStageDb(user, 1)

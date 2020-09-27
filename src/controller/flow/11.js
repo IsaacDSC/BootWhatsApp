@@ -38,7 +38,7 @@ async function execute(user, msg, contato) {
     }
     await getProdutos().then(res => product = res.toString())
 
-    return ['' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotal) + '\nTaxa entrega: ' + formataReal.dinheiroReal((escolha.db[user].valorTaxa?escolha.db[user].valorTaxa:0)) + '\n*Total do pedido: ' + formataReal.dinheiroReal((valorTotal + escolha.db[user].valorTaxa)) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo', '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO']
+    return [ '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO','' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotal) + '\nTaxa entrega: ' + formataReal.dinheiroReal((escolha.db[user].valorTaxa?escolha.db[user].valorTaxa:0)) + '\n*Total do pedido: ' + formataReal.dinheiroReal((valorTotal + escolha.db[user].valorTaxa)) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo']
 
 }
 

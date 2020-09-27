@@ -7,9 +7,11 @@ const db = require('@database/configSQL')
 const Delivery = require('@models/RoteDelivery')
 
 router.get('/', async(req, res) => {
-  
-    res.render('config/config')
-
+    let SQL = `SELECT * FROM bootwhatsapp.configurations;`
+    await db.connection.query(SQL, (err, result) => {
+        console.log(result[0].neighborhood)
+    res.render('config/config',{neighborhood:result[0].neighborhood,classMenu:result[0].classMenu,description:result[0].description})
+})
 })
 
 router.post('/setConfig',async(req,res)=>{

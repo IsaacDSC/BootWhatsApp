@@ -91,8 +91,10 @@ app.engine('hbs', hbs({
         trataHora: function(value) {
             let data = new Date(value)
             return `${data.getHours()}:${data.getMinutes()}`
+        },
+        valorTrue: function(value){
+            return value == 'true'
         }
-
 
     }
 }));

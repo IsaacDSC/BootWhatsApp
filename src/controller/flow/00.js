@@ -9,8 +9,8 @@ let key = 0
 
 async function execute(user, msg, contato) {
   
-    let menu
     await Menu.getMenu(user).then((res) => menu = res.toString())
+  
 
     if (key === 1) {
          NovoClienteAtendimento.NovoClienteAtendimento({soma:1})
@@ -22,22 +22,20 @@ async function execute(user, msg, contato) {
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
         setStage.envStageDb(user, 1)
-        return [
-            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
-            menu
+        return [menu,
+            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`
         ]
     }
 
 
     if (contato) {
-        escolhas.db[user].nome = contato
+       escolhas.db[user].nome = contato
          NovoClienteAtendimento.NovoClienteAtendimento({soma: 1})
         //Nome da pessoa já Cadastrada na sua lista de contatos
         banco.db[user].stage = 1;
         setStage.envStageDb(user, 1)
-        return [
-            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
-            menu
+        return [menu,
+            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto` 
         ];
     } else {
         setStage.envStageDb(user, 0)

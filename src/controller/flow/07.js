@@ -5,7 +5,7 @@ const db = require('@database/configSQL')
 const neigborhoods = require('@helpers/getNeighborhoods')
 const setStage = require('../../helpers/setStage')
 const config = require('@helpers/configBairros')
-let escolhaBairroAtivo
+let escolhaBairroAtivo = false
 config.configBairroAtivo()
 
 const formataReal = require('@helpers/formataReal')
@@ -38,7 +38,7 @@ async function execute(user, msg) {
     if (msg == 2) {
         banco.db[user].stage = 5;
         setStage.envStageDb(user, 5)
-        return ["👏  *Está quase no final.*\nVamos definir os dados de entrega e o pagamento.", ' 🔢  Como deseja receber o pedido:\n\n*[ 1 ]* ENTREGAR NO ENDEREÇO\n*[ 2 ]* RETIRAR NO BALCAO\n*[ 3 ]* COMER AQUI NO LOCAL\n*[ 4 ]* AGENDAR A RETIRADA\n\n───────────────\n*[ V ]* MENU ANTERIOR'];
+        return ["👏  *Está quase no final.*\nVamos definir os dados de entrega e o pagamento.",' 🔢  Como deseja receber o pedido:\n\n*[ 1 ]* ENTREGAR NO ENDEREÇO\n*[ 2 ]* RETIRAR NO BALCAO\n*[ 3 ]* COMER AQUI NO LOCAL\n*[ 4 ]* AGENDAR A RETIRADA\n\n───────────────\n*[ V ]* MENU ANTERIOR'];
     }
 
     return ['Opção Invalida']

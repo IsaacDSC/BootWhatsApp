@@ -17,7 +17,13 @@
                                 <ol class="breadcrumb text-right">
                                     <p>Desativar/Ativar &nbsp;&nbsp;</p>
                                     <label class="switch">
-                                        <input type="checkbox" id="configBairro" data-toggle="modal" style="color: black;">
+                                        {{#if (valorTrue this.neighborhood)}}
+                                        <input type="checkbox" id="configBairro" checked data-toggle="modal"
+                                            style="color: black;">
+                                        {{else}}
+                                        <input type="checkbox" id="configBairro" data-toggle="modal"
+                                            style="color: black;">
+                                        {{/if}}
                                         <span class="slider round"></span>
                                     </label>
                                 </ol>
@@ -35,7 +41,13 @@
                                 <ol class="breadcrumb text-right">
                                     <p>Desativar/Ativar &nbsp;&nbsp;</p>
                                     <label class="switch">
-                                        <input type="checkbox" id="descricaoProduto" data-toggle="modal" style="color: black;">
+                                        {{#if (valorTrue this.description)}}
+                                        <input type="checkbox" id="descricaoProduto" checked data-toggle="modal"
+                                            style="color: black;">
+                                        {{else}}
+                                        <input type="checkbox" id="descricaoProduto" data-toggle="modal"
+                                            style="color: black;">
+                                        {{/if}}
                                         <span class="slider round"></span>
                                     </label>
                                 </ol>
@@ -55,7 +67,13 @@
                                 <ol class="breadcrumb text-right">
                                     <p>Desativar/Ativar &nbsp;&nbsp;</p>
                                     <label class="switch">
-                                        <input type="checkbox" id="confiClass" data-toggle="modal" style="color: black;"  >
+                                        {{#if (valorTrue this.classMenu)}}
+                                        <input type="checkbox" id="confiClass" checked data-toggle="modal"
+                                            style="color: black;">
+                                        {{else}}
+                                        <input type="checkbox" id="confiClass" data-toggle="modal"
+                                            style="color: black;">
+                                        {{/if}}
                                         <span class="slider round"></span>
                                     </label>
                                 </ol>
