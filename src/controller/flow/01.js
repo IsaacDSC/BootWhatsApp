@@ -7,10 +7,11 @@ const banco = require('@data/user/user') //configuração que fica ate o final a
 const setStage = require('@helpers/setStage')
 const getMenu = require('@helpers/getMenu')
 const formataReal = require('@helpers/formataReal')
+const config = require('@/helpers/config')
 
 async function execute(user, msg) {
-
     await getMenu.getMenu(user).then((res) => menu = res.toString())
+    await config.configDescriptionAtivo().then(res=>descricaoAtiva= res)
 
     const quantidadedeEscolhas = await Menu.findAll({
         attributes: ['class'],
@@ -36,10 +37,17 @@ async function execute(user, msg) {
         let message = '🔢 Digite o *número* do produto:\n\n ```Digite apenas um número.```\n\n'
 
         itensMenu.forEach((e, index) => {
-
+            let desc = ''
+            if(descricaoAtiva=='true'){
+                if(e.dataValues.desc){
+                desc= ` _${e.dataValues.desc}_ \n`
+            }
+                else desc =''
+            }
+           
             escolha.db[user].quantidaDeProdutos = index + 1
             escolha.db[user].escolha.push({ 'index': index + 1, 'name': e.dataValues.name, 'price': e.dataValues.value })
-            return message += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${formataReal.dinheiroReal(e.dataValues.value)}_ \n`;
+            return message += `*[ ${index + 1} ]* ${e.dataValues.name.toUpperCase()}- _${formataReal.dinheiroReal(e.dataValues.value)}_\n${desc}`;
         })
         //parte final da String
         message += "\n───────────────\n*[ V ]* MENU ANTERIOR"
