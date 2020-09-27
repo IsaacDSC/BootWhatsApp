@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
           key=1
           $.ajax({
             type: "POST",
-            url: ipHost+'/ligabot',
+            url: '/ligabot',
             success: console.log('Bot Iniciado com sucesso')
           }).then(()=> {jQuery('.modal').modal('hide')
           key=0
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
           $.ajax({
             type: "POST",
-            url: ipHost+'/desligabot',
+            url: '/desligabot',
             success: console.log('Bot Desligado com sucesso')
           })
       
