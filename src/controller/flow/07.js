@@ -4,14 +4,13 @@ const escolha = require("@data/escolha");
 const db = require('@database/configSQL')
 const neigborhoods = require('@helpers/getNeighborhoods')
 const setStage = require('../../helpers/setStage')
-const config = require('@helpers/configBairros')
-let escolhaBairroAtivo = false
-config.configBairroAtivo()
+const config = require('@/helpers/config')
 
 const formataReal = require('@helpers/formataReal')
 
 async function execute(user, msg) {
-
+  await config.configBairroAtivo().then(res=>escolhaBairroAtivo= res)
+    
     //Coloar o valor da taxa 
     let valorTotal = 0
         //seta o escolha
@@ -24,7 +23,7 @@ async function execute(user, msg) {
 
     // return menu += `*[ ${index+1} ]* ${e.dataValues.class.toUpperCase()} \n`
 
-    if (msg == 1 && escolhaBairroAtivo) {
+    if (msg == 1 && escolhaBairroAtivo=='true') {
 
         banco.db[user].stage = 8
         setStage.envStageDb(user, 8)
