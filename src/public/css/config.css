@@ -9,3 +9,7 @@
     position: relative;
     transition: 600ms;
 }
+
+#cashierTypeDelivery ul li {
+    display: inline;
+}
