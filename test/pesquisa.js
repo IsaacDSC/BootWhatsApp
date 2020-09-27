@@ -32,12 +32,20 @@ const db = require('../src/database/configSQL')
 // }
 
 // escolhaBairroAtivo()
-let SQL = `SELECT requests.id, users.name, users.telephone, menus.name, menus.class, requests.quantity, requests.createdAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id);`
-    //let SQL = `SELECT sum(requests.profit) as profit, sum(requests.spent) as spent FROM relacionamentos  join users on(relacionamentos.UserId = users.id) ;`
-db.connection.query(SQL, (err, result) => {
-    //console.log(result)
-    result.forEach(element => {
-        let SQL_agrupamento = `select menus.id, Max(menus.name) Descricao, Sum(requests.quantity) QtdVendida, Sum(requests.profit) ValorTotal from ProdPedidos;`
+// let SQL = `SELECT requests.id, users.name, users.telephone, menus.name, menus.class, requests.quantity, requests.createdAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id);`
+//     //let SQL = `SELECT sum(requests.profit) as profit, sum(requests.spent) as spent FROM relacionamentos  join users on(relacionamentos.UserId = users.id) ;`
+// db.connection.query(SQL, (err, result) => {
+//     //console.log(result)
+//     result.forEach(element => {
+//         let SQL_agrupamento = `select menus.id, Max(menus.name) Descricao, Sum(requests.quantity) QtdVendida, Sum(requests.profit) ValorTotal from ProdPedidos;`
 
-    });
+//     });
+// })
+
+let sql = `SELECT maxCompra FROM configurations;`
+db.connection.query(sql, (err, result) => {
+    console.log(result)
+    if (result[0].maxCompra == null || result[0].maxCompra == '') {
+
+    }
 })

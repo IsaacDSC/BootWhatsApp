@@ -10,6 +10,9 @@ const Config = db.define('configuration', {
     },
     classMenu: {
         type: db.Sequelize.STRING
+    },
+    maxCompra: {
+        type: db.Sequelize.STRING
     }
 })
 
