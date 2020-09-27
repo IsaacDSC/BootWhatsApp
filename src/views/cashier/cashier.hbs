@@ -80,7 +80,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Montar Pedido</a></li>                                
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Montar Pedido</a></li>
                             </ol>
                         </nav>
                     </div>
@@ -171,6 +171,13 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Carrinho de Compras</h5>
                                         <hr>
+                                        <h6 class="text-center mt-2" id="clientCarrinho"></h6>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="form-group ml-2" id="itensNoCarrinho">
+                                            </div>
+                                        </div>
+                                        <hr>
                                         <div class="row" id="cashierTypeDelivery">
                                             <ul>
                                                 <li>
@@ -190,7 +197,11 @@
                                                 <option value="">Dinheiro</option>
                                                 <option value="">Cartão</option>
                                             </select>
-                                            <h3 class="text-center mt-4">Total: R$100,00</h3>
+                                            <div class="mt-5" id="totalTaxaSub">
+                                                <h4 class="aling-left">SubTotal: </h4>
+                                                <h4 class="aling-left">Taxa de Entrega:</h4>
+                                                <h3 class="aling-left">Total: R$100,00</h3>
+                                            </div>
                                             <hr>
                                         </div>
                                         <button type="submit" class="btn btn-outline-dark col-12" data-toggle="modal"
