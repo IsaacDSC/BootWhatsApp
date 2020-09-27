@@ -2,6 +2,7 @@ require('module-alias/register')
 const express = require('express')
 const router = express.Router()
 const Config = require('@models/Config')
+const classMenu = require('@models/classMenu')
 const db = require('@database/configSQL')
 
 const Delivery = require('@models/RoteDelivery')
@@ -43,7 +44,7 @@ router.post('/', (req, res) => {
     console.log(req.body.class)
     let classe = req.body.class.toUpperCase()
     console.log(classe)
-    Config.create({
+    classMenu.create({
         classMenu: classe
     }).then(() => {
         req.flash('success_msg', 'Classe Salva com Sucesso')

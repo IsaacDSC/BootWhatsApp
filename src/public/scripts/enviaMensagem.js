@@ -7,7 +7,7 @@ function mandaMensagem(numero, mensagem) {
         {
                 $.ajax({
                         type: "POST",
-                        url: ipHost+'/mandamensagem',
+                        url: '/mandamensagem',
                         data: { numero, mensagem },
                         success: console.log('Mensagem enviada Com Sucesso')
                 })
@@ -19,7 +19,7 @@ function mandaMensagem(numero, mensagem) {
         if (resposta == true) {
                 $.ajax({
                         type: "POST",
-                        url: ipHost+'/mandamensagem',
+                        url: '/mandamensagem',
                         data: { numero, mensagem },
                         success: console.log('Mensagem enviada Com Sucesso')
                 }).then(() => location.reload())
