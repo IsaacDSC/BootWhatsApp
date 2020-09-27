@@ -24,10 +24,14 @@
                         <a class="page-link" href="/clients/-1" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
+                        {{#each totalClientes}}
+                        {{this}}
+                        {{/each}}
+                        {{totalClientes}}
                     </li>
-                    <li class="page-item"><a class="page-link" href="/clients/1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="/clients/2">2</a></li>
-                    <li class="page-item"><a class="page-link" href="/clients/3">3</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/10">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/20">2</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/30">3</a></li>
                     <li class="page-item">
                         <a class="page-link" href="/clients/+1" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
