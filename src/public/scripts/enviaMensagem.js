@@ -11,6 +11,10 @@ function mandaMensagem(numero, mensagem) {
                         data: { numero, mensagem },
                         success: console.log('Mensagem enviada Com Sucesso')
                 })
+                if(mensagem=='Preparando'){
+                let countPreparo = document.getElementById('countPreparoI')
+                countPreparo.innerText = Number(countPreparo.textContent) +1
+                }
         }
         if (resposta == true) {
                 $.ajax({
