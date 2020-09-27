@@ -1,5 +1,5 @@
 {{>_modalClient}}
-<div class="container">
+{{!-- <div class="container">
     <div class="card">
         <div class="card-body">
             <h5 class="card-text">Monte seu pedido de uma forma prática e rápida</h5>
@@ -15,17 +15,17 @@
                                 <option value="{{class}}">{{maiuscula class}}</option>
                                 {{/each}}
                             </select>
-                        </div>                        
+                        </div>
                         <div class="form-group col-2 mt-2">
                             <button class="btn btn-outline-dark mt-4" id="pesquisarClasses">PESQUISAR</button>
                         </div>
                     </div>
                     <div id="itensDoCardapio" class="row">
-                    </div>                   
+                    </div>
                     <div class="row">
                         <div class="form-group col-12">
                             <label for="" class="ml-1">Observação</label>
-                            <textarea  id="obsClienteCaixa" cols="30" rows="10" class="form-control col-12 ml-2"
+                            <textarea id="obsClienteCaixa" cols="30" rows="10" class="form-control col-12 ml-2"
                                 style="height: 100px;" style="background-color: rgba(236, 236, 236, 0.418);"></textarea>
                         </div>
                     </div>
@@ -38,8 +38,8 @@
                 <div class="form-group col-3 mt-4 ml-5"
                     style="border: rgba(180, 179, 179, 0.281) 1px solid; min-height:500px; border-radius:5px; background-color: rgba(236, 236, 236, 0.418);">
                     <h6 class="text-center mt-2">Carrinho de Compra</h6>
-                     <h6 class="text-center mt-2" id="clientCarrinho"></h6>
-                     <hr>
+                    <h6 class="text-center mt-2" id="clientCarrinho"></h6>
+                    <hr>
                     <div class="row">
                         <div class="form-group ml-2" id="itensNoCarrinho">
                         </div>
@@ -57,11 +57,158 @@
                         Cliente
                     </button>
                     <form action="" method="post">
-                        <button class="btn btn-danger col-12 mt-2 " 
-                             id="finalizarPedidoCashier">Finalizar Pedido</button>
+                        <button class="btn btn-danger col-12 mt-2 " id="finalizarPedidoCashier">Finalizar
+                            Pedido</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</div> --}}
+
+<div class="dashboard-wrapper">
+    <div class="container-fluid  dashboard-content">
+        <!-- ============================================================== -->
+        <!-- pageheader -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">Montar Pedidos</h2>
+                    <p class="pageheader-text mt-2">Monte seu pedido de uma forma prática e rápida</p>
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Montar Pedido</a></li>                                
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end pageheader -->
+        <!-- ============================================================== -->
+        {{>_msg}}
+
+        <!-- ============================================================== -->
+        <!-- horizontal form -->
+        <!-- ============================================================== -->
+        {{!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">Selecione a Classe do Aperitivo</h5>
+                <div class="card-body">
+                    <form id="form" action="/montarPedido" method="POST">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="class">Tipos Aperitivo</label>
+                                <select name="class" id="class" class="form-control">
+                                    <option value="Hamburgue">Hamburge</option>
+                                    <option value="Pizza">Pizza</option>
+                                    <option value="Petisco">Petisco</option>
+                                    <option value="Bebidas">Bebidas</option>
+                                    <option value="Doces">Doces</option>
+                                    <option value="Sorvetes">Sorvetes</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12">
+                                <button class="btn btn-outline-success col-8"
+                                    style="margin-left:20%;">Pesquisar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> --}}
+
+        <!-- ============================================================== -->
+        <!-- end pageheader -->
+        <!-- ============================================================== -->
+        <div class="card-deck mt-1">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="form-group col-8">
+                                        <label for="">Selecione uma classe do Cardápios</label>
+                                        <select name="" id="selectClassCardapio" class="form-control">
+                                            <option value="">Selecione uma classe</option>
+                                            {{#each cardapios}}
+                                            <option value="{{class}}">{{maiuscula class}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-2 mt-2">
+                                        <button class="btn btn-outline-dark mt-4"
+                                            id="pesquisarClasses">PESQUISAR</button>
+                                    </div>
+                                    <div id="itensDoCardapio" class="row">
+                                    </div>
+                                    <div class="row col-12">
+                                        <div class="form-group col-12">
+                                            <label for="" class="ml-1">Observação</label>
+                                            <textarea id="obsClienteCaixa" cols="30" rows="10"
+                                                class="form-control col-12 ml-2" style="height: 100px;"
+                                                style="background-color: rgba(236, 236, 236, 0.418);"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row col-12">
+                                        <div class="form-group col-12 mt-4 ml-2">
+                                            <button class="btn btn-outline-dark col-12" id="enviaraoCarrinho">Enviar
+                                                Carrinho</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            {{!--==================================== CArrinho de compra=========================================== --}}
+                            <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Carrinho de Compras</h5>
+                                        <hr>
+                                        <div class="row" id="cashierTypeDelivery">
+                                            <ul>
+                                                <li>
+                                                    <label for="" class="ml-3">Entrega</label>
+                                                    <input type="radio" id="classEntrega" name="classEntrega" checked>
+                                                </li>
+                                                <li>
+                                                    <label for="" class="ml-3">Retirar no Local</label>
+                                                    <input type="radio" id="classEntrega" name="classEntrega">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Tipo de Pagamento</label>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">Tipo pagamento</option>
+                                                <option value="">Dinheiro</option>
+                                                <option value="">Cartão</option>
+                                            </select>
+                                            <h3 class="text-center mt-4">Total: R$100,00</h3>
+                                            <hr>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-dark col-12" data-toggle="modal"
+                                            data-target="#MeuModal">
+                                            Cliente
+                                        </button>
+                                        <button class="btn btn-danger col-12 mt-2">Finalizar</button>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- ============================================================== -->
+<!-- end horizontal form -->
+<!-- ============================================================== -->
