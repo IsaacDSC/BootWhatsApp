@@ -2,12 +2,40 @@ require('module-alias/register')
 const express = require('express')
 const router = express.Router()
 const Config = require('@models/Config')
+const db = require('@database/configSQL')
 
 const Delivery = require('@models/RoteDelivery')
-const { isUpperCase } = require('@/public/vendors/datatables.net-bs4/pdfmake/build/pdfmake')
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
+  
     res.render('config/config')
+
+})
+
+router.post('/setConfig',async(req,res)=>{
+    let SQL;
+    if(req.body.neighborhood){
+    SQL = `UPDATE configurations SET neighborhood = '${req.body.neighborhood}';`
+    }
+    if(req.body.description){
+        SQL = `UPDATE configurations SET description = '${req.body.description}';`
+    }
+    if(req.body.classMenu){
+        SQL = `UPDATE configurations SET classMenu = '${req.body.classMenu}';`
+    }
+
+    try {
+        await db.connection.query(SQL, (err, update) => {
+        })
+    
+        res.status(200).send('Alterado Com sucesso')
+        
+    } catch (error) {
+        console.log('Set Bairro'+ error )
+
+        res.status(400).send('Falha ao alterar Bairro')
+    }
+
 })
 
 router.post('/', (req, res) => {

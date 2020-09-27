@@ -25,7 +25,7 @@ select.addEventListener('change', e => {
 
     $.ajax({
         type: "POST",
-        url: 'http://localhost:3001/caixa/pesquisaCliente',
+        url: ipHost+'/caixa/pesquisaCliente',
         data: { telephone: value },
         success: console.log('Pesquisado Com Sucesso')
     }).then((res) => {
@@ -47,7 +47,7 @@ btnPesquisar.addEventListener('click', async (e) => {
     }
     await $.ajax({
         type: "POST",
-        url: 'http://localhost:3001/caixa/pesquisaClass',
+        url: ipHost+'/caixa/pesquisaClass',
         data: { class: value },
         success: console.log('Pesquisado Com Sucesso')
     }).then(async (res) => {
