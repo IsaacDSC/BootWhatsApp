@@ -13,7 +13,7 @@ const { client, stopClient, sendText } = require('@config/bot')
 
 
 
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, async(req, res) => {
     let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address, menus.name, menus.class, menus.desc, menus.value, requests.id, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Pendente' OR status = 'Preparando' OR status= 'Saiu para Entrega';`
     let countRequest = `SELECT COUNT(distinct  UserId) as createdAt FROM relacionamentos  WHERE DATE(createdAt) = DATE(NOW());`
     let countPreparo = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Preparando';`
@@ -21,7 +21,7 @@ router.get('/', auth, async (req, res) => {
     let countEntregue = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Entregue';`
     let countCancelado = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Cancelado';`
     let emAtendimento = `select count(stage) as stage from users where stage !='14'`
-
+    let admin = `select name, email from admins;`
     db.connection.query(sql, (err, result) => {
         var saida = [];
 
@@ -79,7 +79,10 @@ router.get('/', auth, async (req, res) => {
                     db.connection.query(countEntregue, (err, countEntregue) => {
                         db.connection.query(countCancelado, (err, countCancelado) => {
                             db.connection.query(emAtendimento, (err, emAtendimento) => {
-                                res.render('index/index', { requests: saida,emAtendimento:emAtendimento[0].stage, countCancelado: countCancelado[0].createdAt, countEntregue: countEntregue[0].createdAt, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, })
+                                db.connection.query(admin, (err, admin) => {
+                                    console.log(admin)
+                                    res.render('index/index', { requests: saida, emAtendimento: emAtendimento[0].stage, countCancelado: countCancelado[0].createdAt, countEntregue: countEntregue[0].createdAt, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, admin: admin })
+                                })
                             })
                         })
                     })
@@ -112,13 +115,13 @@ router.post('/login', (req, res, next) => {
 })
 
 
-router.post('/ligabot', async (req, res) => {
+router.post('/ligabot', async(req, res) => {
     await client()
     return res.status(200).send('Bot Ligado')
 
 })
 
-router.post('/mandamensagem', async (req, res) => {
+router.post('/mandamensagem', async(req, res) => {
     try {
         let Preparo = '♨  Seu pedido está em *preparo*, assim que estiver pronto estaremos lhe avisando.\n\nObrigado.'
         let SaiuParaEntrega = '🛵  Seu pedido saiu para entrega, basta aguardar.\n\nObrigado.'
@@ -156,7 +159,7 @@ router.post('/mandamensagem', async (req, res) => {
 
 })
 
-router.post('/desligabot', async (req, res) => {
+router.post('/desligabot', async(req, res) => {
     await stopClient()
     return res.status(200).send('Bot Desligado')
 
@@ -213,7 +216,7 @@ router.get('/register', (req, res) => {
 
 router.post('/debug', (req, res) => {
     let ORDER = Math.random().toString(32).substr(2, 9)
-    //res.send(req.body.status)
+        //res.send(req.body.status)
     let sql = `UPDATE requests SET status = '${req.body.status}' WHERE 'id=${req.body.id}';`
     db.connection.query(sql, (err, result) => {
         if (err) {

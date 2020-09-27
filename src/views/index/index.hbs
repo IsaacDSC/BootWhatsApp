@@ -23,7 +23,7 @@
 </div>
 
 <div class="content mt-3">
-{{>_msg}}
+    {{>_msg}}
     <div class="col-sm-12">
         <div class="alert  alert-success alert-dismissible fade show" role="alert">
             <span class="badge badge-pill badge-success">Bom Serviço! </span> Não se esqueça de abrir sua loja.
@@ -33,75 +33,89 @@
         </div>
     </div>
 
+    <div class="container col-12">
+        <div class="col-sm-6 col-lg-2 ">
+            <div class="card text-white bg-flat-color-5">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count" id="somaPedido">{{countRequests}}</span>
+                    </h4>
+                    <p class="text-light">Pedidos</p>
+                    <div class="chart-wrapper px-0" style="height:20px;" height="20">
+                        <canvas id="widgetChart1"></canvas>
+                    </div>
 
-    <div class="col-sm-6 col-lg-2">
-        <div class="card text-white bg-flat-color-1">
-            <div class="card-body pb-0 text-center">
-                <h4 class="mb-0">
-                    <span class="count" id="somaPedido">{{countRequests}}</span>
-                </h4>
-                <p class="text-light">Pedidos</p>
+                </div>
+
+            </div>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-6 col-lg-2">
+            <div class="card text-white bg-flat-color-1">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count">{{countPreparo}}</span>
+                    </h4>
+                    <p class="text-light">Preparo</p>
+
+                    <div class="chart-wrapper px-0" style="height:20px;" height="20">
+                        <canvas id="widgetChart2"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-6 col-lg-2">
+            <div class="card text-white bg-flat-color-3">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count">{{countEntregue}}</span>
+                    </h4>
+                    <p class="text-light">Entregues</p>
+
+                </div>
+
                 <div class="chart-wrapper px-0" style="height:20px;" height="20">
-                    <canvas id="widgetChart1"></canvas>
+                    <canvas id="widgetChart3"></canvas>
                 </div>
-
             </div>
-
         </div>
-    </div>
-    <!--/.col-->
+        <!--/.col-->
 
-    <div class="col-sm-6 col-lg-2">
-        <div class="card text-white bg-flat-color-2">
-            <div class="card-body pb-0 text-center">
-                <h4 class="mb-0">
-                    <span class="count">{{countPreparo}}</span>
-                </h4>
-                <p class="text-light">Preparo</p>
+        <div class="col-sm-6 col-lg-2 ">
+            <div class="card text-white bg-flat-color-4">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count">{{countCancelado}}</span>
+                    </h4>
+                    <p class="text-light">Cancelados</p>
 
-                <div class="chart-wrapper px-0" style="height:20px;" height="20">
-                    <canvas id="widgetChart2"></canvas>
+                    <div class="chart-wrapper px-3" style="height:20px;" height="20">
+                        <canvas id="widgetChart4"></canvas>
+                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
-    <!--/.col-->
+        <div class="col-sm-6 col-lg-4 ">
+            <div class="card text-white bg-flat-color-2">
+                <div class="card-body pb-0 text-center">
+                   <h4 class="mb-0">
+                        <span class="count">Anotações</span>
+                    </h4>
+                    <p class="text-light">Digite sua anotações</p>
 
-    <div class="col-sm-6 col-lg-2">
-        <div class="card text-white bg-flat-color-3">
-            <div class="card-body pb-0 text-center">
-                <h4 class="mb-0">
-                    <span class="count">{{countEntregue}}</span>
-                </h4>
-                <p class="text-light">Entregues</p>
-
-            </div>
-
-            <div class="chart-wrapper px-0" style="height:20px;" height="20">
-                <canvas id="widgetChart3"></canvas>
-            </div>
-        </div>
-    </div>
-    <!--/.col-->
-
-    <div class="col-sm-6 col-lg-2 ">
-        <div class="card text-white bg-flat-color-4">
-            <div class="card-body pb-0 text-center">
-                <h4 class="mb-0">
-                    <span class="count">{{countCancelado}}</span>
-                </h4>
-                <p class="text-light">Cancelados</p>
-
-                <div class="chart-wrapper px-3" style="height:20px;" height="20">
-                    <canvas id="widgetChart4"></canvas>
+                    <div class="chart-wrapper px-3" style="height:20px;" height="20">
+                        <canvas id="widgetChart4"></canvas>
+                    </div>
                 </div>
-
             </div>
         </div>
+        <!--/.col-->
     </div>
-    <!--/.col-->
-
 
     <div class="col-xl-9">
         <div class="card">
@@ -149,7 +163,8 @@
                             {{#if (entregue this.status)}}
                             Entregue <input type="radio" checked></p>
                         {{else}}
-                        Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')"></p>
+                        Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')">
+                        </p>
                         {{/if}}
                         <hr>
                     </div>
@@ -160,14 +175,16 @@
                         </div>
 
                         <div class="form-group col-8">
-                            <h6 class=""><strong>Nome: </strong> {{this.nome}} &nbsp;&nbsp;&nbsp;<strong>Telefone:
+                            <h6 class=""><strong>Nome: </strong> {{this.nome}}
+                                &nbsp;&nbsp;&nbsp;<strong>Telefone:
                                 </strong> {{trataTelephone this.telephone}}</h6>
                         </div>
 
                         <div class="form-group ml-3">
                             <h6 class="mt-1"><strong>Total: {{dinheiro this.total}}</strong></i></h6>
                             {{#if this.formPayment}}
-                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong>{{dinheiro this.formPayment}}</h6>
+                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong>{{dinheiro this.formPayment}}
+                            </h6>
                             {{/if}}
                             <h6 class="mt-1"><strong>Tipo de Entrega: </strong>{{this.deliveryType}}</h6>
                             {{#if this.address}}
@@ -177,7 +194,8 @@
                                 {{trataHora this.createdAt}}</i></h6>
                             <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
                                 22:00Hr</i></h6>
-                            <h6 class="mt-1"><strong>Entregue: <i class="fa  fa-check"></i></strong> 22:30Hr</i></h6>
+                            <h6 class="mt-1"><strong>Entregue: <i class="fa  fa-check"></i></strong> 22:30Hr</i>
+                            </h6>
                         </div>
 
                     </div>
@@ -213,24 +231,31 @@
             </div>
         </div>
     </div>
+
     <div class="col-xl-3 col-lg-6">
         <div class="card">
             <div class="card-body">
                 <div class="stat-widget-one">
-                    <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
-                    <div class="stat-content dib">
-                        <div class="stat-text">Total Lucro</div>
-                        {{#if profit}}
-                        <div class="stat-digit" id="totalLucro">{{dinheiro profit}}</div>
-                        {{else}}
-                        <div class="stat-digit" id="totalLucro">0</div>
-                        {{/if}}
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <div class="stat-icon dib"><i class="ti-desktop text-dark border-dark"></i></div>
+                        </div>
+                        <div class="form-group col-8">
+                            {{#each admin}}
+                            <div class="stat-text">{{name}}</div>
+                            <br>
+                        </div>
+                        <div class="stat-content dib">
+                            <div class="text-center">
+                                E-mail: {{email}}
+                            </div>
+                        </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="col-xl-3 col-lg-6">
         <div class="card">
@@ -263,7 +288,23 @@
             </div>
         </div>
     </div>
+    <!-- /#right-panel -->
+    <div class="col-xl-3 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Total Lucro</div>
+                        {{#if profit}}
+                        <div class="stat-digit" id="totalLucro">{{dinheiro profit}}</div>
+                        {{else}}
+                        <div class="stat-digit" id="totalLucro">0</div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Right Panel -->
 </div> <!-- .content -->
-</div><!-- /#right-panel -->
-
-<!-- Right Panel -->

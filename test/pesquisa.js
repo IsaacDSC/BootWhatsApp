@@ -47,5 +47,7 @@ db.connection.query(sql, (err, result) => {
     console.log(result)
     if (result[0].maxCompra == null || result[0].maxCompra == '') {
 
+    } else {
+
     }
 })
