@@ -146,9 +146,9 @@ btnEnviarCarrinho.addEventListener('click', e => {
         itensNoCarrinho.insertAdjacentHTML('beforeend', `<p class="text-center ml-5">${e.quantidade}x <strong>${e.produto}</strong></p>`);
     })
     totalTaxaSub.insertAdjacentHTML('afterbegin', `
-    <p>SubTotal: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</p>
-    <p>Taxa de Entrega:</p>
-    <p>Total: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</p>`)
+    <h5 class="mt-1">SubTotal: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h5>
+    <h5 class="mt-1">Taxa de Entrega:</h5>
+    <h3 class="mt-1">Total: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>`)
 
 
 })
