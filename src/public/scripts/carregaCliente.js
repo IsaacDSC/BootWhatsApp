@@ -25,7 +25,7 @@ select.addEventListener('change', e => {
 
     $.ajax({
         type: "POST",
-        url: ipHost+'/caixa/pesquisaCliente',
+        url: ipHost + '/caixa/pesquisaCliente',
         data: { telephone: value },
         success: console.log('Pesquisado Com Sucesso')
     }).then((res) => {
@@ -40,17 +40,17 @@ select.addEventListener('change', e => {
 
 })
 
-btnPesquisar.addEventListener('click', async (e) => {
+btnPesquisar.addEventListener('click', async(e) => {
     let value = selectCardapio.options[selectCardapio.selectedIndex].value;
     if (!value) {
         return
     }
     await $.ajax({
         type: "POST",
-        url: ipHost+'/caixa/pesquisaClass',
+        url: ipHost + '/caixa/pesquisaClass',
         data: { class: value },
         success: console.log('Pesquisado Com Sucesso')
-    }).then(async (res) => {
+    }).then(async(res) => {
 
         console.log(res)
         async function getClass() {
@@ -65,10 +65,10 @@ btnPesquisar.addEventListener('click', async (e) => {
 
         await getClass().then(res => produto = res.toString())
         let html = `
-  
-       <div class="form-group col-6">
+        <div class="row col-12">
+       <div class="form-group col-8 ml-3">
        <label for="">${value.toUpperCase()}</label>
-       <select name="" id="" class="form-control">
+       <select name="" id="" class="form-control col-12">
            <option value="">Selecione</option>
             ${produto}
        </select>
@@ -77,8 +77,9 @@ btnPesquisar.addEventListener('click', async (e) => {
        <label for="">Qtd</label>
        <input type="text" name="" id="" value="1" class="form-control">
        </div>
-       <div class="form-group col-2 mt-2">
-       <button class="btn btn-outline-danger mt-4">-</button>
+       <div class="form-group col-1 mt-2">
+       <button class="btn btn-outline-danger mt-4" style="border-radius:5px;"><span>&#10005;</span></button>
+       </div>
        </div>
 
      
@@ -121,7 +122,7 @@ btnEnviarClient.addEventListener('click', e => {
 
 btnEnviarCarrinho.addEventListener('click', e => {
     dados.itens = []
-    $('#itensDoCardapio').find('select').each(function (index, html) {
+    $('#itensDoCardapio').find('select').each(function(index, html) {
         if (html.options[html.selectedIndex].text != "Selecione")
             quantidade = $('#itensDoCardapio').find('input')[index].value
         produto = html.options[html.selectedIndex].text
@@ -156,10 +157,10 @@ btnFinalizarPedido.addEventListener('click', e => {
     e.preventDefault()
     let _text = $('#clientCarrinho').html();
     let _textProduct = $('#itensNoCarrinho').find('p')
-    if(!_text){
+    if (!_text) {
         return alert('Falta Informar o cliente!')
     }
-    if(_textProduct.length == 0){
+    if (_textProduct.length == 0) {
         return alert('Falta escolher algum produto!')
     }
 
