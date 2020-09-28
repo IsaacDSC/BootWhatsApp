@@ -1,1 +1,0 @@
-window.ipHost = 'http://localhost:3001'

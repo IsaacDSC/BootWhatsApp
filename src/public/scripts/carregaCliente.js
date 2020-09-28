@@ -25,7 +25,7 @@ select.addEventListener('change', e => {
 
     $.ajax({
         type: "POST",
-        url:   '/caixa/pesquisaCliente',
+        url: '/caixa/pesquisaCliente',
         data: { telephone: value },
         success: console.log('Pesquisado Com Sucesso')
     }).then((res) => {
@@ -40,17 +40,17 @@ select.addEventListener('change', e => {
 
 })
 
-btnPesquisar.addEventListener('click', async(e) => {
+btnPesquisar.addEventListener('click', async (e) => {
     let value = selectCardapio.options[selectCardapio.selectedIndex].value;
     if (!value) {
         return
     }
     await $.ajax({
         type: "POST",
-        url:   '/caixa/pesquisaClass',
+        url: '/caixa/pesquisaClass',
         data: { class: value },
         success: console.log('Pesquisado Com Sucesso')
-    }).then(async(res) => {
+    }).then(async (res) => {
 
         console.log(res)
         async function getClass() {
@@ -78,7 +78,7 @@ btnPesquisar.addEventListener('click', async(e) => {
        <input type="text" name="" id="" value="1" class="form-control">
        </div>
        <div class="form-group col-1 mt-2">
-       <button class="btn btn-outline-danger mt-4" style="border-radius:5px;"><span>&#10005;</span></button>
+       <button onclick="apagaDiv(this)" class="btn btn-outline-danger mt-4" style="border-radius:5px;"><span>&#10005;</span></button>
        </div>
        </div>
 
@@ -122,7 +122,7 @@ btnEnviarClient.addEventListener('click', e => {
 
 btnEnviarCarrinho.addEventListener('click', e => {
     dados.itens = []
-    $('#itensDoCardapio').find('select').each(function(index, html) {
+    $('#itensDoCardapio').find('select').each(function (index, html) {
         if (html.options[html.selectedIndex].text != "Selecione")
             quantidade = $('#itensDoCardapio').find('input')[index].value
         produto = html.options[html.selectedIndex].text
@@ -155,13 +155,29 @@ btnEnviarCarrinho.addEventListener('click', e => {
 
 btnFinalizarPedido.addEventListener('click', e => {
     e.preventDefault()
-    let _text = $('#clientCarrinho').html();
-    let _textProduct = $('#itensNoCarrinho').find('p')
-    if (!_text) {
+    let TipoDePagamento = $('#sTipoDePagamento').val()
+    let TipoEntrega = ''
+    let entrega = $('#classEntrega').is(':checked')
+    let retiraLocal = $('#classRetirarNoLocal').is(':checked')
+
+    if(entrega){
+        TipoEntrega= 'Entregar No Endereco'
+    }if(retiraLocal){
+        TipoEntrega= 'Retirar No Local'
+    }
+    if (!dados.nomeCLient) {
         return alert('Falta Informar o cliente!')
     }
-    if (_textProduct.length == 0) {
+    if (dados.itens.length == 0) {
         return alert('Falta escolher algum produto!')
     }
 
+
+    
 })
+
+
+function apagaDiv(e) {
+    $(e).parent().parent().fadeOut(500, function () { $(e).parent().parent().remove(); })
+
+}

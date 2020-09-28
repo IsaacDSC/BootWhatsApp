@@ -1,4 +1,4 @@
-var socket = io(ipHost)
+var socket = io()
 
 socket.on('PedidoConcluido', async function (data) {
   await renderPedido(data)
