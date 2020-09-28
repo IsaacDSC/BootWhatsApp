@@ -11,3 +11,7 @@ h5 {
     display: flex;
     margin-left: 40%;
 }
+
+#EnviarImg {
+    border-radius: 5px;
+}

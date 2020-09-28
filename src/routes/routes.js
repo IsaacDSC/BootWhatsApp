@@ -98,9 +98,7 @@ router.get('/qrcode', (req, res) => {
     res.render('QrCode/QrCode', { layout: 'QrCode.hbs' })
 })
 
-router.get('/profile', (req, res) => {
-    res.render('profile/myProfile')
-})
+
 
 router.get('/login', (req, res) => {
     res.render('login/login', { layout: 'login.hbs' })

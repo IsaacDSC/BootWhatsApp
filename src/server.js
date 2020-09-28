@@ -23,7 +23,7 @@ const routes = require('@routes/routes')
 const suporteTecnico = require('@routes/suporteTecnico')
 const dados = require('@routes/dados')
 const cashier = require('@/routes/cashier')
-
+const profile = require('@routes/profile.js')
 
 //Inicia O client
 //client()
@@ -47,8 +47,9 @@ io.on('connection', function(socket) {
 function enviaParaFrontend(dados = '') {
     io.emit('PedidoConcluido', dados)
 }
+
 function NovoClienteAtendimento(dados) {
-    io.emit('NovoClienteAtendimento',dados)
+    io.emit('NovoClienteAtendimento', dados)
 }
 
 
@@ -59,8 +60,7 @@ app.engine('hbs', hbs({
     helpers: {
 
         trataTelephone: function(value) {
-            if(!value)
-            {return}
+            if (!value) { return }
             return value.split('@')[0]
         },
 
@@ -92,7 +92,7 @@ app.engine('hbs', hbs({
             let data = new Date(value)
             return `${data.getHours()}:${data.getMinutes()}`
         },
-        valorTrue: function(value){
+        valorTrue: function(value) {
             return value == 'true'
         }
 
@@ -136,6 +136,7 @@ app.use(reset)
 app.use('/suporteTecnico', suporteTecnico)
 app.use('/dados', dados)
 app.use('/caixa', cashier)
+app.use('/profile', profile)
 
 const port = process.env.PORT || 3001
 server.listen(port, () => {
@@ -143,5 +144,5 @@ server.listen(port, () => {
     console.log('Break Server CTRL + C')
 })
 
-exports.NovoClienteAtendimento =NovoClienteAtendimento
+exports.NovoClienteAtendimento = NovoClienteAtendimento
 exports.enviaParaFrontend = enviaParaFrontend
