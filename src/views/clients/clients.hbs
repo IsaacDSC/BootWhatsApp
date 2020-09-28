@@ -1,16 +1,20 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h5>Clientes Cadastrados</h5>
+            <h3>Clientes Cadastrados</h3>
             <hr>
             <div class="centralizar mt-5 ml-5">
                 {{#each clients}}
-                <div class="row col-4 ml-1">
+                <div class="row col-6 justify-content-md-center ml-2" id="CLIENTES">
                     <div class="form-group">
-                        <h5><strong>Nome: </strong>{{name}}</h5>
-                        <h5><strong>Telefone: </strong> {{trataTelephone  telephone}}</h5>
-                        <a href="{{photograph}}" target="_blank"><strong>Foto: </strong> Ver Foto</a>
-                        <p><strong>stage: </strong>{{stage}}</p>
+                        <h5 class="mt-1"><i class="fa fa-user"></i><strong> Nome: </strong>{{name}}</h5>
+                        <h5 class="mt-1"><i class="fa  fa-phone-square"></i><strong> Telefone: </strong>
+                            {{trataTelephone  telephone}}</h5>
+                        <h5 class="mt-1">
+                            <a href="{{photograph}}" target="_blank"><strong><i class="fa fa-camera"></i> Foto:
+                                </strong> Ver Foto </a>
+                            </h class="mt-1">
+                            <p><strong>stage: </strong>{{stage}}</p>
                     </div>
                     <hr>
                 </div>
@@ -18,20 +22,18 @@
             </div>
         </div>
         <div class="row">
-            <nav aria-label="Page navigation example" style="margin-left: 35%;">
+            <nav aria-label="Page navigation example" id="rolePesquisa">
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" href="/clients/-1" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
-                        {{#each totalClientes}}
-                        {{this}}
-                        {{/each}}
-                        {{totalClientes}}
                     </li>
-                    <li class="page-item"><a class="page-link" href="/clients/10">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/1">1</a></li>
                     <li class="page-item"><a class="page-link" href="/clients/20">2</a></li>
                     <li class="page-item"><a class="page-link" href="/clients/30">3</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/40">4</a></li>
+                    <li class="page-item"><a class="page-link" href="/clients/50">5</a></li>
                     <li class="page-item">
                         <a class="page-link" href="/clients/+1" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
