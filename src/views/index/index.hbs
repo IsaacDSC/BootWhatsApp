@@ -103,7 +103,7 @@
         <div class="col-sm-6 col-lg-4 ">
             <div class="card text-white bg-flat-color-2">
                 <div class="card-body pb-0 text-center">
-                   <h4 class="mb-0">
+                    <h4 class="mb-0">
                         <span class="count">Anotações</span>
                     </h4>
                     <p class="text-light">Digite sua anotações</p>
@@ -120,9 +120,10 @@
     <div class="col-xl-9">
         <div class="card">
             <div class="card-body">
-                <div id="pedidos" class="row">
+                <div id="pedidos" class="row" style="min-height: 500px;">
 
                     {{!-- fazer o carregamento de cada pedido começando por aqui --}}
+                    {{#if requests}}
                     {{#each requests}}
 
                     <div class="col-sm-4">
@@ -224,6 +225,12 @@
                         <hr class="mt-5">
                     </div>
                     {{/each}}
+
+                    {{else}}
+                    <h3 style="text-align: center;">Pedidos</h3>
+                    <hr style="height: 10px;">
+                    {{/if}}
+
                     {{!-- Fim do each  --}}
 
 
@@ -232,7 +239,7 @@
         </div>
     </div>
 
-    <div class="col-xl-3 col-lg-6">
+    <div class="col-xl-3 col-lg-6" style="min-heigth: 300px;">
         <div class="card">
             <div class="card-body">
                 <div class="stat-widget-one">

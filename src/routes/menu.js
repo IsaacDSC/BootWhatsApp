@@ -5,8 +5,9 @@ const { auth } = require('@helpers/auth')
 const db = require('@database/configSQL')
 
 router.get('/menu/register', auth, (req, res) => {
-    let SQL = `SELECT classMenu FROM classmenus;`
+    let SQL = `SELECT classMenu FROM classMenus;`
     db.connection.query(SQL, (err, result) => {
+        console.log(result)
         res.render('menu/register', { class: result })
     })
 })
