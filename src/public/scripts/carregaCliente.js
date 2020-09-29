@@ -75,7 +75,7 @@ btnPesquisar.addEventListener('click', async (e) => {
        </div>
        <div class="form-group col-2">
        <label for="">Qtd</label>
-       <input type="text" name="" id="" value="1" class="form-control">
+       <input type="number" min="1" value="1" class="form-control">
        </div>
        <div class="form-group col-1 mt-2">
        <button onclick="apagaDiv(this)" class="btn btn-outline-danger mt-4" style="border-radius:5px;"><span>&#10005;</span></button>
