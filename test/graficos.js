@@ -1,10 +1,10 @@
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawVisualization);
+charts.load('current', { 'packages': ['corechart'] });
+charts.setOnLoadCallback(drawVisualization);
 
 
 function drawVisualization() {
     // Some raw data (not necessarily accurate)
-    var data = google.visualization.arrayToDataTable([
+    var data = visualization.arrayToDataTable([
         ['Month', 'Atendimento', 'Cancelados', 'Despesas', 'Lucro', 'Clientes', 'Linha'],
         ['Jan', 165, 938, 522, 998, 450, 614.6],
         ['Fev', 165, 938, 522, 998, 450, 614.6],
@@ -30,8 +30,9 @@ function drawVisualization() {
 
     var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
     chart.draw(data, options);
+
 }
 
-google.charts.load('current', {
-    'packages': ['corechart']
-});
+
+
+drawVisualization()
