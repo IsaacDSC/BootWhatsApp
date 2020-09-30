@@ -11,6 +11,7 @@ let totalTaxaSub = document.getElementById('totalTaxaSub')
 let btnFinalizarPedido = document.getElementById('finalizarPedidoCashier')
 
 let dados = {
+    idCliente:'',
     obs: '',
     nomeCLient: '',
     telefoneClient: '',
@@ -94,7 +95,6 @@ btnPesquisar.addEventListener('click', async (e) => {
 })
 
 btnEnviarClient.addEventListener('click', e => {
-
     e.preventDefault()
     const nomeCLient = $('#nomeDoCliente').val();
     const telefoneClient = $('#numeroTelefone').val();
@@ -107,6 +107,14 @@ btnEnviarClient.addEventListener('click', e => {
     if (!telefoneClient) {
         return alert('Informe o Telefone do Cliente')
     }
+
+    $.ajax({
+        type: "POST",
+        url: '/caixa/registerUser',
+        data: {telephone:telefoneClient+'@c.us',name:nomeCLient,stage:'0',neighborhood:bairro,address:endereco}, 
+        success: console.log('Usuario cadastrado com sucesso')
+      }).then(res=>console.log( res))
+
     dados.nomeCLient = nomeCLient
     dados.telefoneClient = telefoneClient
     dados.bairro = bairro
