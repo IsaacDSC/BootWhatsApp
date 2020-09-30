@@ -56,8 +56,7 @@ btnPesquisar.addEventListener('click', async (e) => {
         async function getClass() {
             let options = ''
             await res.forEach(element => {
-
-                options += `<option value="${element.id} | ${element.value}">${element.name} - ${element.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</option>`
+                options += `<option value="${element.id} | ${element.value} | ${element.costProduce}">${element.name} - ${element.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</option>`
             })
 
             return options
@@ -136,7 +135,7 @@ btnEnviarCarrinho.addEventListener('click', e => {
             return alert('quantidade 0')
         }
         console.log(produto)
-        dados.itens.push({ produto, quantidade, valor: quantidade * idItem.split('|')[1], idItem: idItem.split('|')[0] })
+        dados.itens.push({ produto, quantidade, valor: quantidade * idItem.split('|')[1], idItem: idItem.split('|')[0],profit: (idItem.split('|')[1] * quantidade) - (idItem.split('|')[2] * quantidade), spent: idItem.split('|')[2] * quantidade  })
     })
     dados.obs = obsClienteCaixa.value
     console.log(dados)
@@ -158,7 +157,7 @@ btnEnviarCarrinho.addEventListener('click', e => {
 
 })
 
-btnFinalizarPedido.addEventListener('click', e => {
+btnFinalizarPedido.addEventListener('click', async e => {
     e.preventDefault()
     let TipoDePagamento = $('#sTipoDePagamento').val()
     let TipoEntrega = ''
@@ -174,10 +173,19 @@ btnFinalizarPedido.addEventListener('click', e => {
         return alert('Falta Informar o cliente!')
     }
     if (dados.itens.length == 0) {
-        return alert('Falta escolher algum produto!')
+        return alert('Falta adicionar algum produto ao carrinho!')
     }
 
 
+    await dados.itens.forEach(e=>{
+     $.ajax({
+        type: "POST",
+        url: '/caixa/submitRequest',
+        data: {idUser:dados.idUser, quantity:e.quantidade,observacao: dados.obs, formaPagamento:TipoDePagamento,profit:e.profit,spent:e.spent,dadosEntrega:TipoEntrega,idItem:e.idItem }, 
+        success: console.log('Item cadastrado com sucesso')
+      })
+})
+location.reload()
     
 })
 
