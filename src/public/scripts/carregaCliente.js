@@ -94,10 +94,10 @@ btnPesquisar.addEventListener('click', async (e) => {
 
 btnEnviarClient.addEventListener('click', async e => {
     e.preventDefault()
-    const nomeCLient = $('#nomeDoCliente').val();
-    const telefoneClient = $('#numeroTelefone').val();
-    const bairro = $('#neighborhood').val();
-    const endereco = $('#addressClient').val();
+    const nomeCLient = $('#nomeDoCliente').val().trim();
+    const telefoneClient = $('#numeroTelefone').val().trim();
+    const bairro = $('#neighborhood').val().trim();
+    const endereco = $('#addressClient').val().trim();
     if (!nomeCLient) {
         return alert('Informe o Nome do Cliente')
     }
@@ -163,6 +163,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
     let TipoEntrega = ''
     let entrega = $('#classEntrega').is(':checked')
     let retiraLocal = $('#classRetirarNoLocal').is(':checked')
+    let order = Math.random().toString(32).substr(2, 9)
 
     if(entrega){
         TipoEntrega= 'Entregar No Endereco'
@@ -181,7 +182,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
      $.ajax({
         type: "POST",
         url: '/caixa/submitRequest',
-        data: {idUser:dados.idUser, quantity:e.quantidade,observacao: dados.obs, formaPagamento:TipoDePagamento,profit:e.profit,spent:e.spent,dadosEntrega:TipoEntrega,idItem:e.idItem }, 
+        data: {idUser:dados.idUser,order, quantity:e.quantidade,observacao: dados.obs.trim(), formaPagamento:TipoDePagamento,profit:e.profit,spent:e.spent,dadosEntrega:TipoEntrega,idItem:e.idItem }, 
         success: console.log('Item cadastrado com sucesso')
       })
 })

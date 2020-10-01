@@ -5,7 +5,7 @@ const User = require('@models/Users')
 const setStage = require('@helpers/setStage')
 const escolha = require('@data/escolha')
 const Menu = require('@models/Menu')
-
+const config = require('@helpers/config')
 
 async function execute(user, msg) {
     let nameItens = escolha.db[user].itensEscolhido.name
@@ -13,13 +13,15 @@ async function execute(user, msg) {
     let idItem = escolha.db[user].idItem
     let price = escolha.db[user].itensEscolhido.price
     let productionCost = escolha.db[user].productionCost
-    let msgItem
 
-    if (msg > 100) {
-        return ['🔢  Quantidade muito alta.\nLimite máximo por pedido 100 unidades.']
+    await config.configMaxCompra().then(res=>quantidadeItens= res)
+
+    console.log(quantidadeItens+'Quantidade de itens')
+    if (msg > Number(quantidadeItens)) {
+        return [`🔢  Quantidade muito alta.\nLimite máximo por pedido ${quantidadeItens} unidades.`]
     }
     if (!Number(msg)) {
-        return ['🔢  Por Favor digte a Quantidade.\nLimite máximo por pedido 100 unidades.']
+        return [`🔢  Por Favor digte a Quantidade.\nLimite máximo por pedido ${quantidadeItens} unidades.`]
     } else { //esta no stage01        
         //enviando para Itens
         banco.db[user].stage = 4;
