@@ -3,12 +3,25 @@ const express = require('express')
 const router = express.Router()
 const data = require('@data/data')
 const graficos = require('@helpers/Graficos')
+const db = require('@database/configSQL')
 
 router.get('/lucros', (req, res) => {
+    let SQL_MaisVendidos = ``
+    let SQL = `SELECT relacionamentos.MenuId, menus.name, requests.quantity from relacionamentos join menus on(relacionamentos.MenuId = menus.id) join requests on(relacionamentos.PedidosId = requests.id);`
+    db.connection.query(SQL, (err, result) => {
+        if (err) {
+            console.log(result)
+        } else {
+            console.log(result)
+            result.forEach((element, index) => {
+                if (element.name == 'Coca-cola 2L') {
+                    console.log(index.length)
+                    console.log(element.length)
+                }
+            })
 
-    //graficos.GraficoLucros()
-    //graficos.clients()
-    //graficos.status()
+        }
+    })
     res.render('dados/lucros')
 })
 
