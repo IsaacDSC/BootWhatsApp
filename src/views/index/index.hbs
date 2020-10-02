@@ -136,7 +136,7 @@
                     <div class="col-sm-8 hidden-sm-down">
 
                         <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
-                               title="Imprimir" class="fa fa-print" onclick="imprimir()"></i></button>
+                               title="Imprimir" class="fa fa-print" onclick="imprimir(this)"></i></button>
 
                         <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado')"
                             title="Cancelar Pedido" class="btn btn-danger float-right"><i
@@ -224,6 +224,7 @@
                         </table>
                         <hr class="mt-5">
                     </div>
+                    </div>
                     {{/each}}
 
                     {{else}}
@@ -234,7 +235,7 @@
                     {{!-- Fim do each  --}}
 
 
-                </div>
+                
             </div>
         </div>
     </div>
