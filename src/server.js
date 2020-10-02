@@ -94,6 +94,14 @@ app.engine('hbs', hbs({
         },
         valorTrue: function(value) {
             return value == 'true'
+        },
+        meseAno: function(){
+            let data = new Date()
+           const mes =[
+                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+                "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+
+            return `${mes[data.getMonth()]} ${data.getFullYear()}`
         }
 
     }

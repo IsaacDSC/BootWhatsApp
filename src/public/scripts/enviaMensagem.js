@@ -15,6 +15,9 @@ function mandaMensagem(numero, mensagem) {
                 let countPreparo = document.getElementById('countPreparoI')
                 countPreparo.innerText = Number(countPreparo.textContent) +1
                 }
+                if(mensagem=='Cancelado'){
+                        location.reload()
+                }
         }
         if (resposta == true) {
                 $.ajax({
