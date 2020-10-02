@@ -9,7 +9,6 @@ const db = require('@database/configSQL')
 const resetEmail = require('@helpers/EmailRedefinirSenha')
 const Admin = require('@models/Admin')
 const bcrypt = require('bcrypt')
-const { has } = require('core-js/fn/dict')
 let resetConfirm = []
 let error = []
 
