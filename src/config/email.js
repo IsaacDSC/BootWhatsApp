@@ -1,9 +1,9 @@
 const nodemailer = require('nodemailer')
 
 const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    service: 'Hotmail',
     auth: {
-        user: 'developingsolutionsTech@gmail.com',
+        user: 'food-trade-business@outlook.com',
         pass: 'secret(!@#)'
     }
 })
@@ -11,4 +11,4 @@ const transporter = nodemailer.createTransport({
 
 
 
-module.exports = transporter
+exports.transporter = transporter

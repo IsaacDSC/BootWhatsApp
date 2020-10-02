@@ -6,6 +6,12 @@ const email = require('../helpers/EmailRedefinirSenha')
 const passport = require('passport')
 const { auth } = require('@helpers/auth')
 const db = require('@database/configSQL')
+const resetEmail = require('@helpers/EmailRedefinirSenha')
+const Admin = require('@models/Admin')
+const bcrypt = require('bcrypt')
+const { has } = require('core-js/fn/dict')
+let resetConfirm = []
+let error = []
 
 router.get('/login', (req, res) => {
     res.render('login/login', { layout: 'login.hbs' })
@@ -29,9 +35,6 @@ router.get('/logout', (req, res) => {
 router.get('/register', (req, res) => {
     res.render('register/register', { layout: 'login.hbs' })
 })
-
-
-
 
 router.get('/register', (req, res) => {
     let businessName = req.body.businessName
@@ -76,25 +79,78 @@ router.get('/redefinirSenha', (req, res) => {
         if (err) {
             console.log(result)
         } else {
-            console.log(result[0].email)
-            res.render('login/resetSenha', { layout: 'login.hbs', email: result[0].email })
+            let ORDER = Math.random().toString(32).substr(2, 9)
+            let email = result[0].email
+                //console.log(result[0].email)
+            resetConfirm.push({
+                code: ORDER
+            })
+            resetEmail.RedefinirSenha(email, ORDER)
+            res.redirect('/confirmCode')
+            console.log(resetConfirm)
         }
     })
 })
+router.get('/confirmCode', (req, res) => {
+    if (resetConfirm[0] == undefined) {
+        res.redirect('/login')
+    } else {
+        let SQL = `SELECT email FROM admins`
+        db.connection.query(SQL, (err, result) => {
+            if (err) {
+                console.log(result)
+            } else {
+                let email = result[0].email
+                res.render('login/resetSenha', { layout: 'login.hbs', email: email })
+            }
+        })
+    }
 
-router.post('/debug', (req, res) => {
-    let ORDER = Math.random().toString(32).substr(2, 9)
-        //res.send(req.body.status)
-    let sql = `UPDATE requests SET status = '${req.body.status}' WHERE 'id=${req.body.id}';`
-    db.connection.query(sql, (err, result) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(result)
-            res.redirect('/')
-        }
-    })
 })
 
+router.post('/confirmCode', (req, res) => {
+    console.log(resetConfirm)
+    if (req.body.code == resetConfirm[0].code) {
+        const pwd = req.body.password
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(pwd, salt, (err, hash) => {
+                const senha = hash
+                if (err) {
+                    res.send('Erro ao criptogradar esta senha: ' + err)
+                } else {
+                    Admin.findOne({ where: { id: 1 } }).then((set) => {
+                        set.password = senha,
+                            set.save().then(() => {
+                                resetConfirm.pop()
+                                req.flash('success_msg', 'Senha Redefinida com Sucesso! ' + req.body.password)
+                                res.redirect('/login')
+                            }).catch((err) => {
+                                console.log(err)
+                            })
+                    })
+                }
+            })
+        })
+
+    } else {
+        console.log(error[0])
+        if (error[0] == undefined || error[0].err == '' || error[0].err == null || error[0].err == undefined) {
+            error.push({
+                err: 1
+            })
+        } else if (error[0].err) {
+            error.unshift({
+                err: error[0].err + 1
+            })
+            if (error[0].err >= 3) {
+                console.log('Estao Tentando Hackear Esta conta, comportamento Estranho')
+                resetConfirm.pop()
+            }
+        }
+
+        req.flash('error_msg', `${error[0].err}º tentativa, Insira corretamente o código de verificação!`)
+        res.redirect('/confirmCode')
+    }
+})
 
 module.exports = router

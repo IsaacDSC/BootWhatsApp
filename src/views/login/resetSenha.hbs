@@ -1,11 +1,247 @@
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-body">
-            <h5>Redefinição de Senha</h5>
-            <p class="mt-2">Enviamos código de confirmação para o email: {{email}}</p>
-            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12"  align="center">
-                <button class="btn btn-primary" align="center" style="border-radius: 5px;">Defefir Senha</button>
+{{>_msg}}
+<div style="background-color: #e9ecef;">
+
+    <!-- start preheader -->
+    <div class="preheader"
+        style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
+        A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
+    </div>
+    <!-- end preheader -->
+
+    <!-- start body -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+        <!-- start logo -->
+        <tr>
+            <td align="center" bgcolor="#e9ecef">
+                <!--[if (gte mso 9)|(IE)]>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+        <td align="center" valign="top" width="600">
+        <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                    <tr>
+                        <td align="center" valign="top" style="padding: 36px 24px;">
+                            <a href="https://sendgrid.com" target="_blank" style="display: inline-block;">
+                                <img src="./img/paste-logo-light@2x.png" alt="Logo" border="0" width="48"
+                                    style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+            </td>
+        </tr>
+        <!-- end logo -->
+
+        <!-- start hero -->
+        <tr>
+            <td align="center" bgcolor="#e9ecef">
+                <!--[if (gte mso 9)|(IE)]>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+        <td align="center" valign="top" width="600">
+        <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                    <tr>
+                        <td align="left" bgcolor="#ffffff"
+                            style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
+                            <h1
+                                style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">
+                                Reset Senha</h1>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+            </td>
+        </tr>
+        <!-- end hero -->
+
+        <!-- start copy block -->
+        <tr>
+            <td align="center" bgcolor="#e9ecef">
+                <!--[if (gte mso 9)|(IE)]>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+        <td align="center" valign="top" width="600">
+        <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+
+                    <!-- start copy -->
+                    <tr>
+                        <td align="left" bgcolor="#ffffff"
+                            style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                            <p><span>Codigo de Confirmação enviado para: </span><strong> {{email}}</strong></p>
+                            <p style="margin: 0;">Toque no botão abaixo para redefinir a senha da sua conta. Se você não
+                                solicitou uma nova senha, você pode excluir este e-mail com segurança.</p>
+                        </td>
+                    </tr>
+                    <!-- end copy -->
+
+                    <!-- start button -->
+                    <tr>
+                        <td align="left" bgcolor="#ffffff">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center" bgcolor="#ffffff" style="padding: 12px;">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
+                                                    <button type="button" class="btn btn-secundary" data-toggle="modal"
+                                                        data-target="#codigoSeg"
+                                                        style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Confirmação
+                                                        Códig</button>
+                                                    {{!-- <a href="/confirmReset" target="_blank"
+                                                        style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">
+                                                        Confirmação Código</a> --}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- end button -->
+
+                    <!-- start copy -->
+                    <tr>
+                        <td align="left" bgcolor="#ffffff"
+                            style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                            <p style="margin: 0;">
+                                Se isso não funcionar, Entre em contato com o Suporte Técnico</p>
+                            <p style="margin: 0;"><a href="https://sendgrid.com"
+                                    target="_blank">https://same-link-as-button.url/xxx-xxx-xxxx</a></p>
+                        </td>
+                    </tr>
+                    <!-- end copy -->
+
+                    <!-- start copy -->
+                    <tr>
+                        <td align="left" bgcolor="#ffffff"
+                            style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
+                            <p style="margin: 0;">Obrigado,<br>Pela Preferência</p>
+                        </td>
+                    </tr>
+                    <!-- end copy -->
+
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+            </td>
+        </tr>
+        <!-- end copy block -->
+
+        <!-- start footer -->
+        <tr>
+            <td align="center" bgcolor="#e9ecef" style="padding: 24px;">
+                <!--[if (gte mso 9)|(IE)]>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+        <tr>
+        <td align="center" valign="top" width="600">
+        <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+
+                    <!-- start permission -->
+                    <tr>
+                        <td align="center" bgcolor="#e9ecef"
+                            style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
+                            <p style="margin: 0;">Você recebeu este e-mail porque recebemos uma solicitação de
+                                [type_of_action] para sua conta. Se você não solicitou [type_of_action], pode excluir
+                                este e-mail com segurança.</p>
+                        </td>
+                    </tr>
+                    <!-- end permission -->
+
+                    <!-- start unsubscribe -->
+                    <tr>
+                        <td align="center" bgcolor="#e9ecef"
+                            style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
+                            <p style="margin: 0;">Para mais informações entre em contato com o<a
+                                    href="https://sendgrid.com" target="_blank"> Suporte Técnico</a> a gora!.</p>
+                            <p style="margin: 0;">Author: IsaacDSC & Mateus Mendes</p>
+                        </td>
+                    </tr>
+                    <!-- end unsubscribe -->
+
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+            </td>
+        </tr>
+        <!-- end footer -->
+
+    </table>
+    <!-- end body -->
+
+</div>
+
+
+
+
+
+{{!-- Modal --}}
+<div class="modal" tabindex="-1" id="codigoSeg">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Código de Segurança</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <form action="/confirmCode" method="post">
+                        <div class="row col-10 ml-4">
+                            <div class="form-group col-12">
+                                <label for="" class="ml-2">Digite o código de Segurança</label>
+                                <input type="text" name="code" class="form-control" placeholder="Digite o código enviado no email">
+                            </div>
+                            <div class="form-group col-12 mt-3">
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control pwd" placeholder="Digite sua nova Senha">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default reveal" type="button"><i
+                                                class="glyphicon glyphicon-eye-open"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-12 mt-3">
+                                <button type="submit" class="btn btn-primary ml-3 col-12">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(".reveal").mousedown(function () {
+        $(".pwd").replaceWith($('.pwd').clone().attr('type', 'text'));
+    })
+        .mouseup(function () {
+            $(".pwd").replaceWith($('.pwd').clone().attr('type', 'password'));
+        })
+        .mouseout(function () {
+            $(".pwd").replaceWith($('.pwd').clone().attr('type', 'password'));
+        });
+</script>
