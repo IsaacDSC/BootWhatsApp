@@ -24,10 +24,6 @@ router.get('/reset', (req, res) => {
     })
 })
 
-router.get('/resetSenha', (req, res) => {
-    let senhaRedefinicao = Math.random().toString(32).substr(2, 9)
-    email.RedefinirSenha(req.body.emailRedefinir, senhaRedefinicao)
-    res.render('reset/reset')
-})
+
 
 module.exports = router

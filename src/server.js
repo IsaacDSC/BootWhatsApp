@@ -24,11 +24,11 @@ const suporteTecnico = require('@routes/suporteTecnico')
 const dados = require('@routes/dados')
 const cashier = require('@/routes/cashier')
 const profile = require('@routes/profile.js')
-
-//Inicia O client
-//client()
-//Para o Client
-//stopClient()
+const login = require('@routes/login')
+    //Inicia O client
+    //client()
+    //Para o Client
+    //stopClient()
 
 
 
@@ -137,6 +137,7 @@ app.use('/suporteTecnico', suporteTecnico)
 app.use('/dados', dados)
 app.use('/caixa', cashier)
 app.use('/profile', profile)
+app.use(login)
 
 const port = process.env.PORT || 3001
 server.listen(port, () => {
