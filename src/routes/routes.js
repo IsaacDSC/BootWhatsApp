@@ -98,11 +98,6 @@ router.get('/qrcode', (req, res) => {
     res.render('QrCode/QrCode', { layout: 'QrCode.hbs' })
 })
 
-
-
-
-
-
 router.post('/ligabot', async(req, res) => {
     await client()
     return res.status(200).send('Bot Ligado')
