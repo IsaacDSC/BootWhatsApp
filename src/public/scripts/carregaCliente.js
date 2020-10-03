@@ -186,8 +186,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
         success: console.log('Item cadastrado com sucesso')
       })
 })
-location.reload()
-    
+    location.reload()
 })
 
 

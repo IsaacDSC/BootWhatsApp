@@ -12,6 +12,8 @@ const setStage = require('../../helpers/setStage')
 
 async function execute(user, msg, contato) {
     let valorTotal = 0
+    let order = Math.random().toString(32).substr(2, 9)
+
     /*await getMenu.getMenu(user).then((res) => menu = res.toString())
 
     if(escolha.db[user].itens.length==0){
@@ -25,6 +27,7 @@ async function execute(user, msg, contato) {
         NovoClienteAtendimento.NovoClienteAtendimento({soma: -1})
         await enviaParaFrontend.enviaParaFrontend({
             name: contato,
+            order,
             telephone: user,
             taxa: escolha.db[user].valorTaxa,
             OrderTime: new Date().toTimeString(),
@@ -36,7 +39,7 @@ async function execute(user, msg, contato) {
             dadosEntrega: escolha.db[user].dadosEntrega
         })
 
-      await SubmitRequest.submit(user) //chama a função e envia os dados para a table request
+      await SubmitRequest.submit(user,order) //chama a função e envia os dados para a table request
             //seta o escolha
 
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']

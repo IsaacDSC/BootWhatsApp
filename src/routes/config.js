@@ -63,15 +63,24 @@ router.get('/delivery', (req, res) => {
 
 router.post('/delivery', (req, res) => {
     //res.send(req.body.tempoEspera)
-    Delivery.create({
+    try {  
+        Delivery.create({
         neighborhoods: req.body.bairro,
-        cost: req.body.valor,
+        cost: req.body.valor.replace(',','.'),
     }).then(() => {
         req.flash('success_msg', 'Configurações sobre Entregas Salva com Sucesso')
-        res.render('/config')
+        res.redirect('/config/delivery')
+    
     }).catch((err) => {
-        res.send(err)
+        req.flash('error_msg', 'Erro ao cadastrar Entregas')
+        res.redirect('/config/delivery')
     })
+        
+    } catch (error) {
+        req.flash('error_msg', 'Erro ao cadastrar Entregas')
+        res.redirect('/config/delivery')
+    }
+  
 })
 
 router.post('/maxPedidos', (req, res) => {

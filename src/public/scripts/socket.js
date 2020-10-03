@@ -59,7 +59,7 @@ async function renderPedido(dados) {
 
 <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
         class="fa fa-print"></i></button>
-        <button type="button" onclick="mandaMensagem('${dados.telephone}','Cancelado')"
+        <button type="button" onclick="mandaMensagem('${dados.telephone}','Cancelado','${dados.order}')"
         title="Cancelar Pedido" class="btn btn-danger float-right"><i
             class="fa fa-window-close"></i></button>
 <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
@@ -69,9 +69,9 @@ async function renderPedido(dados) {
 
 <div class="form-group mt-1 col-12">
 
-<p class="ml-3">Preparando <input type="radio" onchange="mandaMensagem('${dados.telephone}','Preparando')" >
-&nbsp;&nbsp; Saiu para Entrega <input type="radio" onchange="mandaMensagem('${dados.telephone}','Saiu para Entrega')" >
-&nbsp;&nbsp; Entregue <input type="radio" onchange="mandaMensagem('${dados.telephone}','Entregue')"></p>
+<p class="ml-3">Preparando <input type="radio" onchange="mandaMensagem('${dados.telephone}','Preparando','${dados.order}')" >
+&nbsp;&nbsp; Saiu para Entrega <input type="radio" onchange="mandaMensagem('${dados.telephone}','Saiu para Entrega','${dados.order}')" >
+&nbsp;&nbsp; Entregue <input type="radio" onchange="mandaMensagem('${dados.telephone}','Entregue','${dados.order}')"></p>
 
 <hr>
 </div>

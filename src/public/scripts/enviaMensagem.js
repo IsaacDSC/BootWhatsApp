@@ -1,4 +1,4 @@
-function mandaMensagem(numero, mensagem) {
+function mandaMensagem(numero, mensagem,order) {
         let resposta
         if(mensagem =='Cancelado'){
          resposta = confirm("Precione Ok para Cancelar o pedido!")
@@ -8,7 +8,7 @@ function mandaMensagem(numero, mensagem) {
                 $.ajax({
                         type: "POST",
                         url: '/mandamensagem',
-                        data: { numero, mensagem },
+                        data: { numero, mensagem,order },
                         success: console.log('Mensagem enviada Com Sucesso')
                 })
                 if(mensagem=='Preparando'){

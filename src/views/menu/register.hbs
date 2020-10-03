@@ -30,11 +30,11 @@
                 <div class="row col-12">
                     <div class="form-group col-6">
                         <label for="">Gasto Material</label>
-                        <input type="number" max="999" name="costProduce" id="costProduce" class="form-control">
+                        <input type="text" maxlength="6" name="costProduce" id="costProduce" class="form-control dinheiro">
                     </div>
                     <div class="form-group col-6">
                         <label for="">Valor Venda</label>
-                        <input type="number" max="999" name="value" id="value" class="form-control">
+                        <input type="text" maxlength="6" name="value" id="value" class="form-control dinheiro">
                     </div>
                 </div>
                 <div class="row col-12 mt-2">
@@ -46,3 +46,11 @@
         </div>
     </div>
 </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>  
+<script>
+
+    jQuery('.dinheiro').mask('#.##0,00', {reverse: true,});
+   
+</script>

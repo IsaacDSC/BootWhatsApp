@@ -122,7 +122,7 @@ router.post('/mandamensagem', async(req, res) => {
         if (req.body.mensagem == 'Cancelado') {
             mensagem = Cancelado
         }
-        let sql = await `UPDATE requests INNER JOIN users ON users.id = requests.idUsuario SET requests.status = '${req.body.mensagem}' WHERE telephone = '${req.body.numero}' and requests.status != 'Entregue';`
+        let sql = await `UPDATE requests INNER JOIN users ON users.id = requests.idUsuario SET requests.status = '${req.body.mensagem}' WHERE telephone = '${req.body.numero}'and  requests.orderRequest='${req.body.order}' and requests.status != 'Entregue';`
         await db.connection.query(sql, (err, result) => {
             if (err) {
                 return err

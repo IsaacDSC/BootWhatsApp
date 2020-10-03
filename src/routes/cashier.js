@@ -45,7 +45,8 @@ router.post('/pesquisaCliente', async (req, res) => {
 router.post('/registerUser', async(req, res) => {
     try {
           await updateUsers.updateOrCreate(req.body.telephone,{telephone:req.body.telephone,name:req.body.name,stage:0,neighborhood:req.body.neighborhood,address:req.body.address})
-    .then(result=>res.send( String(result)))
+    .then(result=>{res.send( String(result))
+    })
     } catch (error) {
         console.log(error)
     }

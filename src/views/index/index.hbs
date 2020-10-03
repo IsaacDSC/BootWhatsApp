@@ -138,7 +138,7 @@
                         <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
                                title="Imprimir" class="fa fa-print" onclick="imprimir(this)"></i></button>
 
-                        <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado')"
+                        <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado','{{this.orderRequest}}')"
                             title="Cancelar Pedido" class="btn btn-danger float-right"><i
                                 class="fa fa-window-close"></i></button>
                         <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
@@ -151,20 +151,20 @@
                         <p class="ml-3">Preparando <input type="radio" checked>
                             {{else}}
                         <p class="ml-3">Preparando <input type="radio"
-                                onchange="mandaMensagem('{{this.telephone}}','Preparando')">
+                                onchange="mandaMensagem('{{this.telephone}}','Preparando','{{this.orderRequest}}')">
                             {{/if}}
                             &nbsp;&nbsp;
                             {{#if (saiuParaEntrega this.status)}}
                             Saiu para Entrega <input type="radio" checked>
                             {{else}}
                             Saiu para Entrega <input type="radio"
-                                onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega')">
+                                onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega','{{this.orderRequest}}')">
                             {{/if}}
                             &nbsp;&nbsp;
                             {{#if (entregue this.status)}}
                             Entregue <input type="radio" checked></p>
                         {{else}}
-                        Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue')">
+                        Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue','{{this.orderRequest}}')">
                         </p>
                         {{/if}}
                         <hr>

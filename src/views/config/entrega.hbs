@@ -1,7 +1,9 @@
+
 <div class="container">
     <div class="card">
         <div class="card-body">
             <h5>Configurações de entregas</h5>
+              {{>_msg}}
             <hr>
         </div>
         <div class="card-body">
@@ -11,20 +13,24 @@
                         <label for="">Cadastre os Bairros disponíveis para entrega</label>
                         <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Digite o nome do bairro">
                     </div>
+                   <!--
                     <div class="form-group col-12">
                         <label for="">Cadastre as cidades disponíveis para entrega</label>
                         <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Digite o nome da cidade">
                     </div>
+                     -->
                     <div class="row col-12">
                         <div class="form-group col-6">
                         <label for="">Valor da Entrega</label>
-                        <input type="text" name="valor" id="valor" class="form-control" placeholder="Digite o valor da entrega">
+                        <input type="text" name="valor" id="valor" class="form-control dinheiro" maxlength="6" placeholder="Digite o valor da entrega">
                     </div>
+                   <!--
                     <div class="form-group col-6">
                         <label for="">Tempo Médio para Entrega</label>
                         <input type="time" name="tempoEspera" id="tempoEspera" class="form-control"
                             placeholder="Digite o Tempo médio para entrega">
                     </div>
+                       -->
                     </div>                    
                     <div class="form-group col-12 mt-2">
                         <button class="btn btn-success col-12">Enviar Configurações</button>
@@ -34,3 +40,11 @@
         </div>
     </div>
 </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>  
+<script>
+
+    jQuery('.dinheiro').mask('#.##0,00', {reverse: true,});
+   
+</script>

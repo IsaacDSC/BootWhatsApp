@@ -16,8 +16,8 @@ router.post('/menu/register', auth, (req, res) => {
     Menu.create({
         name: req.body.name,
         desc: req.body.desc,
-        value: req.body.value,
-        costProduce: req.body.costProduce,
+        value: req.body.value.replace(',','.'),
+        costProduce: req.body.costProduce.replace(',','.'),
         class: req.body.class
     }).then(() => {
         req.flash('success_msg', 'cardápio cadastrado com sucesso!')
