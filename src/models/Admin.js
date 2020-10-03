@@ -4,7 +4,7 @@ const Admin = db.define('admin', {
     company: {
         type: db.Sequelize.STRING,
         require: true,
-        allowNull: true
+        allowNull: false
     },
     name: {
         type: db.Sequelize.STRING,
@@ -12,6 +12,11 @@ const Admin = db.define('admin', {
         allowNull: false,
     },
     email: {
+        type: db.Sequelize.STRING,
+        require: true,
+        allowNull: false
+    },
+    telephone: {
         type: db.Sequelize.STRING,
         require: true,
         allowNull: false
