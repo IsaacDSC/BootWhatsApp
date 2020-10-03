@@ -154,7 +154,10 @@ router.post('/desligabot', async(req, res) => {
 })
 
 
-
+router.get('/marketing', (req, res) => {
+    req.flash('error_msg', 'O plano Básico não cobre Marketing Incluso, se deseja ter uma ferramenta de marketing inclusa acesse: http://DevelopingSolutions/planos')
+    res.redirect('/')
+})
 
 
 
