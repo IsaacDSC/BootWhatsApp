@@ -1,23 +1,29 @@
 var ctx = document.getElementById('grafico').getContext('2d');
 
 $('document').ready(function(){
+   let item = []
+   let quantidade = []
 $.ajax({
     type: "POST",
-    url: '/desligabot',
+    url: '/dados/grafico',
     success: function(data){
-        alert('ok')
+         data.forEach(e => {
+            item.push( e.name)
+            quantidade.push(e.quantidade)
+         })
     }
-  })
+  }).then(()=>renderGrafico(item,quantidade))
+
 })
 
-
+function renderGrafico(item,quantidade){
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: item,
         datasets: [{
             label: 'ITENS MAIS VENDIDOS',
-            data: [25, 19, 3, 5, 2, 3],
+            data: quantidade,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -46,4 +52,4 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
-});
+})}

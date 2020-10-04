@@ -25,10 +25,16 @@ router.get('/lucros', (req, res) => {
     res.render('dados/lucros')
 })
 
-router.post('/grafico',(req,res)=>{
+router.post('/grafico',(req,res)=>{ 
+    //where requests.status = 'Entregue'
     SQL = `select menus.name, sum(requests.quantity) as quantidade from relacionamentos  join menus on(relacionamentos.MenuId = menus.id) join requests on( relacionamentos.PedidosId = requests.id) 
     GROUP BY menus.name ORDER BY quantidade DESC limit 6;`
-    
+    db.connection.query(SQL, (err, result) => {
+        if(err){
+            return err
+        }
+        res.status(200).send(result)
+    })
 
 })
 
