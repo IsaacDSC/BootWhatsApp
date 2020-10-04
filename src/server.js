@@ -21,7 +21,7 @@ const msg = require('@routes/msg')
 const reset = require('@routes/reset')
 const routes = require('@routes/routes')
 const suporteTecnico = require('@routes/suporteTecnico')
-const dados = require('@routes/dados')
+const grapichs = require('@/routes/grapichs')
 const cashier = require('@/routes/cashier')
 const profile = require('@routes/profile.js')
 const login = require('@routes/login')
@@ -95,11 +95,12 @@ app.engine('hbs', hbs({
         valorTrue: function(value) {
             return value == 'true'
         },
-        meseAno: function(){
+        meseAno: function() {
             let data = new Date()
-           const mes =[
+            const mes = [
                 "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
-                "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+                "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            ]
 
             return `${mes[data.getMonth()]} ${data.getFullYear()}`
         }
@@ -142,7 +143,7 @@ app.use('/msg', msg)
 app.use('/config', config)
 app.use(reset)
 app.use('/suporteTecnico', suporteTecnico)
-app.use('/dados', dados)
+app.use('/dados', grapichs)
 app.use('/caixa', cashier)
 app.use('/profile', profile)
 app.use(login)
