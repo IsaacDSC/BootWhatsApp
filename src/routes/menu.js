@@ -16,8 +16,8 @@ router.post('/menu/register', auth, (req, res) => {
     Menu.create({
         name: req.body.name,
         desc: req.body.desc,
-        value: req.body.value.replace(',','.'),
-        costProduce: req.body.costProduce.replace(',','.'),
+        value: req.body.value.replace(',', '.'),
+        costProduce: req.body.costProduce.replace(',', '.'),
         class: req.body.class
     }).then(() => {
         req.flash('success_msg', 'cardápio cadastrado com sucesso!')
@@ -81,7 +81,7 @@ router.post('/menu/editar', (req, res) => {
             res.redirect('/menu/editar')
         } else {
             req.flash('success')
-            res.render('menu/views', { result: result })
+            res.render('menu/editar', { result: result })
         }
     })
 
@@ -94,7 +94,7 @@ router.post('/menu/editando', (req, res) => {
         if (err) {
             res.send(err)
         } else {
-            req.flash('success_msg', 'Menu cadastrado com sucesso!')
+            req.flash('success_msg', 'Cardápio Editado com sucesso!')
             res.redirect('/menu/views')
             console.log(result)
         }
