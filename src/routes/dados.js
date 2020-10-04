@@ -27,7 +27,7 @@ router.get('/lucros', (req, res) => {
 
 router.post('/grafico',(req,res)=>{
     SQL = `select menus.name, sum(requests.quantity) as quantidade from relacionamentos  join menus on(relacionamentos.MenuId = menus.id) join requests on( relacionamentos.PedidosId = requests.id) 
-    GROUP BY menus.name ORDER BY requests.quantity DESC limit 6;`
+    GROUP BY menus.name ORDER BY quantidade DESC limit 6;`
     
 
 })
