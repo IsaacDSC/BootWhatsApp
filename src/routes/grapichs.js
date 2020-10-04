@@ -6,24 +6,28 @@ const graficos = require('@helpers/Graficos')
 const db = require('@database/configSQL')
 
 router.get('/lucros', (req, res) => {
-    res.render('grapichs/grapichs')
-        /* let SQL_MaisVendidos = ``
-         let SQL = `SELECT relacionamentos.MenuId, menus.name, requests.quantity from relacionamentos join menus on(relacionamentos.MenuId = menus.id) join requests on(relacionamentos.PedidosId = requests.id);`
-         db.connection.query(SQL, (err, result) => {
-             if (err) {
-                 console.log(result)
-             } else {
-                 console.log(result)
-                 result.forEach((element, index) => {
-                     if (element.name == 'Coca-cola 2L') {
-                         console.log(index.length)
-                         console.log(element.length)
-                     }
-                 })
+    let sql_admin = `SELECT name, email company, telephone FROM admins;`
+    let SQL = `SELECT  (SELECT COUNT(users.id) FROM   users ) AS totalCliente,
+    ( SELECT COUNT(users.id) FROM users where DATE(createdAt) = DATE(NOW()) ) AS novosClientes,
+    ( SELECT count(requests.id) FROM requests ) AS totalPedidos,
+    ( SELECT sum(requests.profit + requests.spent) FROM requests where status='Entregue' ) AS totalVendas,
+    ( SELECT sum(requests.profit) FROM requests where status='Entregue') AS totalLucro,
+    ( SELECT sum(requests.spent) FROM requests where status='Entregue' ) AS totalDespesa,
+    ( SELECT count(requests.id)*0.35 FROM requests where status='Entregue' ) AS pagamento`
 
-             }
-         })*/
-        //res.render('dados/lucros')
+    db.connection.query(sql_admin, (err, admin) => {
+        if (err) {
+            console.log(admin)
+        } else {
+            console.log(admin)
+            const adminOne = admin[0]
+            console.log(admin[0])
+            db.connection.query(SQL, (err, dados) => {
+                res.render('grapichs/grapichs', { admin: admin[0], dados: dados[0] })
+            })
+        }
+    })
+
 })
 
 router.post('/grafico', (req, res) => {
