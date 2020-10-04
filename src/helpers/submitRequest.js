@@ -23,7 +23,7 @@ async function submit(user,order) {
         } else {
             console.log(`\n\n IdUser: ${UserId[0].id}\n\n`)
             escolha.db[user].itens.forEach(e => { //adicionei o valor taxa 
-                let SQL = `INSERT INTO requests (IdUsuario,orderRequest,quantity, note, delivery, formPayment, profit, spent, status,deliveryType,createdAt,updatedAt) VALUES ('${UserId[0].id}','${order}','${Number(e.quantity)}','${escolha.db[user].observacao}', '${escolha.db[user].valorTaxa}', '${escolha.db[user].formaPagamento}', '${Number(e.profit)}','${Number(e.spent)}','${'Pendente'}','${escolha.db[user].dadosEntrega}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP); `
+                let SQL = `INSERT INTO requests (IdUsuario,orderRequest,quantity, note,trocoPara, delivery, formPayment, profit, spent, status,deliveryType,createdAt,updatedAt) VALUES ('${UserId[0].id}','${order}','${Number(e.quantity)}','${escolha.db[user].observacao}','${escolha.db[user].trocoPara}', '${escolha.db[user].valorTaxa}', '${escolha.db[user].formaPagamento}', '${Number(e.profit)}','${Number(e.spent)}','${'Pendente'}','${escolha.db[user].dadosEntrega}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP); `
                 db.connection.query(SQL, (err, result) => {
                     if (err) {
                         throw err

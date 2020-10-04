@@ -28,6 +28,9 @@ const Requests = db.define('request', {
     note: {
         type: db.Sequelize.STRING,
     },
+    trocoPara: {
+        type: db.Sequelize.STRING,
+    },
     delivery: {
         type: db.Sequelize.FLOAT,
         allowNull: true,
