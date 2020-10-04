@@ -6,7 +6,7 @@ const graficos = require('@helpers/Graficos')
 const db = require('@database/configSQL')
 
 router.get('/lucros', (req, res) => {
-    let SQL_MaisVendidos = ``
+   /* let SQL_MaisVendidos = ``
     let SQL = `SELECT relacionamentos.MenuId, menus.name, requests.quantity from relacionamentos join menus on(relacionamentos.MenuId = menus.id) join requests on(relacionamentos.PedidosId = requests.id);`
     db.connection.query(SQL, (err, result) => {
         if (err) {
@@ -21,8 +21,15 @@ router.get('/lucros', (req, res) => {
             })
 
         }
-    })
+    })*/
     res.render('dados/lucros')
+})
+
+router.post('/grafico',(req,res)=>{
+    SQL = `select menus.name, sum(requests.quantity) as quantidade from relacionamentos  join menus on(relacionamentos.MenuId = menus.id) join requests on( relacionamentos.PedidosId = requests.id) 
+    GROUP BY menus.name ORDER BY requests.quantity DESC limit 6;`
+    
+
 })
 
 
