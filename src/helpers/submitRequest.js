@@ -51,6 +51,7 @@ async function submit(user,order) {
             })
         }
     })
+    escolha.db[user] = {}
 
 }
 

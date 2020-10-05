@@ -1,6 +1,6 @@
 <!-- Header-->
 <header id="header" class="header">
-   <audio id="sound" src="/audio/campainha.mp3"></audio>
+ <audio class="audios" src="/audio/campainha.mp3"></audio>
     <div class="header-menu">
         <div class="col-sm-7">
             <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
@@ -42,10 +42,22 @@
 </header><!-- /header -->
 <!-- Header-->
 <script>
+    var socket = io()
     const perfil = document.querySelector('#perfil')
-    perfil.addEventListener('click')
+  /*  perfil.addEventListener('click',e=>{
+         playSound()
+    })*/
 
             //mudar class colocar no final da class show 
             //mudar aria-expanded="true"
+socket.on('PedidoConcluido', async function (data) {
+    playSound()
+
+})
+
+
+function playSound() {
+    const som = document.getElementsByClassName("audios")
+    som.play();
+}
 </script>
-<script src="/scripts/socket.js"></script>

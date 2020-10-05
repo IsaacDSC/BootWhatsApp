@@ -22,7 +22,7 @@ async function execute(user, msg, contato) {
     } */
 
     if (msg.toUpperCase() == 'OK') {
-        banco.db[user].stage = 0
+        banco.db[user].stage = ''
         setStage.envStageDb(user, 0)
         NovoClienteAtendimento.NovoClienteAtendimento({soma: -1})
         await enviaParaFrontend.enviaParaFrontend({
@@ -41,7 +41,6 @@ async function execute(user, msg, contato) {
 
       await SubmitRequest.submit(user,order) //chama a função e envia os dados para a table request
             //seta o escolha
-
         return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
 
     }
