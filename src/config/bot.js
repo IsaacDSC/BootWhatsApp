@@ -128,6 +128,7 @@ function getStage(user) {
         return banco.db[user].stage;
     } else {
         //Se for a primeira vez que entra e contato
+        banco.db[user]={stage: 0}
         escolha.db[user] = {
             escolha: [],
             itens: [],
