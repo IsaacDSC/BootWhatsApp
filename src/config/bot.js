@@ -132,7 +132,7 @@ function getStage(user) {
             escolha: [],
             itens: [],
             nome: '',
-            valorTaxa: '',
+            valorTaxa: 0,
             itensEscolhido: '',
             quantidaDeProdutos: '',
             productionCost: '',
