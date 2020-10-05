@@ -32,8 +32,6 @@ Retirar emojis para não enviar ao banco de dados: text.replace(/([\u2700-\u27BF
 Para aceitar Emojis no Banco de dados: ALTER TABLE tabela MODIFY coluna VARCHAR(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 
-Olá
-
 ALTER TABLE relacionamentos ADD COLUMN MenuId int first;
 ALTER TABLE relacionamentos ADD FOREIGN KEY (cardapioId) REFERENCES menus(id);
 
