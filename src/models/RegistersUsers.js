@@ -1,3 +1,5 @@
+require('module-alias/register')
+
 const db = require('@database/index')
 
 const RegisterUsers = db.define('resgisterUser', {
@@ -21,9 +23,9 @@ const RegisterUsers = db.define('resgisterUser', {
         type: db.Sequelize.STRING(12),
         allowNull: true
     },
-    terms: db.Sequelize.STRING(6),
-    allowNull: false
+    terms: {type:db.Sequelize.STRING(6),
+    allowNull: false}
 })
-
+//RegisterUsers.sync({ force: true })
 
 module.exports = RegisterUsers
