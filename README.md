@@ -38,7 +38,7 @@ ALTER TABLE relacionamentos ADD COLUMN MenuId int first;
 ALTER TABLE relacionamentos ADD FOREIGN KEY (cardapioId) REFERENCES menus(id);
 
 Para Inserir na tabela os dados e retornar o id: {
-    INSERT INTO  admins (name,email,password,createdAt,updatedAt) 
+    INSERT INTO  admins (name,email,password,createdAt,updatedAt)
     VALUES('bob','asdasd','sdasd','2020-09-20 01:51:52','2020-09-20 01:51:52');
     SELECT LAST_INSERT_ID();
 }
@@ -50,3 +50,6 @@ function check() {
 }
 
 Mudar o Ip enviaMensagem.js Socket.js ImagemQrCode.js
+
+
+Fim
