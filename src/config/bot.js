@@ -10,10 +10,12 @@ const User = require('@models/Users');
 //const public = require('@public/images')
 let venom_client;
 var status
+
 const sendText = async (telephone, msg) => {
     if (!venom_client) {
-        console.log('client ainda não criado!');
-        await client();
+        return
+        //console.log('client ainda não criado!');
+        //await client();
     }
     return await venom_client.sendText(telephone, msg);
 }

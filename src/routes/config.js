@@ -8,7 +8,7 @@ const db = require('@database/configSQL')
 const Delivery = require('@models/RoteDelivery')
 
 router.get('/', async(req, res) => {
-    let SQL = `SELECT * FROM bootwhatsapp.configurations;`
+    let SQL = `SELECT * FROM configurations;`
     await db.connection.query(SQL, (err, result) => {
         console.log(result[0].neighborhood)
         res.render('config/config', { neighborhood: result[0].neighborhood, classMenu: result[0].classMenu, description: result[0].description,maxCompra:result[0].maxCompra })
