@@ -113,7 +113,7 @@ router.post('/mandamensagem', async (req, res) => {
     try {
         let Preparo = '♨  Seu pedido está em *preparo*, assim que estiver pronto estaremos lhe avisando.\n\nObrigado.'
         let SaiuParaEntrega = '🛵  Seu pedido saiu para entrega, basta aguardar.\n\nObrigado.'
-        let Entregue = 'Produto Entregue'
+        let Entregue = 'Houseburguer Bm agradece por utilizarem nossos serviços! Esperamos entende-lo(a) novamente em breve.'
         let Cancelado = 'Seu Pedido foi cancelado'
         if (req.body.mensagem == 'Preparando') {
             mensagem = Preparo
