@@ -65,19 +65,19 @@ btnPesquisar.addEventListener('click', async(e) => {
 
         await getClass().then(res => produto = res.toString())
         let html = `
-        <div class="row>
-       <div class="col-8">
+        <div class="row col-12">
+       <div class="form-group col-8">
        <label for="">${value.toUpperCase()}</label>
        <select name="" id="" class="form-control col-12">
            <option value="">Selecione</option>
             ${produto}
        </select>
        </div>
-       <div class="col-4 ml-2">
+       <div class="form-group col-3">
        <label for="">Qtd</label>
        <input type="number" min="1" value="1" class="form-control">
        </div>
-       <div class="col-1 mt-1">
+       <div class="form-group col-1 mt-2">
        <button onclick="apagaDiv(this)" class="btn btn-outline-danger mt-4" style="border-radius:5px;"><span>&#10005;</span></button>
        </div>
        </div>
