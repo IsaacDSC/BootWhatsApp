@@ -1,16 +1,9 @@
+require('dotenv').config()
 module.exports = {
     dialect: 'mysql',
-    host: '127.0.0.1',
-    username: 'dev',
-    password: 'secret',
-    database: 'bootwhatsapp',
+    host: process.env.DATABASE_HOST,
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
+    database: process.env.DATABASE_NAME,
 
 }
-  /*  
-module.exports = {
-    dialect: 'mysql',
-    host: 'db4free.net',
-    username: 'matheusmlol',
-    password: '12052000a',
-    database: 'bootwhatsapp'
-}*/

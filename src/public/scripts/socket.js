@@ -1,17 +1,17 @@
 var socket = io()
 
-socket.on('PedidoConcluido', async function (data) {
-  await renderPedido(data)
-    somaPedidosDia()
+socket.on('PedidoConcluido', async function(data) {
     playSound()
+    await renderPedido(data)
+    somaPedidosDia()
 
 })
 
-socket.on('NovoClienteAtendimento',async function (data){
+socket.on('NovoClienteAtendimento', async function(data) {
     somaAtendimento(data.soma)
 })
 
-function somaAtendimento(data){
+function somaAtendimento(data) {
     let elemeto = document.getElementById('EmAtendimento')
     const text = elemeto.textContent
     let SomaNumber = Number(text) + data
@@ -19,10 +19,17 @@ function somaAtendimento(data){
 }
 //Enviar o User e o Status do pedido quando mudar para o backend
 
-let elemento = document.getElementById('pedidos');
+let elemento = document.getElementById('divDoPedido');
 
 
 async function renderPedido(dados) {
+    let data = new Date()
+    const mes = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+        "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ]
+
+
     let produtos;
     let total = 0;
     // let spent=0;
@@ -48,9 +55,13 @@ async function renderPedido(dados) {
     await getProdutos().then(res => produtos = res.toString())
 
 
-    const html = ` <div class="col-sm-4">
-<h4 class="card-title mb-0">Pedidos</h4>
-<div class="small text-muted">October 2017</div>
+    const html = `
+    <div id="pedidos" class="row" style="min-height: 500px;">
+
+    <div class="col-sm-4">
+    <h4 class="card-title mb-0">Pedidos</h4>
+
+<div class="small text-muted">${mes[data.getMonth()]} ${data.getFullYear()}</div>
 
 </div>
 <!--/.col-->
@@ -58,7 +69,7 @@ async function renderPedido(dados) {
 <div class="col-sm-8 hidden-sm-down">
 
 <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
-        class="fa fa-print"></i></button>
+        class="fa fa-print" onclick="imprimir(this)"></i></button>
         <button type="button" onclick="mandaMensagem('${dados.telephone}','Cancelado','${dados.order}')"
         title="Cancelar Pedido" class="btn btn-danger float-right"><i
             class="fa fa-window-close"></i></button>
@@ -80,7 +91,7 @@ async function renderPedido(dados) {
 
 <div class="form-group col-12">
 <div class="form-group col-4">
-    <h6 class=""><strong>Pedido: </strong> #</h6>
+    <h6 class=""><strong>Pedido: </strong> # ${dados.order}</h6>
 </div>
 
 <div class="form-group col-8">
@@ -89,17 +100,16 @@ async function renderPedido(dados) {
 </div>
 
 <div class="form-group ml-3">
-    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}  ${dados.trocoPara ? ` Troco Para: ${(dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))}` : ''}</i></h6>
-    <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> R$ 50,00
-    </h6>
-    <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
-            Cartao</i></h6>
-    <h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address ? dados.Address : ''}</h6>
+    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })} ${dados.taxa? `<i>--Taxa de Entrega ${dados.taxa}</i>` : ''} ${dados.trocoPara ? ` Troco Para: ${(dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))}` : ''}</i></h6>
+    ${dados.formaPagamento?`
+    <h6 class="mt-1"><strong>Foma de Pagamento: </strong> ${dados.formaPagamento}
+    </h6>`:''
+    }
+    ${dados.dadosEntrega?`<h6 class="mt-1"><strong>Tipo de Entrega: </strong>${dados.dadosEntrega}</h6>`  : ''}
+
+    ${dados.Address?`<h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address}  ${dados.bairro}</h6>`: ''}
     <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
         ${dados.OrderTime.split(':')[0]}:${dados.OrderTime.split(':')[1]}Hr</i></h6>
-    <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
-        22:00Hr</i></h6>
-    <h6 class="mt-1"><strong>Entregue: <i class="fa  fa-check"></i></strong> 22:30Hr</i></h6>
 </div>
 
 </div>
@@ -117,7 +127,9 @@ async function renderPedido(dados) {
     ${produtos}
 </table>
 <hr class="mt-5">
-</div>`
+</div>
+</div>
+`
 
     elemento.insertAdjacentHTML('afterbegin', html);
 }

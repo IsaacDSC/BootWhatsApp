@@ -11,9 +11,6 @@ const Delivery = db.define('deliverie', {
     },
     cost: {
         type: db.Sequelize.FLOAT,
-    },
-    timeDelivery: {
-        type: db.Sequelize.DATE
     }
 })
 

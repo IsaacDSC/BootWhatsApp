@@ -13,9 +13,10 @@ async function execute(user, msg) {
     
     //Coloar o valor da taxa 
     let valorTotal = 0
+    valorTotal = 0
         //seta o escolha
         //Coloar o valor da taxa 
-
+    
     await escolha.db[user].itens.forEach(e => {
         valorTotal += e.itens.price * e.quantity
     })
@@ -24,7 +25,7 @@ async function execute(user, msg) {
     // return menu += `*[ ${index+1} ]* ${e.dataValues.class.toUpperCase()} \n`
 
     if (msg == 1 && escolhaBairroAtivo=='true') {
-
+        //add
         banco.db[user].stage = 8
         setStage.envStageDb(user, 8)
         return [bairros]

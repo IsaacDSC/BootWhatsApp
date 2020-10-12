@@ -14,7 +14,7 @@ router.get('/menu/register', auth, (req, res) => {
 
 router.post('/menu/register', auth, (req, res) => {
     Menu.create({
-        name: req.body.name,
+        name: req.body.name.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); }),
         desc: req.body.desc,
         value: req.body.value.replace(',', '.'),
         costProduce: req.body.costProduce.replace(',', '.'),
@@ -27,7 +27,7 @@ router.post('/menu/register', auth, (req, res) => {
     })
 })
 
-router.get('/menu/views', (req, res) => {
+router.get('/menu/views', auth, (req, res) => {
     let sql_class = `SELECT DISTINCT class FROM menus;`
     db.connection.query(sql_class, (err, classe) => {
         res.render('menu/views', { class: classe })
@@ -36,7 +36,7 @@ router.get('/menu/views', (req, res) => {
 
 })
 
-router.post('/menu/views', (req, res) => {
+router.post('/menu/views', auth, (req, res) => {
     let classe = req.body.class
         //res.send(classe)
     if (classe.length > 0) {
@@ -53,7 +53,7 @@ router.post('/menu/views', (req, res) => {
     }
 })
 
-router.post('/menu/apagar', (req, res) => {
+router.post('/menu/apagar', auth, (req, res) => {
     //res.send(req.body.id)
     let id = req.body.id
     let SQL = `DELETE FROM menus WHERE (id = '${id}');`
@@ -70,7 +70,7 @@ router.post('/menu/apagar', (req, res) => {
     })
 })
 
-router.post('/menu/editar', (req, res) => {
+router.post('/menu/editar', auth, (req, res) => {
     //res.send(req.body.id)
     let id = req.body.id
     let SQL = `SELECT * FROM menus WHERE id = '${id}';`
@@ -86,7 +86,7 @@ router.post('/menu/editar', (req, res) => {
     })
 
 })
-router.post('/menu/editando', (req, res) => {
+router.post('/menu/editando', auth, (req, res) => {
     let id = req.body.id
     let SQL = `UPDATE menus SET name = '${req.body.name}', class = '${req.body.class}' ,menus.desc='${req.body.desc}',value='${req.body.value}', costProduce='${req.body.costProduce}' WHERE id='${id}';`
     db.connection.query(SQL, (err, result) => {

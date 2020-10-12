@@ -7,10 +7,10 @@
             <form action="/menu/register" method="post">
                 <div class="row col-12">
                     <div class="form-group col-12">
-                        <select name="class" id="class" class="form-control">
-                            <option value="promocoes">Selecione uma Classe</option>
+                        <select name="class" required id="class" class="form-control">
+                            <option value="">Selecione uma Classe</option>
                             {{#each class}}
-                            <option value={{classMenu}}>{{classMenu}}</option>
+                            <option value="{{classMenu}}">{{classMenu}}</option>
                             {{/each}}                            
                         </select>
                     </div>

@@ -16,7 +16,7 @@ router.get('/reset', (req, res) => {
                     name: 'Administrador',
                     email: 'admin@gmail.com',
                     company: "empresa",
-                    telephone: '988180688',
+                    telephone: '99999999',
                     password: pass
                 }).then(() => res.send('OK')).catch((err) => {
                     res.send('Erro ao enviar ao banco de dados: ' + err)

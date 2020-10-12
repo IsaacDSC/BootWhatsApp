@@ -1,11 +1,11 @@
-function mandaMensagem(numero, mensagem,order) {
+async function mandaMensagem(numero, mensagem,order) {
         let resposta
         if(mensagem =='Cancelado'){
          resposta = confirm("Precione Ok para Cancelar o pedido!")
         }
         if(mensagem != 'Cancelado')
         {
-                $.ajax({
+              await $.ajax({
                         type: "POST",
                         url: '/mandamensagem',
                         data: { numero, mensagem,order },
@@ -15,15 +15,16 @@ function mandaMensagem(numero, mensagem,order) {
                 let countPreparo = document.getElementById('countPreparoI')
                 countPreparo.innerText = Number(countPreparo.textContent) +1
                 }
-                if(mensagem=='Cancelado'){
+                if(mensagem=='Entregue'){
                         location.reload()
                 }
+               
         }
         if (resposta == true) {
                 $.ajax({
                         type: "POST",
                         url: '/mandamensagem',
-                        data: { numero, mensagem },
+                        data: { numero, mensagem,order },
                         success: console.log('Mensagem enviada Com Sucesso')
                 }).then(() => location.reload())
         }

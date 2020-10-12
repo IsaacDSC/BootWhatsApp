@@ -1,20 +1,57 @@
-<div class="container" id="configClass">
-    <form action="/config" method="post">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="aling-rigth">Configurar Classes de Cardápios</h5>
-                <hr>
-                <div class="row">
-                    <div class="form-group col-8">
-                        <label for="">Cadastre a Classe do alimento para Venda <small>(Ex: Bebidas, Lanches, Pizzas,
-                                etc..)</small></label>
-                        <input type="text" name="class" id="class" class="form-control">
+<div class="modal" tabindex="-1" id="addClass">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastre a Classe de seu Cardápio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/config" method="post">
+                    <div class="row">
+                        <div class="form-group col-8">
+                            <label for="">Cadastre a Classe do alimento para Venda <small>(Ex: Bebidas, Lanches,
+                                    Pizzas,
+                                    etc..)</small></label>
+                            <input type="text" name="class" id="class" class="form-control" placeholder="Digite aqui a Classe a ser cadastrada">
+                        </div>
+                        <div class="form-group col-4 mt-4">
+                        <br>
+                            <button class="btn btn-outline-dark col-8 mt-2">Enviar</button>
+                        </div>
                     </div>
-                    <div class="form-group col-4 mt-2">
-                        <button class="btn btn-outline-dark mt-4 col-8">Enviar</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="editClass">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Classe Cardápio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/config/editarClass" method="post">
+                    <div class="row">
+                        <div class="form-group col-8">
+                            <select name="class" required id="class" class="form-control mt-4">
+                                <option value="">Selecione</option>
+                                {{#each menus}}
+                                <option value="{{class}}">{{class}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    <div class="col-4">
+                        <button class="btn btn-outline-dark mt-4 col-8">Editar</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

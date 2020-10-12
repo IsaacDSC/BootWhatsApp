@@ -4,8 +4,9 @@ const router = express.Router()
 const data = require('@data/data')
 const graficos = require('@helpers/Graficos')
 const db = require('@database/configSQL')
+const { auth } = require('@helpers/auth')
 
-router.get('/lucros', (req, res) => {
+router.get('/lucros', auth, (req, res) => {
     let sql_admin = `SELECT name, email company, telephone FROM admins;`
     let SQL = `SELECT  (SELECT COUNT(users.id) FROM   users ) AS totalCliente,
     ( SELECT COUNT(users.id) FROM users where DATE(createdAt) = DATE(NOW()) ) AS novosClientes,
@@ -13,7 +14,11 @@ router.get('/lucros', (req, res) => {
     ( SELECT sum(requests.profit + requests.spent) FROM requests where status='Entregue' ) AS totalVendas,
     ( SELECT sum(requests.profit) FROM requests where status='Entregue') AS totalLucro,
     ( SELECT sum(requests.spent) FROM requests where status='Entregue' ) AS totalDespesa,
-    ( SELECT count(requests.id)*0.35 FROM requests where status='Entregue' ) AS pagamento`
+    ( SELECT vencimento from configurations ) AS vencimento,
+    ( SELECT ROUND(count(distinct requests.orderRequest)*configurations.plano,2) as preco
+FROM requests , configurations
+WHERE requests.createdAt >= date(configurations.inicio)  and status = 'Entregue' 
+ ) AS pagamento`
 
     db.connection.query(sql_admin, (err, admin) => {
         if (err) {
@@ -30,7 +35,7 @@ router.get('/lucros', (req, res) => {
 
 })
 
-router.post('/grafico', (req, res) => {
+router.post('/grafico', auth, (req, res) => {
     //where requests.status = 'Entregue'
     SQL = `select menus.name, sum(requests.quantity) as quantidade from relacionamentos  join menus on(relacionamentos.MenuId = menus.id) join requests on( relacionamentos.PedidosId = requests.id)
     GROUP BY menus.name ORDER BY quantidade DESC limit 6;`

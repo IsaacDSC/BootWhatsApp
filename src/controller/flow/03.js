@@ -16,7 +16,6 @@ async function execute(user, msg) {
 
     await config.configMaxCompra().then(res=>quantidadeItens= res)
 
-    console.log(quantidadeItens+'Quantidade de itens')
     if (msg > Number(quantidadeItens)) {
         return [`🔢  Quantidade muito alta.\nLimite máximo por pedido ${quantidadeItens} unidades.`]
     }

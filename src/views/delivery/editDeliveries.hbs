@@ -6,29 +6,29 @@
             <hr>
         </div>
         <div class="card-body">
-            <form action="/config/delivery" method="post">
+            <form action="/delivery/editando" method="post">
+            <input type="hidden" value="{{delivery.id}}" name="id">
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="">Cadastre os Bairros disponíveis para entrega</label>
-                        <input type="text" name="bairro" id="bairro" class="form-control"
-                            placeholder="Digite o nome do bairro">
+                        <input type="text" name="neighborhoods" id="neighborhoods" class="form-control"
+                            placeholder="Digite o nome do bairro" value="{{delivery.neighborhoods}}">
 
                     </div>
                     <div class="form-group col-4">
                         <label for="">Valor da Entrega</label>
-                        <input type="text" name="valor" id="valor" class="form-control dinheiro" maxlength="6"
-                            placeholder="Digite o valor da entrega">
+                        <input type="text" name="cost" id="valor" class="form-control dinheiro" maxlength="6"
+                            placeholder="Digite o valor da entrega" value="{{dinheiro delivery.cost}}">
                     </div>
                 </div>
         </div>
         <div class="form-group col-5 mt-2">
-            <button class="btn btn-dark col-12">Enviar Configurações</button>
+            <button class="btn btn-dark col-12">Editar Configurações</button>
         </div>
         </form>
     </div>
 </div>
-</div>
-</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>

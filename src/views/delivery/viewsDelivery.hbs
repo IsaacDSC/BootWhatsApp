@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-text">Rotas de Delivery Cadastradas</h3>
+            <hr>
+            {{>_msg}}
+            <hr>
+            {{#each delivery}}
+            <div class="row">
+                <div class="col-3">
+                    <div class="btn-group col-3 mt-4" role="group" aria-label="Basic example">
+                        <form action="/delivery/editar" method="post">
+                            <input type="hidden" name="id" id="id" value="{{id}}">
+                            <button type="submit" class="btn btn-secondary"
+                                style="height: 50px; border-radius:5px; width:110%">Editar</button>
+                        </form>
+                        <form action="/delivery/apagar" method="post">
+                            <input type="hidden" name="id" id="id" value="{{id}}">
+                            <button type="submit" class="btn btn-secondary ml-2"
+                                style="height: 50px; border-radius:5px; width:100%">Apagar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-6 mt-4">
+                    <h5><strong>Bairros: </strong>{{neighborhoods}}</h5>
+                    <h5><strong>Valor Entrega: </strong> {{dinheiro cost}}</h5>
+                </div>
+            </div>
+            <hr>
+            {{/each}}
+
+        </div>
+    </div>
+</div>

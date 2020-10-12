@@ -12,10 +12,19 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <p>Desligar / Ligar &nbsp;&nbsp;</p>
+
+                    {{#if (valorTrue boot)}}
                     <label class="switch">
-                        <input type="checkbox" id="checkbox" data-toggle="modal" checked>
+                        <input type="checkbox" id="checkbox" data-toggle="modal"checked >
                         <span class="slider round"></span>
                     </label>
+                    {{else}}
+                      <label class="switch">
+                        <input type="checkbox" id="checkbox" data-toggle="modal" >
+                        <span class="slider round"></span>
+                    </label>
+
+                    {{/if}}
                 </ol>
             </div>
         </div>
@@ -119,11 +128,11 @@
 
     <div class="col-xl-9">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" id="divDoPedido">
 
-                    {{!-- fazer o carregamento de cada pedido começando por aqui --}}
-                    {{#if requests}}
-                    {{#each requests}}
+                {{!-- fazer o carregamento de cada pedido começando por aqui --}}
+                {{#if requests}}
+                {{#each requests}}
 
                 <div id="pedidos" class="row" style="min-height: 500px;">
                     <div class="col-sm-4">
@@ -136,9 +145,10 @@
                     <div class="col-sm-8 hidden-sm-down">
 
                         <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
-                               title="Imprimir" class="fa fa-print" onclick="imprimir(this)"></i></button>
+                                title="Imprimir" class="fa fa-print" onclick="imprimir(this)"></i></button>
 
-                        <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado','{{this.orderRequest}}')"
+                        <button type="button"
+                            onclick="mandaMensagem('{{this.telephone}}','Cancelado','{{this.orderRequest}}')"
                             title="Cancelar Pedido" class="btn btn-danger float-right"><i
                                 class="fa fa-window-close"></i></button>
                         <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
@@ -164,7 +174,8 @@
                             {{#if (entregue this.status)}}
                             Entregue <input type="radio" checked></p>
                         {{else}}
-                        Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue','{{this.orderRequest}}')">
+                        Entregue <input type="radio"
+                            onchange="mandaMensagem('{{this.telephone}}','Entregue','{{this.orderRequest}}')">
                         </p>
                         {{/if}}
                         <hr>
@@ -175,28 +186,35 @@
                             <h6 class=""><strong>Pedido: </strong> #{{this.orderRequest}}</h6>
                         </div>
 
-                        <div class="form-group col-8" >
+                        <div class="form-group col-8">
                             <h6 class=""><strong>Nome: </strong> {{this.nome}}
                                 &nbsp;&nbsp;&nbsp;<strong>Telefone:
                                 </strong> {{trataTelephone this.telephone}}</h6>
                         </div>
 
                         <div class="form-group ml-3">
+                            {{#if this.delivery}}
+                            <h6 class="mt-1"><strong>Total: {{somaDinheiro this.total this.delivery}} </strong><i>--Taxa de Entrega {{dinheiro this.delivery}}
+                                {{#if this.trocoPara}}
+                                    (Troco Para: {{dinheiro this.trocoPara}})
+                                {{/if}}
+
+                            </i></i></h6>
+                            {{else}}
                             <h6 class="mt-1"><strong>Total: {{dinheiro this.total}}</strong></i></h6>
+                            {{/if}}
+
                             {{#if this.formPayment}}
-                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong>{{dinheiro this.formPayment}}
+                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong>{{ this.formPayment}}
                             </h6>
                             {{/if}}
                             <h6 class="mt-1"><strong>Tipo de Entrega: </strong>{{this.deliveryType}}</h6>
                             {{#if this.address}}
-                            <h6 class="mt-1"><strong>Endereço: </strong>{{this.address}}</h6>
+                            <h6 class="mt-1"><strong>Endereço: </strong>{{this.address}} {{this.neighborhood}}</h6>
                             {{/if}}
                             <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
                                 {{trataHora this.createdAt}}</i></h6>
-                            <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
-                                22:00Hr</i></h6>
-                            <h6 class="mt-1"><strong>Entregue: <i class="fa  fa-check"></i></strong> 22:30Hr</i>
-                            </h6>
+
                         </div>
 
                     </div>
@@ -224,18 +242,18 @@
                         </table>
                         <hr class="mt-5">
                     </div>
-                    </div>
-                    {{/each}}
+                </div>
+                {{/each}}
 
-                    {{else}}
-                    <h3 style="text-align: center;">Pedidos</h3>
-                    <hr style="height: 10px;">
-                    {{/if}}
+                {{else}}
+                <h3 style="text-align: center;">Pedidos</h3>
+                <hr style="height: 10px;">
+                {{/if}}
 
-                    {{!-- Fim do each  --}}
+                {{!-- Fim do each  --}}
 
 
-                
+
             </div>
         </div>
     </div>
@@ -317,4 +335,4 @@
     <!-- Right Panel -->
 </div> <!-- .content -->
 
- <script src="/scripts/socket.js"></script>
+<script src="/scripts/socket.js"></script>

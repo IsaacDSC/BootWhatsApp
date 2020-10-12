@@ -13,6 +13,7 @@ let btnFinalizarPedido = document.getElementById('finalizarPedidoCashier')
 let dados = {
     obs: '',
     nomeCLient: '',
+    taxa: 0,
     telefoneClient: '',
     bairro: '',
     endereco: '',
@@ -98,6 +99,8 @@ btnEnviarClient.addEventListener('click', async e => {
     const telefoneClient = $('#numeroTelefone').val().trim();
     const bairro = $('#neighborhood').val().trim();
     const endereco = $('#addressClient').val().trim();
+    const taxaEntrega = $('#taxaEntrega').val().trim().replace(',','.')
+
     if (!nomeCLient) {
         return alert('Informe o Nome do Cliente')
     }
@@ -116,8 +119,8 @@ btnEnviarClient.addEventListener('click', async e => {
     dados.telefoneClient = telefoneClient
     dados.bairro = bairro
     dados.endereco = endereco
+    dados.taxa = taxaEntrega
     jQuery('.modal').modal('hide')
-    console.log(dados)
     clientCarrinho.innerText = `Cliente: ${nomeCLient}`
 
 })
@@ -151,8 +154,8 @@ btnEnviarCarrinho.addEventListener('click', e => {
     })
     totalTaxaSub.insertAdjacentHTML('afterbegin', `
     <h5 class="mt-1">SubTotal: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h5>
-    <h5 class="mt-1">Taxa de Entrega:</h5>
-    <h3 class="mt-1">Total: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>`)
+    <h5 class="mt-1">Taxa de Entrega: ${Number(dados.taxa).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h5>
+    <h3 class="mt-1">Total: ${(Number(soma) +Number(dados.taxa)).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>`)
 
 
 })
@@ -182,7 +185,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
      $.ajax({
         type: "POST",
         url: '/caixa/submitRequest',
-        data: {idUser:dados.idUser,order, quantity:e.quantidade,observacao: dados.obs.trim(), formaPagamento:TipoDePagamento,profit:e.profit,spent:e.spent,dadosEntrega:TipoEntrega,idItem:e.idItem }, 
+        data: {idUser:dados.idUser,order, quantity:e.quantidade,observacao: dados.obs.trim(), formaPagamento:TipoDePagamento,profit:e.profit,spent:e.spent,dadosEntrega:TipoEntrega,idItem:e.idItem,taxa:dados.taxa }, 
         success: console.log('Item cadastrado com sucesso')
       })
 })

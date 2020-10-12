@@ -14,6 +14,12 @@ async function configMaxCompra() {
     const bairroConfig = await Config.findOne({ attributes: ['maxCompra']})
     return bairroConfig.dataValues.maxCompra
 }
+async function configBotAtivo() {
+    const bairroConfig = await Config.findOne({ attributes: ['boot']})
+    return bairroConfig.dataValues.boot
+}
+
+exports.configBotAtivo = configBotAtivo
 
 exports.configMaxCompra = configMaxCompra
 

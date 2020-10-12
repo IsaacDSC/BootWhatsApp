@@ -7,6 +7,7 @@ const folder = path.resolve(__dirname + '', '../', 'public', 'images', 'avatar')
 const multer = require('multer')
 const Admin = require('@models/Admin')
 const bcrypt = require('bcrypt')
+const { auth } = require('@helpers/auth')
 let ADMIN = []
     //config multer
 const storage = multer.diskStorage({
@@ -38,7 +39,7 @@ const upload = multer({
     }
 })
 
-router.get('/', (req, res) => {
+router.get('/', auth, (req, res) => {
     Admin.findOne({ where: { id: 1 } }).then((admin) => {
         res.render('profile/myProfile', { admin: admin })
     }).catch((err) => {
@@ -46,7 +47,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
     const pwd = req.body.pwd
     if (req.body.pwd == '') {
         req.flash('error_msg', 'Digite a Senha')
@@ -125,7 +126,7 @@ router.post('/', (req, res) => {
 //     }
 // })
 
-router.post('/upload', upload.single('img'), (req, res) => {
+router.post('/upload', auth, upload.single('img'), (req, res) => {
     res.redirect('/profile')
 })
 

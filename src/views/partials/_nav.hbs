@@ -1,6 +1,6 @@
 <!-- Header-->
 <header id="header" class="header">
- <audio class="audios" src="/audio/campainha.mp3"></audio>
+    <audio class="audios" src="/audio/campainha.mp3"></audio>
     <div class="header-menu">
         <div class="col-sm-7">
             <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
@@ -22,15 +22,22 @@
         <div class="col-sm-5">
             <div class="user-area dropdown float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" src="/images/avatar/profile.png" alt="User Avatar" id="perfil">
+                    <img class="user-avatar rounded-circle" src="/images/avatar/profile.png" alt="User Avatar"
+                        id="perfil">
                 </a>
 
                 <div class="user-menu dropdown-menu">
+
+                    <button type="button" data-toggle="modal" data-target=".modal" title="Abrir QrCode"
+                        class="btn rounded mr-5"><i class="fa fa-qrcode"></i> Qr code</button>
+
                     <a class="nav-link" href="/profile"><i class="fa fa-user"></i> Perfil</a>
 
                     <a class="nav-link" href="/config"><i class="fa fa-cog"></i> Configurações</a>
 
                     <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Sair</a>
+
+
                 </div>
             </div>
 
@@ -44,20 +51,20 @@
 <script>
     var socket = io()
     const perfil = document.querySelector('#perfil')
-  /*  perfil.addEventListener('click',e=>{
-         playSound()
-    })*/
+    /*  perfil.addEventListener('click',e=>{
+           playSound()
+      })*/
 
-            //mudar class colocar no final da class show 
-            //mudar aria-expanded="true"
-socket.on('PedidoConcluido', async function (data) {
-    playSound()
+    //mudar class colocar no final da class show
+    //mudar aria-expanded="true"
+    socket.on('PedidoConcluido', async function (data) {
+        playSound()
 
-})
+    })
 
 
-function playSound() {
-    const som = document.getElementsByClassName("audios")
-    som.play();
-}
+    function playSound() {
+        const som = document.getElementsByClassName("audios")
+        som.play();
+    }
 </script>

@@ -4,7 +4,7 @@ const router = express.Router()
 const { auth } = require('@helpers/auth')
 const db = require('@database/configSQL')
 
-router.get('/clients/:pag', (req, res) => {
+router.get('/clients/:pag', auth, (req, res) => {
     let parametro = Number(req.params.pag)
     let sql = `SELECT * FROM users ORDER BY id=${parametro} DESC LIMIT 20;`
     let sql_totalClients = `SELECT COUNT(id) as total FROM users;`

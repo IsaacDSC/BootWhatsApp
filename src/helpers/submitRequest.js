@@ -3,10 +3,10 @@ const db = require('@database/configSQL');
 const escolha = require("@data/escolha");
 
 
-async function submit(user,order) {
-    
+async function submit(user, order) {
+
     let sql = `SELECT id FROM users where telephone = '${user}';`
-    let sql_adress = `UPDATE users SET address = '${escolha.db[user].endereco}' WHERE telephone = '${user}';`
+    let sql_adress = `UPDATE users SET address = '${escolha.db[user].endereco}',neighborhood = '${escolha.db[user].bairro}' WHERE telephone = '${user}';`
         //let sql_relacionamentos = `ISERT INTO relacionamentos (UserId,MenuId,PedidosId,createdAt, updateAt) VALUES ('${UserId[0].id}','${escolha.db[user].itens.id}','',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),`
     await db.connection.query(sql_adress, (err, resultado) => {
         if (err) {
@@ -17,7 +17,7 @@ async function submit(user,order) {
     })
 
 
-   await  db.connection.query(sql, (err, UserId) => {
+    await db.connection.query(sql, (err, UserId) => {
         if (err) {
             throw err
         } else {
@@ -27,21 +27,20 @@ async function submit(user,order) {
                 db.connection.query(SQL, (err, result) => {
                     if (err) {
                         throw err
-                    
+
                     } else {
                         //idRequest=result.insertId
                         //id menu = e.id
                         //user id = UserId[0].id 
-                    let insert_SQL = `INSERT INTO relacionamentos (UserId,MenuId, PedidosId,createdAt,updatedAt) VALUES (${UserId[0].id},${e.id},${result.insertId},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);`
+                        let insert_SQL = `INSERT INTO relacionamentos (UserId,MenuId, PedidosId,createdAt,updatedAt) VALUES (${UserId[0].id},${e.id},${result.insertId},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);`
                         db.connection.query(insert_SQL, (err, result) => {
-                            if(err){
+                            if (err) {
                                 throw err
-                            }
-                            else{
+                            } else {
 
                                 console.log('Inserido com sucesso na tabela relacionamento')
                             }
-                          
+
                         })
 
 
@@ -51,8 +50,8 @@ async function submit(user,order) {
             })
         }
     })
-    escolha.db[user] = {}
 
+   setTimeout(()=>{escolha.db[user]= undefined},5000)
 }
 
 exports.submit = submit

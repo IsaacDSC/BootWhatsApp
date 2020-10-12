@@ -1,6 +1,8 @@
 {{>_msg}}
 
 {{>_configClassMenu}}
+
+
 <div class="container" id="config">
     <div class="card">
         <div class="card-body">
@@ -59,38 +61,30 @@
             <hr>
             <div class="row">
                 <div class="form-group col-6 ml-5 mt-3">
-                    <h6 class="text-left">Configurações Classes de Cardápios <small><br>(Ative para separar seus
+                    <h6 class="text-left">Configurações Classes de Cardápios <small><br>(Aperte no botão Cadastar e separar seus
                             produtos em classes Ex:bebidas,hamburgues,pizzas, etc)</small></h6>
-                    <div class="col-sm-12">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <p>Desativar/Ativar &nbsp;&nbsp;</p>
-                                    <label class="switch">
-                                        {{#if (valorTrue this.classMenu)}}
-                                        <input type="checkbox" id="confiClass" checked data-toggle="modal"
-                                            style="color: black;">
-                                        {{else}}
-                                        <input type="checkbox" id="confiClass" data-toggle="modal"
-                                            style="color: black;">
-                                        {{/if}}
-                                        <span class="slider round"></span>
-                                    </label>
-                                </ol>
-                            </div>
+                    <div class="col-sm-5 mt-3">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-dark" data-toggle="modal"
+                                data-target="#addClass" style="border-radius: 5px;">Cadastar Classe Cardápio</button>
+                            <button type="button" class="btn btn-outline-dark ml-1" data-toggle="modal"
+                                data-target="#editClass" style="border-radius: 5px;">Editar Classe Cardápio</button>
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-4 ml-2 mt-3">
-                    <h6 class="text-left">Configurações numeros máximo de compra <small><br>(Ative que clientes não venham conseguir pedir comprar mais que o limite que você tem para produzir)</small></h6>
-                    <form action="/config/maxPedidos" method="post">
-                        <div class="col-sm-12 ml-3">
-                            <div class="row mt-3">
-                                <input type="number" min="1" name="maxCompra"  class="form-control col-7" value="{{this.maxCompra}}">
-                                <button class="btn btn-outline-dark col-3 ml-2" style="border-radius: 5px;">Salvar</button>
-                            </div>
-                    </form>
-                    {{!-- <div class="page-header float-left">
+
+            <div class="form-group col-4 ml-2 mt-3">
+                <h6 class="text-left">Configurações numeros máximo de compra <small><br>(Ative que clientes não
+                        venham conseguir pedir comprar mais que o limite que você tem para produzir)</small></h6>
+                <form action="/config/maxPedidos" method="post">
+                    <div class="col-sm-12 ml-3">
+                        <div class="row mt-3">
+                            <input type="number" min="1" name="maxCompra" class="form-control col-7"
+                                value="{{this.maxCompra}}">
+                            <button class="btn btn-outline-dark col-3 ml-2" style="border-radius: 5px;">Salvar</button>
+                        </div>
+                </form>
+                {{!-- <div class="page-header float-left">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <p>Desativar/Ativar &nbsp;&nbsp;</p>
@@ -107,10 +101,12 @@
                                 </ol>
                             </div>
                         </div> --}}
-                </div>
             </div>
         </div>
+
     </div>
 </div>
 </div>
- <script src="/scripts/socket.js"></script>
+
+
+<script src="/scripts/socket.js"></script>

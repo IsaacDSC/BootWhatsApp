@@ -19,8 +19,7 @@
         </div>
     </div>
 
-
-
+     {{>_msg}}
     <div class="col-sm-12 mb-4">
         <div class="card-group">
             <div class="card col-md-6 no-padding ">
@@ -67,7 +66,7 @@
                         <i class="fa fa-pie-chart"></i>
                     </div>
                     <div class="h4 mb-0">
-                        <span class="count">28</span>%
+                                              <span class="count"><i class="fa ti-lock"></i></span>
                     </div>
                     <small class="text-muted text-uppercase font-weight-bold">Crescimento</small>
                     <div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;"></div>
@@ -78,7 +77,7 @@
                     <div class="h1 text-muted text-right mb-4">
                         <i class="fa fa-clock-o"></i>
                     </div>
-                    <div class="h4 mb-0">10/11/2020</div>
+                    <div class="h4 mb-0">{{trataData dados.vencimento}}</div>
                     <small class="text-muted text-uppercase font-weight-bold">Data Vencimento</small>
                     <div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
                 </div>
@@ -112,16 +111,16 @@
                                 <div class="card-header user-header alt bg-dark">
                                     <div class="media">
                                         <a href="#">
-                                            <img class="align-self-center rounded-circle mr-3"
+                                            <img class="align-self-center  rounded-circle mr-3"
                                                 style="width:85px; height:85px;" alt=""
                                                 src="/images/avatar/profile.png">
                                         </a>
                                         <div class="media-body">
                                             <h2 class="text-light display-6">{{admin.name}}</h2>
-                                            <p>{{admin.company}}</p>
+                                            <p class="text-center">{{admin.company}}</p>
                                         </div>
                                     </div>
-                                    <p class="mt-2">{{admin.company}}{{admin.telephone}}</p>
+                                    <p class="mt-2 text-center">Telefone: {{admin.telephone}}</p>
                                 </div>
 
 
@@ -140,13 +139,13 @@
                                     </li>
 
                                     <li class="list-group-item">
-                                        <a href="#"> <i class="fa ti-money"></i> Pagamento<span
+                                        <a href="#pgm"> <i class="fa ti-money"></i> Pagamento<span
                                                 class="badge badge-warning pull-right r-activity">
                                                 {{dinheiro dados.pagamento}}</span></a>
                                     </li>
-                                    <li class="list-group-item">
-                                        <a href="#"> <i class="fa fa-cogs"></i> Configurar Planos</a>
-                                    </li>
+                                   <!-- <li class="list-group-item">
+                                        <a href="#"> <i class="fa fa-cogs"></i> Acertos de Contas</a>
+                                    </li>-->
                                 </ul>
 
                             </section>
@@ -162,23 +161,25 @@
 
 <div class="col-lg-12 col-md-6">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" id="pgm">
             <strong class="card-title mb-3" style="text-align: center;">Developing Solutions</strong>
+            <form action="/pay" method="post">
+            <input type="image" src="/images/mceclip0.png" width="300" alt="Submit Form" />
+
+            </form>
         </div>
         <div class="card-body">
-<p class="text-center"><i class="fa fa-code"></i>Author Matheus & Isaac DSC</p>
+            <p class="text-center"><i class="fa fa-code"></i>Author Matheus & Isaac DSC</p>
             <div class="card-text text-sm-center">
-                <a href="#"><i class="fa fa-facebook pr-1"></i></a>
-                <a href="#"><i class="fa fa-twitter pr-1"></i></a>
-                <a href="#"><i class="fa fa-linkedin pr-1"></i></a>
-                <a href="#"><i class="fa fa-pinterest pr-1"></i></a>
+                <a href="https://www.facebook.com/DevelopingSolutiosTech" target="_blanck"><i class="fa fa-facebook pr-1"></i></a>
+                <a href="https://solutionstech.com.br" target="_blanck"><i class="fa fa-code pr-1"></i></a>
+
             </div>
         </div>
     </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="/scripts/grafico.js"></script>
 
- <script src="/scripts/socket.js"></script>
+<script src="/scripts/socket.js"></script>

@@ -6,11 +6,12 @@ const setStage = require('../../helpers/setStage')
 
 
 async function execute(user, msg) {
-
+    let valorTotal = 0
+    //add
+    valorTotal = 0
     const frase = '🔤  Se desejar, digite alguma *OBSERVAÇÃO PARA O SEU PEDIDO*.\n\n───────────────\n[ N ] NÃO TENHO OBSERVAÇÃO'
 
     //Coloar o valor da taxa 
-    let valorTotal =0
 
     await escolha.db[user].itens.forEach(e => {
         valorTotal += e.itens.price * e.quantity

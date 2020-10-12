@@ -10,8 +10,6 @@ const flowOne = require('@controller/flow/01')
 
 async function execute(user, msg) {
 
-    console.log(escolha.db[user])
-
     await getMenu.getMenu(user).then((res) => menu = res.toString())
 
     //Esse redireciona para o arquivo 01

@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5>Pagina para Editar Classe</h5>
+            <hr>
+            <form action="/config/class" method="post">
+                <div class="row">
+                    <div class="col-8">
+                        {{#each nameClass}}
+                        <label for="">Você esta Modificando a classe: <i>{{class}}</i></label>
+                        <input type="hidden" name="parametro" value="{{class}}">
+                        <input type="text" name="class" class="form-control" placeholder="Digite aqui o nome da classe que deseja substituir">
+                    </div>
+                    <div class="col-4 mt-2">
+                        <button class="btn btn-outline-dark col-6 mt-4">Editar</button>
+                    </div>
+                    {{/each}}
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ const banco = require('@data/user/user')
 const escolha = require("@data/escolha");
 const formataReal = require('@helpers/formataReal')
 const setStage = require('../../helpers/setStage')
+const data = require('@helpers/dataAtualFormatada')
 
 async function execute(user, msg, contato) {
     //new
@@ -38,7 +39,7 @@ async function execute(user, msg, contato) {
     }
     await getProdutos().then(res => product = res.toString())
 
-    return [ '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO','' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotal) + '\nTaxa entrega: ' + formataReal.dinheiroReal((escolha.db[user].valorTaxa?escolha.db[user].valorTaxa:0)) + '\n*Total do pedido: ' + formataReal.dinheiroReal((valorTotal + escolha.db[user].valorTaxa)) + '*\n\nTel: ' + contato + ' WHATSAPP\nSeq: 2 | 14/09/2020 16:26\nStatus: Cliente novo']
+    return [ '*Etapa final.*\n\n*[ OK ] PARA CONFIRMAR O PEDIDO*\n*[ C ]* PARA CORRIGIR O PEDIDO','' + escolha.db[user].nome + '\n' + escolha.db[user].dadosEntrega + '' + end + obs + '\n\n*[ PRODUTOS ]*\n' + product + '\n' + pgm + '*Total produto:* ' + formataReal.dinheiroReal(valorTotal) + '\nTaxa entrega: ' + formataReal.dinheiroReal((escolha.db[user].valorTaxa?escolha.db[user].valorTaxa:0)) + '\n*Total do pedido: ' + formataReal.dinheiroReal((valorTotal + escolha.db[user].valorTaxa)) + '*\n\nTel: ' + contato + ` WHATSAPP\nSeq: 5 | ${data.dataAtualFormatada()}\n`]
 
 }
 

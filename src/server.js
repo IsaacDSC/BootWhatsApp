@@ -1,5 +1,7 @@
 //File System para salvar o Qr Code
 require('module-alias/register')
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
 const hbs = require('express-handlebars')
@@ -25,6 +27,8 @@ const grapichs = require('@/routes/grapichs')
 const cashier = require('@/routes/cashier')
 const profile = require('@routes/profile.js')
 const login = require('@routes/login')
+const delivery = require('@routes/delivery')
+const payment = require('@/routes/payment')
     //Inicia O client
     //client()
     //Para o Client
@@ -69,7 +73,13 @@ app.engine('hbs', hbs({
         },
         dinheiro: function(value) {
             if (value) {
-                return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                return Number(value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            }
+            return
+        },
+        somaDinheiro: function(value1, value2) {
+            if (value1) {
+                return (value1 + value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
         },
@@ -89,8 +99,17 @@ app.engine('hbs', hbs({
             return value == 'Entregue'
         },
         trataHora: function(value) {
+            const formataHora = (Hora) => Hora < 10 ? '0' + Hora : Hora
             let data = new Date(value)
-            return `${data.getHours()}:${data.getMinutes()}`
+            return `${formataHora(data.getHours())}:${formataHora(data.getMinutes())}`
+        },
+        trataData: function(value){
+            const formataHora = (Hora) => Hora < 10 ? '0' + Hora : Hora
+            let data = new Date(value)
+            dia= data.getDate()
+            mes = data.getMonth()
+            ano = data.getFullYear()
+            return `${formataHora(dia)}/${formataHora(mes+1)}/${ano}`
         },
         valorTrue: function(value) {
             return value == 'true'
@@ -145,10 +164,12 @@ app.use(reset)
 app.use('/suporteTecnico', suporteTecnico)
 app.use('/dados', grapichs)
 app.use('/caixa', cashier)
+app.use('/pay', payment)
 app.use('/profile', profile)
 app.use(login)
+app.use('/delivery', delivery)
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT_APLICATION
 server.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
     console.log('Break Server CTRL + C')

@@ -32,6 +32,5 @@ const Relacionamento = db.define('relacionamento', {
 
 })
 
-//Relacionamento.sync({ force: true })
 
 module.exports = Relacionamento

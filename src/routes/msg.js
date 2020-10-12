@@ -8,7 +8,7 @@ router.get('/register', auth, (req, res) => {
     res.render('formMSG/register')
 })
 
-router.post('/register', (req, res) => {
+router.post('/register', auth, (req, res) => {
     /* Messages.createTable() */
     Messages.create({
         stage: req.body.stage,

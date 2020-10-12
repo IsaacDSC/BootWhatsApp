@@ -23,7 +23,7 @@ async function execute(user, msg, contato) {
         // passando user para estagio 01
         setStage.envStageDb(user, 1)
         return [menu,
-            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`
+            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
         ]
     }
 
@@ -35,7 +35,7 @@ async function execute(user, msg, contato) {
         banco.db[user].stage = 1;
         setStage.envStageDb(user, 1)
         return [menu,
-            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto` 
+            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
         ];
     } else {
         setStage.envStageDb(user, 0)
