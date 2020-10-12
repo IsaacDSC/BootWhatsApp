@@ -168,7 +168,7 @@ app.use('/profile', profile)
 app.use(login)
 app.use('/delivery', delivery)
 
-const port = process.env.PORT_APLICATION
+const port = process.env.PORT_APLICATION || process.env.PORT
 server.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
     console.log('Break Server CTRL + C')
