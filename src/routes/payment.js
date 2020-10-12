@@ -14,13 +14,26 @@ const getFullUrl = (req) =>{
 }
 
 router.post('/',async(req,res)=>{
-
-  SQL_Preco = `SELECT ROUND(count(distinct requests.orderRequest)*configurations.plano,2) as preco
+   const data = new Date();
+   SQL_DATA_VENCIMENTO = `select vencimento from configurations;`
+   await db.connection.query(SQL_DATA_VENCIMENTO, (err, result) => {
+    if(err){
+      req.flash('error_msg', 'Houve um erro no pagamento, tente novamente mais tarde'.toUpperCase())
+      res.redirect('/dados/lucros')
+      return
+    }
+    const vencimento = result[0].vencimento
+    if(vencimento<=data){
+      SQL_Preco = `SELECT ROUND(count(distinct requests.orderRequest)*configurations.plano,2) as preco
   FROM requests , configurations
   WHERE requests.createdAt BETWEEN date(configurations.inicio) AND date(configurations.vencimento) and status = 'Entregue'`
-  await db.connection.query(SQL_Preco, (err, result) => {
+   db.connection.query(SQL_Preco, (err, result) => {
     if(err){
       return err
+    }
+    preco = result[0].preco
+    if(preco<=50){
+      preco = 50
     }
     const purchaseOrder = {
       items: [
@@ -30,7 +43,7 @@ router.post('/',async(req,res)=>{
           description : "Pagamento Prestação De Serviço solutionstech",
           quantity: 1,
           currency_id: 'BRL',
-          unit_price: parseFloat(result[0].preco)
+          unit_price: parseFloat(preco)
         }
       ],
       auto_return : "all",
@@ -54,6 +67,14 @@ router.post('/',async(req,res)=>{
     orderMercadoPago(purchaseOrder)
 
   })
+    }else{
+      req.flash('error_msg', 'Ainda Não esta no vencimento!'.toUpperCase())
+      res.redirect('/dados/lucros')
+
+    }
+
+   })
+
 
    async function orderMercadoPago(purchaseOrder){
       try {
@@ -77,7 +98,8 @@ router.get('/success',(req,res)=>{
             const SQL = `update configurations set vencimento = ADDDATE(vencimento, INTERVAL 31 DAY), inicio = ADDDATE(inicio, INTERVAL 30 DAY) ;`
             db.connection.query(SQL, (err, result) => {
               if(err){
-                return err
+                req.flash('error_msg', 'Houve um erro ao atualizar a data de vencimento, por favor contate o suporte!'.toUpperCase())
+                res.redirect('/dados/lucros')
               }
               req.flash('success_msg', 'Plano Pago com Successo! Data de vencimento Atualizada!'.toUpperCase())
               res.redirect('/dados/lucros')
