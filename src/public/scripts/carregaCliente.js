@@ -41,7 +41,7 @@ select.addEventListener('change', e => {
 
 })
 
-btnPesquisar.addEventListener('click', async (e) => {
+btnPesquisar.addEventListener('click', async(e) => {
     let value = selectCardapio.options[selectCardapio.selectedIndex].value;
     if (!value) {
         return
@@ -51,7 +51,7 @@ btnPesquisar.addEventListener('click', async (e) => {
         url: '/caixa/pesquisaClass',
         data: { class: value },
         success: console.log('Pesquisado Com Sucesso')
-    }).then(async (res) => {
+    }).then(async(res) => {
 
         console.log(res)
         async function getClass() {
@@ -65,24 +65,24 @@ btnPesquisar.addEventListener('click', async (e) => {
 
         await getClass().then(res => produto = res.toString())
         let html = `
-        <div class="row col-12">
-       <div class="form-group col-8 ml-3">
+        <div class="row>
+       <div class="col-8">
        <label for="">${value.toUpperCase()}</label>
        <select name="" id="" class="form-control col-12">
            <option value="">Selecione</option>
             ${produto}
        </select>
        </div>
-       <div class="form-group col-2">
+       <div class="col-4 ml-2">
        <label for="">Qtd</label>
        <input type="number" min="1" value="1" class="form-control">
        </div>
-       <div class="form-group col-1 mt-2">
+       <div class="col-1 mt-1">
        <button onclick="apagaDiv(this)" class="btn btn-outline-danger mt-4" style="border-radius:5px;"><span>&#10005;</span></button>
        </div>
        </div>
 
-     
+
        `
 
         itensCardapio.insertAdjacentHTML('afterbegin', html);
@@ -99,7 +99,7 @@ btnEnviarClient.addEventListener('click', async e => {
     const telefoneClient = $('#numeroTelefone').val().trim();
     const bairro = $('#neighborhood').val().trim();
     const endereco = $('#addressClient').val().trim();
-    const taxaEntrega = $('#taxaEntrega').val().trim().replace(',','.')
+    const taxaEntrega = $('#taxaEntrega').val().trim().replace(',', '.')
 
     if (!nomeCLient) {
         return alert('Informe o Nome do Cliente')
@@ -108,12 +108,12 @@ btnEnviarClient.addEventListener('click', async e => {
         return alert('Informe o Telefone do Cliente')
     }
 
-  await $.ajax({
+    await $.ajax({
         type: "POST",
         url: '/caixa/registerUser',
-        data: {telephone:telefoneClient+'@c.us',name:nomeCLient,stage:'0',neighborhood:bairro,address:endereco}, 
+        data: { telephone: telefoneClient + '@c.us', name: nomeCLient, stage: '0', neighborhood: bairro, address: endereco },
         success: console.log('Usuario cadastrado com sucesso')
-      }).then(res=>{dados.idUser=res})
+    }).then(res => { dados.idUser = res })
 
     dados.nomeCLient = nomeCLient
     dados.telefoneClient = telefoneClient
@@ -129,7 +129,7 @@ btnEnviarClient.addEventListener('click', async e => {
 
 btnEnviarCarrinho.addEventListener('click', e => {
     dados.itens = []
-    $('#itensDoCardapio').find('select').each(function (index, html) {
+    $('#itensDoCardapio').find('select').each(function(index, html) {
         if (html.options[html.selectedIndex].text != "Selecione")
             quantidade = $('#itensDoCardapio').find('input')[index].value
         produto = html.options[html.selectedIndex].text
@@ -138,7 +138,7 @@ btnEnviarCarrinho.addEventListener('click', e => {
             return alert('quantidade 0')
         }
         console.log(produto)
-        dados.itens.push({ produto, quantidade, valor: quantidade * idItem.split('|')[1], idItem: idItem.split('|')[0],profit: (idItem.split('|')[1] * quantidade) - (idItem.split('|')[2] * quantidade), spent: idItem.split('|')[2] * quantidade  })
+        dados.itens.push({ produto, quantidade, valor: quantidade * idItem.split('|')[1], idItem: idItem.split('|')[0], profit: (idItem.split('|')[1] * quantidade) - (idItem.split('|')[2] * quantidade), spent: idItem.split('|')[2] * quantidade })
     })
     dados.obs = obsClienteCaixa.value
     console.log(dados)
@@ -168,10 +168,11 @@ btnFinalizarPedido.addEventListener('click', async e => {
     let retiraLocal = $('#classRetirarNoLocal').is(':checked')
     let order = Math.random().toString(32).substr(2, 9)
 
-    if(entrega){
-        TipoEntrega= 'Entregar No Endereco'
-    }if(retiraLocal){
-        TipoEntrega= 'Retirar No Local'
+    if (entrega) {
+        TipoEntrega = 'Entregar No Endereco'
+    }
+    if (retiraLocal) {
+        TipoEntrega = 'Retirar No Local'
     }
     if (!dados.nomeCLient) {
         return alert('Falta Informar o cliente!')
@@ -181,19 +182,19 @@ btnFinalizarPedido.addEventListener('click', async e => {
     }
 
 
-    await dados.itens.forEach(e=>{
-     $.ajax({
-        type: "POST",
-        url: '/caixa/submitRequest',
-        data: {idUser:dados.idUser,order, quantity:e.quantidade,observacao: dados.obs.trim(), formaPagamento:TipoDePagamento,profit:e.profit,spent:e.spent,dadosEntrega:TipoEntrega,idItem:e.idItem,taxa:dados.taxa }, 
-        success: console.log('Item cadastrado com sucesso')
-      })
-})
+    await dados.itens.forEach(e => {
+        $.ajax({
+            type: "POST",
+            url: '/caixa/submitRequest',
+            data: { idUser: dados.idUser, order, quantity: e.quantidade, observacao: dados.obs.trim(), formaPagamento: TipoDePagamento, profit: e.profit, spent: e.spent, dadosEntrega: TipoEntrega, idItem: e.idItem, taxa: dados.taxa },
+            success: console.log('Item cadastrado com sucesso')
+        })
+    })
     location.reload()
 })
 
 
 function apagaDiv(e) {
-    $(e).parent().parent().fadeOut(500, function () { $(e).parent().parent().remove(); })
+    $(e).parent().parent().fadeOut(500, function() { $(e).parent().parent().remove(); })
 
 }
