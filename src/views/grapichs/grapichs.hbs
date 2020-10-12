@@ -1,185 +1,188 @@
 <div id="right-panel" class="right-panel">
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Dashboard</h1>
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Widgets</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li><a href="#">Dashboard</a></li>
-                        <li class="active">Widgets</li>
-                    </ol>
+
+        {{>_msg}}
+        <div class="col-sm-12 mb-4">
+            <div class="card-group">
+                <div class="card col-md-6 no-padding ">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-users"></i>
+                        </div>
+
+                        <div class="h4 mb-0">
+                            <span class="count">{{dados.totalCliente}}</span>
+                        </div>
+
+                        <small class="text-muted text-uppercase font-weight-bold">Total de Clientes</small>
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-md-6 no-padding ">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                        <div class="h4 mb-0">
+                            <span class="count">{{dados.novosClientes}}</span>
+                        </div>
+                        <small class="text-muted text-uppercase font-weight-bold">Novos Clientes</small>
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2" style="width: 40%; height: 5px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-md-6 no-padding ">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-cart-plus"></i>
+                        </div>
+                        <div class="h4 mb-0">
+                            <span class="count">{{dados.totalPedidos}}</span>
+                        </div>
+                        <small class="text-muted text-uppercase font-weight-bold">Total de Pedidos</small>
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-md-6 no-padding ">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-pie-chart"></i>
+                        </div>
+                        <div class="h4 mb-0">
+                            <span class="count"><i class="fa ti-lock"></i></span>
+                        </div>
+                        <small class="text-muted text-uppercase font-weight-bold">Crescimento</small>
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-md-6 no-padding ">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <div class="h4 mb-0">{{trataData dados.vencimento}}</div>
+                        <small class="text-muted text-uppercase font-weight-bold">Data Vencimento</small>
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-md-6 no-padding ">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-comments-o"></i>
+                        </div>
+                        <div class="h4 mb-0">
+                            <span class="count"><i class="fa ti-lock"></i></span>
+                        </div>
+                        <small class="text-muted text-uppercase font-weight-bold">Nº Propagandas</small>
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-     {{>_msg}}
-    <div class="col-sm-12 mb-4">
-        <div class="card-group">
-            <div class="card col-md-6 no-padding ">
-                <div class="card-body">
-                    <div class="h1 text-muted text-right mb-4">
-                        <i class="fa fa-users"></i>
-                    </div>
-
-                    <div class="h4 mb-0">
-                        <span class="count">{{dados.totalCliente}}</span>
-                    </div>
-
-                    <small class="text-muted text-uppercase font-weight-bold">Total de Clientes</small>
-                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
-                </div>
-            </div>
-            <div class="card col-md-6 no-padding ">
-                <div class="card-body">
-                    <div class="h1 text-muted text-right mb-4">
-                        <i class="fa fa-user-plus"></i>
-                    </div>
-                    <div class="h4 mb-0">
-                        <span class="count">{{dados.novosClientes}}</span>
-                    </div>
-                    <small class="text-muted text-uppercase font-weight-bold">Novos Clientes</small>
-                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2" style="width: 40%; height: 5px;"></div>
-                </div>
-            </div>
-            <div class="card col-md-6 no-padding ">
-                <div class="card-body">
-                    <div class="h1 text-muted text-right mb-4">
-                        <i class="fa fa-cart-plus"></i>
-                    </div>
-                    <div class="h4 mb-0">
-                        <span class="count">{{dados.totalPedidos}}</span>
-                    </div>
-                    <small class="text-muted text-uppercase font-weight-bold">Total de Pedidos</small>
-                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;"></div>
-                </div>
-            </div>
-            <div class="card col-md-6 no-padding ">
-                <div class="card-body">
-                    <div class="h1 text-muted text-right mb-4">
-                        <i class="fa fa-pie-chart"></i>
-                    </div>
-                    <div class="h4 mb-0">
-                                              <span class="count"><i class="fa ti-lock"></i></span>
-                    </div>
-                    <small class="text-muted text-uppercase font-weight-bold">Crescimento</small>
-                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;"></div>
-                </div>
-            </div>
-            <div class="card col-md-6 no-padding ">
-                <div class="card-body">
-                    <div class="h1 text-muted text-right mb-4">
-                        <i class="fa fa-clock-o"></i>
-                    </div>
-                    <div class="h4 mb-0">{{trataData dados.vencimento}}</div>
-                    <small class="text-muted text-uppercase font-weight-bold">Data Vencimento</small>
-                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
-                </div>
-            </div>
-            <div class="card col-md-6 no-padding ">
-                <div class="card-body">
-                    <div class="h1 text-muted text-right mb-4">
-                        <i class="fa fa-comments-o"></i>
-                    </div>
-                    <div class="h4 mb-0">
-                        <span class="count"><i class="fa ti-lock"></i></span>
-                    </div>
-                    <small class="text-muted text-uppercase font-weight-bold">Nº Propagandas</small>
-                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h3>Produtos Mais Vendidos</h3>
-                        <hr>
-                        <canvas id="grafico"></canvas>
-                    </div>
-                    <div class="col-sm-4 col-4">
-                        <aside class="profile-nav alt">
-                            <section class="card">
-                                <div class="card-header user-header alt bg-dark">
-                                    <div class="media">
-                                        <a href="#">
-                                            <img class="align-self-center  rounded-circle mr-3"
-                                                style="width:85px; height:85px;" alt=""
-                                                src="/images/avatar/profile.png">
-                                        </a>
-                                        <div class="media-body">
-                                            <h2 class="text-light display-6">{{admin.name}}</h2>
-                                            <p class="text-center">{{admin.company}}</p>
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                            <h3>Produtos Mais Vendidos</h3>
+                            <hr>
+                            <canvas id="grafico"></canvas>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                            <aside class="profile-nav alt">
+                                <section class="card">
+                                    <div class="card-header user-header alt bg-dark">
+                                        <div class="media">
+                                            <a href="#">
+                                                <img class="align-self-center  rounded-circle mr-3"
+                                                    style="width:85px; height:85px;" alt=""
+                                                    src="/images/avatar/profile.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h2 class="text-light display-6">{{admin.name}}</h2>
+                                                <p class="text-center">{{admin.company}}</p>
+                                            </div>
                                         </div>
+                                        <p class="mt-2 text-center">Telefone: {{admin.telephone}}</p>
                                     </div>
-                                    <p class="mt-2 text-center">Telefone: {{admin.telephone}}</p>
-                                </div>
 
 
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <a href="#"> <i class="fa ti-stats-up"></i> Total Vendas <span
-                                                class="badge badge-primary pull-right">{{dinheiro dados.totalVendas}}</span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#"> <i class="fa  fa-money"></i> Total Lucro <span
-                                                class="badge badge-success pull-right">{{dinheiro dados.totalLucro}}</span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#"> <i class="fa ti-bar-chart"></i> Total Despesa <span
-                                                class="badge badge-danger pull-right">{{dinheiro dados.totalDespesa}}</span></a>
-                                    </li>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <a href="#"> <i class="fa ti-stats-up"></i> Total Vendas <span
+                                                    class="badge badge-primary pull-right">{{dinheiro dados.totalVendas}}</span></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a href="#"> <i class="fa  fa-money"></i> Total Lucro <span
+                                                    class="badge badge-success pull-right">{{dinheiro dados.totalLucro}}</span></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a href="#"> <i class="fa ti-bar-chart"></i> Total Despesa <span
+                                                    class="badge badge-danger pull-right">{{dinheiro dados.totalDespesa}}</span></a>
+                                        </li>
 
-                                    <li class="list-group-item">
-                                        <a href="#pgm"> <i class="fa ti-money"></i> Pagamento<span
-                                                class="badge badge-warning pull-right r-activity">
-                                                {{dinheiro dados.pagamento}}</span></a>
-                                    </li>
-                                   <!-- <li class="list-group-item">
+                                        <li class="list-group-item">
+                                            <a href="#pgm"> <i class="fa ti-money"></i> Pagamento<span
+                                                    class="badge badge-warning pull-right r-activity">
+                                                    {{dinheiro dados.pagamento}}</span></a>
+                                        </li>
+                                        <!-- <li class="list-group-item">
                                         <a href="#"> <i class="fa fa-cogs"></i> Acertos de Contas</a>
                                     </li>-->
-                                </ul>
+                                    <li>
+                                         {{>_mercadoPago}}
+                                    </li>
+                                    </ul>
 
-                            </section>
-                        </aside>
+                                </section>
+                            </aside>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
-<div class="col-lg-12 col-md-6">
-    <div class="card">
-        <div class="card-header" id="pgm">
-            <strong class="card-title mb-3" style="text-align: center;">Developing Solutions</strong>
-            <form action="/pay" method="post">
-            <input type="image" src="/images/mceclip0.png" width="300" alt="Submit Form" />
+    <div class="col-lg-12 col-md-6">
+        <div class="card">
+            <div class="card-body mt-5">
+                <p class="text-center"><i class="fa fa-code"></i>Author Matheus & Isaac DSC</p>
+                <div class="card-text text-sm-center">
+                    <a href="https://www.facebook.com/DevelopingSolutiosTech" target="_blanck"><i
+                            class="fa fa-facebook pr-1"></i></a>
+                    <a href="https://solutionstech.com.br" target="_blanck"><i class="fa fa-code pr-1"></i></a>
 
-            </form>
-        </div>
-        <div class="card-body">
-            <p class="text-center"><i class="fa fa-code"></i>Author Matheus & Isaac DSC</p>
-            <div class="card-text text-sm-center">
-                <a href="https://www.facebook.com/DevelopingSolutiosTech" target="_blanck"><i class="fa fa-facebook pr-1"></i></a>
-                <a href="https://solutionstech.com.br" target="_blanck"><i class="fa fa-code pr-1"></i></a>
-
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-<script src="/scripts/grafico.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="/scripts/grafico.js"></script>
 
-<script src="/scripts/socket.js"></script>
+    <script src="/scripts/socket.js"></script>
