@@ -158,23 +158,23 @@
 
                     <div class="form-group mt-1 col-12">
                         {{#if (preparando this.status)}}
-                        <p class="ml-3">Preparando <input type="radio" checked>
+                        <p class="ml-3">Preparando<input type="radio" checked>
                             {{else}}
-                        <p class="ml-3">Preparando <input type="radio"
+                        <p class="ml-3">Preparando<input type="radio"
                                 onchange="mandaMensagem('{{this.telephone}}','Preparando','{{this.orderRequest}}')">
                             {{/if}}
                             &nbsp;&nbsp;
                             {{#if (saiuParaEntrega this.status)}}
-                            Saiu para Entrega <input type="radio" checked>
+                            Saiu para Entrega<input type="radio" checked>
                             {{else}}
-                            Saiu para Entrega <input type="radio"
+                            Saiu para Entrega<input type="radio"
                                 onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega','{{this.orderRequest}}')">
                             {{/if}}
                             &nbsp;&nbsp;
                             {{#if (entregue this.status)}}
-                            Entregue <input type="radio" checked></p>
+                            Entregue<input type="radio" checked></p>
                         {{else}}
-                        Entregue <input type="radio"
+                            Entregue<input type="radio"
                             onchange="mandaMensagem('{{this.telephone}}','Entregue','{{this.orderRequest}}')">
                         </p>
                         {{/if}}
