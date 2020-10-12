@@ -1,3 +1,12 @@
+<style>
+
+    @media only screen and (max-width: 600px) {
+  .mobile {
+    display: inline-block ;
+  }
+}
+</style>
+
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -5,7 +14,7 @@
             {{>_msg}}
             <hr>
         </div>
-        <div class="card-body">
+        <div class="card-body" >
             <form action="/config/delivery" method="post">
                 <div class="row">
                     <div class="form-group col-6">
@@ -16,7 +25,7 @@
                     </div>
                     <div class="form-group col-4">
                         <label for="">Valor da Entrega</label>
-                        <input type="text" name="valor" id="valor" class="form-control dinheiro" maxlength="6"
+                        <input type="text" name="valor"  id="valor" class="form-control dinheiro" maxlength="6"
                             placeholder="Digite o valor da entrega">
                     </div>
                 </div>
@@ -33,7 +42,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
 <script>
-  
+
     jQuery('.dinheiro').mask('#.##0,00', { reverse: true, });
 
 </script>
