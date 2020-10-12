@@ -32,8 +32,8 @@ router.post('/',async(req,res)=>{
       return err
     }
     preco = result[0].preco
-    if(preco<=50){
-      preco = 50
+    if(preco<=75){
+      preco = 75
     }
     const purchaseOrder = {
       items: [
