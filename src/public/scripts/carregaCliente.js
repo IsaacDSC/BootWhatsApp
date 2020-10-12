@@ -65,24 +65,30 @@ btnPesquisar.addEventListener('click', async(e) => {
 
         await getClass().then(res => produto = res.toString())
         let html = `
-        <div class="row col-12">
-       <div class="form-group col-8">
-       <label for="">${value.toUpperCase()}</label>
-       <select name="" id="" class="form-control col-12">
-           <option value="">Selecione</option>
-            ${produto}
-       </select>
+        <div class="container">
+        <hr>
+            <div class="row">
+                <div class="form-group col-sm-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                    <label for="">${value.toUpperCase()}</label>
+                    <select name="" id="" class="form-control col-12">
+                    <option value="">Selecione</option>
+                        ${produto}
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-3 col-lg-4 col-xl-4 mt-4 ">
+                    <div class="input-group mt-2">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">Qtd</span>
+                    </div>
+                    <input type="number" min="1" class="form-control" aria-label="Amount (to the nearest dollar)" value="1">
+                    <div class="input-group-append" onclick="apagaDiv(this)">
+                    <span class="input-group-text btn btn-danger" style="border-radius:3px;">X</span>
+                    </div>
+                    </div>
+                </div>
+            </div>
+       <hr>
        </div>
-       <div class="form-group col-3">
-       <label for="">Qtd</label>
-       <input type="number" min="1" value="1" class="form-control">
-       </div>
-       <div class="form-group col-1 mt-2">
-       <button onclick="apagaDiv(this)" class="btn btn-outline-danger mt-4" style="border-radius:5px;"><span>&#10005;</span></button>
-       </div>
-       </div>
-
-
        `
 
         itensCardapio.insertAdjacentHTML('afterbegin', html);
@@ -150,7 +156,7 @@ btnEnviarCarrinho.addEventListener('click', e => {
             return
         }
         soma += e.valor
-        itensNoCarrinho.insertAdjacentHTML('beforeend', `<p class="text-center ml-5">${e.quantidade}x <strong>${e.produto}</strong></p>`);
+        itensNoCarrinho.insertAdjacentHTML('beforeend', `<p id="descCarrinho" class="text-center ml-2">${e.quantidade}x <strong>${e.produto}</strong></p>`);
     })
     totalTaxaSub.insertAdjacentHTML('afterbegin', `
     <h5 class="mt-1">SubTotal: ${soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h5>
@@ -195,6 +201,6 @@ btnFinalizarPedido.addEventListener('click', async e => {
 
 
 function apagaDiv(e) {
-    $(e).parent().parent().fadeOut(500, function() { $(e).parent().parent().remove(); })
+    $(e).parent().parent().parent().parent().fadeOut(500, function() { $(e).parent().parent().parent().parent().remove(); })
 
 }
