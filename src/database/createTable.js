@@ -17,7 +17,7 @@ async function createTable() {
     //User.belongsToMany(User, { through: 'relacionamentos', foreignKey: 'UserId', as: 'users' })
     //Requests.belongsToMany(Requests, { through: 'relacionamentos', foreignKey: 'PedidosId', as: 'requests' })
     Relacionamento.sync({ froce: true })
-        //Admin.sync({ force: true })
+        Admin.sync({ force: true })
         await db.sync({ force: true })
         //  Resquests.sync({ force: true })
 }
