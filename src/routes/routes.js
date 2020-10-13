@@ -109,10 +109,13 @@ router.post('/ligabot', async (req, res) => {
 
 router.post('/mandamensagem', async (req, res) => {
     try {
+        SQL_Entregue=`select message from messages where stage='entregue';`
         let Preparo = '♨  Seu pedido está em *preparo*, assim que estiver pronto estaremos lhe avisando.\n\nObrigado.'
         let SaiuParaEntrega = '🛵  Seu pedido saiu para entrega, basta aguardar.\n\nObrigado.'
-        let Entregue = 'Houseburguer Bm agradece por utilizarem nossos serviços! Esperamos entende-lo(a) novamente em breve.'
         let Cancelado = 'Seu Pedido foi cancelado'
+        await db.connection.query(SQL_Entregue, (err, result) => {
+            
+        
         
         if (req.body.mensagem == 'Preparando') {
             mensagem = Preparo
@@ -121,13 +124,16 @@ router.post('/mandamensagem', async (req, res) => {
             mensagem = SaiuParaEntrega
         }
         if (req.body.mensagem == 'Entregue') {
-            mensagem = Entregue
+         
+                mensagem = result[0].message
+            
+           
         }
         if (req.body.mensagem == 'Cancelado') {
             mensagem = Cancelado
         }
-        let sql = await `UPDATE requests INNER JOIN users ON users.id = requests.idUsuario SET requests.status = '${req.body.mensagem}' WHERE telephone = '${req.body.numero}'and  requests.orderRequest='${req.body.order}' and requests.status != 'Entregue';`
-        await db.connection.query(sql, (err, result) => {
+        let sql = `UPDATE requests INNER JOIN users ON users.id = requests.idUsuario SET requests.status = '${req.body.mensagem}' WHERE telephone = '${req.body.numero}'and  requests.orderRequest='${req.body.order}' and requests.status != 'Entregue';`
+         db.connection.query(sql, (err, result) => {
             if (err) {
                 return err
             }
@@ -136,10 +142,11 @@ router.post('/mandamensagem', async (req, res) => {
         })
 
 
-        await sendText(req.body.numero, mensagem)
-
+         sendText(req.body.numero, mensagem)
+   
         return res.status(200).send('Mensagem Enviada')
-
+    
+    })
     } catch (error) {
         return res.status(400).send('Falha ao enviar a mensagem')
     }

@@ -3,7 +3,7 @@ const db = require('../database/index')
 
 const Messages = db.define('message', {
     stage: {
-        type: db.Sequelize.STRING(3),
+        type: db.Sequelize.STRING(10),
         unique: true,
         allowNull: false,
         require: true

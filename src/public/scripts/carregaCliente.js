@@ -136,10 +136,14 @@ btnEnviarCarrinho.addEventListener('click', e => {
             quantidade = $('#itensDoCardapio').find('input')[index].value
         produto = html.options[html.selectedIndex].text
         idItem = html.options[html.selectedIndex].value
+        console.log(produto +' Produto')
+        if(produto=='Selecione'){
+            return
+        }
         if (quantidade == '0') {
             return alert('quantidade 0')
         }
-        console.log(produto)
+   
         dados.itens.push({ produto, quantidade, valor: quantidade * idItem.split('|')[1], idItem: idItem.split('|')[0], profit: (idItem.split('|')[1] * quantidade) - (idItem.split('|')[2] * quantidade), spent: idItem.split('|')[2] * quantidade })
     })
     dados.obs = obsClienteCaixa.value
@@ -182,7 +186,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
     if (dados.itens.length == 0) {
         return alert('Falta adicionar algum produto ao carrinho!')
     }
-
+    localStorage.clear()
 
     await dados.itens.forEach(e => {
         $.ajax({
@@ -192,6 +196,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
             success: console.log('Item cadastrado com sucesso')
         })
     })
+    localStorage.setItem('val','1')
     location.reload()
 })
 

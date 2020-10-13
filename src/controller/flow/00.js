@@ -8,7 +8,7 @@ const NovoClienteAtendimento = require('../../server');
 let key = 0
 
 async function execute(user, msg, contato) {
-  
+    
     await Menu.getMenu(user).then((res) => menu = res.toString())
   
 
