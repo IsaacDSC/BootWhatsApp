@@ -43,11 +43,11 @@ const getStatus = async() => {
 async function client() {
      //if (venom_client) return venom_client;
     if(key == 1){return}
-    key =1
+    key ++
     venom_client = await create('Delivery', (base64Qr, asciiQR) => {
             // Mostra o Qr Code no Terminal
             console.log(asciiQR);
-
+            
             // Cria o arquivo png
             let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
             exportQR(base64Qr, dir);
@@ -73,7 +73,6 @@ async function client() {
 }
 async function start(client) {
     console.log('Iniciado Com Sucesso')
-
     client.onStateChange((state) => {
         console.log(state);
         if (state == 'CONFLICT' || state == 'UNPAIRED' || state == 'UNLAUNCHED') {

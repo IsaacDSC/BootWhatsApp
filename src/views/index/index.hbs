@@ -1,5 +1,5 @@
 {{>_popup}}
-<!--{{>_modalEditRequest}}-->
+{{>_modalEditRequest}}
 <div class="breadcrumbs">
     <div class="col-sm-4">
         <div class="page-header float-left">
@@ -148,8 +148,8 @@
                         <button type="button"  onclick="imprimir(this)" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
                                 title="Imprimir" class="fa fa-print" ></i></button>
 
-                       <!-- <button type="button" onclick="editar('{{this.orderRequest}}')" data-toggle="modalEditClient" data-target="#modalEditClient" class="btn btn-secondary float-right  ml-3"><i
-                                title="Editar" class="fa fa-edit" ></i></button>-->
+                       <button type="button" onclick="editar('{{this.orderRequest}}')" class="btn btn-secondary float-right  ml-3"><i
+                                title="Editar" class="fa fa-edit" ></i></button>
 
                         <button type="button"
                             onclick="mandaMensagem('{{this.telephone}}','Cancelado','{{this.orderRequest}}')"

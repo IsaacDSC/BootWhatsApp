@@ -8,14 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('qrCode').src = "/images/qrCode.png?random="+new Date().getTime();
         },4000)
 
-          jQuery('.modal').modal();
+          jQuery('#popup').modal();
           if(key==0){
           key=1
           $.ajax({
             type: "POST",
             url: '/ligabot',
             success: console.log('Bot Iniciado com sucesso')
-          }).then(()=> {jQuery('.modal').modal('hide')
+          }).then(()=> {
+      //  jQuery('#popup').modal('hide')
           key=0
           clearInterval(intervalo)
         })}
