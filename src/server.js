@@ -29,10 +29,10 @@ const profile = require('@routes/profile.js')
 const login = require('@routes/login')
 const delivery = require('@routes/delivery')
 const payment = require('@/routes/payment')
-    //Inicia O client
-    //client()
-    //Para o Client
-    //stopClient()
+//Inicia O client
+//client()
+//Para o Client
+//stopClient()
 
 
 
@@ -42,10 +42,10 @@ app.use((req, res, next) => {
     next();
 });
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
     console.log('Usuario Conectado ' + socket.id)
-        //Broadcast envia para todos os clientes
-        //emit para apenas 1
+    //Broadcast envia para todos os clientes
+    //emit para apenas 1
 })
 
 function enviaParaFrontend(dados = '') {
@@ -63,58 +63,58 @@ app.engine('hbs', hbs({
     extname: 'hbs',
     helpers: {
 
-        trataTelephone: function(value) {
+        trataTelephone: function (value) {
             if (!value) { return }
             return value.split('@')[0]
         },
 
-        maiuscula: function(value) {
+        maiuscula: function (value) {
             return value.toUpperCase()
         },
-        dinheiro: function(value) {
+        dinheiro: function (value) {
             if (value) {
                 return Number(value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
         },
-        somaDinheiro: function(value1, value2) {
+        somaDinheiro: function (value1, value2) {
             if (value1) {
                 return (value1 + value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
         },
-        multiplica: function(value1, value2) {
+        multiplica: function (value1, value2) {
             if (value1) {
                 return (value1 * value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
         },
-        preparando: function(value) {
+        preparando: function (value) {
             return value == 'Preparando' || value == 'Saiu para Entrega' || value == 'Entregue'
         },
-        saiuParaEntrega: function(value) {
+        saiuParaEntrega: function (value) {
             return value == 'Saiu para Entrega' || value == 'Entregue'
         },
-        entregue: function(value) {
+        entregue: function (value) {
             return value == 'Entregue'
         },
-        trataHora: function(value) {
+        trataHora: function (value) {
             const formataHora = (Hora) => Hora < 10 ? '0' + Hora : Hora
             let data = new Date(value)
             return `${formataHora(data.getHours())}:${formataHora(data.getMinutes())}`
         },
-        trataData: function(value){
+        trataData: function (value) {
             const formataHora = (Hora) => Hora < 10 ? '0' + Hora : Hora
             let data = new Date(value)
-            dia= data.getDate()
+            dia = data.getDate()
             mes = data.getMonth()
             ano = data.getFullYear()
-            return `${formataHora(dia)}/${formataHora(mes+1)}/${ano}`
+            return `${formataHora(dia)}/${formataHora(mes + 1)}/${ano}`
         },
-        valorTrue: function(value) {
+        valorTrue: function (value) {
             return value == 'true'
         },
-        meseAno: function() {
+        meseAno: function () {
             let data = new Date()
             const mes = [
                 "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
@@ -122,29 +122,43 @@ app.engine('hbs', hbs({
             ]
 
             return `${mes[data.getMonth()]} ${data.getFullYear()}`
+        },
+        somaPedidos: function (value,value2) {
+            soma = 0
+            value.forEach(e => {
+                soma += Number(e.value) * Number(e.quantity)
+            });
+            if(Number(value2)){
+                return (soma+value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            }
+            return (soma).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+       
+        
+
+
         }
 
     }
 }));
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "/views/")) //resolvendo problema, direcionando views para dentro de src
-    //consfig BodyParser
+//consfig BodyParser
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-    //config pasta Public
+//config pasta Public
 app.use(express.static(path.join(__dirname, 'public')))
-    //config session
+//config session
 app.use(session({
-        secret: 'secret',
-        resave: true,
-        saveUninitialized: true
-    }))
-    //config passport
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}))
+//config passport
 app.use(passport.initialize())
 app.use(passport.session())
-    //config Flahs
+//config Flahs
 app.use(flash())
-    //config midleware flash
+//config midleware flash
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')

@@ -15,12 +15,12 @@
 
                     {{#if (valorTrue boot)}}
                     <label class="switch">
-                        <input type="checkbox" id="checkbox" data-toggle="modal"checked >
+                        <input type="checkbox" id="checkbox" data-toggle="modal" checked>
                         <span class="slider round"></span>
                     </label>
                     {{else}}
-                      <label class="switch">
-                        <input type="checkbox" id="checkbox" data-toggle="modal" >
+                    <label class="switch">
+                        <input type="checkbox" id="checkbox" data-toggle="modal">
                         <span class="slider round"></span>
                     </label>
 
@@ -174,7 +174,7 @@
                             {{#if (entregue this.status)}}
                             Entregue<input type="radio" checked></p>
                         {{else}}
-                            Entregue<input type="radio"
+                        Entregue<input type="radio"
                             onchange="mandaMensagem('{{this.telephone}}','Entregue','{{this.orderRequest}}')">
                         </p>
                         {{/if}}
@@ -188,19 +188,26 @@
 
                         <div class="form-group col-8">
                             <h6 class=""><strong>Nome:</strong>{{this.nome}}
-                              &nbsp;<strong>Telefone:</strong>{{trataTelephone this.telephone}}</h6>
+                                &nbsp;<strong>Telefone:</strong>{{trataTelephone this.telephone}}</h6>
                         </div>
 
                         <div class="form-group ml-3">
                             {{#if this.delivery}}
-                            <h6 class="mt-1"><strong>Total: {{somaDinheiro this.total this.delivery}} </strong><i>--Taxa de Entrega {{dinheiro this.delivery}}
-                                {{#if this.trocoPara}}
-                                    (Troco Para: {{dinheiro this.trocoPara}})
-                                {{/if}}
+                            <h6 class="mt-1"><strong>Total:
 
-                            </i></i></h6>
+                                    {{somaPedidos pedidos this.delivery}}
+
+                                </strong><i>--Taxa de Entrega {{dinheiro this.delivery}}
+                                    {{#if this.trocoPara}}
+                                    (Troco Para: {{dinheiro this.trocoPara}})
+                                    {{/if}}
+
+                                </i></i></h6>
                             {{else}}
-                            <h6 class="mt-1"><strong>Total: {{dinheiro this.total}}</strong></i></h6>
+                            <h6 class="mt-1"><strong>Total: {{somaPedidos pedidos}}</strong></i></h6>
+                            {{#if this.trocoPara}}
+                            (Troco Para: {{dinheiro this.trocoPara}})
+                            {{/if}}
                             {{/if}}
 
                             {{#if this.formPayment}}

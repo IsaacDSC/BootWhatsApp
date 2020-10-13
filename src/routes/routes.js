@@ -22,7 +22,6 @@ router.get('/', auth, async (req, res) => {
     let admin = `select name, email from admins where id='1';`
     let boot = `select boot from configurations`
     db.connection.query(sql, (err, result) => {
-        console.log(result)
         var saida = [];
 
         for (var i = 0; i < result.length; i++) {
@@ -74,7 +73,6 @@ router.get('/', auth, async (req, res) => {
                 })
             }
         }
-
         db.connection.query(countRequest, (err, countRequests) => {
             db.connection.query(countPreparo, (err, countPreparo) => {
                 db.connection.query(profitSpent, (err, profitSpent) => {
