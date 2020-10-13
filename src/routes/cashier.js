@@ -56,7 +56,7 @@ router.post('/registerUser', auth, async(req, res) => {
 })
 
 router.post('/submitRequest', auth, async(req, res) => {
-    let SQL = `INSERT INTO requests (IdUsuario,orderRequest,quantity, note, delivery, formPayment, profit, spent, status,deliveryType,createdAt,updatedAt) VALUES ('${req.body.idUser}','${req.body.order}','${Number(req.body.quantity)}','${req.body.observacao}', '${req.body.taxa}', '${req.body.formaPagamento}', '${Number(req.body.profit)}','${Number(req.body.spent)}','${'Pendente'}','${req.body.dadosEntrega}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP); `
+    let SQL = `INSERT INTO requests (IdUsuario,orderRequest,quantity,trocoPara, note, delivery, formPayment, profit, spent, status,deliveryType,createdAt,updatedAt) VALUES ('${req.body.idUser}','${req.body.order}','${Number(req.body.quantity)}','${req.body.trocoPara}','${req.body.observacao}', '${req.body.taxa}', '${req.body.formaPagamento}', '${Number(req.body.profit)}','${Number(req.body.spent)}','${'Pendente'}','${req.body.dadosEntrega}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP); `
 
     await db.connection.query(SQL, (err, result) => {
         if (err) {

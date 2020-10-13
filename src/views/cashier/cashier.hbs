@@ -83,7 +83,7 @@
                                 <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Montar Pedido</a></li>
                             </ol>
                         </nav>
-                         {{>_msg}}
+                        {{>_msg}}
                     </div>
                 </div>
             </div>
@@ -145,17 +145,24 @@
                                             </div>
                                         </div>
                                         <hr>
-                                        <div class="row" id="cashierTypeDelivery">
+                                        <div class="row form-group" id="cashierTypeDelivery">
                                             <ul>
                                                 <li>
                                                     <label for="" class="ml-3">Entrega</label>
                                                     <input type="radio" id="classEntrega" name="classEntrega" checked>
                                                 </li>
+                            
                                                 <li>
                                                     <label for="" class="ml-3">Retirar no Local</label>
                                                     <input type="radio" id="classRetirarNoLocal" name="classEntrega">
                                                 </li>
+                                             
+
                                             </ul>
+                                            <div class="row align-items-center justify-content-center">
+                                                 <label for="" >Troco Para</label>
+                                                <input type="text" id="trocoPara" class="form-control mx-sm-5 mb-2 dinheiro text-center"  maxlength="5">
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="">Tipo de Pagamento</label>
@@ -175,7 +182,8 @@
                                             data-target="#MeuModal">
                                             Cliente
                                         </button>
-                                        <button class="btn btn-danger col-12 mt-2" id="finalizarPedidoCashier" >Finalizar</button>
+                                        <button class="btn btn-danger col-12 mt-2"
+                                            id="finalizarPedidoCashier">Finalizar</button>
                                         <br>
                                     </div>
                                 </div>
@@ -190,3 +198,11 @@
 <!-- ============================================================== -->
 <!-- end horizontal form -->
 <!-- ============================================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+<script>
+
+    jQuery('.dinheiro').mask('#.##0,00', {reverse: true,});
+
+</script>

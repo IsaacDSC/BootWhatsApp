@@ -110,10 +110,6 @@ btnEnviarClient.addEventListener('click', async e => {
     if (!nomeCLient) {
         return alert('Informe o Nome do Cliente')
     }
-    if (!telefoneClient) {
-        return alert('Informe o Telefone do Cliente')
-    }
-
     await $.ajax({
         type: "POST",
         url: '/caixa/registerUser',
@@ -173,7 +169,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
     let entrega = $('#classEntrega').is(':checked')
     let retiraLocal = $('#classRetirarNoLocal').is(':checked')
     let order = Math.random().toString(32).substr(2, 9)
-
+    let trocoPara = $('#trocoPara').val().replace(',','.')
     if (entrega) {
         TipoEntrega = 'Entregar No Endereco'
     }
@@ -192,7 +188,7 @@ btnFinalizarPedido.addEventListener('click', async e => {
         $.ajax({
             type: "POST",
             url: '/caixa/submitRequest',
-            data: { idUser: dados.idUser, order, quantity: e.quantidade, observacao: dados.obs.trim(), formaPagamento: TipoDePagamento, profit: e.profit, spent: e.spent, dadosEntrega: TipoEntrega, idItem: e.idItem, taxa: dados.taxa },
+            data: { idUser: dados.idUser,trocoPara, order, quantity: e.quantidade, observacao: dados.obs.trim(), formaPagamento: TipoDePagamento, profit: e.profit, spent: e.spent, dadosEntrega: TipoEntrega, idItem: e.idItem, taxa: dados.taxa },
             success: console.log('Item cadastrado com sucesso')
         })
     })
