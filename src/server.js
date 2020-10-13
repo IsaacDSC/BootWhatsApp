@@ -29,6 +29,7 @@ const profile = require('@routes/profile.js')
 const login = require('@routes/login')
 const delivery = require('@routes/delivery')
 const payment = require('@/routes/payment')
+const editarPedido = require('@/routes/editarPedido')
 //Inicia O client
 //client()
 //Para o Client
@@ -181,7 +182,7 @@ app.use('/pay', payment)
 app.use('/profile', profile)
 app.use(login)
 app.use('/delivery', delivery)
-
+app.use(editarPedido)
 const port = process.env.PORT_APLICATION || process.env.PORT
 server.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
