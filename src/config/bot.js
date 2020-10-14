@@ -65,24 +65,28 @@ async function start(client) {
         }
     })
     client.onMessage(async (message) => {
+
+        console.log(message)
         if (!message.isGroupMsg) {
             const user = await User.findAll({ where: { telephone: message.sender.id } })
             console.log(user.length)
             if (user.length === 0) {
                 try {
+                   
                     let resposta = await stages.step[getStage(message.from)].obj.execute(
                         message.from,
                         message.body,
-                        message.sender.name,
+                        message.sender.name?message.sender.name:message.sender.pushname,
+            
                     )
                     for (let i = 0; i < resposta.length; i++) {
                         const element = resposta[i]
                         client.sendText(message.from, element)
                     }
                     console.log('usuario cadastrado')
-                    User.create({
+                    await User.create({
                         telephone: message.sender.id,
-                        name: message.sender.pushname,
+                        name: message.sender.name?message.sender.name:message.sender.pushname,
                         photograph: message.sender.profilePicThumbObj.img,
                         stage: 0
                     }).then(() => {
@@ -94,7 +98,7 @@ async function start(client) {
 
             } else {
 
-                let resposta = await stages.step[getStage(message.from)].obj.execute(message.from, message.body, message.sender.name)
+                let resposta = await stages.step[getStage(message.from)].obj.execute(message.from, message.body, message.sender.name?message.sender.name:message.sender.pushname)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)

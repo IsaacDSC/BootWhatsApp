@@ -1,5 +1,6 @@
 require('module-alias/register')
 const banco = require('@data/user/user')
+const db = require('@database/configSQL');
 const Menu = require('../../helpers/getMenu')
 const setStage = require('../../helpers/setStage')
 const escolhas = require('@data/escolha')
@@ -10,14 +11,19 @@ let key = 0
 async function execute(user, msg, contato) {
     
     await Menu.getMenu(user).then((res) => menu = res.toString())
-  
-
+    
+    
     if (key === 1) {
          NovoClienteAtendimento.NovoClienteAtendimento({soma:1})
         //Nome da pessoa Digitado = contato
-        contato = msg
+       contato = msg
+       Sql = `UPDATE users
+       SET name = ${msg}
+       WHERE telephone = '${user}';`
+       await db.connection.query(Sql, (err, resultado) => {
+       })
         
-        escolhas.db[user].nome = contato
+       escolhas.db[user].nome = msg
         banco.db[user].stage = 1;
         //console.log('\n\n' + user + '\n\n')
         // passando user para estagio 01
@@ -37,7 +43,7 @@ async function execute(user, msg, contato) {
         return [menu,
             `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
         ];
-    } else {
+  } else {
         setStage.envStageDb(user, 0)
 
         banco.db[user].stage = 0;
