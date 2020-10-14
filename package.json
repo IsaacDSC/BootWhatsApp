@@ -19,6 +19,7 @@
     "author": "IsaacDSC",
     "license": "ISC",
     "dependencies": {
+        "@open-wa/wa-automate": "^2.0.32",
         "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
         "core-js": "^2.6.11",
@@ -35,12 +36,10 @@
         "nodemailer": "^6.4.11",
         "passport": "^0.4.1",
         "passport-local": "^1.0.0",
-        "puppeteer": "^5.3.1",
         "rxjs": "^6.6.3",
         "sequelize": "^6.3.5",
-        "sharp": "^0.26.0",
-        "socket.io": "^2.3.0",
-        "venom-bot": "^2.0.11"
+        "sharp": "^0.26.1",
+        "socket.io": "^2.3.0"
     },
     "_moduleAliases": {
         "@": "src",
