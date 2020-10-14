@@ -31,7 +31,7 @@ async function execute(user, msg) {
             //e.index == banco.db[user].msgItem
 
         //Coloca o Item escolhido do usuario ao banco de dados 
-        return ['Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *' + escolha.db[user].classeDoProduto.toUpperCase() + '*\n\n*[ F ]* *PARA FECHAR O PEDIDO*',`👏  Produto *gravado* no carrinho.`]
+        return [`👏  Produto *gravado* no carrinho.`,'Deseja escolher *outro* produto?\n\n───────────────\n\n*[ E ]* ESCOLHER OUTRO PRODUTO\n*[ M ]* ESCOLHER MAIS *' + escolha.db[user].classeDoProduto.toUpperCase() + '*\n\n*[ F ]* *PARA FECHAR O PEDIDO*']
 
     }
 }

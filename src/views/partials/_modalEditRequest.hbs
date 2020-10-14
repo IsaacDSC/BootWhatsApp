@@ -8,87 +8,90 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="modalEditaPedido">
-                 <button type="button" onclick="adicionarElemento(this)" class="btn btn-success float-right  ml-3"><i
-                 title="Adicionar Pedido" class="fa fa-plus"  ></i></button>
 
-                <div class="d-flex">
-                    <div class="container">
-                        <hr>
-                        <div class="form-group col-auto">
-                            <label for="">Selecione uma Classe</label>
-                            <select name="" id="selectClassCardapio" class="form-control" id="fundo">
+            <div class="modal-body ">
+                <button type="button" onclick="adicionarElemento(this)" class="btn btn-success float-right  ml-3"><i
+                        title="Adicionar Pedido" class="fa fa-plus"></i></button>
+                <div class="modalEditaPedido">
+                    <div class="d-flex">
+                        <div class="container">
+                            <hr>
+                            <div class="form-group col-auto">
+                                <label for="">Selecione uma Classe</label>
+                                <select name="" id="selectClassCardapio" class="form-control" id="fundo">
 
-                                <option value="class">Promocoes </option>
-                                <option value="class">maiuscula </option>
-                                <option value="class">maiuscula </option>
-                            </select>
-                        </div>
-                        <div class="form-group col-auto">
-                            <label for="">Selecione um Produto</label>
-                            <select name="" id="" class="form-control col-12">
-                                <option value="">Xtudo</option>
+                                    <option value="class">Promocoes </option>
+                                    <option value="class">maiuscula </option>
+                                    <option value="class">maiuscula </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-auto">
+                                <label for="">Selecione um Produto</label>
+                                <select name="" id="" class="form-control col-12">
+                                    <option value="">Xtudo</option>
 
-                            </select>
-                        </div>
-                        <div class="form-group col-3 mt-4 ">
+                                </select>
+                            </div>
+                            <div class="form-group col-3 mt-4 ">
 
-                            <div class="input-group mt-2">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Qtd</span>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Qtd</span>
+                                    </div>
+                                    <input type="number" min="1" class="form-control"
+                                        aria-label="Amount (to the nearest dollar)" value="1">
+                                    <div class="input-group-append" onclick="apagaElemento(this)">
+                                        <span class="input-group-text btn btn-danger"
+                                            style="border-radius:3px;">X</span>
+                                    </div>
+
                                 </div>
-                                <input type="number" min="1" class="form-control"
-                                    aria-label="Amount (to the nearest dollar)" value="1">
-                                <div class="input-group-append" onclick="apagaElemento(this)">
-                                    <span class="input-group-text btn btn-danger" style="border-radius:3px;">X</span>
-                                </div>
+
 
                             </div>
-
-
+                            </hr>
                         </div>
-                        </hr>
                     </div>
-                </div>
-                <div class="d-flex">
-                    <div class="container">
-                        <hr>
-                        <div class="form-group col-auto">
-                            <label for="">Selecione uma Classe</label>
-                            <select name="" id="selectClassCardapio" class="form-control" id="fundo">
+                    <div class="d-flex">
+                        <div class="container">
+                            <hr>
+                            <div class="form-group col-auto">
+                                <label for="">Selecione uma Classe</label>
+                                <select name="" id="selectClassCardapio" class="form-control" id="fundo">
 
-                                <option value="class">Promocoes </option>
-                                <option value="class">maiuscula </option>
-                                <option value="class">maiuscula </option>
-                            </select>
-                        </div>
-                        <div class="form-group col-auto">
-                            <label for="">Selecione um Produto</label>
-                            <select name="" id="" class="form-control col-12">
-                                <option value="">Xtudo</option>
+                                    <option value="class">Promocoes </option>
+                                    <option value="class">maiuscula </option>
+                                    <option value="class">maiuscula </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-auto">
+                                <label for="">Selecione um Produto</label>
+                                <select name="" id="" class="form-control col-12">
+                                    <option value="">Xtudo</option>
 
-                            </select>
-                        </div>
-                        <div class="form-group col-3 mt-4 ">
+                                </select>
+                            </div>
+                            <div class="form-group col-3 mt-4 ">
 
-                            <div class="input-group mt-2">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Qtd</span>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Qtd</span>
+                                    </div>
+                                    <input type="number" min="1" class="form-control"
+                                        aria-label="Amount (to the nearest dollar)" value="1">
+                                    <div class="input-group-append" onclick="apagaElemento(this)">
+                                        <span class="input-group-text btn btn-danger"
+                                            style="border-radius:3px;">X</span>
+                                    </div>
+
                                 </div>
-                                <input type="number" min="1" class="form-control"
-                                    aria-label="Amount (to the nearest dollar)" value="1">
-                                <div class="input-group-append" onclick="apagaElemento(this)">
-                                    <span class="input-group-text btn btn-danger" style="border-radius:3px;">X</span>
-                                </div>
+
 
                             </div>
-
-
+                            </hr>
                         </div>
-                        </hr>
                     </div>
                 </div>
-
 
             </div>
             <div class="modal-footer">
@@ -99,4 +102,3 @@
         </div>
     </div>
 </div>
-

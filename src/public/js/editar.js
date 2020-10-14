@@ -1,15 +1,16 @@
-let modalEditaPedido = document.getElementById('modalEditaPedido')
+let modalEditaPedido = document.querySelector('.modalEditaPedido')
 
-function editar(order){
-    modalEditaPedido.querySelectorAll('*').forEach(n => n.remove())
+function editar(order) {
+    jQuery('#modalEditClient').modal();
+    modalEditaPedido.innerHTML = ''
     $.ajax({
         type: "POST",
         url: '/editar/pedido',
-        data: {order},
-        success: function (value){
+        data: { order },
+        success: function (value) {
             console.log(value)
             renderModal(value)
-            
+
         }
     })
 
@@ -38,10 +39,12 @@ trocoPara= "",
 updatedAt= "2020-10-13T12:37:27.000Z",
 value= 10}]
 */
-async function renderModal(res){
+async function renderModal(res) {
+   
     res.forEach(e => {
-        console.log(e)
-        let html =`<div class="d-flex">
+        let div = document.createElement('div')
+
+        div.innerHTML = `<div class="d-flex">
         <div class="container">
             <hr>
             <div class="form-group col-auto">
@@ -80,7 +83,7 @@ async function renderModal(res){
         </div>
     </div>`
 
-    modalEditaPedido.insertAdjacentHTML('afterend', html);
+        modalEditaPedido.appendChild(div);
 
 
     })
@@ -98,7 +101,7 @@ async function adicionarElemento(e) {
         url: '/caixa/pesquisaClass',
         data: { class: value },
         success: console.log('Pesquisado Com Sucesso')
-    }).then(async(res) => {
+    }).then(async (res) => {
 
         console.log(res)
         async function getClass() {
@@ -112,7 +115,7 @@ async function adicionarElemento(e) {
 
         await getClass().then(res => produto = console.log(res))
 
-        let html =`<div class="d-flex">
+        let html = `<div class="d-flex">
         <div class="container">
             <hr>
             <div class="form-group col-auto">
@@ -159,6 +162,6 @@ async function adicionarElemento(e) {
 
 
 function apagaElemento(e) {
-    $(e).parent().parent().parent().parent().fadeOut(500, function() { $(e).parent().parent().parent().parent().remove(); })
+    $(e).parent().parent().parent().parent().fadeOut(500, function () { $(e).parent().parent().parent().parent().remove(); })
 
 }
