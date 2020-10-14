@@ -40,8 +40,8 @@ async function execute(user, msg, contato) {
         //Nome da pessoa já Cadastrada na sua lista de contatos
         banco.db[user].stage = 1;
         setStage.envStageDb(user, 1)
-        return [menu,
-            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,
+        return [
+            `Olá, *${contato}* sou uma assistente virtual, irei apresentar o carpádio, para fazer o pedido basta enviar o codigo do produto`,menu
         ];
   } else {
         setStage.envStageDb(user, 0)
