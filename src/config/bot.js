@@ -12,8 +12,8 @@ const User = require('@models/Users');
 //const public = require('@public/images')
 let venom_client;
 var status
-let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
 
+let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
 
 
 const sendText = async (telephone, msg) => {
@@ -33,6 +33,7 @@ const stopClient = async () => {
     }
     return console.log('client ainda não criado!');
 }
+
 
 ev.on('qr.**', async qrcode => {
     const imageBuffer = Buffer.from(
@@ -59,9 +60,9 @@ async function client() {
 async function start(client) {
     console.log('Iniciado Com Sucesso')
     client.onStateChanged(async state => {
-        if (state == "CONFLICT") {
+        if (state == "CONFLICT" || state==="UNLAUNCHED") {
             await client.forceRefocus();
-            console.log("done");
+
         }
     })
     client.onMessage(async (message) => {
