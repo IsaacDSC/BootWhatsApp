@@ -39,21 +39,23 @@ trocoPara= "",
 updatedAt= "2020-10-13T12:37:27.000Z",
 value= 10}]
 */
-async function renderModal(res) {
-   
-    res.forEach(e => {
+async function renderModal(value) {
+    let opcoes =''
+   await value.classes.forEach(e=>{
+    return opcoes += ` <option value="${e.classMenu}">${e.classMenu}</option>`
+    })
+  
+    value.result.forEach((e,index,array) => {
+    
         let div = document.createElement('div')
-
         div.innerHTML = `<div class="d-flex">
         <div class="container">
             <hr>
             <div class="form-group col-auto">
-                <label for="">Selecione uma Classe</label>
-                <select name="" id="selectClassCardapio" class="form-control" id="fundo">
-
-                    <option value="class">Promocoes </option>
-                    <option value="class">maiuscula </option>
-                    <option value="class">maiuscula </option>
+                <label for="">TIPO</label>
+                <select name="" id="selectClassCardapio" class="form-control option${index}" id="fundo">
+                        ${opcoes}
+                      
                 </select>
             </div>
             <div class="form-group col-auto">
@@ -82,9 +84,8 @@ async function renderModal(res) {
             </hr>
         </div>
     </div>`
-
         modalEditaPedido.appendChild(div);
-
+        document.querySelector(`.option${index}`).value = e.class;
 
     })
 }

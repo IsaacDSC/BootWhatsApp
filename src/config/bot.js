@@ -34,13 +34,12 @@ const stopClient = async () => {
     }
     return console.log('client ainda não criado!');
 }
-
-ev.on("**", (data, sessionId, namespace) => {
-
-    if (data === "SUCCESS" && namespace === "QR") {
-       console.log(data+'data'+namespace)
+ev.on('STARTUP.**', async (data, sessionId) => {
+    if (data == 'SUCCESS') {
+        console.log(data)
     }
 })
+
 
 ev.on('qr.**', async qrcode => {
     const imageBuffer = Buffer.from(
@@ -53,7 +52,7 @@ ev.on('qr.**', async qrcode => {
 const launchConfig = {
     qrTimeout: 60000 * 10,
     autoRefresh: true,
-    // chromiumArgs: [],
+     chromiumArgs: ['--no-sandbox'],
 
 };
 
@@ -62,23 +61,18 @@ async function client() {
     venom_client = await create('Delivery', launchConfig)
 
     await start(venom_client)
-    
+
 }
 
 async function start(client) {
     console.log('Iniciado Com Sucesso')
-
     client.onStateChanged(async state => {
+        if (state == "CONFLICT" || state === "UNLAUNCHED") {
+            client.forceRefocus();
+        }
         console.log(state)
-        if (state == "CONFLICT" || state==="UNLAUNCHED") {
-             client.forceRefocus();
-        }
-        if(state=="UNPAIRED"){
-            console.log(state +'state')
-          //fs.unlink(local,()=>{console.log('Excluido')})
-        }
-
     })
+
     client.onMessage(async (message) => {
 
         if (!message.isGroupMsg) {
@@ -86,12 +80,12 @@ async function start(client) {
             console.log(user.length)
             if (user.length === 0) {
                 try {
-                   
+
                     let resposta = await stages.step[getStage(message.from)].obj.execute(
                         message.from,
                         message.body,
-                        message.sender.name?message.sender.name:message.sender.pushname,
-            
+                        message.sender.name ? message.sender.name : message.sender.pushname,
+
                     )
                     for (let i = 0; i < resposta.length; i++) {
                         const element = resposta[i]
@@ -100,7 +94,7 @@ async function start(client) {
                     console.log('usuario cadastrado')
                     await User.create({
                         telephone: message.sender.id,
-                        name: message.sender.name?message.sender.name:message.sender.pushname,
+                        name: message.sender.name ? message.sender.name : message.sender.pushname,
                         photograph: message.sender.profilePicThumbObj.img,
                         stage: 0
                     }).then(() => {
@@ -112,7 +106,7 @@ async function start(client) {
 
             } else {
 
-                let resposta = await stages.step[getStage(message.from)].obj.execute(message.from, message.body, message.sender.name?message.sender.name:message.sender.pushname)
+                let resposta = await stages.step[getStage(message.from)].obj.execute(message.from, message.body, message.sender.name ? message.sender.name : message.sender.pushname)
                 for (let i = 0; i < resposta.length; i++) {
                     const element = resposta[i]
                     client.sendText(message.from, element)
