@@ -14,6 +14,7 @@ let venom_client;
 var status
 
 let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
+let local = path.resolve(__dirname, '..', '..', 'Delivery.data.json')
 
 
 const sendText = async (telephone, msg) => {
@@ -34,6 +35,12 @@ const stopClient = async () => {
     return console.log('client ainda não criado!');
 }
 
+ev.on("**", (data, sessionId, namespace) => {
+
+    if (data === "SUCCESS" && namespace === "QR") {
+       console.log(data+'data'+namespace)
+    }
+})
 
 ev.on('qr.**', async qrcode => {
     const imageBuffer = Buffer.from(
@@ -53,21 +60,27 @@ const launchConfig = {
 async function client() {
     if (venom_client) { return }
     venom_client = await create('Delivery', launchConfig)
+
     await start(venom_client)
     
 }
 
 async function start(client) {
     console.log('Iniciado Com Sucesso')
-    client.onStateChanged(async state => {
-        if (state == "CONFLICT" || state==="UNLAUNCHED") {
-            await client.forceRefocus();
 
+    client.onStateChanged(async state => {
+        console.log(state)
+        if (state == "CONFLICT" || state==="UNLAUNCHED") {
+             client.forceRefocus();
         }
+        if(state=="UNPAIRED"){
+            console.log(state +'state')
+          //fs.unlink(local,()=>{console.log('Excluido')})
+        }
+
     })
     client.onMessage(async (message) => {
 
-        console.log(message)
         if (!message.isGroupMsg) {
             const user = await User.findAll({ where: { telephone: message.sender.id } })
             console.log(user.length)
