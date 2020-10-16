@@ -6,7 +6,7 @@ const db = require('@database/configSQL')
 router.post('/editar/pedido', (req, res) => {
     const { order } = req.body
     const SQL = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status != 'Entregue' and orderRequest='${order}' ;`
-    const SQL_CLASS = `select classMenu from classMenus;`
+    const SQL_CLASS = `select  distinct ( menus.class) as classMenu from menus;`
     try {
     db.connection.query(SQL, (err, result) => {
         if(err){

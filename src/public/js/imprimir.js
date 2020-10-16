@@ -1,5 +1,5 @@
 function imprimir(div) {
-    const conteudo = $(div).parent().parent().parent().html()
+    const conteudo = $(div).parent().parent().html()
 
     let telaImpressao = window.open('', '', 'width=800, heigth=600');
 

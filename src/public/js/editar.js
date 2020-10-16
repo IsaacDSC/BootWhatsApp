@@ -1,4 +1,5 @@
 let modalEditaPedido = document.querySelector('.modalEditaPedido')
+const dinheiroReal = (valor) => valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
 function editar(order) {
     jQuery('#modalEditClient').modal();
@@ -16,29 +17,6 @@ function editar(order) {
 
 }
 
-/*
-let res = [{address="MANOEL INACIO MACIEL",
-classs = "PROMOCOES",
-createdAt= "2020-10-13T12:37:27.000Z",
-delivery= 0,
-deliveryType= "Entregar No Endereco",
-desc= "",
-formPayment= "",
-id=41,
-name= "X-tudo",
-neighborhood= "",
-nome= "MATHEUS MENDES REZENDE",
-note="",
-orderRequest= "6eiui7ies",
-profit=8,
-quantity= 1,
-spent=2,
-status="Pendente",
-telephone="35988798846@c.us",
-trocoPara= "",
-updatedAt= "2020-10-13T12:37:27.000Z",
-value= 10}]
-*/
 async function renderModal(value) {
     let opcoes =''
    await value.classes.forEach(e=>{
@@ -53,15 +31,16 @@ async function renderModal(value) {
             <hr>
             <div class="form-group col-auto">
                 <label for="">TIPO</label>
-                <select name="" id="selectClassCardapio" class="form-control option${index}" id="fundo">
+                <select name="" id="selectClassCardapio" onchange="mudaopcao(this,'selectCategoria${e.id}')" class="form-control option${index}" id="fundo">
                         ${opcoes}
-                      
                 </select>
+                <input type="text" style="display: none;" value="${e.id}" data-toggle="modal">
+
             </div>
             <div class="form-group col-auto">
-                <label for="">Selecione um Produto</label>
-                <select name="" id="" class="form-control col-12">
-                    <option value="">Xtudo</option>
+                <label for="">PRODUTO</label>
+                <select name="" id="selectCategoria${e.id}" class="form-control col-12">
+                    <option value="${e.name}">${e.name} | ${dinheiroReal(e.value)}</option>
 
                 </select>
             </div>
@@ -93,7 +72,7 @@ async function renderModal(value) {
 
 async function adicionarElemento(e) {
     //editar Value modalEditaPedido
-    let value = 'PROMOCOES';
+    let value = 'PIZZA';
     if (!value) {
         return
     }
@@ -104,7 +83,6 @@ async function adicionarElemento(e) {
         success: console.log('Pesquisado Com Sucesso')
     }).then(async (res) => {
 
-        console.log(res)
         async function getClass() {
             let options = ''
             await res.forEach(element => {
@@ -114,25 +92,23 @@ async function adicionarElemento(e) {
             return options
         }
 
-        await getClass().then(res => produto = console.log(res))
+        await getClass().then(res => produto = res)
 
-        let html = `<div class="d-flex">
+        let div = document.createElement('div')
+        div.innerHTML = `
+        <div class="d-flex">
         <div class="container">
             <hr>
             <div class="form-group col-auto">
                 <label for="">Selecione uma Classe</label>
                 <select name="" id="selectClassCardapio" class="form-control" id="fundo">
-
                     <option value="class">Promocoes </option>
-                    <option value="class">maiuscula </option>
-                    <option value="class">maiuscula </option>
                 </select>
             </div>
             <div class="form-group col-auto">
                 <label for="">Selecione um Produto</label>
                 <select name="" id="" class="form-control col-12">
-                    <option value="">Xtudo</option>
-
+                    ${produto}
                 </select>
             </div>
             <div class="form-group col-3 mt-4 ">
@@ -155,7 +131,8 @@ async function adicionarElemento(e) {
         </div>
     </div>`
 
-        modalEditaPedido.insertAdjacentHTML('afterend', html);
+      modalEditaPedido.appendChild(div);
+
 
     })
 
@@ -164,5 +141,19 @@ async function adicionarElemento(e) {
 
 function apagaElemento(e) {
     $(e).parent().parent().parent().parent().fadeOut(500, function () { $(e).parent().parent().parent().parent().remove(); })
+}
 
+async function mudaopcao(value1,value){
+    document.getElementById(value).innerText = ''
+    await $.ajax({
+        type: "POST",
+        url: '/caixa/pesquisaClass',
+        data: { class:  $(value1).val() },
+        success: function (res){
+            res.forEach(e=>{
+                $(`#${value}`).append(`<option value="${e.name}">${e.name} | ${dinheiroReal(e.value)}</option>`);
+            })
+        }
+    })
+   
 }
