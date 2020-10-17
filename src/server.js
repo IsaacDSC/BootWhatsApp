@@ -23,13 +23,14 @@ const msg = require('@routes/msg')
 const reset = require('@routes/reset')
 const routes = require('@routes/routes')
 const suporteTecnico = require('@routes/suporteTecnico')
-const grapichs = require('@/routes/grapichs')
-const cashier = require('@/routes/cashier')
+const grapichs = require('@routes/grapichs')
+const cashier = require('@routes/cashier')
 const profile = require('@routes/profile.js')
 const login = require('@routes/login')
 const delivery = require('@routes/delivery')
-const payment = require('@/routes/payment')
-const editarPedido = require('@/routes/editarPedido')
+const payment = require('@routes/payment')
+const editarPedido = require('@routes/editarPedido')
+const pedidos = require('@routes/pedidos')
 //Inicia O client
 //client()
 //Para o Client
@@ -133,8 +134,8 @@ app.engine('hbs', hbs({
                 return (soma+value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return (soma).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-       
-        
+
+
 
 
         }
@@ -183,6 +184,7 @@ app.use('/profile', profile)
 app.use(login)
 app.use('/delivery', delivery)
 app.use(editarPedido)
+app.use(pedidos)
 const port = process.env.PORT_APLICATION || process.env.PORT
 server.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
