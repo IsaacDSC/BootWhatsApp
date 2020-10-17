@@ -23,7 +23,8 @@ router.post('/menu/register', auth, (req, res) => {
         req.flash('success_msg', 'cardápio cadastrado com sucesso!')
         res.redirect('/menu/register')
     }).catch((err) => {
-        res.send(err)
+        req.flash('error_msg', 'cardápio já cadastrado!')
+        res.redirect('/menu/register')
     })
 })
 
