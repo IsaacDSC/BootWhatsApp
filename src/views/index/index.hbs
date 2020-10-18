@@ -44,86 +44,91 @@
     </div>
 
     <div class="container col-12">
-        <div class="col-sm-6 col-lg-2 ">
-            <div class="card text-white bg-flat-color-5">
-                <div class="card-body pb-0 text-center">
-                    <h4 class="mb-0">
-                        <span class="count" id="somaPedido">{{countRequests}}</span>
-                    </h4>
-                    <p class="text-light">Pedidos</p>
+        <a href="#">
+            <div class="col-sm-6 col-lg-2 ">
+                <div class="card text-white bg-flat-color-5">
+                    <div class="card-body pb-0 text-center">
+                        <h4 class="mb-0">
+                            <span class="count" id="somaPedido">{{countRequests}}</span>
+                        </h4>
+                        <p class="text-light">Pedidos</p>
+                        <div class="chart-wrapper px-0" style="height:20px;" height="20">
+                            <canvas id="widgetChart1"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </a>
+        <!--/.col-->
+        <a href="#">
+            <div class="col-sm-6 col-lg-2">
+                <div class="card text-white bg-flat-color-1">
+                    <div class="card-body pb-0 text-center">
+                        <h4 class="mb-0">
+                            <span class="count" id="countPreparoI">{{countPreparo}}</span>
+                        </h4>
+                        <p class="text-light">Preparo</p>
+
+                        <div class="chart-wrapper px-0" style="height:20px;" height="20">
+                            <canvas id="widgetChart2"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </a>
+        <!--/.col-->
+        <a href="#">
+            <div class="col-sm-6 col-lg-2">
+                <div class="card text-white bg-flat-color-3">
+                    <div class="card-body pb-0 text-center">
+                        <h4 class="mb-0">
+                            <span class="count">{{countEntregue}}</span>
+                        </h4>
+                        <p class="text-light">Entregues</p>
+
+                    </div>
+
                     <div class="chart-wrapper px-0" style="height:20px;" height="20">
-                        <canvas id="widgetChart1"></canvas>
+                        <canvas id="widgetChart3"></canvas>
                     </div>
-
                 </div>
-
             </div>
-        </div>
+        </a>
         <!--/.col-->
+        <a href="#">
+            <div class="col-sm-6 col-lg-2 ">
+                <div class="card text-white bg-flat-color-4">
+                    <div class="card-body pb-0 text-center">
+                        <h4 class="mb-0">
+                            <span class="count">{{countCancelado}}</span>
+                        </h4>
+                        <p class="text-light">Cancelados</p>
 
-        <div class="col-sm-6 col-lg-2">
-            <div class="card text-white bg-flat-color-1">
-                <div class="card-body pb-0 text-center">
-                    <h4 class="mb-0">
-                        <span class="count" id="countPreparoI">{{countPreparo}}</span>
-                    </h4>
-                    <p class="text-light">Preparo</p>
+                        <div class="chart-wrapper px-3" style="height:20px;" height="20">
+                            <canvas id="widgetChart4"></canvas>
+                        </div>
 
-                    <div class="chart-wrapper px-0" style="height:20px;" height="20">
-                        <canvas id="widgetChart2"></canvas>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!--/.col-->
-
-        <div class="col-sm-6 col-lg-2">
-            <div class="card text-white bg-flat-color-3">
-                <div class="card-body pb-0 text-center">
-                    <h4 class="mb-0">
-                        <span class="count">{{countEntregue}}</span>
-                    </h4>
-                    <p class="text-light">Entregues</p>
-
-                </div>
-
-                <div class="chart-wrapper px-0" style="height:20px;" height="20">
-                    <canvas id="widgetChart3"></canvas>
-                </div>
-            </div>
-        </div>
-        <!--/.col-->
-
-        <div class="col-sm-6 col-lg-2 ">
-            <div class="card text-white bg-flat-color-4">
-                <div class="card-body pb-0 text-center">
-                    <h4 class="mb-0">
-                        <span class="count">{{countCancelado}}</span>
-                    </h4>
-                    <p class="text-light">Cancelados</p>
-
-                    <div class="chart-wrapper px-3" style="height:20px;" height="20">
-                        <canvas id="widgetChart4"></canvas>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-4 ">
-            <div class="card text-white bg-flat-color-2">
-                <div class="card-body pb-0 text-center">
-                    <h4 class="mb-0">
-                        <span class="count" id="imprimir">Anotações</span>
-                    </h4>
-                    <p class="text-light">Digite sua anotações</p>
-
-                    <div class="chart-wrapper px-3" style="height:20px;" height="20">
-                        <canvas id="widgetChart4"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
+        <a href="#">
+            <div class="col-sm-6 col-lg-4">
+                <div class="card text-white bg-flat-color-2">
+                    <div class="card-body pb-0 text-center">
+                        <h4 class="mb-0">
+                            <span class="count" id="imprimir">Anotações</span>
+                        </h4>
+                        <p class="text-light">Faça Seu Check List
+                        <div class="chart-wrapper px-3" style="height:20px;" height="20">
+                            <canvas id="widgetChart4"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
         <!--/.col-->
     </div>
 
@@ -145,11 +150,12 @@
                     <hr>
                     <div class="col-sm-8 hidden-sm-down">
 
-                        <button type="button"  onclick="imprimir(this)" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
-                                title="Imprimir" class="fa fa-print" ></i></button>
+                        <button type="button" onclick="imprimir(this)"
+                            class="btn btn-primary float-right bg-flat-color-1 ml-3"><i title="Imprimir"
+                                class="fa fa-print"></i></button>
 
-                       <button type="button"  class="btn btn-secondary float-right  ml-3"><i
-                                title="Editar" class="fa fa-edit" ></i></button>
+                        <button type="button" class="btn btn-secondary float-right  ml-3"><i title="Editar"
+                                class="fa fa-edit"></i></button>
 
                         <button type="button"
                             onclick="mandaMensagem('{{this.telephone}}','Cancelado','{{this.orderRequest}}')"
@@ -345,8 +351,8 @@
     <!-- Right Panel -->
 </div> <!-- .content -->
 <script>
-    window.addEventListener("storage",(function(e){
-       location.reload(true)
+    window.addEventListener("storage", (function (e) {
+        location.reload(true)
     }).bind(this));
 
 </script>

@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form action="/pedidos" method="post">
+                <label for="">Escolha a data(Referência por Data)</label>
+                <select name="date" id="date" class="form-control">
+                    <option value="">Selecione</option>
+                    {{#each date}}
+                    <option value="{{createdAt}}">{{createdAt}}</option>
+                    {{/each}}
+                </select>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6"><button class="btn btn-dark mt-4 col-12">Pesquisar</button></div>
+                    <div class="col-2"></div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="ml-3 mt-3">Vizualizar Pedidos</h2>
+            <hr>
+            {{#each pedidos}}
+            <h3 class="text-center"><i class=""></i><strong>Pedido: </strong> {{orderRequest}}</h3>
+            <p class="text-rigth">Data: <small>{{createdAt}}</small></p>
+            <hr>
+            <div class="row mt-5">
+                <div class="col-3">
+                    <h6 class="text-center">Cliente</h6>
+                    <hr>
+                    <p class="text-center"><i class=""></i><strong>Nome: </strong> {{nome}}</p>
+                    <p class="text-center"><i class=""></i><strong>Telefone: </strong> {{telephone}}</p>
+                    <p class="text-center"><i class=""></i><strong>Bairro: </strong> {{neighborhood}}</p>
+                    <p class="text-center"><i class=""></i><strong>Endereço: </strong> {{address}}</p>
+
+                </div>
+                <div class="col-3">
+                    <h6 class="text-center">Pedido</h6>
+                    <hr>
+                    <p class="text-center"><i class=""></i><strong>Nome: </strong> {{name}}</p>
+                    <p class="text-center"><i class=""></i><strong>Classe: </strong> {{class}}</p>
+                    <p class="text-center"><i class=""></i><strong>Descrição: </strong> {{desc}}</p>
+                    <p class="text-center"><i class=""></i><strong>Quantidade: </strong> {{quantity}}</p>
+                    <p class="text-center"><i class=""></i><strong>Observação: </strong> {{note}}</p>
+                </div>
+                <div class="col-3">
+                    <h6 class="text-center">Pagamento</h6>
+                    <hr>
+                    <p class="text-center"><i class=""></i><strong>Valor: </strong> {{value}}</p>
+                    <p class="text-center"><i class=""></i><strong>Troco: </strong> {{trocoPara}}</p>
+                    <p class="text-center"><i class=""></i><strong>Lucro: </strong> {{profit}}</p>
+                    <p class="text-center"><i class=""></i><strong>Gasto: </strong> {{spent}}</p>
+                    <p class="text-center"><i class=""></i><strong>Forma de Pagamento: </strong> {{formPayment}}</p>
+                </div>
+                <div class="col-3">
+                    <h6 class="text-center">Delivery</h6>
+                    <hr>
+                    <p class="text-center"><i class=""></i><strong>Endereço: </strong> {{delivery}}</p>
+                    <p class="text-center"><i class=""></i><strong>Tipo de Venda: </strong> {{deliveryType}}</p>
+                    <p class="text-center"><i class=""></i><strong>Status: </strong> {{status}}</p>
+                </div>
+            </div>
+            <hr>
+            {{/each}}
+        </div>
+    </div>
+</div>
