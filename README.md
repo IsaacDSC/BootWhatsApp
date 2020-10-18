@@ -6,6 +6,17 @@
     --encerramento
 
 
+Olá Boa Tarde, 
+Estamos enviando abaixo um link personalizado para acesso:
+link: https://ops-burguer.herokuapp.com/login
+email: admin@gmail.com
+senha: secret(!@#)
+Em qualquer dúvida pode entrar em contato conosco através dos números:
+24988180688 - IsaacDSC – DevelopingSolutions
+3588798846 - Matheus Mendes – DevelopingSolutions
+
+Forte Abraço!
+
 
 message.sender.pushname == nome que o usuario colocou no seu wpp
 message.sender.name == nome que o usuario esta salvo na minha agenda

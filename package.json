@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "main": "src/server.js",
+    "bin": "src/server.js",
     "scripts": {
         "server": "pm2 start src/server.js",
         "lista": "pm2 list",
