@@ -25,6 +25,10 @@ const Admin = db.define('admin', {
         type: db.Sequelize.STRING,
         require: true,
         allowNull: false
+    },
+    statusConnection:{
+        type: db.Sequelize.BOOLEAN,
+        defaultValue: false,
     }
 })
 

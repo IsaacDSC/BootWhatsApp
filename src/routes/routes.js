@@ -7,11 +7,11 @@ const Requests = require('@models/Requests')
 const User = require('@models/Users')
 const Menu = require('@models/Menu')
 const db = require('@database/configSQL')
-
+const SessionQrcode = require('../helpers/deslogarQrcode')
 const { client, stopClient, sendText } = require('@config/bot')
 
 
-router.get('/', auth, async(req, res) => {
+router.get('/', async(req, res) => {
     let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Pendente' OR status = 'Preparando' OR status= 'Saiu para Entrega';`
     let countRequest = `SELECT COUNT(distinct  UserId) as createdAt FROM relacionamentos  WHERE DATE(createdAt) = DATE(NOW());`
     let countPreparo = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Preparando';`
@@ -21,6 +21,7 @@ router.get('/', auth, async(req, res) => {
     let emAtendimento = `select count(stage) as stage from users where stage !='14' and stage !='0';`
     let admin = `select name, email from admins where id='1';`
     let boot = `select boot from configurations`
+    let statusConnection = `SELECT statusConnection from admins;`
     db.connection.query(sql, (err, result) => {
         var saida = [];
 
@@ -81,7 +82,14 @@ router.get('/', auth, async(req, res) => {
                             db.connection.query(emAtendimento, (err, emAtendimento) => {
                                 db.connection.query(admin, (err, admin) => {
                                     db.connection.query(boot, (err, boot) => {
-                                        res.render('index/index', { boot: boot[0].boot, requests: saida, emAtendimento: emAtendimento[0].stage, countCancelado: countCancelado[0].createdAt, countEntregue: countEntregue[0].createdAt, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, admin: admin })
+                                        db.connection.query(statusConnection, (err, status)=>{
+                                            console.log(status)
+                                            if(status[0].statusConnection == 1){
+                                                res.render('index/index', { status: 'Qr code Conectado!' ,boot: boot[0].boot, requests: saida, emAtendimento: emAtendimento[0].stage, countCancelado: countCancelado[0].createdAt, countEntregue: countEntregue[0].createdAt, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, admin: admin })
+                                            }else{
+                                                res.render('index/index', { status: 'Conecte-se com o Qr code' ,boot: boot[0].boot, requests: saida, emAtendimento: emAtendimento[0].stage, countCancelado: countCancelado[0].createdAt, countEntregue: countEntregue[0].createdAt, countRequests: countRequests[0].createdAt, countPreparo: countPreparo[0].createdAt, profit: profitSpent[0].profit, spent: profitSpent[0].spent, admin: admin })
+                                            }
+                                        })
                                     })
                                 })
                             })
@@ -177,5 +185,10 @@ router.get('/marketing', (req, res) => {
     res.redirect('/')
 })
 
+
+router.post('/deleteSession', (req, res)=>{
+    SessionQrcode.deslogar()
+    res.redirect('/')
+})
 
 module.exports = router

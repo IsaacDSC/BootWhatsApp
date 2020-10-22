@@ -1,9 +1,9 @@
 const fs = require('fs');
 //const { create } = require('venom-bot');
 const { create, Client, ev } = require('@open-wa/wa-automate');
-
 const path = require('path')
-//dependencies files.js 
+const statusConnection = require('../helpers/statusConnection')
+//dependencies files.js
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
@@ -35,9 +35,13 @@ const stopClient = async () => {
     return console.log('client ainda não criado!');
 }
 ev.on('STARTUP.**', async (data, sessionId) => {
+    console.log(data)
     if (data == 'SUCCESS') {
-        console.log(data)
+        statusConnection.sendStatus(true)
+    }else{
+        statusConnection.sendStatus(false)
     }
+
 })
 
 
