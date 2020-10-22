@@ -38,6 +38,7 @@ ev.on('STARTUP.**', async (data, sessionId) => {
     console.log(data)
     if (data == 'SUCCESS') {
         statusConnection.sendStatus(true)
+
     }else{
         statusConnection.sendStatus(false)
     }

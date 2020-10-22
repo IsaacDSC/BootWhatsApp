@@ -2,35 +2,83 @@ const express = require('express')
 const router = express.Router()
 const db = require('../database/configSQL')
 
-router.get('/pedidos', (req, res)=>{
-    let SQL = `SELECT distinct requests.createdAt as createdAt FROM requests;`
-    db.connection.query(SQL, (err, result)=>{
-        console.log(result)
-        if(err){
-            console.log(result)
-            res.redirect('/pedidos')
-        }else{
-           // res.send(result)
-             res.render('pedidos/selecione', {date: result})
-        }
-    })
-})
-
 router.post('/pedidos', (req, res)=>{
-        console.log(req.body.date)
-    let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status= 'Entregue' AND where createdAt = '${req.body.date}';`
-    db.connection.query(sql, (err, result)=>{
-        console.log(result)
+    //res.send(req.body.date)
+    let SQL = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt , requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where date(requests.createdAt) = date('${req.body.date}');`
+    db.connection.query(SQL, (err, result)=>{
+        //console.log(result)
         if(err){
-            console.log(result)
-            res.send(result)
-            //res.redirect('/pedidos')
+            res.send('erro ' + result)
+            // console.log(result)
+            // res.redirect('/pedidos')
         }else{
            // res.send(result)
-             res.render('pedidos/pedidos', {pedidos: result})
+           res.render('pedidos/pedidos', {pedidos: result})
+
         }
     })
 })
 
+router.get('/pedidos', (req, res)=>{
+    res.render('pedidos/selecione')
+})
+
+
+router.get('/pedidos/preparo', (req, res)=>{
+    res.render('pedidos/selecioneEmPreparo')
+})
+router.post('/pedidos/preparo', (req,res)=>{
+    let SQL = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt , requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where date(requests.createdAt) = date('${req.body.date}') AND requests.status = 'Pendente';`
+    db.connection.query(SQL, (err, result)=>{
+        //console.log(result)
+        if(err){
+            res.send('erro ' + result)
+            // console.log(result)
+            // res.redirect('/pedidos')
+        }else{
+           // res.send(result)
+           res.render('pedidos/EmPreparo', {pedidos: result})
+
+        }
+    })
+})
+
+router.get('/pedidos/entregues', (req, res)=>{
+    res.render('pedidos/selecioneEntregues')
+})
+router.post('/pedidos/entregues', (req, res)=>{
+    let SQL = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt , requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where date(requests.createdAt) = date('${req.body.date}') AND requests.status = 'Entregue';`
+    db.connection.query(SQL, (err, result)=>{
+        //console.log(result)
+        if(err){
+            res.send('erro ' + result)
+            // console.log(result)
+            // res.redirect('/pedidos')
+        }else{
+           // res.send(result)
+           res.render('pedidos/Entregues', {pedidos: result})
+
+        }
+    })
+})
+
+router.get('/pedidos/cancelados', (req, res)=>{
+    res.render('pedidos/selecioneCancelados')
+})
+router.post('/pedidos/cancelados', (req, res)=>{
+    let SQL = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt , requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where date(requests.createdAt) = date('${req.body.date}') AND requests.status = 'Cancelado';`
+    db.connection.query(SQL, (err, result)=>{
+        //console.log(result)
+        if(err){
+            res.send('erro ' + result)
+            // console.log(result)
+            // res.redirect('/pedidos')
+        }else{
+           // res.send(result)
+           res.render('pedidos/Cancelados', {pedidos: result})
+
+        }
+    })
+})
 
 module.exports = router

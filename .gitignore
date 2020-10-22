@@ -6,3 +6,4 @@ debug.log
 .env
 Delivery.data.json
 src/public/images/avatar/profile.png
+session.data.json
