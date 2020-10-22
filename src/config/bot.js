@@ -54,10 +54,9 @@ ev.on('qr.**', async qrcode => {
 });
 
 const launchConfig = {
-    qrTimeout: 60000 * 10,
+    qrTimeout: false,
     autoRefresh: true,
-     chromiumArgs: ['--no-sandbox'],
-
+    chromiumArgs: ['--no-sandbox'],
 };
 
 async function client() {
