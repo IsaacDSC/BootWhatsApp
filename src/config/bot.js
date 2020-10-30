@@ -57,6 +57,7 @@ ev.on('qr.**', async qrcode => {
 const launchConfig = {
     qrTimeout: false,
     autoRefresh: true,
+    inDocker:true,
     chromiumArgs: ['--no-sandbox'],
 };
 
