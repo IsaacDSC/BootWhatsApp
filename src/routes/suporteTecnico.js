@@ -2,8 +2,9 @@ require('module-alias/register')
 const express = require('express')
 const router = express.Router()
 const EmailSuportTecnico = require('../helpers/SubmitEmailSuporte')
+const { auth } = require('@helpers/auth')
 
-router.get('/email', (req, res) => {
+router.get('/email', auth, (req, res) => {
     let subject = ''
     let motivo = ''
     EmailSuportTecnico.ChamadoSuporteTech(subject, motivo).then(() => {

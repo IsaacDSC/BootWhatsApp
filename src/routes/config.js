@@ -117,15 +117,15 @@ router.post('/maxPedidos', auth, (req, res) => {
 
 
 
-router.post('/editarClass', (req, res) => {
+router.post('/editarClass', auth, (req, res) => {
     let SQL_class = `SELECT classMenu as class FROM classMenus where classMenu='${req.body.class}';`
     db.connection.query(SQL_class, (err, menus) => {
-   
+
         res.render('config/class', { nameClass: menus })
     })
 })
 
-router.post('/class', (req, res) => {
+router.post('/class', auth, (req, res) => {
     const classe = req.body.class.toUpperCase()
     let SQL = `UPDATE menus SET class = '${classe}' WHERE class='${req.body.parametro}';`
     let SQL1 = `UPDATE classMenus SET classMenu = '${classe}' WHERE classMenu='${req.body.parametro}';`
