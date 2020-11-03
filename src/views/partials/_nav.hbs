@@ -1,6 +1,7 @@
 <!-- Header-->
 {{>_popup}}
 <header id="header" class="header">
+
     <audio class="audios" src="/audio/campainha.mp3"></audio>
     <div class="header-menu">
         <div class="col-sm-7">
@@ -21,9 +22,14 @@
         </div>
 
         <div class="col-sm-5">
+
             <div class="user-area dropdown float-right">
+                <div class="spinner-border text-success d-none"  role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" src="/images/avatar/profile.png" onerror="this.onerror=null; this.src='/images/avatar/anonimus.png'" alt="User Avatar"
+                    <img class="user-avatar rounded-circle" src="/images/avatar/profile.png"
+                        onerror="this.onerror=null; this.src='/images/avatar/anonimus.png'" alt="User Avatar"
                         id="perfil">
                 </a>
 

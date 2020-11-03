@@ -50,6 +50,14 @@ io.on('connection', function(socket) {
         //emit para apenas 1
 })
 
+function qrcodeSuccess(){
+    io.emit('qrcodeSuccess')
+}
+
+function bootIniciado(){
+    io.emit('bootIniciado')
+}
+
 function enviaParaFrontend(dados = '') {
     io.emit('PedidoConcluido', dados)
 }
@@ -193,5 +201,7 @@ server.listen(port, () => {
     console.log('Break Server CTRL + C')
 })
 
+exports.bootIniciado =bootIniciado
+exports.qrcodeSuccess = qrcodeSuccess
 exports.NovoClienteAtendimento = NovoClienteAtendimento
 exports.enviaParaFrontend = enviaParaFrontend

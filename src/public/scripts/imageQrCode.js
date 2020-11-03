@@ -1,12 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
-setInterval(() => {
+  setInterval(() => {
     document.getElementById('qrCode').src = "/images/qrCode.png?random=" + new Date().getTime();
-}, 4000)
-
+  }, 4000)
   let key = 0
   const checkbox = document.querySelector('input[type="checkbox"]');
 
-checkbox.addEventListener('change', async function () {
+  socket.on('qrcodeSuccess', async function () {
+    await jQuery('#popup').modal('hide')
+    $('.spinner-border').removeClass('d-none')
+  })
+
+  socket.on('bootIniciado', async function () {
+    $('.spinner-border').addClass('d-none')
+  })
+
+  checkbox.addEventListener('change', async function () {
     if (checkbox.checked) {
       jQuery('#popup').modal();
       if (key == 0) {

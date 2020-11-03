@@ -1,5 +1,5 @@
 const fs = require('fs');
-//const { create } = require('venom-bot');
+
 const { create, Client, ev } = require('@open-wa/wa-automate');
 const path = require('path')
 const statusConnection = require('../helpers/statusConnection')
@@ -9,9 +9,8 @@ const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
 //Models
 const User = require('@models/Users');
-//const public = require('@public/images')
+const qrcodeSuccess = require('../server')
 let venom_client;
-var status
 
 let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
 let local = path.resolve(__dirname, '..', '..', 'Delivery.data.json')
@@ -37,6 +36,7 @@ const stopClient = async () => {
 ev.on('STARTUP.**', async (data, sessionId) => {
     console.log(data)
     if (data == 'SUCCESS') {
+        qrcodeSuccess.qrcodeSuccess()
         statusConnection.sendStatus(true)
 
     }else{
@@ -55,7 +55,7 @@ ev.on('qr.**', async qrcode => {
 });
 
 const launchConfig = {
-    qrTimeout: 0,
+    qrTimeout: 60*60,
     chromiumArgs: ['--no-sandbox'],
 };
 
@@ -69,6 +69,7 @@ async function client() {
 
 async function start(client) {
     console.log('Iniciado Com Sucesso')
+    qrcodeSuccess.bootIniciado()
     client.onStateChanged(async state => {
         if (state == "CONFLICT" || state === "UNLAUNCHED") {
             client.forceRefocus();
