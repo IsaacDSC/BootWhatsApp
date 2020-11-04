@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   setInterval(() => {
     document.getElementById('qrCode').src = "/images/qrCode.png?random=" + new Date().getTime();
-  }, 4000)
+  }, 2000)
   let key = 0
   const checkbox = document.querySelector('input[type="checkbox"]');
 
