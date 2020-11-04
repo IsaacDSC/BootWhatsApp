@@ -56,14 +56,12 @@ ev.on('qr.**', async qrcode => {
 
 const launchConfig = {
     qrTimeout: 0,
-    authTimeout: 0,
-    autoRefresh: true,
     chromiumArgs: ['--no-sandbox'],
 };
 
 async function client() {
     if (venom_client) { return }
-    venom_client = await create('Delivery', launchConfig)
+    venom_client = await create(launchConfig)
 
     await start(venom_client)
 
