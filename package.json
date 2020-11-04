@@ -9,7 +9,7 @@
         "lista": "pm2 list",
         "monit": "pm2 monit",
         "restart": "pm2 restart src/server.js",
-        "start": "node src/server.js",
+        "start": "node src/server.js --npm-options=--ignore-scripts",
         "down": "pm2 delete src/server.js",
         "test": "nodeTdd.reporter"
     },
