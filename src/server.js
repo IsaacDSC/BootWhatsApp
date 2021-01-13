@@ -35,7 +35,8 @@ const pedidos = require('@routes/pedidos')
     //client()
     //Para o Client
     //stopClient()
-
+const createtables = require('@database/createTable')
+createtables
 
 
 //socketio
@@ -50,11 +51,11 @@ io.on('connection', function(socket) {
         //emit para apenas 1
 })
 
-function qrcodeSuccess(){
+function qrcodeSuccess() {
     io.emit('qrcodeSuccess')
 }
 
-function bootIniciado(){
+function bootIniciado() {
     io.emit('bootIniciado')
 }
 
@@ -201,7 +202,7 @@ server.listen(port, () => {
     console.log('Break Server CTRL + C')
 })
 
-exports.bootIniciado =bootIniciado
+exports.bootIniciado = bootIniciado
 exports.qrcodeSuccess = qrcodeSuccess
 exports.NovoClienteAtendimento = NovoClienteAtendimento
 exports.enviaParaFrontend = enviaParaFrontend
