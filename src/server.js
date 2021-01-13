@@ -35,9 +35,6 @@ const pedidos = require('@routes/pedidos')
     //client()
     //Para o Client
     //stopClient()
-const createtables = require('@database/createTable')
-createtables
-
 
 //socketio
 app.use((req, res, next) => {
