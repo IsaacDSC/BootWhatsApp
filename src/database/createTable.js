@@ -1,4 +1,4 @@
-require('module-alias/register')
+/* require('module-alias/register')
 const db = require('./index')
 
 const Requests = require('@models/Requests')
@@ -9,7 +9,6 @@ const Relacionamento = require('@models/Relacionamento')
 const ClassMenu = require('@models/classMenu')
 const Message = require('@models/Messages')
 const RegistersUsers = require('@models/RegistersUsers')
-const Requests = require('@models/Requests')
 const RoteDelivery = require('@models/RoteDelivery')
 
 let MODELS = [Requests, Menu, User, Admin, Relacionamento, ClassMenu, Message, RegistersUsers, RoteDelivery]
@@ -31,7 +30,7 @@ function relationship() {
 setTimeout(() => {
     relationship()
 }, 120000)
-
+ */
 // createTable()
 
 // async function createTable() {
