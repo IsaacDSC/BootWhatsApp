@@ -6,7 +6,7 @@ const formataReal = require('@helpers/formataReal')
 const setStage = require('../../helpers/setStage')
 
 async function execute(user, msg) {
-
+    return['estagio 14']
 
 
 }

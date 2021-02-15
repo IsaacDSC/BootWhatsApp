@@ -46,6 +46,8 @@ Para aceitar Emojis no Banco de dados: ALTER TABLE tabela MODIFY coluna VARCHAR(
 
 ALTER TABLE relacionamentos ADD COLUMN MenuId int first;
 ALTER TABLE relacionamentos ADD FOREIGN KEY (cardapioId) REFERENCES menus(id);
+ALTER TABLE classMenus ADD COLUMN manyFlavors boolean;
+
 
 Para Inserir na tabela os dados e retornar o id: {
     INSERT INTO  admins (name,email,password,createdAt,updatedAt)

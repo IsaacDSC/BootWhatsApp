@@ -93,8 +93,6 @@ btnPesquisar.addEventListener('click', async(e) => {
 
         itensCardapio.insertAdjacentHTML('afterbegin', html);
 
-
-
     })
 
 })
