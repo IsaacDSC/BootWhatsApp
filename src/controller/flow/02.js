@@ -20,7 +20,7 @@ async function  execute(user, msg) {
         return [menu];
     }
     //se estiver mais de um item
-  /*   if(msg.includes(' ')){
+     if(msg.includes(' ')){
 
         escolha.db[user].msgItem = Number(msg)
         setStage.envStageDb(user, 3)
@@ -35,7 +35,7 @@ async function  execute(user, msg) {
         escolha.db[user].itensEscolhido = { name: itemEscolhido[0].name, price: itemEscolhido[0].price }
         console.log(escolha.db[user].msgItem)
         return ['🔢  Quantos produtos *' + itemEscolhido[0].name + '* iguais a este você quer pedir?\n\n *Digite um número para gravar este produto.*']
-    */
+    
     }
     if (msg > escolha.db[user].quantidaDeProdutos || !Number(msg)) {
         return ["Você *precisa* escolher um número de produto."]
